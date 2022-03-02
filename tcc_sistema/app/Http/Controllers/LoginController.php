@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     public function dashboard() {
-        return view('index');
+        return view('admin.dashboard');
     }
 }

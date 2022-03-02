@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [LoginController::class, 'dashboard'])->name('admin');
+Route::get('/admin', [LoginController::class, 'dashboard'])->name('admin');
 
 

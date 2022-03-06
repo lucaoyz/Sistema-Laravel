@@ -11,10 +11,10 @@ class LoginController extends Controller
     }
 
     public function loginForm() {
-        return view('admin.sign-in');
+        return view('admin.login');
     }
 
-    public function registerForm() {
-        return view('admin.sign-up');
+    public function registroForm() {
+        return view('admin.registro');
     }
 }

@@ -27,13 +27,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-2" href="{{ route('admin.profile')}}">
+                  <a class="nav-link me-2" href="{{ route('admin.perfil')}}">
                     <i class="fa fa-user opacity-6 text-dark me-1"></i>
                     Profile
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-2" href="{{ route('admin.register')}}">
+                  <a class="nav-link me-2" href="{{ route('admin.registro')}}">
                     <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
                     Sign Up
                   </a>
@@ -105,7 +105,7 @@
                   </div>
                   <p class="mt-4 text-sm text-center">
                     Don't have an account?
-                    <a href="{{route('admin.register')}}" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                    <a href="{{route('admin.registro')}}" class="text-primary text-gradient font-weight-bold">Sign up</a>
                   </p>
                 </form>
               </div>

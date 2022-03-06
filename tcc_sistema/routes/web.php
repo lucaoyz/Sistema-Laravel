@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,15 +17,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+/* Rotas padroes (login/Registro/Dashboard) */
 Route::get('/admin', [LoginController::class, 'dashboard'])->name('admin');
 Route::get('/admin/login', [LoginController::class, 'loginForm'])->name('admin.login');
-Route::get('/admin/registro', [LoginController::class, 'registerForm'])->name('admin.register');
-/* temporario, será feito alteração após reforma e criação de views para o sistema */
-Route::get('/admin/perfil', [UserController::class, 'profile'])->name('admin.profile');
-Route::get('/admin/tabelas', [UserController::class, 'tables'])->name('admin.tables');
-Route::get('/admin/notificacoes', [UserController::class, 'notificacoes'])->name('admin.notificacoes');
+Route::get('/admin/registro', [LoginController::class, 'registroForm'])->name('admin.registro');
+
+/* Usuarios */
+Route::get('/admin/perfil', [UserController::class, 'perfil'])->name('admin.perfil');
+Route::get('/admin/usuarios', [UserController::class, 'usuarios'])->name('admin.usuarios');
+Route::get('/admin/perfil/notificacoes', [UserController::class, 'notificacoes'])->name('admin.notificacoes');
+
+/* Rotas para o Financeiro */
 Route::get('/admin/financeiro', [FinanceiroController::class, 'financeiro'])->name('admin.financeiro');
+
+/* Rotas para o Produtos */
+Route::get('admin/produtos', [ProdutosController::class, 'produtos'])->name('admin.produtos');
+
 
 
 

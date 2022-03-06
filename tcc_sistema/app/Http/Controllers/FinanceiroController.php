@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class FinanceiroController extends Controller
 {
     public function financeiro(){
-        return view('admin.billing');
+        return view('admin.financeiro');
     }
 }

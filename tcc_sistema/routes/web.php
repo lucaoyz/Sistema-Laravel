@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,9 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin', [LoginController::class, 'dashboard'])->name('admin');
 Route::get('/admin/login', [LoginController::class, 'loginForm'])->name('admin.login');
-Route::get('/admin/register', [LoginController::class, 'registerForm'])->name('admin.register');
+Route::get('/admin/registro', [LoginController::class, 'registerForm'])->name('admin.register');
 /* temporario, será feito alteração após reforma e criação de views para o sistema */
-Route::get('/admin/profile', [UserController::class, 'profile'])->name('admin.profile');
+Route::get('/admin/perfil', [UserController::class, 'profile'])->name('admin.profile');
+Route::get('/admin/tabelas', [UserController::class, 'tables'])->name('admin.tables');
+Route::get('/admin/notificacoes', [UserController::class, 'notificacoes'])->name('admin.notificacoes');
+Route::get('/admin/financeiro', [FinanceiroController::class, 'financeiro'])->name('admin.financeiro');
 
 
 

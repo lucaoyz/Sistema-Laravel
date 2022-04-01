@@ -15,6 +15,6 @@ class UserController extends Controller
     }
 
     public function notificacoes(){
-        return view('admin.notificacoes');
+        return view('admin.notificacoesIDEIA');
     }
 }

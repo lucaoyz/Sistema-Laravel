@@ -1,4 +1,4 @@
-@extends('layouts.layouts')
+@extends('layouts.head')
 @section('title', 'Entrar')
 
 <body class="bg-gray-200">

@@ -1,4 +1,4 @@
-@extends('layouts.layouts')
+@extends('layouts.head')
 @section('title', 'Registro')
 
 <body class="">

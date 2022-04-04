@@ -1,0 +1,6 @@
+@extends('layouts.head')
+@section('title', 'Treino')
+@extends('layouts.layouts')
+@section('treino', 'active bg-gradient-primary')
+@section('pagina', 'Treino')
+@section('content')

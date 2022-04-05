@@ -46,7 +46,7 @@
             </a>
           </li>
           <li class="nav-item mt-3">
-            <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
+            <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Usuario</h6>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white @yield('perfil')" href="{{route('admin.perfil')}}">
@@ -76,7 +76,7 @@
       </div>
       <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
-          <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
+          <a class="btn bg-gradient-primary mt-4 w-100" type="button">SAIR</a>
         </div>
       </div>
     </aside>
@@ -159,8 +159,8 @@
         <div class="card shadow-lg">
           <div class="card-header pb-0 pt-3">
             <div class="float-start">
-              <h5 class="mt-3 mb-0">Material UI Configurator</h5>
-              <p>See our dashboard options.</p>
+              <h5 class="mt-3 mb-0">Configurações do sistema:</h5>
+              <p>Altere visualmente seu sistema.</p>
             </div>
             <div class="float-end mt-4">
               <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -173,7 +173,7 @@
           <div class="card-body pt-sm-3 pt-0">
             <!-- Sidebar Backgrounds -->
             <div>
-              <h6 class="mb-0">Sidebar Colors</h6>
+              <h6 class="mb-0">Cor da barra lateral</h6>
             </div>
             <a href="javascript:void(0)" class="switch-trigger background-color">
               <div class="badge-colors my-2 text-start">
@@ -187,39 +187,39 @@
             </a>
             <!-- Sidenav Type -->
             <div class="mt-3">
-              <h6 class="mb-0">Sidenav Type</h6>
-              <p class="text-sm">Choose between 2 different sidenav types.</p>
+              <h6 class="mb-0">Tipo de barra lateral</h6>
+              <p class="text-sm">Selecione o tipo de sua barra lateral.</p>
             </div>
             <div class="d-flex">
               <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark" onclick="sidebarType(this)">Dark</button>
               <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent" onclick="sidebarType(this)">Transparent</button>
               <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
             </div>
-            <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+            <p class="text-sm d-xl-none d-block mt-2">Você só pode alterar o tipo de barra lateral na versão de computador.</p>
             <!-- Navbar Fixed -->
             <div class="mt-3 d-flex">
-              <h6 class="mb-0">Navbar Fixed</h6>
+              <h6 class="mb-0">Barra de navegação fixada</h6>
               <div class="form-check form-switch ps-0 ms-auto my-auto">
                 <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
               </div>
             </div>
             <hr class="horizontal dark my-3">
             <div class="mt-2 d-flex">
-              <h6 class="mb-0">Light / Dark</h6>
+              <h6 class="mb-0">Branco / Escuro</h6>
               <div class="form-check form-switch ps-0 ms-auto my-auto">
                 <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
               </div>
             </div>
             <hr class="horizontal dark my-sm-4">
-            <a class="btn btn-outline-dark w-100" href="">View documentation</a>
             <div class="w-100 text-center">
-              <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
-              <h6 class="mt-3">Thank you for sharing!</h6>
-              <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
-                <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
+              <a class="github-button" href="https://github.com/lucaoyz/sistema-laravel" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+              <br><h6 class="mt-3">Obrigado por usar nosso sistema!</h6>
+
+              <a href="https://github.com/lucaoyz" class="btn btn-dark mb-0 me-2" target="_blank">
+                <i class="fab fa-github me-1" aria-hidden="true"></i> GitHub
               </a>
-              <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
-                <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
+              <a href="" class="btn btn-dark mb-0 me-2" target="_blank">
+                <i class="fab fa-instagram me-1" aria-hidden="true"></i> Instagram
               </a>
             </div>
           </div>

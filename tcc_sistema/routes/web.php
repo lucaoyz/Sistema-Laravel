@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\FinanceiroController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\TreinoController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,5 +33,39 @@ Route::get('/admin/financeiro', [FinanceiroController::class, 'financeiro'])->na
 Route::get('/admin/treino', [TreinoController::class, 'treino'])->name('admin.treino');
 
 
+
+
+
+Auth::routes();
+
+/*------------------------------------------
+--------------------------------------------
+All Normal Users Routes List
+--------------------------------------------
+--------------------------------------------*/
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+
+/*------------------------------------------
+--------------------------------------------
+All Admin Routes List
+--------------------------------------------
+--------------------------------------------*/
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+
+    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+});
+
+/*------------------------------------------
+--------------------------------------------
+All Admin Routes List
+--------------------------------------------
+--------------------------------------------*/
+Route::middleware(['auth', 'user-access:professor'])->group(function () {
+
+    Route::get('/professor/home', [HomeController::class, 'professorHome'])->name('professor.home');
+});
 
 

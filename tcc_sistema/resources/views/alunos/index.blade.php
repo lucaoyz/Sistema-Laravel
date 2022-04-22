@@ -31,7 +31,7 @@
         </tr>
         @foreach ($alunos as $aluno)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{ $aluno->id }}</td>
             <td>{{ $aluno->alu_nome }}</td>
             <td>{{ $aluno->alu_email }}</td>
             <td>{{ $aluno->alu_idade }}</td>

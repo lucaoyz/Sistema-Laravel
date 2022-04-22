@@ -3,6 +3,7 @@
 use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\TreinoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AlunoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,7 +41,7 @@ Auth::routes();
 
 /*------------------------------------------
 --------------------------------------------
-All Normal Users Routes List
+LISTA DE ROTAS DE ALUNOS/NORMAL USERS
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user'])->group(function () {
@@ -50,17 +51,25 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
 /*------------------------------------------
 --------------------------------------------
-All Admin Routes List
+LISTA DE ROTAS DE ADMIN
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
-    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::prefix('admin')->group(function(){
+
+        Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
+        Route::resource('/alunos', AlunoController::class);
+
 });
+
+});
+
+
 
 /*------------------------------------------
 --------------------------------------------
-All Admin Routes List
+lISTA DE ROTAS DE PROFESSOR
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:professor'])->group(function () {

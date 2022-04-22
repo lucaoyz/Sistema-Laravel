@@ -9,6 +9,7 @@
 
                 <div class="card-body">
                     You are a Admin User.
+                    <button class="btn btn-primary"><a href="{{route('alunos.index')}}">Cadastro aluno</a></button>
                 </div>
             </div>
         </div>

@@ -59,6 +59,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::prefix('admin')->group(function(){
 
         Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
+
+        // Cadastro de aluno
         Route::resource('/alunos', AlunoController::class);
 
 });

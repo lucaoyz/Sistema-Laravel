@@ -1,4 +1,4 @@
-@extends('alunos.layout')
+@extends('admin.alunos.layout')
 
 @section('content')
     <div class="row">

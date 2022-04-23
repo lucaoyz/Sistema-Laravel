@@ -16,7 +16,7 @@ class AlunoController extends Controller
     {
         $alunos = Aluno::latest()->paginate(5);
 
-        return view('alunos.index',compact('alunos'))
+        return view('admin.alunos.index',compact('alunos'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        return view('alunos.create');
+        return view('admin.alunos.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class AlunoController extends Controller
      */
     public function show(Aluno $aluno)
     {
-        return view('alunos.show',compact('aluno'));
+        return view('admin.alunos.show',compact('aluno'));
     }
 
     /**
@@ -72,7 +72,7 @@ class AlunoController extends Controller
      */
     public function edit(Aluno $aluno)
     {
-        return view('alunos.edit',compact('aluno'));
+        return view('admin.alunos.edit',compact('aluno'));
     }
 
     /**

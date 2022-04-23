@@ -17,21 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* Rotas padroes (login/Registro/Dashboard) */
-Route::get('/admin', [LoginController::class, 'dashboard'])->name('admin');
-Route::get('/admin/login', [LoginController::class, 'loginForm'])->name('admin.login');
-Route::get('/admin/registro', [LoginController::class, 'registroForm'])->name('admin.registro');
 
-/* Usuarios */
-Route::get('/admin/perfil', [UserController::class, 'perfil'])->name('admin.perfil');
-Route::get('/admin/usuarios', [UserController::class, 'usuarios'])->name('admin.usuarios');
-    /* ideia */ Route::get('/admin/perfil/notificacoes', [UserController::class, 'notificacoes'])->name('admin.notificacoes');
-
-/* Rotas para o Financeiro */
-Route::get('/admin/financeiro', [FinanceiroController::class, 'financeiro'])->name('admin.financeiro');
-
-/* Rotas para os treinos */
-Route::get('/admin/treino', [TreinoController::class, 'treino'])->name('admin.treino');
 
 
 
@@ -62,6 +48,29 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         // Cadastro de aluno
         Route::resource('/alunos', AlunoController::class);
+
+        /* Rotas dashboard */
+        Route::get('/', function(){
+            return view('admin.dashboard');
+        })->name('admin');
+
+        /* Usuarios */
+        Route::get('/perfil', function(){
+            return view('admin.perfil');
+        })->name('admin.perfil');
+        Route::get('/usuarios', function(){
+            return view('admin.usuarios');
+        })->name('admin.usuarios');
+
+        /* Rotas para o Financeiro */
+        Route::get('/financeiro', function(){
+            return view('admin.financeiro');
+        })->name('admin.financeiro');
+
+        /* Rotas para os treinos */
+        Route::get('/treino', function(){
+            return view('admin.treino');
+        })->name('admin.treino');
 
 });
 

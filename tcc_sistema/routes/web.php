@@ -125,3 +125,6 @@ Route::middleware(['auth', 'user-access:professor'])->group(function () {
 
 });
 
+Route::fallback(function () {
+    return view('fallback');
+});

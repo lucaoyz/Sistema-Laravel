@@ -32,7 +32,26 @@ LISTA DE ROTAS DE ALUNOS/NORMAL USERS
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user'])->group(function () {
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::prefix('aluno')->group(function(){
+
+        Route::get('/home', [HomeController::class, 'index'])->name('aluno.home');
+
+        /* Rotas dashboard */
+        Route::get('/', function(){
+            return view('aluno.dashboard');
+        })->name('aluno');
+
+        /* Usuarios */
+        Route::get('/perfil', function(){
+            return view('aluno.perfil');
+        })->name('aluno.perfil');
+
+        /* Rotas para os treinos */
+        Route::get('/treino', function(){
+            return view('aluno.treino');
+        })->name('aluno.treino');
+
+    });
 });
 
 /*------------------------------------------
@@ -74,8 +93,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 });
 
-});
-
 
 
 /*------------------------------------------
@@ -85,7 +102,24 @@ lISTA DE ROTAS DE PROFESSOR
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:professor'])->group(function () {
 
-    Route::get('/professor/home', [HomeController::class, 'professorHome'])->name('professor.home');
+    Route::prefix('professor')->group(function(){
+
+        Route::get('/home', [HomeController::class, 'professorHome'])->name('professor.home');
+
+         /* Rotas dashboard */
+         Route::get('/', function(){
+            return view('professor.dashboard');
+        })->name('professor');
+
+        /* Usuarios */
+        Route::get('/perfil', function(){
+            return view('professor.perfil');
+        })->name('professor.perfil');
+
+        /* Rotas para os treinos */
+        Route::get('/treino', function(){
+            return view('professor.treino');
+        })->name('professor.treino');
+
+    });
 });
-
-

@@ -7,14 +7,14 @@
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
           <img src="{{asset('img/logo-ct.png')}}" class="navbar-brand-img h-100" alt="main_logo">
-          <span class="ms-1 font-weight-bold text-white">GV2 Academia</span>
+          <span class="ms-1 font-weight-bold text-white">GV2 Academia - Professor</span>
         </a>
       </div>
       <hr class="horizontal light mt-0 mb-2">
       <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link text-white @yield('dashboard')" href="{{ route('admin') }}">
+            <a class="nav-link text-white @yield('dashboard')" href="{{ route('professor') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
@@ -22,23 +22,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white @yield('usuarios')" href="{{route('admin.usuarios')}}">
-              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="material-icons opacity-10">table_view</i>
-              </div>
-              <span class="nav-link-text ms-1">Usuarios</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white @yield('financeiro')" href="{{route('admin.financeiro')}}">
-              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="material-icons opacity-10">receipt_long</i>
-              </div>
-              <span class="nav-link-text ms-1">Financeiro</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white @yield('treino')" href="{{route('admin.treino')}}">
+            <a class="nav-link text-white @yield('treino')" href="{{route('professor.treino')}}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">fitness_center</i>
               </div>
@@ -49,7 +33,7 @@
             <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Usuario</h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white @yield('perfil')" href="{{route('admin.perfil')}}">
+            <a class="nav-link text-white @yield('perfil')" href="{{route('professor.perfil')}}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>
@@ -60,7 +44,10 @@
       </div>
       <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
-          <a class="btn bg-gradient-primary mt-4 w-100" type="button">SAIR</a>
+            <!-- botao sair -->
+            <a class="btn bg-gradient-primary mt-4 w-100" type="button" href="{{route('logout')}}"><i class="fa fa-sign-out me-sm-1"></i>{{ __('Sair') }}<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form></a>
         </div>
       </div>
     </aside>
@@ -81,12 +68,26 @@
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             </div>
             <ul class="navbar-nav  justify-content-end">
-              <li class="nav-item d-flex align-items-center">
-                <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                  <i class="fa fa-sign-out me-sm-1"></i>
-                  <span class="d-sm-inline d-none">Sair</span>
-                </a>
-              </li>
+
+                <!-- botao sair -->
+
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            <i class="fa fa-sign-out me-sm-1"></i>{{ __('Sair') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
               <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                 <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                   <div class="sidenav-toggler-inner">

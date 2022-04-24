@@ -1,6 +1,6 @@
 @extends('layouts.head')
 @section('title', 'Dashboard')
-@extends('admin.layouts')
+@extends('aluno.layouts')
 @section('dashboard', 'active bg-gradient-primary')
 @section('pagina', 'Dashboard')
 @section('content')

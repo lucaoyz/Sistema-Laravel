@@ -92,7 +92,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         })->name('admin.treino');
 
 });
-
+});
 
 
 /*------------------------------------------
@@ -122,4 +122,6 @@ Route::middleware(['auth', 'user-access:professor'])->group(function () {
         })->name('professor.treino');
 
     });
+
 });
+

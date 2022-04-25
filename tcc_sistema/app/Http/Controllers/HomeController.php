@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('aluno.dashboard');
     }
 
       /**
@@ -33,7 +33,7 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('adminHome');
+        return view('admin.dashboard');
     }
 
     /**
@@ -43,6 +43,6 @@ class HomeController extends Controller
      */
     public function professorHome()
     {
-        return view('professorHome');
+        return view('professor.dashboard');
     }
 }

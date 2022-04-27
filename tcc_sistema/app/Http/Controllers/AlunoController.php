@@ -41,7 +41,7 @@ class AlunoController extends Controller
         $request->validate([
             'alu_nome' => 'required',
             'alu_email' => 'required',
-            'alu_idade' => 'required',
+            'alu_data_nascimento' => 'required|date',
             'alu_endereco' => 'required',
             'alu_celular' => 'required',
             'alu_cpf' => 'required',
@@ -87,7 +87,7 @@ class AlunoController extends Controller
         $request->validate([
             'alu_nome' => 'required',
             'alu_email' => 'required',
-            'alu_idade' => 'required',
+            'alu_data_nascimento' => 'required|date',
             'alu_endereco' => 'required',
             'alu_celular' => 'required',
             'alu_cpf' => 'required',

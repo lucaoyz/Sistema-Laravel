@@ -30,8 +30,8 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Idade:</strong>
-                {{ $aluno->alu_idade }}
+                <strong>Data de Nascimento:</strong>
+                {{ $aluno->alu_data_nascimento }}
             </div>
         </div>
 

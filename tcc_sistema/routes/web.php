@@ -56,12 +56,12 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
 /*------------------------------------------
 --------------------------------------------
-LISTA DE ROTAS DE ADMIN
+LISTA DE ROTAS GERENCIAIS
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
-    Route::prefix('admin')->group(function(){
+    Route::prefix('gerencial')->group(function(){
 
         Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
 

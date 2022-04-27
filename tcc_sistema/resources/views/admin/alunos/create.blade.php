@@ -65,16 +65,14 @@
         </div>
 
         <div class="row mb-3">
-            <label for="alu_idade" class="col-md-4 col-form-label text-md-end">{{ __('Idade') }}</label>
+            <label for="alu_data_nascimento" class="col-md-4 col-form-label text-md-end">{{ __('Data de Nascimento') }}</label>
 
             <div class="col-md-6">
-                <input id="alu_idade" type="text"
-                class="form-control @error('alu_idade') is-invalid @enderror"
-                name="alu_idade" value="{{ old('alu_idade') }}" required autocomplete="alu_idade" autofocus
-                onkeypress="return onlynumber();" maxlength="3"
-                placeholder="Insira a idade do aluno aqui">
+                <input id="alu_data_nascimento" type="date"
+                class="form-control @error('alu_data_nascimento') is-invalid @enderror"
+                name="alu_data_nascimento" value="{{ old('alu_data_nascimento') }}" required autocomplete="alu_idade" autofocus>
 
-                @error('alu_idade')
+                @error('alu_data_nascimento')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

@@ -23,7 +23,7 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
-            <th>Idade</th>
+            <th>Data de Nascimento</th>
             <th>Endereço</th>
             <th>Telefone ou Celular</th>
             <th>CPF</th>
@@ -34,7 +34,7 @@
             <td>{{ $aluno->id }}</td>
             <td>{{ $aluno->alu_nome }}</td>
             <td>{{ $aluno->alu_email }}</td>
-            <td>{{ $aluno->alu_idade }}</td>
+            <td>{{ $aluno->alu_data_nascimento }}</td>
             <td>{{ $aluno->alu_endereco }}</td>
             <td>{{ $aluno->alu_celular }}</td>
             <td>{{ $aluno->alu_cpf }}</td>

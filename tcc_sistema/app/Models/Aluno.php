@@ -12,8 +12,8 @@ class Aluno extends Model
     protected $fillable = [
         'alu_nome',
         'alu_email',
-        'alu_idade',
         'alu_endereco',
+        'alu_data_nascimento',
         'alu_telefone',
         'alu_celular',
         'alu_cpf',

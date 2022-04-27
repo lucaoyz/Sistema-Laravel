@@ -18,7 +18,7 @@ return new class extends Migration
             $table->tinyInteger('type')->default(0);
             $table->string('alu_nome');
             $table->string('alu_email');
-            $table->integer('alu_idade');
+            $table->date('alu_data_nascimento');
             $table->string('alu_endereco');
             $table->string('alu_celular')->nullable;
             $table->string('alu_cpf');

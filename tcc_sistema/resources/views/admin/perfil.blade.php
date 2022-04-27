@@ -1,6 +1,5 @@
-@extends('layouts.head')
-@section('title', 'Perfil')
 @extends('admin.layouts')
+@section('title', 'Perfil')
 @section('perfil', 'active bg-gradient-primary')
 @section('pagina', 'Perfil')
 @section('content')

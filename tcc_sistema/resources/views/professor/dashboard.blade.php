@@ -1,6 +1,5 @@
-@extends('layouts.head')
-@section('title', 'Dashboard')
 @extends('professor.layouts')
+@section('title', 'Dashboard')
 @section('dashboard', 'active bg-gradient-primary')
 @section('pagina', 'Dashboard')
 @section('content')

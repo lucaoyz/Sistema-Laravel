@@ -18,4 +18,10 @@ class Aluno extends Model
         'alu_celular',
         'alu_cpf',
     ];
+
+    protected $dates = [
+        'alu_data_nascimento',
+    ];
+
+
 }

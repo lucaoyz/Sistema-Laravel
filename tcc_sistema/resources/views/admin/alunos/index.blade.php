@@ -34,7 +34,7 @@
             <td>{{ $aluno->id }}</td>
             <td>{{ $aluno->alu_nome }}</td>
             <td>{{ $aluno->alu_email }}</td>
-            <td>{{ $aluno->alu_data_nascimento }}</td>
+            <td>{{ $aluno->alu_data_nascimento->format('d/m/Y')}}</td>
             <td>{{ $aluno->alu_endereco }}</td>
             <td>{{ $aluno->alu_celular }}</td>
             <td>{{ $aluno->alu_cpf }}</td>

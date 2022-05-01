@@ -31,7 +31,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Data de Nascimento:</strong>
-                {{ $aluno->alu_data_nascimento }}
+                {{ $aluno->alu_data_nascimento->format('d/m/Y') }}
             </div>
         </div>
 

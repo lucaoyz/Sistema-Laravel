@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Laravel 9 CRUD</h2>
+                <h2>Laravel 9 CRUD Aluno</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('alunos.create') }}"> Crie um novo aluno</a>

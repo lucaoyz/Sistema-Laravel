@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2> Mostrar alunos</h2>
+                <h2> Mostrar aluno</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('alunos.index') }}"> Voltar</a>

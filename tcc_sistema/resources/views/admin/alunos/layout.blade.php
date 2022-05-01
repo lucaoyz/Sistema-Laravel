@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel 9 CRUD </title>
+    <title>Laravel 9 CRUD Aluno</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <script type="text/javascript">
@@ -26,7 +26,7 @@
              }
     }
     </script>
-    
+
 </head>
 <body>
 

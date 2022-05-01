@@ -70,7 +70,8 @@
             <div class="col-md-6">
                 <input id="alu_data_nascimento" type="date"
                 class="form-control @error('alu_data_nascimento') is-invalid @enderror"
-                name="alu_data_nascimento" value="{{ old('alu_data_nascimento') }}" required autocomplete="alu_idade" autofocus>
+                name="alu_data_nascimento" value="{{ old('alu_data_nascimento') }}" required autocomplete="alu_idade" autofocus
+                max="{{ now()->toDateString('d-m-Y') }}">
 
                 @error('alu_data_nascimento')
                     <span class="invalid-feedback" role="alert">

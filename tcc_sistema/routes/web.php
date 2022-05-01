@@ -65,9 +65,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
 
+        // filtro de aluno
+        Route::any('/alunos/search', [AlunoController::class, 'search'])->name('alunos.search');
+
         // Cadastro de aluno
         Route::resource('/alunos', AlunoController::class);
-
         /* Rotas dashboard */
         Route::get('/', function(){
             return view('admin.dashboard');

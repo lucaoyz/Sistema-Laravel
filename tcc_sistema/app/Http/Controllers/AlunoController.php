@@ -114,4 +114,16 @@ class AlunoController extends Controller
         return redirect()->route('alunos.index')
                         ->with('success','Aluno deletado com sucesso!');
     }
+
+    public function search(Request $request)
+    {
+
+        $filters = $request->except('_token');
+        $alunos = Aluno::where('alu_nome', 'LIKE', "%{$request->search}%")
+            ->orWhere('alu_email', 'LIKE', "%{$request->search}%")
+            ->orWhere('alu_cpf', 'LIKE', "%{$request->search}%")
+            ->paginate(5);
+
+            return view('admin.alunos.index', compact('alunos', 'filters'));
+    }
 }

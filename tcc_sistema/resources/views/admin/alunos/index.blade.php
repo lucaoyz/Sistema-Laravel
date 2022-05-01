@@ -8,6 +8,16 @@
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('alunos.create') }}"> Crie um novo aluno</a>
+            </div><br>
+            <div class="pull-right">
+                <form action="{{route('alunos.search')}}" method="post">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="search" placeholder="Filtrar por nome, email ou cpf" width="200px">
+                        <button class="btn btn-primary" type="submit">Filtrar</button>
+                        <a class="btn btn-outline-secondary" href="{{route('alunos.index')}}">Limpar filtro</a>
+                      </div>
+                </form><br>
             </div>
         </div>
     </div>
@@ -55,6 +65,11 @@
         @endforeach
     </table>
 
-    {!! $alunos->links() !!}
+    @if (isset($filters))
+        {{ $alunos->appends($filters)->links() }}
+    @else
+        {{ $alunos->links() }}
+    @endif
+
 
 @endsection

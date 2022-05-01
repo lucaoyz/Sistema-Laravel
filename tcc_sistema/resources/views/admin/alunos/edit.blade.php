@@ -67,7 +67,8 @@
                 <div class="col-md-6">
                     <input id="alu_data_nascimento" type="date"
                     class="form-control @error('alu_data_nascimento') is-invalid @enderror"
-                    name="alu_data_nascimento" value="{{ $aluno->alu_data_nascimento }}" required autocomplete="alu_data_nascimento" autofocus>
+                    name="alu_data_nascimento" value="{{ $aluno->alu_data_nascimento->format('d/m/Y') }}" required autocomplete="alu_data_nascimento" autofocus
+                    max="{{ now()->toDateString('d-m-Y') }}">
 
                     @error('alu_data_nascimento')
                         <span class="invalid-feedback" role="alert">

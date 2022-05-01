@@ -65,7 +65,7 @@
 
                         <form action="{{ route('alunos.destroy',$aluno->id) }}" method="POST">
 
-                            <a class="btn btn-info" href="{{ route('alunos.show',$aluno->id) }}">Mostrar</a>
+                            <a class="btn btn-info" href="{{ route('alunos.show',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Mostrar</a>
 
                             <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}">Editar</a>
 
@@ -132,9 +132,10 @@
                         <span class="text-xs font-weight-bold mb-0">{{ $aluno->alu_data_nascimento->format('d/m/Y')}}</span>
                       </td>
                       <td class="align-middle">
+
                         <form action="{{ route('alunos.destroy',$aluno->id) }}" method="POST">
 
-                            <a class="btn btn-info" href="{{ route('alunos.show',$aluno->id) }}">Mostrar</a>
+                            <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Mostrar</a>
 
                             <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}">Editar</a>
 
@@ -156,7 +157,9 @@
     </div>
     @endsection
   </main>
-  <!--   Core JS Files   -->
+
+  <!-- Modal -->
+  @extends('admin.modals')
 </body>
 
 </html>

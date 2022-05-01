@@ -17,7 +17,7 @@ class AlunoController extends Controller
         $alunos = Aluno::latest()->paginate(5);
         $alunos->alu_data_nascimento = \Carbon\Carbon::now('America/Sao_Paulo');
 
-        return view('admin.alunos.index',compact(['alunos']))
+        return view('admin.usuarios',compact(['alunos']))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

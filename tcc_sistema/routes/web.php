@@ -79,9 +79,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/perfil', function(){
             return view('admin.perfil');
         })->name('admin.perfil');
-        Route::get('/usuarios', function(){
-            return view('admin.usuarios');
-        })->name('admin.usuarios');
+        
+        Route::get('/usuarios', [AlunoController::class, 'index'])->name('admin.usuarios');
 
         /* Rotas para o Financeiro */
         Route::get('/financeiro', function(){

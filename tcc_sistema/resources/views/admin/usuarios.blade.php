@@ -29,7 +29,7 @@
 
             <!-- Botão de criar -->
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('alunos.create') }}"> Crie um novo aluno</a>
+                <a class="btn btn-success" href="{{ route('alunos.create') }}" data-bs-toggle="modal" data-bs-target="#criarAlunoModal"> Crie um novo aluno</a>
             </div>
             </div>
 

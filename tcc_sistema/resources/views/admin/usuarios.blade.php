@@ -89,10 +89,10 @@
                         <form action="{{ route('alunos.destroy',$aluno->id) }}" method="POST">
 
                             <!-- Mostrar -->
-                            <a class="btn btn-info" href="{{ route('alunos.show',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Mostrar</a>
+                            <a class="btn btn-info" href="{{ route('alunos.show',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#mostrarAlunoModal{{$aluno->id}}">Mostrar</a>
 
                             <!-- Editar -->
-                            <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}">Editar</a>
+                            <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}"" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Editar</a>
 
                             <!-- Excluir -->
                             @csrf

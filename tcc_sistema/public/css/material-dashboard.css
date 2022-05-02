@@ -1831,7 +1831,7 @@ progress {
   .form-control:focus {
     color: #495057;
     background-color: transparent;
-    border-color: transparent;
+    border-color: #d2d6da;
     outline: 0;
     box-shadow: none; }
   .form-control::-webkit-date-and-time-value {
@@ -13916,7 +13916,7 @@ label,
   transition: 0.2s ease all; }
 
 .form-control {
-  border: none; }
+   }
   .form-control.is-invalid {
     border: 1px solid #d2d6da;
     padding: 0.625rem 0.75rem;

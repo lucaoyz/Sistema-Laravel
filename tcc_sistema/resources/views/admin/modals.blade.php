@@ -231,8 +231,6 @@
   @endforeach
 
     <!-- Criar aluno -->
-
-@foreach($alunos as $aluno)
 @if ($errors->any())
 <div class="alert alert-danger">
     <strong>Whoops!</strong> Pode haver problemas em seu formulário!<br><br>
@@ -372,6 +370,5 @@
       </div>
     </div>
   </div>
-  @endforeach
 
 

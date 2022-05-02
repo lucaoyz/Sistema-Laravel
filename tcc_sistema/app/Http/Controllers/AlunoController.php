@@ -50,7 +50,7 @@ class AlunoController extends Controller
 
         Aluno::create($request->all());
 
-        return redirect()->route('alunos.index')
+        return redirect()->route('admin.usuarios')
                         ->with('success','Aluno criado com sucesso!');
     }
 
@@ -97,7 +97,7 @@ class AlunoController extends Controller
 
         $aluno->update($request->all());
 
-        return redirect()->route('alunos.index')
+        return redirect()->route('admin.usuarios')
                         ->with('success','Aluno atualizado com sucesso!');
     }
 

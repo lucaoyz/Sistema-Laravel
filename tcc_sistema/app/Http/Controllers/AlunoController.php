@@ -28,7 +28,7 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        return view('admin.alunos.create');
+        return view('admin.usuarios');
     }
 
     /**
@@ -63,7 +63,7 @@ class AlunoController extends Controller
     public function show(Aluno $aluno)
     {
 
-        return view('admin.alunos.show',compact('aluno'));
+        return view('admin.usuarios',compact('aluno'));
     }
 
     /**
@@ -74,7 +74,7 @@ class AlunoController extends Controller
      */
     public function edit(Aluno $aluno)
     {
-        return view('admin.alunos.edit',compact('aluno'));
+        return view('admin.usuarios',compact('aluno'));
     }
 
     /**
@@ -111,7 +111,7 @@ class AlunoController extends Controller
     {
         $aluno->delete();
 
-        return redirect()->route('alunos.index')
+        return redirect()->route('admin.usuarios')
                         ->with('success','Aluno deletado com sucesso!');
     }
 

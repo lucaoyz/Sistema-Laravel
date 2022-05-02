@@ -177,13 +177,13 @@
                       <!-- Botoes de ações -->
                       <td class="align-middle">
 
-                        <form action="{{ route('alunos.destroy',$aluno->id) }}" method="POST">
+                        <form action="" method="POST">
 
                             <!-- Mostrar -->
-                            <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Mostrar</a>
+                            <a class="btn btn-info" href="">Mostrar</a>
 
                             <!-- Editar -->
-                            <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}">Editar</a>
+                            <a class="btn btn-primary" href="">Editar</a>
 
                             <!-- Excluir -->
                             @csrf

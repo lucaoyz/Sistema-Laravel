@@ -66,7 +66,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
 
         // filtro de aluno
-        Route::any('/alunos/search', [AlunoController::class, 'search'])->name('alunos.search');
+        Route::any('/usuarios/search', [AlunoController::class, 'search'])->name('alunos.search');
 
         // Cadastro de aluno
         Route::resource('/alunos', AlunoController::class);
@@ -79,7 +79,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/perfil', function(){
             return view('admin.perfil');
         })->name('admin.perfil');
-        
+
         Route::get('/usuarios', [AlunoController::class, 'index'])->name('admin.usuarios');
 
         /* Rotas para o Financeiro */

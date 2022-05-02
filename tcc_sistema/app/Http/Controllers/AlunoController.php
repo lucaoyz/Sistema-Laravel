@@ -124,6 +124,6 @@ class AlunoController extends Controller
             ->orWhere('alu_cpf', 'LIKE', "%{$request->search}%")
             ->paginate(5);
 
-            return view('admin.alunos.index', compact('alunos', 'filters'));
+            return view('admin.usuarios', compact('alunos', 'filters'));
     }
 }

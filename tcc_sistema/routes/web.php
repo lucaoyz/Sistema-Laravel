@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AlunoController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +32,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
     Route::prefix('aluno')->group(function(){
 
-        Route::get('/home', [HomeController::class, 'index'])->name('aluno.home');
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('aluno.home');
 
         /* Rotas dashboard */
         Route::get('/', function(){
@@ -61,13 +61,22 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::prefix('gerencial')->group(function(){
 
-        Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home');
 
-        // filtro de aluno
-        Route::any('/usuarios/search', [AlunoController::class, 'search'])->name('alunos.search');
+
 
         // Cadastro de aluno
-        Route::resource('/alunos', AlunoController::class);
+
+        Route::get('/alunos', [App\Http\Controllers\UsuariosController::class, 'index'])->name('alunos.index');
+        Route::get('/alunos/create', [App\Http\Controllers\UsuariosController::class, 'createAluno'])->name('alunos.create');
+        Route::post('/alunos/store', [App\Http\Controllers\UsuariosController::class, 'storeAluno'])->name('alunos.store');
+        Route::get('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'showAluno'])->name('alunos.show');
+        Route::get('/alunos/{aluno}/edit',[App\Http\Controllers\UsuariosController::class, 'editAluno'])->name('alunos.edit');
+        Route::put('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'updateAluno'])->name('alunos.update');
+        Route::delete('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'destroyAluno'])->name('alunos.destroy');
+            // filtro de aluno
+            Route::any('/usuarios/search', [App\Http\Controllers\UsuariosController::class, 'searchAluno'])->name('alunos.search');
+
         /* Rotas dashboard */
         Route::get('/', function(){
             return view('admin.dashboard');
@@ -78,7 +87,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             return view('admin.perfil');
         })->name('admin.perfil');
 
-        Route::get('/usuarios', [AlunoController::class, 'index'])->name('admin.usuarios');
+        Route::get('/usuarios', [App\Http\Controllers\UsuariosController::class, 'index'])->name('admin.usuarios');
 
         /* Rotas para o Financeiro */
         Route::get('/financeiro', function(){
@@ -103,7 +112,7 @@ Route::middleware(['auth', 'user-access:professor'])->group(function () {
 
     Route::prefix('professor')->group(function(){
 
-        Route::get('/home', [HomeController::class, 'professorHome'])->name('professor.home');
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'professorHome'])->name('professor.home');
 
          /* Rotas dashboard */
          Route::get('/', function(){

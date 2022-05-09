@@ -11,6 +11,7 @@
 
 
                     @if (auth::check())
+                    Para gerencial, <a href="{{route('admin')}}">clique aqui</a> para voltar à sua pagina inicial.<br>
                     Para professores, <a href="{{route('professor')}}">clique aqui</a> para voltar à sua pagina inicial.<br>
                     Para alunos, <a href="{{route('aluno')}}">clique aqui</a> para voltar à sua pagina inicial.<br>
                         Você está logado, deseja sair? <a href="{{ route('logout') }}"

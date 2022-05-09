@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\FinanceiroController;
-use App\Http\Controllers\TreinoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AlunoController;
 use Illuminate\Support\Facades\Route;

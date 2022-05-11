@@ -15,18 +15,13 @@
 </div>
 @endif
 
-<!-- Alunos -->
     <div class="container-fluid py-4">
+        <!-- Alunos -->
       <div class="row">
         <div class="col-12">
-          <div class="card my-4">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Alunos</h6>
-              </div>
-
-              <!-- Filtro -->
-              <form action="{{route('alunos.search')}}" method="post">
+            <!-- Filtro -->
+            <div class="card-header-tabs p-0 mt-n4 mx-3 border-radius-lg" style="background-color: #fff;">
+            <form action="{{route('usuarios.search')}}" method="post">
                 @csrf
                 <div class="input-group input-group-outline my-3">
                     <!-- Campo de texto para digitar oque será filtrado -->
@@ -37,8 +32,14 @@
                     <a class="btn btn-outline-secondary" href="{{route('admin.usuarios')}}">Limpar filtro</a>
                   </div>
             </form>
-
-            <!-- Botão de criar -->
+            </div>
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Alunos</h6>
+              </div>
+              <br>
+              <!-- Botão de criar -->
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('alunos.create') }}" data-bs-toggle="modal" data-bs-target="#criarAlunoModal"> Crie um novo aluno</a>
             </div>
@@ -136,7 +137,13 @@
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3">Professores</h6>
               </div>
+              <br>
+              <!-- Botão de criar -->
+            <div class="pull-right">
+                <a class="btn btn-success" href="{{ route('personals.create') }}" data-bs-toggle="modal" data-bs-target="#criarPersonalModal"> Crie um novo professor</a>
             </div>
+            </div>
+
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">

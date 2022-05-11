@@ -74,8 +74,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/alunos/{aluno}/edit',[App\Http\Controllers\UsuariosController::class, 'editAluno'])->name('alunos.edit');
         Route::put('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'updateAluno'])->name('alunos.update');
         Route::delete('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'destroyAluno'])->name('alunos.destroy');
-            // filtro de aluno
-            Route::any('/usuarios/alunos/search', [App\Http\Controllers\UsuariosController::class, 'searchAluno'])->name('alunos.search');
+            // filtro de registros
+            Route::any('/usuarios/search', [App\Http\Controllers\UsuariosController::class, 'search'])->name('usuarios.search');
 
         // Cadastro de professores
 

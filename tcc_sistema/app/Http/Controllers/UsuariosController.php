@@ -191,7 +191,7 @@ class UsuariosController extends Controller
                         ->with('success','Personal deletado com sucesso!');
     }
 
-    public function searchAluno(Request $request)
+    public function search(Request $request)
     {
 
         $filters = $request->except('_token');
@@ -200,8 +200,14 @@ class UsuariosController extends Controller
             ->orWhere('alu_cpf', 'LIKE', "%{$request->search}%")
             ->paginate(5);
 
+        $personals = Personal::where('per_nome', 'LIKE', "%{$request->search}%")
+            ->orWhere('per_email', 'LIKE', "%{$request->search}%")
+            ->orWhere('per_cpf', 'LIKE', "%{$request->search}%")
+            ->paginate(5);
+
             return view('admin.usuarios', [
                 'alunos' => $alunos,
+                'personals' => $personals,
                 'filters' => $filters,
                 ]);
     }
@@ -215,8 +221,10 @@ class UsuariosController extends Controller
             ->orWhere('per_cpf', 'LIKE', "%{$request->search}%")
             ->paginate(5);
 
+
             return view('admin.usuarios', [
                 'personals' => $personals,
+                'alunos' => $alunos,
                 'filters' => $filters,
                 ]);
     }

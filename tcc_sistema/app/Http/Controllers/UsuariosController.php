@@ -83,6 +83,13 @@ class UsuariosController extends Controller
             'per_cpf' => 'required',
         ]);
 
+        $tb_user = new User;
+        $tb_user->name = $request->per_nome;
+        $tb_user->email = $request->per_email;
+        $tb_user->password = bcrypt('12345678');
+        $tb_user->type = 2;
+        $tb_user->save();
+
         Personal::create($request->all());
 
         return redirect()->route('admin.usuarios')

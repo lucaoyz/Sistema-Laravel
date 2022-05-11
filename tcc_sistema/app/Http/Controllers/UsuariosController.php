@@ -212,21 +212,4 @@ class UsuariosController extends Controller
                 ]);
     }
 
-    public function searchPersonal(Request $request)
-    {
-
-        $filters = $request->except('_token');
-        $personals = Personal::where('per_nome', 'LIKE', "%{$request->search}%")
-            ->orWhere('per_email', 'LIKE', "%{$request->search}%")
-            ->orWhere('per_cpf', 'LIKE', "%{$request->search}%")
-            ->paginate(5);
-
-
-            return view('admin.usuarios', [
-                'personals' => $personals,
-                'alunos' => $alunos,
-                'filters' => $filters,
-                ]);
-    }
-
 }

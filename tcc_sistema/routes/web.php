@@ -75,7 +75,19 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::put('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'updateAluno'])->name('alunos.update');
         Route::delete('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'destroyAluno'])->name('alunos.destroy');
             // filtro de aluno
-            Route::any('/usuarios/search', [App\Http\Controllers\UsuariosController::class, 'searchAluno'])->name('alunos.search');
+            Route::any('/usuarios/alunos/search', [App\Http\Controllers\UsuariosController::class, 'searchAluno'])->name('alunos.search');
+
+        // Cadastro de professores
+
+        Route::get('/personals', [App\Http\Controllers\UsuariosController::class, 'index'])->name('personals.index');
+        Route::get('/personals/create', [App\Http\Controllers\UsuariosController::class, 'createPersonal'])->name('personals.create');
+        Route::post('/personals/store', [App\Http\Controllers\UsuariosController::class, 'storePersonal'])->name('personals.store');
+        Route::get('/personals/{personal}', [App\Http\Controllers\UsuariosController::class, 'showPersonal'])->name('personals.show');
+        Route::get('/personals/{personal}/edit',[App\Http\Controllers\UsuariosController::class, 'editPersonal'])->name('personals.edit');
+        Route::put('/personals/{personal}', [App\Http\Controllers\UsuariosController::class, 'updatePersonal'])->name('personals.update');
+        Route::delete('/personals/{personal}', [App\Http\Controllers\UsuariosController::class, 'destroyPersonal'])->name('personals.destroy');
+            // filtro de professores
+            Route::any('/usuarios/personals/search', [App\Http\Controllers\UsuariosController::class, 'searchPersonal'])->name('personals.search');
 
         /* Rotas dashboard */
         Route::get('/', function(){

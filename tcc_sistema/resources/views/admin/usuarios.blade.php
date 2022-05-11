@@ -1,3 +1,8 @@
+<!-- NOTAS
+    FROND-END/BACK-END
+        ALUNOS/ALUNO    S
+    PROFESSORES/PERSONALS
+-->
 @extends('admin.layouts')
 @section('title', 'Usuarios')
 @section('usuarios', 'active bg-gradient-primary')
@@ -142,48 +147,54 @@
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">CPF</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Celular</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data de nascimento</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Endereço</th>
                             <th class="text-secondary text-uppercase text-xxs font-weight-bolder opacity-7">Ações</th>
                         </tr>
                     </thead>
                   <tbody>
-
+                    <!-- Laço de repetição dos personals -->
+                    @foreach ($personals as $personal)
                     <tr>
-
                         <!-- Nome e email -->
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Nome</h6>
-                            <p class="text-xs text-secondary mb-0">Email</p>
+                            <h6 class="mb-0 text-sm">{{ $personal->per_nome }}</h6>
+                            <p class="text-xs text-secondary mb-0">{{ $personal->per_email }}</p>
                           </div>
                         </div>
                       </td>
 
                       <!-- CPF -->
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">CPF</p>
+                        <p class="text-xs font-weight-bold mb-0">{{ $personal->per_cpf }}</p>
                       </td>
 
                       <!-- Celular -->
                       <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">Celular</p>
+                        <p class="text-xs font-weight-bold mb-0">{{ $personal->per_celular }}</p>
                       </td>
 
                       <!-- Data de nascimento -->
                       <td class="align-middle text-center">
-                        <span class="text-xs font-weight-bold mb-0">Data de nascimento</span>
+                        <span class="text-xs font-weight-bold mb-0">{{ $personal->per_data_nascimento->format('Y/m/d') }}</span>
+                      </td>
+
+                      <!-- Endereço -->
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0">{{ $personal->per_endereco }}</p>
                       </td>
 
                       <!-- Botoes de ações -->
                       <td class="align-middle">
 
-                        <form action="" method="POST">
+                        <form action="{{ route('personals.destroy',$personal->id) }}" method="POST">
 
                             <!-- Mostrar -->
-                            <a class="btn btn-info" href="">Mostrar</a>
+                            <a class="btn btn-info" href="{{ route('personals.show',$personal->id) }}">Mostrar</a>
 
                             <!-- Editar -->
-                            <a class="btn btn-primary" href="">Editar</a>
+                            <a class="btn btn-primary" href="{{ route('personals.edit',$personal->id) }}">Editar</a>
 
                             <!-- Excluir -->
                             @csrf
@@ -193,9 +204,15 @@
                         </form>
                       </td>
                     </tr>
-
+                    @endforeach
                   </tbody>
                 </table>
+                <!-- Paginação com e sem filtros -->
+                @if (isset($filters))
+                        {{ $personals->appends($filters)->links() }}
+                    @else
+                        {{ $personals->links() }}
+                @endif
               </div>
             </div>
           </div>

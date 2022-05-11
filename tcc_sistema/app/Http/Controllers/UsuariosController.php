@@ -78,7 +78,7 @@ class UsuariosController extends Controller
         Personal::create($request->all());
 
         return redirect()->route('admin.usuarios')
-                        ->with('success','Personal criado com sucesso!');
+                        ->with('success','Professor criado com sucesso!');
     }
 
     /**
@@ -164,7 +164,7 @@ class UsuariosController extends Controller
         $personal->update($request->all());
 
         return redirect()->route('admin.usuarios')
-                        ->with('success','Personal atualizado com sucesso!');
+                        ->with('success','Professor atualizado com sucesso!');
     }
 
     /**
@@ -188,7 +188,7 @@ class UsuariosController extends Controller
         $personal->delete();
 
         return redirect()->route('admin.usuarios')
-                        ->with('success','Personal deletado com sucesso!');
+                        ->with('success','Professor deletado com sucesso!');
     }
 
     public function search(Request $request)

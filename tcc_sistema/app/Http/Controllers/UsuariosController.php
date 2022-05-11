@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Personal;
 use App\Models\Aluno;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
@@ -57,6 +58,13 @@ class UsuariosController extends Controller
             'alu_celular' => 'required',
             'alu_cpf' => 'required',
         ]);
+
+        $tb_user = new User;
+        $tb_user->name = $request->alu_nome;
+        $tb_user->email = $request->alu_email;
+        $tb_user->password = bcrypt('12345678');
+        $tb_user->type = 0;
+        $tb_user->save();
 
         Aluno::create($request->all());
 

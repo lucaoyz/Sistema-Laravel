@@ -198,10 +198,10 @@
                         <form action="{{ route('personals.destroy',$personal->id) }}" method="POST">
 
                             <!-- Mostrar -->
-                            <a class="btn btn-info" href="{{ route('personals.show',$personal->id) }}">Mostrar</a>
+                            <a class="btn btn-info" href="{{ route('personals.show',$personal->id) }}" data-bs-toggle="modal" data-bs-target="#mostrarPersonalModal{{$personal->id}}">Mostrar</a>
 
                             <!-- Editar -->
-                            <a class="btn btn-primary" href="{{ route('personals.edit',$personal->id) }}">Editar</a>
+                            <a class="btn btn-primary" href="{{ route('personals.edit',$personal->id) }}" data-bs-toggle="modal" data-bs-target="#editarPersonalModal{{$personal->id}}">Editar</a>
 
                             <!-- Excluir -->
                             @csrf

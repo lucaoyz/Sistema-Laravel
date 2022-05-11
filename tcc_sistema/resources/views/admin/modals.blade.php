@@ -373,6 +373,72 @@
 
   <!-- PROFESSOR // PERSONAL -->
 
+  <!-- mostrar professor / personal -->
+@foreach($personals as $personal)
+<div class="modal fade" id="mostrarPersonalModal{{$personal->id}}" tabindex="-1" role="dialog" aria-labelledby="mostrarPersonalModal{{$personal->id}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal" id="editarPersonalModal">Mostrar Professor</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Nome:</strong>
+                        {{ $personal->per_nome }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Email:</strong>
+                        {{ $personal->per_email }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Data de Nascimento:</strong>
+                        {{ $personal->per_data_nascimento->format('d/m/Y') }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Endereço:</strong>
+                        {{ $personal->per_endereco }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Telefone ou Celular:</strong>
+                        {{ $personal->per_celular }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Cpf:</strong>
+                        {{ $personal->per_cpf }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endforeach
+
   <!-- criar professor // PERSONAL-->
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -513,5 +579,146 @@
       </div>
     </div>
   </div>
+
+  <!-- Editar professor / personal -->
+
+@foreach($personals as $personal)
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Pode haver problemas em seu formulário!<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+<div class="modal fade" id="editarPersonalModal{{$personal->id}}" tabindex="-1" role="dialog" aria-labelledby="editarPersonalModal{{$personal->id}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 700px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal" id="editarPersonalModal">Editar</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('personals.update',$personal->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+
+
+                    <div class="row mb-3">
+                        <label for="per_nome" class="col-md-4 col-form-label text-md-end">{{ __('Nome') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="per_nome" type="text"
+                             class="form-control @error('per_nome') is-invalid @enderror"
+                              name="per_nome" value="{{ $personal->per_nome }}" required autocomplete="per_nome" autofocus>
+
+                            @error('per_nome')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Endereço de email do professor') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="email" type="email"
+                            class="form-control @error('email') is-invalid @enderror"
+                             name="per_email" value="{{ $personal->per_email }}" required autocomplete="per_email">
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="per_data_nascimento" class="col-md-4 col-form-label text-md-end">{{ __('Data de Nascimento') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="per_data_nascimento" type="date"
+                            class="form-control @error('per_data_nascimento') is-invalid @enderror"
+                            name="per_data_nascimento" value="{{ $personal->per_data_nascimento->format('Y-m-d') }}" required autocomplete="per_data_nascimento" autofocus
+                            max="{{ now()->toDateString('d-m-Y') }}">
+
+                            @error('per_data_nascimento')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="per_endereco" class="col-md-4 col-form-label text-md-end">{{ __('Endereço') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="per_endereco" type="text"
+                            class="form-control @error('per_endereco') is-invalid @enderror"
+                            name="per_endereco" value="{{ $personal->per_endereco }}" required autocomplete="per_endereco" autofocus>
+
+                            @error('per_endereco')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="per_celular" class="col-md-4 col-form-label text-md-end">{{ __('Telefone ou Celular') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="per_celular" type="text"
+                            class="form-control" @error('per_celular') is-invalid @enderror"
+                            name="per_celular" value="{{ $personal->per_celular }}" required autocomplete="per_celular" autofocus
+                            onkeypress="mascara(this, '## #########'); return onlynumber();" maxlength="12">
+
+                            @error('per_celular')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="per_cpf" class="col-md-4 col-form-label text-md-end">{{ __('Cpf') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="per_cpf" type="text"
+                             class="form-control @error('per_cpf') is-invalid @enderror"
+                             name="per_cpf" value="{{ $personal->per_cpf }}" required autocomplete="per_cpf" autofocus
+                             onkeypress="mascara(this, '###.###.###-##'); return onlynumber();" maxlength="14">
+
+                            @error('per_cpf')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row mb-0">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Atualizar') }}
+                    </button>
+            </div>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+  @endforeach
 
 

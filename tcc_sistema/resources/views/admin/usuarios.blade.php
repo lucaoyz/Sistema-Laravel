@@ -184,7 +184,7 @@
 
                       <!-- Data de nascimento -->
                       <td class="align-middle text-center">
-                        <span class="text-xs font-weight-bold mb-0">{{ $personal->per_data_nascimento->format('Y/m/d') }}</span>
+                        <span class="text-xs font-weight-bold mb-0">{{ $personal->per_data_nascimento->format('d/m/Y')}}</span>
                       </td>
 
                       <!-- Endereço -->

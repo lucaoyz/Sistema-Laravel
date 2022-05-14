@@ -54,6 +54,7 @@
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">CPF</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Celular</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mensalidade</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data de nascimento</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Endereço</th>
                             <th class="text-secondary text-uppercase text-xxs font-weight-bolder opacity-7">Ações</th>
@@ -83,6 +84,11 @@
                       <!-- Telefone ou celular -->
                       <td class="align-middle text-center text-sm">
                         <p class="text-xs font-weight-bold mb-0">{{ $aluno->alu_celular }}</p>
+                      </td>
+
+                      <!-- Mensalidade -->
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0">{{('R$ ')}}{{ $aluno->alu_mensalidade }}</p>
                       </td>
 
                       <!-- Data de nascimento -->

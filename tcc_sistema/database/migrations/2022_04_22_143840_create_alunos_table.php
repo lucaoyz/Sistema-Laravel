@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('type')->default(0);
             $table->string('alu_nome');
             $table->string('alu_email');
             $table->date('alu_data_nascimento');
             $table->string('alu_endereco');
+            $table->string('alu_mensalidade');
             $table->string('alu_celular')->nullable;
             $table->string('alu_cpf');
             $table->timestamps();

@@ -55,6 +55,7 @@ class UsuariosController extends Controller
             'alu_email' => 'required',
             'alu_data_nascimento' => 'required|date',
             'alu_endereco' => 'required',
+            'alu_mensalidade' => 'required',
             'alu_celular' => 'required',
             'alu_cpf' => 'required',
         ]);
@@ -155,6 +156,7 @@ class UsuariosController extends Controller
             'alu_email' => 'required',
             'alu_data_nascimento' => 'required|date',
             'alu_endereco' => 'required',
+            'alu_mensalidade' => 'required',
             'alu_celular' => 'required',
             'alu_cpf' => 'required',
         ]);

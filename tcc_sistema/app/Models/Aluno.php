@@ -15,6 +15,7 @@ class Aluno extends Model
         'alu_endereco',
         'alu_data_nascimento',
         'alu_telefone',
+        'alu_mensalidade',
         'alu_celular',
         'alu_cpf',
     ];

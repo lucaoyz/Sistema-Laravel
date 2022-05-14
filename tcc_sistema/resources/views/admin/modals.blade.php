@@ -74,6 +74,13 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
+                        <strong>Mensalidade:</strong>
+                        {{('R$ ')}}{{ $aluno->alu_mensalidade }}
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
                         <strong>Cpf:</strong>
                         {{ $aluno->alu_cpf }}
                     </div>
@@ -201,6 +208,23 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label for="alu_mensalidade" class="col-md-4 col-form-label text-md-end">{{ __('Mensalidade') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="alu_mensalidade" type="text"
+                            class="form-control" @error('alu_mensalidade') is-invalid @enderror"
+                            name="alu_mensalidade" value="{{ $aluno->alu_mensalidade }}" required autocomplete="alu_mensalidade" autofocus
+                            maxlength="5">
+
+                            @error('alu_mensalidade')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
                         <label for="alu_cpf" class="col-md-4 col-form-label text-md-end">{{ __('Cpf') }}</label>
 
                         <div class="col-md-6">
@@ -256,7 +280,7 @@
 
 
                     <div class="row mb-3">
-                        <label for="alu_nome" class="col-md-4 col-form-label text-md-end">{{ __('Nome') }}</label>
+                        <label for="alu_nome" class="col-md-4 col-form-label text-md-end">{{ __('*Nome') }}</label>
 
                         <div class="col-md-6">
                             <input id="alu_nome" type="text"
@@ -273,7 +297,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="alu_email" class="col-md-4 col-form-label text-md-end">{{ __('Endereço de email do aluno') }}</label>
+                        <label for="alu_email" class="col-md-4 col-form-label text-md-end">{{ __('*Endereço de email do aluno') }}</label>
 
                         <div class="col-md-6">
                             <input id="alu_email" type="email"
@@ -290,7 +314,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="alu_data_nascimento" class="col-md-4 col-form-label text-md-end">{{ __('Data de Nascimento') }}</label>
+                        <label for="alu_data_nascimento" class="col-md-4 col-form-label text-md-end">{{ __('*Data de Nascimento') }}</label>
 
                         <div class="col-md-6">
                             <input id="alu_data_nascimento" type="date"
@@ -307,7 +331,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="alu_endereco" class="col-md-4 col-form-label text-md-end">{{ __('Endereço') }}</label>
+                        <label for="alu_endereco" class="col-md-4 col-form-label text-md-end">{{ __('*Endereço') }}</label>
 
                         <div class="col-md-6">
                             <input id="alu_endereco" type="text"
@@ -324,7 +348,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="alu_celular" class="col-md-4 col-form-label text-md-end">{{ __('Telefone ou Celular') }}</label>
+                        <label for="alu_celular" class="col-md-4 col-form-label text-md-end">{{ __('*Telefone ou Celular') }}</label>
 
                         <div class="col-md-6">
                             <input id="alu_celular" type="tel"
@@ -342,7 +366,25 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="alu_cpf" class="col-md-4 col-form-label text-md-end">{{ __('Cpf') }}</label>
+                        <label for="alu_mensalidade" class="col-md-4 col-form-label text-md-end">{{ __('*Mensalidade R$') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="alu_mensalidade" type="text"
+                             class="form-control @error('alu_mensalidade') is-invalid @enderror"
+                             name="alu_mensalidade" value="{{ old('alu_mensalidade') }}" required autocomplete="alu_mensalidade" autofocus
+                             maxlength="5"
+                             placeholder="Insira a mensalidade do aluno aqui">
+
+                            @error('alu_mensalidade')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="alu_cpf" class="col-md-4 col-form-label text-md-end">{{ __('*Cpf') }}</label>
 
                         <div class="col-md-6">
                             <input id="alu_cpf" type="text"

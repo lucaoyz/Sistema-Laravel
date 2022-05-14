@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('personals', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('type')->default(2);
             $table->string('per_nome');
             $table->string('per_email');
             $table->date('per_data_nascimento');

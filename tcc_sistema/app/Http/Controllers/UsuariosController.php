@@ -162,11 +162,6 @@ class UsuariosController extends Controller
             'alu_cpf' => 'required',
         ]);
 
-        $tb_user = User::find($request->id);
-        $tb_user->name = $request->alu_nome;
-        $tb_user->email = $request->alu_email;
-        $tb_user->save();
-
         $aluno->update($request->all());
 
         return redirect()->route('admin.usuarios')

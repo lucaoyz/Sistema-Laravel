@@ -152,6 +152,7 @@ class UsuariosController extends Controller
     public function updateAluno(Request $request, Aluno $aluno)
     {
         $request->validate([
+            'id' => 'required',
             'alu_nome' => 'required',
             'alu_email' => 'required',
             'alu_data_nascimento' => 'required|date',
@@ -160,6 +161,11 @@ class UsuariosController extends Controller
             'alu_celular' => 'required',
             'alu_cpf' => 'required',
         ]);
+
+        $tb_user = User::find($request->id);
+        $tb_user->name = $request->alu_nome;
+        $tb_user->email = $request->alu_email;
+        $tb_user->save();
 
         $aluno->update($request->all());
 

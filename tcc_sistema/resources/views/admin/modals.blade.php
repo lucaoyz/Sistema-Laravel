@@ -124,6 +124,21 @@
                 @method('PUT')
 
 
+                    <div class="row mb-3">
+                        <label for="id" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="id" type="text" 
+                            class="form-control @error('id') is-invalid @enderror"
+                            name="id" value="{{ $aluno->id }}" required autocomplete="id" autofocus>
+
+                            @error('id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
                     <div class="row mb-3">
                         <label for="alu_nome" class="col-md-4 col-form-label text-md-end">{{ __('Nome') }}</label>

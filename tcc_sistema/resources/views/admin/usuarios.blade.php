@@ -15,6 +15,12 @@
 </div>
 @endif
 
+@if ($message = Session::get('error'))
+<div class="alert alert-danger">
+    <p>{{ $message }}</p>
+</div>
+@endif
+
     <div class="container-fluid py-4">
         <!-- Alunos -->
       <div class="row">

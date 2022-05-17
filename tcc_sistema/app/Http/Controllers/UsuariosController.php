@@ -50,6 +50,12 @@ class UsuariosController extends Controller
      */
     public function storeAluno(Request $request)
     {
+        $usuarioEmail = Aluno::where('alu_email', '=', $request->input('alu_email'))->first();
+        if($usuarioEmail){
+            return redirect()->route('admin.usuarios')
+            ->with('error','Esse email já está sendo usado!');
+        }
+        else {
         $request->validate([
             'alu_nome' => 'required',
             'alu_email' => 'required',
@@ -71,6 +77,7 @@ class UsuariosController extends Controller
 
         return redirect()->route('admin.usuarios')
                         ->with('success','Aluno criado com sucesso!');
+            }
     }
 
     public function storePersonal(Request $request)

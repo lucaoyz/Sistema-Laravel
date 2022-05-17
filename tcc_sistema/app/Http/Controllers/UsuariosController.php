@@ -82,6 +82,12 @@ class UsuariosController extends Controller
 
     public function storePersonal(Request $request)
     {
+        $usuarioEmail = Personal::where('per_email', '=', $request->input('per_email'))->first();
+        if($usuarioEmail){
+            return redirect()->route('admin.usuarios')
+            ->with('error','Esse email já está sendo usado!');
+        }
+        else {
         $request->validate([
             'per_nome' => 'required',
             'per_email' => 'required',
@@ -102,6 +108,7 @@ class UsuariosController extends Controller
 
         return redirect()->route('admin.usuarios')
                         ->with('success','Professor criado com sucesso!');
+            }
     }
 
     /**

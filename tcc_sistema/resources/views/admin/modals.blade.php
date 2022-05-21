@@ -807,4 +807,34 @@
   </div>
   @endforeach
 
+  <!-- Modal de exclusão professor / personal -->
+  @foreach($personals as $personal)
+<div class="modal fade" id="deletePersonalModal" tabindex="-1" role="dialog" aria-labelledby="deletePersonalModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal" id="deletePersonalModal">Excluir</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <p>Deseja realmente excluir esse registro?</p>
+            <form action="{{ route('personals.destroy',$personal->id) }}" method="POST">
+
+                @csrf
+                @method('DELETE')
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-danger">Confirmar</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+@endforeach
+
 

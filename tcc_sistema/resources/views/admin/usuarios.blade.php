@@ -203,8 +203,6 @@
                       <!-- Botoes de ações -->
                       <td class="align-middle">
 
-                        <form action="{{ route('personals.destroy',$personal->id) }}" method="POST">
-
                             <!-- Mostrar -->
                             <a class="btn btn-info" href="{{ route('personals.show',$personal->id) }}" data-bs-toggle="modal" data-bs-target="#mostrarPersonalModal{{$personal->id}}">Mostrar</a>
 
@@ -212,11 +210,7 @@
                             <a class="btn btn-primary" href="{{ route('personals.edit',$personal->id) }}" data-bs-toggle="modal" data-bs-target="#editarPersonalModal{{$personal->id}}">Editar</a>
 
                             <!-- Excluir -->
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit" class="btn btn-danger">Excluir</button>
-                        </form>
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePersonalModal">Excluir</a>
                       </td>
                     </tr>
                     @endforeach

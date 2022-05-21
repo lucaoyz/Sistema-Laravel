@@ -441,7 +441,7 @@
         </div>
         <div class="modal-body">
 
-            <p>Deseja realmente excluir esse registro?</p>
+            <p>Deseja realmente excluir esse aluno?</p>
             <form action="{{ route('alunos.destroy',$aluno->id) }}" method="POST">
 
                 @csrf
@@ -820,7 +820,7 @@
         </div>
         <div class="modal-body">
 
-            <p>Deseja realmente excluir esse registro?</p>
+            <p>Deseja realmente excluir esse professor?</p>
             <form action="{{ route('personals.destroy',$personal->id) }}" method="POST">
 
                 @csrf

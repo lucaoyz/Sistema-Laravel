@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
 class CreateUsersSeeder extends Seeder
@@ -15,29 +16,12 @@ class CreateUsersSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
-            [
-               'name'=>'Admin User',
-               'email'=>'admin@sistema.com',
-               'type'=>1,
-               'password'=> bcrypt('123456'),
-            ],
-            [
-               'name'=>'Professor User',
-               'email'=>'professor@sistema.com',
-               'type'=> 2,
-               'password'=> bcrypt('123456'),
-            ],
-            [
-               'name'=>'User',
-               'email'=>'user@sistema.com',
-               'type'=>0,
-               'password'=> bcrypt('123456'),
-            ],
-        ];
+        DB::table('users')->insert([
+            'name'=>'Gerencial',
+            'email'=>'gerencial@sistema.com',
+            'type'=>1,
+            'password'=> bcrypt('12345678'),
+        ]);
 
-        foreach ($users as $key => $user) {
-            User::create($user);
-        }
     }
 }

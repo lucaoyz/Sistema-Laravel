@@ -74,6 +74,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/alunos/{aluno}/edit',[App\Http\Controllers\UsuariosController::class, 'editAluno'])->name('alunos.edit');
         Route::put('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'updateAluno'])->name('alunos.update');
         Route::delete('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'destroyAluno'])->name('alunos.destroy');
+        Route::delete('/alunos/inativar/{aluno}', [App\Http\Controllers\UsuariosController::class, 'inativarAluno'])->name('alunos.inativar');
 
         // Cadastro de professores
 

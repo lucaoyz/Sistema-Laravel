@@ -110,14 +110,16 @@
                       <!-- Botoes de ação -->
                       <td class="align-middle ">
 
-
-                            <!-- Mostrar -->
+                             <!-- Mostrar -->
                             <a class="btn btn-info" href="{{ route('alunos.show',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#mostrarAlunoModal{{$aluno->id}}">Mostrar</a>
 
                             <!-- Editar -->
                             <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Editar</a>
 
-                            <!-- Excluir -->
+                                <!-- Inativar -->
+                                <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#inativarAlunoModal">Inativar</a>
+
+                                <!-- Excluir -->
                             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAlunoModal">Excluir</a>
 
                       </td>

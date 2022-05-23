@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Personal;
 use App\Models\Aluno;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
@@ -210,11 +211,17 @@ class UsuariosController extends Controller
     public function destroyAluno(Aluno $aluno)
     {
         $aluno->delete();
+
+        return redirect()->route('admin.usuarios')
+                        ->with('success','Aluno deletado com sucesso!');
+    }
+
+    public function inativarAluno(Aluno $aluno){
         $usuario = User::where('email', '=', $aluno->alu_email)->first();
         $usuario->delete();
 
         return redirect()->route('admin.usuarios')
-                        ->with('success','Aluno deletado com sucesso!');
+                        ->with('success','Aluno inativado com sucesso!');
     }
 
     public function destroyPersonal(Personal $personal)

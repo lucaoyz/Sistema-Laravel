@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tre_id')->nullable()->constrained('treinos');
             $table->string('alu_nome');
             $table->string('alu_email');
             $table->date('alu_data_nascimento');

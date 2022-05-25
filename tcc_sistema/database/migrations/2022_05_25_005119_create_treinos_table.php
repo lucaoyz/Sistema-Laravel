@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tb_treinos', function (Blueprint $table) {
+        Schema::create('treinos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('alu_id')->nullable()->constrained('alunos');
             $table->foreignId('per_id')->nullable()->constrained('personals');
-            $table->string('tre_treino');
             $table->string('tre_dias_semana');
             $table->string('tre_tempo');
             $table->date('tre_data_troca');

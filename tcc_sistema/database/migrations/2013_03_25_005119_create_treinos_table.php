@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('treinos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('alu_id')->nullable()->constrained('alunos');
             $table->foreignId('per_id')->nullable()->constrained('personals');
             $table->string('tre_dias_semana');
             $table->string('tre_tempo');

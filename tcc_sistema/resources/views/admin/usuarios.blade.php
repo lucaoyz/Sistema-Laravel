@@ -205,8 +205,11 @@
                       <!-- Botoes de ações -->
                       <td class="align-middle">
 
-                            <!-- Mostrar -->
-                            <a class="btn btn-info" href="{{ route('personals.show',$personal->id) }}" data-bs-toggle="modal" data-bs-target="#mostrarPersonalModal{{$personal->id}}">Mostrar</a>
+                        <form action="{{ route('personals.ativar',$personal->id) }}" method="POST">
+
+                            @csrf
+
+                        <button type="submit" class="btn btn-success">Ativar</button>
 
                             <!-- Editar -->
                             <a class="btn btn-primary" href="{{ route('personals.edit',$personal->id) }}" data-bs-toggle="modal" data-bs-target="#editarPersonalModal{{$personal->id}}">Editar</a>

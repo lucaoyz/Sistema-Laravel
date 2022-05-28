@@ -82,6 +82,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/personals', [App\Http\Controllers\UsuariosController::class, 'index'])->name('personals.index');
         Route::get('/personals/create', [App\Http\Controllers\UsuariosController::class, 'createPersonal'])->name('personals.create');
         Route::post('/personals/store', [App\Http\Controllers\UsuariosController::class, 'storePersonal'])->name('personals.store');
+        Route::post('/personals/ativar/{personal}', [App\Http\Controllers\UsuariosController::class, 'ativarPersonal'])->name('personals.ativar');
         Route::get('/personals/{personal}', [App\Http\Controllers\UsuariosController::class, 'showPersonal'])->name('personals.show');
         Route::get('/personals/{personal}/edit',[App\Http\Controllers\UsuariosController::class, 'editPersonal'])->name('personals.edit');
         Route::put('/personals/{personal}', [App\Http\Controllers\UsuariosController::class, 'updatePersonal'])->name('personals.update');

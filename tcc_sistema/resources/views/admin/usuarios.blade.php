@@ -114,9 +114,8 @@
 
                                 @csrf
 
-                            <button type="submit" class="btn btn-danger">Criar acesso</button>
-                            </form>
-
+                            <button type="submit" class="btn btn-success">Ativar</button>
+                            
                              <!-- Mostrar -->
                             <a class="btn btn-info" href="{{ route('alunos.show',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#mostrarAlunoModal{{$aluno->id}}">Mostrar</a>
 
@@ -125,7 +124,7 @@
 
                             <!-- Remover -->
                             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerAlunoModal">Remover</a>
-
+                        </form>
                       </td>
                     </tr>
                     @endforeach

@@ -15,7 +15,7 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Aluno $aluno)
     {
         $alunos = Aluno::latest()->paginate(5);
         $alunos->alu_data_nascimento = \Carbon\Carbon::now('America/Sao_Paulo');
@@ -23,9 +23,18 @@ class UsuariosController extends Controller
         $personals = Personal::latest()->paginate(5);
         $personals->per_data_nascimento = \Carbon\Carbon::now('America/Sao_Paulo');
 
+        $usuario = User::where('email', '=', $aluno->alu_email)->first();
+
+        if(empty($usuario)){
+            $acesso = "0";
+        } else {
+            $acesso = "1";
+        }
+
         return view('admin.usuarios', [
             'alunos' => $alunos,
             'personals' => $personals,
+            'acesso' => $acesso,
             ]);
     }
     /**

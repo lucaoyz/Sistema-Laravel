@@ -428,21 +428,21 @@
     </div>
   </div>
 
-  <!-- Modal de exclusão aluno -->
+  <!-- Modal de remover aluno -->
   @foreach($alunos as $aluno)
-<div class="modal fade" id="deleteAlunoModal" tabindex="-1" role="dialog" aria-labelledby="deleteAlunoModal" aria-hidden="true">
+<div class="modal fade" id="removerAlunoModal" tabindex="-1" role="dialog" aria-labelledby="removerAlunoModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="deleteAlunoModal">Excluir</h5>
+          <h5 class="modal-title font-weight-normal" id="removerAlunoModal">Remover aluno</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
 
-            <p>Deseja realmente excluir esse aluno?</p>
-            <form action="{{ route('alunos.destroy',$aluno->id) }}" method="POST">
+            <p>Qual ação você deseja fazer com esse aluno?</p>
+            <form action="{{ route('alunos.inativar',$aluno->id) }}" method="POST">
 
                 @csrf
                 @method('DELETE')
@@ -450,7 +450,14 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-danger">Confirmar</button>
+          <button type="submit" class="btn btn-danger">Remover acesso</button>
+        </form>
+            <form action="{{ route('alunos.destroy',$aluno->id) }}" method="POST">
+
+                @csrf
+                @method('DELETE')
+
+          <button type="submit" class="btn btn-danger">Remover por completo</button>
         </form>
         </div>
       </div>

@@ -116,11 +116,8 @@
                             <!-- Editar -->
                             <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Editar</a>
 
-                                <!-- Inativar -->
-                                <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#inativarAlunoModal">Inativar</a>
-
-                                <!-- Excluir -->
-                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAlunoModal">Excluir</a>
+                            <!-- Remover -->
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerAlunoModal">Remover</a>
 
                       </td>
                     </tr>

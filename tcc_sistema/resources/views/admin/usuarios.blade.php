@@ -108,7 +108,14 @@
                       </td>
 
                       <!-- Botoes de ação -->
-                      <td class="align-middle ">
+                      <td class="align-middle">
+
+                            <form action="{{ route('alunos.acesso',$aluno->id) }}" method="POST">
+
+                                @csrf
+
+                            <button type="submit" class="btn btn-danger">Criar acesso</button>
+                            </form>
 
                              <!-- Mostrar -->
                             <a class="btn btn-info" href="{{ route('alunos.show',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#mostrarAlunoModal{{$aluno->id}}">Mostrar</a>

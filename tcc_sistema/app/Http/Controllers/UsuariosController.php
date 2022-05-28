@@ -81,6 +81,30 @@ class UsuariosController extends Controller
             }
     }
 
+    public function acessoAluno(Aluno $aluno)
+    {
+        $usuario = User::where('email', '=', $aluno->alu_email)->first();
+
+        if(empty($usuario)){
+            $alu_email = $aluno->alu_email;
+            $alu_nome = $aluno->alu_nome;
+
+            $tb_user = new User;
+            $tb_user->name = $alu_nome;
+            $tb_user->email = $alu_email;
+            $tb_user->password = bcrypt('12345678');
+            $tb_user->type = 0;
+            $tb_user->save();
+
+            return redirect()->route('admin.usuarios')
+                            ->with('success','Aluno ativado com sucesso!');
+        } else {
+            return redirect()->route('admin.usuarios')
+            ->with('error','Aluno já possue acesso!');
+        }
+
+        }
+
     public function storePersonal(Request $request)
     {
         $usuarioEmail = Personal::where('per_email', '=', $request->input('per_email'))->first();

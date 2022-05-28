@@ -70,6 +70,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/alunos', [App\Http\Controllers\UsuariosController::class, 'index'])->name('alunos.index');
         Route::get('/alunos/create', [App\Http\Controllers\UsuariosController::class, 'createAluno'])->name('alunos.create');
         Route::post('/alunos/store', [App\Http\Controllers\UsuariosController::class, 'storeAluno'])->name('alunos.store');
+        Route::post('/alunos/acesso/{aluno}', [App\Http\Controllers\UsuariosController::class, 'acessoAluno'])->name('alunos.acesso');
         Route::get('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'showAluno'])->name('alunos.show');
         Route::get('/alunos/{aluno}/edit',[App\Http\Controllers\UsuariosController::class, 'editAluno'])->name('alunos.edit');
         Route::put('/alunos/{aluno}', [App\Http\Controllers\UsuariosController::class, 'updateAluno'])->name('alunos.update');

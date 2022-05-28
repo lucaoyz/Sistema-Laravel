@@ -208,8 +208,8 @@
                             <!-- Editar -->
                             <a class="btn btn-primary" href="{{ route('personals.edit',$personal->id) }}" data-bs-toggle="modal" data-bs-target="#editarPersonalModal{{$personal->id}}">Editar</a>
 
-                            <!-- Excluir -->
-                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePersonalModal">Excluir</a>
+                            <!-- Remover -->
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerPersonalModal">Remover</a>
                       </td>
                     </tr>
                     @endforeach

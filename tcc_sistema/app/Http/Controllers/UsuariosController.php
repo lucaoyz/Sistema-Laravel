@@ -225,13 +225,20 @@ class UsuariosController extends Controller
     }
 
     public function destroyPersonal(Personal $personal)
-    {
+    {   
         $personal->delete();
+
+        return redirect()->route('admin.usuarios')
+                        ->with('success','Professor deletado com sucesso!');
+    }
+
+    public function inativarPersonal(Personal $personal)
+    {
         $usuario = User::where('email', '=', $personal->per_email)->first();
         $usuario->delete();
 
         return redirect()->route('admin.usuarios')
-                        ->with('success','Professor deletado com sucesso!');
+                        ->with('success','Professor inativado com sucesso!');
     }
 
     public function search(Request $request)

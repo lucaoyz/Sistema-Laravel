@@ -85,6 +85,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/personals/{personal}/edit',[App\Http\Controllers\UsuariosController::class, 'editPersonal'])->name('personals.edit');
         Route::put('/personals/{personal}', [App\Http\Controllers\UsuariosController::class, 'updatePersonal'])->name('personals.update');
         Route::delete('/personals/{personal}', [App\Http\Controllers\UsuariosController::class, 'destroyPersonal'])->name('personals.destroy');
+        Route::delete('/personals/inativar/{personal}', [App\Http\Controllers\UsuariosController::class, 'inativarPersonal'])->name('personals.inativar');
+
 
         // filtro de registros
         Route::any('/usuarios/search', [App\Http\Controllers\UsuariosController::class, 'search'])->name('usuarios.search');

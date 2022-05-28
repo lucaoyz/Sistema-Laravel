@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('tpg_id')->constrained('tipopagto');
             $table->foreignId('for_id')->constrained('fornecedores');
             $table->char('con_tipo');
-            $table->float('con_valor', 12, 2);
-            $table->float('con_valor_final', 12, 2);
+            $table->string('con_valor');
+            $table->string('con_valor_final');
             $table->string('con_parcelas');
             $table->date('con_data_venc');
             $table->date('con_data_pag')->nullable();

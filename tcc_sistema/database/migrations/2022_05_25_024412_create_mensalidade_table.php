@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('men_data_final');
             $table->date('men_data_pagto');
             $table->string('men_status');
-            $table->float('men_valor', 12, 2);
+            $table->string('men_valor');
             $table->string('men_qtde_parcelas');
 
             $table->timestamps();

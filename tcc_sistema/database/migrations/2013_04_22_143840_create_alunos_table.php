@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('alu_email');
             $table->date('alu_data_nascimento');
             $table->string('alu_endereco');
-            $table->float('alu_mensalidade', 12, 2);
+            $table->string('alu_mensalidade');
             $table->string('alu_celular')->nullable;
             $table->string('alu_cpf');
             $table->timestamps();

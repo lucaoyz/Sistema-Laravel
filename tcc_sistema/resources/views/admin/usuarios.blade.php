@@ -115,9 +115,6 @@
                                 @csrf
 
                             <button type="submit" class="btn btn-success">Ativar</button>
-                            
-                             <!-- Mostrar -->
-                            <a class="btn btn-info" href="{{ route('alunos.show',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#mostrarAlunoModal{{$aluno->id}}">Mostrar</a>
 
                             <!-- Editar -->
                             <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Editar</a>

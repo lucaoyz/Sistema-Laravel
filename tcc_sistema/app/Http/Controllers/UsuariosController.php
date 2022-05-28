@@ -90,7 +90,7 @@ class UsuariosController extends Controller
             }
     }
 
-    public function acessoAluno(Aluno $aluno)
+    public function ativarAluno(Aluno $aluno)
     {
         $usuario = User::where('email', '=', $aluno->alu_email)->first();
 
@@ -109,7 +109,7 @@ class UsuariosController extends Controller
                             ->with('success','Aluno ativado com sucesso!');
         } else {
             return redirect()->route('admin.usuarios')
-            ->with('error','Aluno já possue acesso!');
+            ->with('error','Aluno já está ativado!');
         }
 
         }

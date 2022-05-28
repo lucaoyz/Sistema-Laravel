@@ -110,7 +110,7 @@
                       <!-- Botoes de ação -->
                       <td class="align-middle">
 
-                            <form action="{{ route('alunos.acesso',$aluno->id) }}" method="POST">
+                            <form action="{{ route('alunos.ativar',$aluno->id) }}" method="POST">
 
                                 @csrf
 

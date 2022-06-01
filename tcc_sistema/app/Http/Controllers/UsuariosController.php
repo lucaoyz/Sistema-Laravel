@@ -131,14 +131,17 @@ class UsuariosController extends Controller
             'per_cpf' => 'required',
         ]);
 
+
+        $result = Personal::create($request->all());
+
         $tb_user = new User;
+        $tb_user->per_id = $result->id;
         $tb_user->name = $request->per_nome;
         $tb_user->email = $request->per_email;
         $tb_user->password = bcrypt('12345678');
         $tb_user->type = 2;
-        $tb_user->save();
 
-        Personal::create($request->all());
+        $result = $tb_user->save();
 
         return redirect()->route('admin.usuarios')
                         ->with('success','Professor criado com sucesso!');

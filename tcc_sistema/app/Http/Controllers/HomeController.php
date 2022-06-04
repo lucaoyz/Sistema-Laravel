@@ -48,20 +48,21 @@ class HomeController extends Controller
         return view('professor.dashboard');
     }
 
-    /* Mudar senha */
+    /* Mudar senha admin // gerencial */
 
-    public function changePassword()
+    public function changePasswordAdmin()
     {
         return view('admin.change-password');
     }
 
-    public function updatePassword(Request $request)
+    public function updatePasswordAdmin(Request $request)
 {
         # Validation
 
         $mensagens = [
             'required' => 'Obrigatório!',
             'new_password.min' => 'É necessário no mínimo 8 caracteres na senha!',
+            'confirmed' => 'A confirmação de senha não bate!'
         ];
 
         $request->validate([
@@ -82,6 +83,6 @@ class HomeController extends Controller
         ]);
 
             return redirect()->route('admin.perfil')->with('success','Senha alterada com sucesso!');
-
 }
+
 }

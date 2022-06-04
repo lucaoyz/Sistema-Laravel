@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Alterar senha') }}</div>
 
-                    <form action="{{ route('update-password') }}" method="POST">
+                    <form action="{{ route('admin.update-password') }}" method="POST">
                         @csrf
                         <div class="card-body">
                             @if (session('status'))

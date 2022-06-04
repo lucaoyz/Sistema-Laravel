@@ -38,7 +38,7 @@
           </div>
           <div class="col-auto my-auto">
             <div class="h-100" >
-                <a class="btn btn-primary" href="{{ route('change-password') }}">Alterar senha</a>
+                <a class="btn btn-primary" href="{{ route('admin.change-password') }}">Alterar senha</a>
             </div>
           </div>
         </div>

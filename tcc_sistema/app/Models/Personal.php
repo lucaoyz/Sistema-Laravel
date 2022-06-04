@@ -23,4 +23,8 @@ class Personal extends Model
         'per_data_nascimento',
     ];
 
+    public function usuarioPersonal() {
+        return $this->hasOne(User::class, 'per_id', 'id');
+    }
+
 }

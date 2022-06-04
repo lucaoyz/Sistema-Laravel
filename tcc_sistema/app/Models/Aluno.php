@@ -24,5 +24,8 @@ class Aluno extends Model
         'alu_data_nascimento',
     ];
 
+    public function usuarioAluno() {
+        return $this->hasOne(User::class, 'alu_id', 'id');
+    }
 
 }

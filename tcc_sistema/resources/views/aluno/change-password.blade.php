@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Alterar senha') }}</div>
 
-                    <form action="{{ route('admin.update-password') }}" method="POST">
+                    <form action="{{ route('aluno.update-password') }}" method="POST">
                         @csrf
                         <div class="card-body">
                             @if (session('status'))
@@ -52,7 +52,7 @@
                         <div class="card-footer">
                             <button class="btn btn-success">Confirmar</button>
 
-                            <a href="{{route('admin.perfil')}}" class="btn btn-secondary">Voltar</a>
+                            <a href="{{route('aluno.perfil')}}" class="btn btn-secondary">Voltar</a>
 
                         </div>
 

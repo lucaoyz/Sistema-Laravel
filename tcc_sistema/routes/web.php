@@ -39,10 +39,13 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
             return view('aluno.dashboard');
         })->name('aluno');
 
-        /* Usuarios */
+        /* Perfil */
         Route::get('/perfil', function(){
             return view('aluno.perfil');
         })->name('aluno.perfil');
+
+        Route::get('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'changePasswordAluno'])->name('aluno.change-password');
+        Route::post('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'updatePasswordAluno'])->name('aluno.update-password');
 
         /* Rotas para os treinos */
         Route::get('/treino', function(){

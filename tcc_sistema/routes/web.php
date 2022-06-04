@@ -142,10 +142,13 @@ Route::middleware(['auth', 'user-access:professor'])->group(function () {
             return view('professor.dashboard');
         })->name('professor');
 
-        /* Usuarios */
+        /* Perfil */
         Route::get('/perfil', function(){
             return view('professor.perfil');
         })->name('professor.perfil');
+
+        Route::get('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'changePasswordProfessor'])->name('professor.change-password');
+        Route::post('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'updatePasswordProfessor'])->name('professor.update-password');
 
         /* Rotas para os treinos */
         Route::get('/treino', function(){

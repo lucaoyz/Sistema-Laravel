@@ -52,16 +52,22 @@ class HomeController extends Controller
 
     public function changePassword()
     {
-        return view('change-password');
+        return view('admin.change-password');
     }
 
     public function updatePassword(Request $request)
 {
         # Validation
+
+        $mensagens = [
+            'required' => 'Obrigatório!',
+            'new_password.min' => 'É necessário no mínimo 8 caracteres na senha!',
+        ];
+
         $request->validate([
             'old_password' => 'required',
-            'new_password' => 'required|confirmed',
-        ]);
+            'new_password' => 'required|confirmed|min:8',
+        ], $mensagens);
 
 
         #Match The Old Password
@@ -75,12 +81,7 @@ class HomeController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
 
-        if (auth()->user()->type == 'admin') {
             return redirect()->route('admin.perfil')->with('success','Senha alterada com sucesso!');
-        }else if (auth()->user()->type == 'professor') {
-            return redirect()->route('professor.perfil')->with('success','Senha alterada com sucesso!');
-        }else{
-            return redirect()->route('aluno.perfil')->with('success','Senha alterada com sucesso!');
-        }
+
 }
 }

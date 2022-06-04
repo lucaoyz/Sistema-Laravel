@@ -11,10 +11,15 @@
 
 
                     @if (auth::check())
-                    Para gerencial, <a href="{{route('admin')}}">clique aqui</a> para voltar à sua pagina inicial.<br>
-                    Para professores, <a href="{{route('professor')}}">clique aqui</a> para voltar à sua pagina inicial.<br>
-                    Para alunos, <a href="{{route('aluno')}}">clique aqui</a> para voltar à sua pagina inicial.<br>
-                        Você está logado, deseja sair? <a href="{{ route('logout') }}"
+                    @if(auth()->user()->type == 'admin')
+                            <a href="{{route('admin')}}">Clique aqui</a> para voltar à sua pagina inicial.<br>
+                            @elseif(auth()->user()->type == 'professor')
+                            <a href="{{route('professor')}}">Clique aqui</a> para voltar à sua pagina inicial.<br>
+                            @else
+                            <a href="{{route('aluno')}}">Clique aqui</a> para voltar à sua pagina inicial.<br>
+                            @endif
+
+                        <br>Você está logado, deseja sair? <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
                          <i class="fa fa-sign-out me-sm-1"></i>clique aqui.

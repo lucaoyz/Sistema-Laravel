@@ -51,7 +51,15 @@
 
                         <div class="card-footer">
                             <button class="btn btn-success">Confirmar</button>
+
+                            @if(auth()->user()->type == 'admin')
                             <a href="{{route('admin.perfil')}}" class="btn btn-secondary">Voltar</a>
+                            @elseif(auth()->user()->type == 'professor')
+                            <a href="{{route('professor.perfil')}}" class="btn btn-secondary">Voltar</a>
+                            @else
+                            <a href="{{route('aluno.perfil')}}" class="btn btn-secondary">Voltar</a>
+                            @endif
+
                         </div>
 
                     </form>

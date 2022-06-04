@@ -4,6 +4,17 @@
 @section('pagina', 'Perfil')
 @section('content')
 
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+    @endif
+
+    @if ($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <p>{{ $message }}</p>
+    </div>
+    @endif
     <div class="container-fluid px-2 px-md-4">
       <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
         <span class="mask  bg-gradient-primary  opacity-6"></span>
@@ -23,6 +34,11 @@
               <p class="mb-0 font-weight-normal text-sm">
                 {{ Auth::user()->email }}
               </p>
+            </div>
+          </div>
+          <div class="col-auto my-auto">
+            <div class="h-100" >
+                <a class="btn btn-primary" href="{{ route('change-password') }}">Alterar senha</a>
             </div>
           </div>
         </div>

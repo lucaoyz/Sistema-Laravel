@@ -120,7 +120,7 @@
                             <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Editar</a>
 
                             <!-- Remover -->
-                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerAlunoModal">Remover</a>
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerAlunoModal{{$aluno->id}}">Remover</a>
                         </form>
                       </td>
                     </tr>

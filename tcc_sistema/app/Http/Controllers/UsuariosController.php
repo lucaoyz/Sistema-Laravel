@@ -295,19 +295,62 @@ class UsuariosController extends Controller
 
     public function updatePersonal(Request $request, Personal $personal)
     {
-        $request->validate([
-            'per_nome' => 'required',
-            'per_email' => 'required',
-            'per_data_nascimento' => 'required|date',
-            'per_endereco' => 'required',
-            'per_celular' => 'required',
-            'per_cpf' => 'required',
-        ]);
+        $usuarioEmail = Personal::where('per_email', '=', $request->input('per_email'))->first();
+        $usuarioId = Personal::where('id', '=', $request->input('id'))->first();
 
-        $personal->update($request->all());
+        if($usuarioEmail){
+            if($usuarioEmail->per_email != $usuarioId->per_email){
+                return redirect()->route('admin.usuarios')
+                                    ->with('error', 'Esse email já está sendo usado!');
+            } else {
+                $request->validate([
+                    'per_nome' => 'required',
+                    'per_data_nascimento' => 'required|date',
+                    'per_endereco' => 'required',
+                    'per_celular' => 'required',
+                    'per_cpf' => 'required',
+                ]);
 
-        return redirect()->route('admin.usuarios')
-                        ->with('success','Professor atualizado com sucesso!');
+                $personal->id = $request->id;
+                $personal->per_nome = $request->per_nome;
+                $personal->per_data_nascimento = $request->per_data_nascimento;
+                $personal->per_endereco = $request->per_endereco;
+                $personal->per_celular = $request->per_celular;
+                $personal->per_cpf = $request->per_cpf;
+
+                $personal->save();
+
+                $user = User::where('per_id', $request->id)->first();
+
+                    $user->per_id = $request->id;
+                    $user->name = $request->per_nome;
+                    $user->save();
+
+                    return redirect()->route('admin.usuarios')
+                                ->with('success', 'Professor atualizado com sucesso!');
+            }
+        } else {
+            $request->validate([
+                'per_nome' => 'required',
+                'per_email' => 'required',
+                'per_data_nascimento' => 'required|date',
+                'per_endereco' => 'required',
+                'per_celular' => 'required',
+                'per_cpf' => 'required',
+            ]);
+
+            $personal->update($request->all());
+
+            $user = User::where('per_id', $request->id)->first();
+
+                $user->per_id = $request->id;
+                $user->email = $request->per_email;
+                $user->name = $request->per_nome;
+                $user->save();
+
+                return redirect()->route('admin.usuarios')
+                            ->with('success', 'Professor atualizado com sucesso!');
+        }
     }
 
     /**

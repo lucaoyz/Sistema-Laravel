@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Personal;
 use App\Models\Aluno;
 use App\Models\User;
@@ -225,6 +226,7 @@ class UsuariosController extends Controller
 
     public function updateAluno(Request $request, Aluno $aluno)
     {
+    
         $request->validate([
             'id' => 'required',
             'alu_nome' => 'required',
@@ -238,8 +240,16 @@ class UsuariosController extends Controller
 
         $aluno->update($request->all());
 
-        return redirect()->route('admin.usuarios')
-                        ->with('success','Aluno atualizado com sucesso!');
+        $user = User::where('alu_id', $request->id)->first();
+
+            $user->alu_id = $request->id;
+            $user->email = $request->alu_email;
+            $user->name = $request->alu_nome;
+            $user->save();
+
+            return redirect()->route('admin.usuarios')
+                        ->with('success', 'Aluno atualizado com sucesso!');
+
     }
 
     public function updatePersonal(Request $request, Personal $personal)

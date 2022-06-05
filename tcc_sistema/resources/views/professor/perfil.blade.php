@@ -16,14 +16,14 @@
     </div>
     @endif
     <div class="container-fluid px-2 px-md-4">
-    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://scontent.fcpq5-1.fna.fbcdn.net/v/t1.6435-9/81519045_2192862607482485_8190455268572659712_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeFFbfQUsbQrwz_jGSP-a7OeRLOuezaHOXNEs657Noc5c9aE3-kw-R2ckuMv_TXdf7z_h5sZhG3PMCZTfTo4rgqc&_nc_ohc=0XmqUZJC2tEAX-B6w_K&_nc_ht=scontent.fcpq5-1.fna&oh=00_AT-v9wtAUg4bHmGHpIoc3anBWhryVJOuP00vrMc8BMZz9A&oe=62C33C58');">
         <span class="mask  bg-gradient-primary  opacity-6"></span>
     </div>
     <div class="card card-body mx-3 mx-md-4 mt-n6">
         <div class="row gx-4 mb-2">
         <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-            <img src="{{asset('img/bruce-mars.jpg')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+            <img src="{{asset('img/halter.png')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
             </div>
         </div>
         <div class="col-auto my-auto">
@@ -64,9 +64,9 @@
                 </p>
                 <hr class="horizontal gray-light my-4">
                 <ul class="list-group">
-                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nome completo:</strong> &nbsp; Alec M. Thompson</li>
+                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nome completo:</strong> &nbsp; {{ Auth::user()->name }}</li>
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Telefone ou celular:</strong> &nbsp; (44) 123 1234 123</li>
-                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; alecthompson@mail.com</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ Auth::user()->email }}</li>
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Endereço:</strong> &nbsp; USA</li>
                 </ul>
                 </div>

@@ -97,10 +97,12 @@ class UsuariosController extends Controller
         $usuario = User::where('email', '=', $aluno->alu_email)->first();
 
         if(empty($usuario)){
+            $alu_id = $aluno->id;
             $alu_email = $aluno->alu_email;
             $alu_nome = $aluno->alu_nome;
 
             $tb_user = new User;
+            $tb_user->alu_id = $alu_id;
             $tb_user->name = $alu_nome;
             $tb_user->email = $alu_email;
             $tb_user->password = bcrypt('12345678');
@@ -154,10 +156,12 @@ class UsuariosController extends Controller
         $usuario = User::where('email', '=', $personal->per_email)->first();
 
         if(empty($usuario)){
+            $per_id = $personal->id;
             $per_email = $personal->per_email;
             $per_nome = $personal->per_nome;
 
             $tb_user = new User;
+            $tb_user->per_id = $per_id;
             $tb_user->name = $per_nome;
             $tb_user->email = $per_email;
             $tb_user->password = bcrypt('12345678');

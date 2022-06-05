@@ -226,30 +226,67 @@ class UsuariosController extends Controller
 
     public function updateAluno(Request $request, Aluno $aluno)
     {
-    
-        $request->validate([
-            'id' => 'required',
-            'alu_nome' => 'required',
-            'alu_email' => 'required',
-            'alu_data_nascimento' => 'required|date',
-            'alu_endereco' => 'required',
-            'alu_mensalidade' => 'required',
-            'alu_celular' => 'required',
-            'alu_cpf' => 'required',
-        ]);
+        $usuarioEmail = Aluno::where('alu_email', '=', $request->input('alu_email'))->first();
+        $usuarioId = Aluno::where('id', '=', $request->input('id'))->first();
 
-        $aluno->update($request->all());
+        if($usuarioEmail){
+            if($usuarioEmail->alu_email != $usuarioId->alu_email){
+                return redirect()->route('admin.usuarios')
+                                    ->with('error', 'Esse email já está sendo usado!');
+            } else {
+                $request->validate([
+                    'id' => 'required',
+                    'alu_nome' => 'required',
+                    'alu_data_nascimento' => 'required|date',
+                    'alu_endereco' => 'required',
+                    'alu_mensalidade' => 'required',
+                    'alu_celular' => 'required',
+                    'alu_cpf' => 'required',
+                ]);
 
-        $user = User::where('alu_id', $request->id)->first();
+                $aluno->id = $request->id;
+                $aluno->alu_nome = $request->alu_nome;
+                $aluno->alu_data_nascimento = $request->alu_data_nascimento;
+                $aluno->alu_endereco = $request->alu_endereco;
+                $aluno->alu_mensalidade = $request->alu_mensalidade;
+                $aluno->alu_celular = $request->alu_celular;
+                $aluno->alu_cpf = $request->alu_cpf;
 
-            $user->alu_id = $request->id;
-            $user->email = $request->alu_email;
-            $user->name = $request->alu_nome;
-            $user->save();
+                $aluno->save();
 
-            return redirect()->route('admin.usuarios')
-                        ->with('success', 'Aluno atualizado com sucesso!');
+                $user = User::where('alu_id', $request->id)->first();
 
+                    $user->alu_id = $request->id;
+                    $user->name = $request->alu_nome;
+                    $user->save();
+
+                    return redirect()->route('admin.usuarios')
+                                ->with('success', 'Aluno atualizado com sucesso!');
+            }
+        } else {
+            $request->validate([
+                'id' => 'required',
+                'alu_nome' => 'required',
+                'alu_email' => 'required',
+                'alu_data_nascimento' => 'required|date',
+                'alu_endereco' => 'required',
+                'alu_mensalidade' => 'required',
+                'alu_celular' => 'required',
+                'alu_cpf' => 'required',
+            ]);
+
+            $aluno->update($request->all());
+
+            $user = User::where('alu_id', $request->id)->first();
+
+                $user->alu_id = $request->id;
+                $user->email = $request->alu_email;
+                $user->name = $request->alu_nome;
+                $user->save();
+
+                return redirect()->route('admin.usuarios')
+                            ->with('success', 'Aluno atualizado com sucesso!');
+        }
     }
 
     public function updatePersonal(Request $request, Personal $personal)

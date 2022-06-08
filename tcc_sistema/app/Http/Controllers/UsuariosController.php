@@ -62,6 +62,12 @@ class UsuariosController extends Controller
     public function storeAluno(Request $request)
     {
         $usuarioEmail = Aluno::where('alu_email', '=', $request->input('alu_email'))->first();
+        $usuarioEmailPer = Personal::where('per_email', '=', $request->input('alu_email'))->first();
+
+        if($usuarioEmailPer){
+            return redirect()->route('admin.usuarios')
+            ->with('error','Esse email já está sendo usado!');
+        }
         if($usuarioEmail){
             return redirect()->route('admin.usuarios')
             ->with('error','Esse email já está sendo usado!');
@@ -120,6 +126,12 @@ class UsuariosController extends Controller
     public function storePersonal(Request $request)
     {
         $usuarioEmail = Personal::where('per_email', '=', $request->input('per_email'))->first();
+        $usuarioEmailAlu = Aluno::where('alu_email', '=', $request->input('per_email'))->first();
+
+        if($usuarioEmailAlu){
+            return redirect()->route('admin.usuarios')
+            ->with('error','Esse email já está sendo usado!');
+        }
         if($usuarioEmail){
             return redirect()->route('admin.usuarios')
             ->with('error','Esse email já está sendo usado!');

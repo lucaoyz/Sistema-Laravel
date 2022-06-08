@@ -224,13 +224,8 @@
               <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
             </div>
             <p class="text-sm d-xl-none d-block mt-2">Você só pode alterar o tipo de barra lateral na versão de computador.</p>
-            <!-- Navbar Fixed -->
-            <div class="mt-3 d-flex">
-              <h6 class="mb-0">Barra de navegação fixada</h6>
-              <div class="form-check form-switch ps-0 ms-auto my-auto">
-                <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
-              </div>
-            </div>
+            <!-- Dark Mode -->
+
             <hr class="horizontal dark my-3">
             <div class="mt-2 d-flex">
               <h6 class="mb-0">Branco / Escuro</h6>
@@ -246,7 +241,7 @@
               <a href="https://github.com/lucaoyz" class="btn btn-dark mb-0 me-2" target="_blank">
                 <i class="fab fa-github me-1" aria-hidden="true"></i> GitHub
               </a>
-              <a href="" class="btn btn-dark mb-0 me-2" target="_blank">
+              <a href="https://instagram.com/ahtaeazy" class="btn btn-dark mb-0 me-2" target="_blank">
                 <i class="fab fa-instagram me-1" aria-hidden="true"></i> Instagram
               </a>
             </div>

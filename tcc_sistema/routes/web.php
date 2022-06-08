@@ -44,8 +44,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
             return view('aluno.perfil');
         })->name('aluno.perfil');
 
-        Route::get('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'changePasswordAluno'])->name('aluno.change-password');
-        Route::post('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'updatePasswordAluno'])->name('aluno.update-password');
+        Route::get('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'changePasswordAluno'])->name('aluno.change-password');
+        Route::post('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'updatePasswordAluno'])->name('aluno.update-password');
 
         /* Rotas para os treinos */
         Route::get('/treino', function(){
@@ -105,8 +105,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             return view('admin.perfil');
         })->name('admin.perfil');
 
-        Route::get('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'changePasswordAdmin'])->name('admin.change-password');
-        Route::post('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'updatePasswordAdmin'])->name('admin.update-password');
+        Route::get('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'changePasswordAdmin'])->name('admin.change-password');
+        Route::post('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'updatePasswordAdmin'])->name('admin.update-password');
 
         /* Usuarios */
         Route::get('/usuarios', [App\Http\Controllers\UsuariosController::class, 'index'])->name('admin.usuarios');
@@ -146,8 +146,8 @@ Route::middleware(['auth', 'user-access:professor'])->group(function () {
             return view('professor.perfil');
         })->name('professor.perfil');
 
-        Route::get('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'changePasswordProfessor'])->name('professor.change-password');
-        Route::post('/perfil/change-password', [App\Http\Controllers\HomeController::class, 'updatePasswordProfessor'])->name('professor.update-password');
+        Route::get('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'changePasswordProfessor'])->name('professor.change-password');
+        Route::post('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'updatePasswordProfessor'])->name('professor.update-password');
 
         /* Rotas para os treinos */
         Route::get('/treino', function(){

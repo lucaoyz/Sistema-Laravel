@@ -29,13 +29,13 @@
                 <i class="material-icons opacity-10">person</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                <h4 class="mb-0">2,300</h4>
+                <p class="text-sm mb-0 text-capitalize">Usuarios registrados</p>
+                <h4 class="mb-0">{{ $usuarios }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than lask month</p>
+                <p class="mb-0"><span class="text-danger text-sm font-weight-bolder"><a href="{{route('admin.usuarios')}}">Registre um novo usuário</a></span></p>
             </div>
           </div>
         </div>
@@ -46,13 +46,13 @@
                 <i class="material-icons opacity-10">person</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                <h4 class="mb-0">3,462</h4>
+                <p class="text-sm mb-0 text-capitalize">Alunos registrados</p>
+                <h4 class="mb-0">{{ $alunos }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
+              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder"><a href="{{route('admin.usuarios')}}">Registre um novo aluno</a></span></p>
             </div>
           </div>
         </div>

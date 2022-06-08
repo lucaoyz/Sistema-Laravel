@@ -97,9 +97,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::any('/usuarios/search', [App\Http\Controllers\UsuariosController::class, 'search'])->name('usuarios.search');
 
         /* Rotas dashboard */
-        Route::get('/', function(){
-            return view('admin.dashboard');
-        })->name('admin');
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin');
+
 
         /* Perfil */
         Route::get('/perfil', function(){

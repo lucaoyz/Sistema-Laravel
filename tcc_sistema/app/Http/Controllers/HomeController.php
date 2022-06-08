@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Aluno;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -35,7 +36,13 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('admin.dashboard');
+        $usuarios = User::select('id')->count();
+        $alunos = Aluno::select('id')->count();
+
+        return view('admin.dashboard', [
+            'usuarios' => $usuarios,
+            'alunos' => $alunos,
+        ]);
     }
 
     /**

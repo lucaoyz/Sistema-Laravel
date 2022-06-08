@@ -62,9 +62,10 @@
                   <hr class="horizontal gray-light my-4">
                   <ul class="list-group">
                     <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nome:</strong> &nbsp; {{ Auth::user()->name }}</li>
-                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Telefone ou celular:</strong> &nbsp; (44) 123 1234 123</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Telefone ou celular:</strong> &nbsp; (19) 19191-9191</li>
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ Auth::user()->email }}</li>
-                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Endereço:</strong> &nbsp; USA</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Endereço:</strong> &nbsp; Santa Barbara d'Oeste</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">CPF:</strong> &nbsp; 111.111.111-11</li>
                   </ul>
                 </div>
               </div>
@@ -72,59 +73,16 @@
             <div class="col-12 col-xl-4">
               <div class="card card-plain h-100">
                 <div class="card-header pb-0 p-3">
-                  <h6 class="mb-0">Social</h6>
+                  <h6 class="mb-0">Treino</h6>
                 </div>
                 <div class="card-body p-3">
                   <ul class="list-group">
                     <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
-                      <div class="avatar me-3">
-                        <img src="{{asset('img/kal-visuals-square.jpg')}}" alt="kal" class="border-radius-lg shadow">
-                      </div>
                       <div class="d-flex align-items-start flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Sophie B.</h6>
-                        <p class="mb-0 text-xs">Hi! I need more information..</p>
+                        <h6 class="mb-0 text-sm"></h6>
+                        <p class="list-group-item border-0 ps-0 pt-0 text-sm">Acesse seu treino clicando no texto a frente!</p>
                       </div>
-                      <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                      <div class="avatar me-3">
-                        <img src="{{asset('img/marie.jpg')}}" alt="kal" class="border-radius-lg shadow">
-                      </div>
-                      <div class="d-flex align-items-start flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Anne Marie</h6>
-                        <p class="mb-0 text-xs">Awesome work, can you..</p>
-                      </div>
-                      <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                      <div class="avatar me-3">
-                        <img src="{{asset('img/ivana-square.jpg')}}" alt="kal" class="border-radius-lg shadow">
-                      </div>
-                      <div class="d-flex align-items-start flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Ivanna</h6>
-                        <p class="mb-0 text-xs">About files I can..</p>
-                      </div>
-                      <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                      <div class="avatar me-3">
-                        <img src="{{asset('img/team-4.jpg')}}" alt="kal" class="border-radius-lg shadow">
-                      </div>
-                      <div class="d-flex align-items-start flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Peterson</h6>
-                        <p class="mb-0 text-xs">Have a great afternoon..</p>
-                      </div>
-                      <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0">
-                      <div class="avatar me-3">
-                        <img src="{{asset('img/team-3.jpg')}}" alt="kal" class="border-radius-lg shadow">
-                      </div>
-                      <div class="d-flex align-items-start flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">Nick Daniel</h6>
-                        <p class="mb-0 text-xs">Hi! I need more information..</p>
-                      </div>
-                      <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" href="javascript:;">Reply</a>
+                      <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" href="{{route('admin.treino')}}">Clique aqui</a>
                     </li>
                   </ul>
                 </div>

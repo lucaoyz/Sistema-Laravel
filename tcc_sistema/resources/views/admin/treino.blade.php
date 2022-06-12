@@ -67,7 +67,10 @@
   </div>
   @endsection
 </main>
-<!--   Core JS Files   -->
+
+  <!-- Modal -->
+  @extends('admin.modalsTreino')
+
 </body>
 </html>
 

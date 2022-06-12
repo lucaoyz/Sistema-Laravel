@@ -237,7 +237,7 @@
   </main>
 
   <!-- Modal -->
-  @extends('admin.modals')
+  @extends('admin.modalsUsers')
 
 </body>
 

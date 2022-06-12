@@ -15,16 +15,9 @@ return new class extends Migration
     {
         Schema::create('exercicios', function (Blueprint $table) {
             $table->id();
-            $table->string('exe_peito');
-            $table->string('exe_costas');
-            $table->string('exe_biceps');
-            $table->string('exe_triceps');
-            $table->string('exe_antebraco');
-            $table->string('exe_ombro');
-            $table->string('exe_trapezio');
-            $table->string('exe_inferior');
-            $table->string('exe_lombar');
-            $table->string('exe_abdomen');
+            $table->string('exe_nome');
+            $table->string('exe_membro');
+            $table->string('exe_descricao');
             $table->timestamps();
         });
     }

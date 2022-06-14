@@ -23,6 +23,40 @@
     }
     </script>
 
+<!-- tela de exercicio -->
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Pode haver problemas em seu formulário!<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+<div class="modal fade" id="ExercicioModal" tabindex="-1" role="dialog" aria-labelledby="ExercicioModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 750px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal" id="ExercicioModal">Exercícios</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarExercicioModal" class="text-success" style="font-size: 20px">Registre um novo exercicio</a></h5>
+        </div>
+        <div class="modal-footer">
+            <div class="row mb-0">
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+
 <!-- Criar exercicio -->
 @if ($errors->any())
 <div class="alert alert-danger">

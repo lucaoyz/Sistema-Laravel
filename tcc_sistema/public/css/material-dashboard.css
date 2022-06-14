@@ -1981,7 +1981,7 @@ textarea.form-control-lg {
     .form-select {
       transition: none; } }
   .form-select:focus {
-    border-color: transparent;
+    border-color: #ced4da;
     outline: 0;
     box-shadow: none; }
   .form-select[multiple], .form-select[size]:not([size="1"]) {

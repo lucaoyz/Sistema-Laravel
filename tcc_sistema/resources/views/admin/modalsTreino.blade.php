@@ -103,10 +103,20 @@
                         <label for="exe_membro" class="col-md-4 col-form-label text-md-end">{{ __('*Membro muscular do exercício') }}</label>
 
                         <div class="col-md-6">
-                            <input id="exe_membro" type="text"
-                             class="form-control @error('exe_membro') is-invalid @enderror"
-                              name="exe_membro" value="{{ old('exe_membro') }}" required autocomplete="exe_membro"
-                              placeholder="Insira o membro muscular do exercício">
+                            <select name="exe_membro" id="exe_membro"
+                            class="form-select @error('exe_membro') is-invalid @enderror"
+                            value="{{ old('exe_membro') }}" required autocomplete="exe_membro">
+                                <option value="peito">Peito</option>
+                                <option value="costas">Costas</option>
+                                <option value="biceps">Biceps</option>
+                                <option value="triceps">Triceps</option>
+                                <option value="antebraco">Antebraço</option>
+                                <option value="ombro">Ombro</option>
+                                <option value="trapezio">Trapezio</option>
+                                <option value="inferior">Inferior</option>
+                                <option value="lombar">Lombar</option>
+                                <option value="abdomen">Abdomen</option>
+                            </select>
 
                             @error('exe_membro')
                                 <span class="invalid-feedback" role="alert">

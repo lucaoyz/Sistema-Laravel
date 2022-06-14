@@ -4,6 +4,18 @@
 @section('pagina', 'Treino')
 @section('content')
 
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <p>{{ $message }}</p>
+</div>
+@endif
+
+@if ($message = Session::get('error'))
+<div class="alert alert-danger">
+    <p>{{ $message }}</p>
+</div>
+@endif
+
 <div class="container-fluid py-4">
     <div class="row">
       <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -11,7 +23,7 @@
           <div class="card-header p-3 pt-2">
             <div class="pt-1">
               <p class="text-sm mb-0 text-capitalize">Exercicios</p>
-              <h5 class="mb-0"><a href="" class="text-success">Registre um novo exercicio</a></h5>
+              <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarExercicioModal" class="text-success">Registre um novo exercicio</a></h5>
             </div>
           </div>
           <hr class="dark horizontal my-0">

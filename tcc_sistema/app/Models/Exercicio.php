@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Exercicio extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'exe_nome',
+        'exe_membro',
+        'exe_descricao',
+    ];
+
 }

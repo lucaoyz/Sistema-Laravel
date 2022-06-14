@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('exe_nome');
             $table->string('exe_membro');
-            $table->string('exe_descricao');
+            $table->string('exe_descricao')->nullable();
             $table->timestamps();
         });
     }

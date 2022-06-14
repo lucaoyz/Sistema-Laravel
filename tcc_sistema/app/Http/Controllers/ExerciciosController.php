@@ -35,7 +35,23 @@ class ExerciciosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $exercicioNome = Exercicio::where('exe_nome', '=', $request->input('exe_nome'))->first();
+
+        if($exercicioNome){
+            return redirect()->route('admin.treino')
+            ->with('error','Esse exercício já está cadastrado!');
+        } else {
+        $request->validate([
+            'exe_nome' => 'required',
+            'exe_membro' => 'required',
+            'exe_descricao' => 'nullable',
+        ]);
+
+        Exercicio::create($request->all());
+
+        return redirect()->route('admin.treino')
+                        ->with('success','Exercício criado com sucesso!');
+            }
     }
 
     /**

@@ -17,7 +17,7 @@ class ExerciciosController extends Controller
         $exercicios = Exercicio::latest()->paginate(5);
 
         return view('admin.treino', [
-            'exercicios' => $exercicios
+            'exercicios' => $exercicios,
             ]);
     }
 

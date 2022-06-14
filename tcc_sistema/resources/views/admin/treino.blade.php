@@ -28,7 +28,7 @@
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
-            <p class="mb-0"><span class="text-sm font-weight-bolder">Atualmente contando com ** exercicios!</span></p>
+            <p class="mb-0"><span class="text-sm font-weight-bolder">Atualmente contando com {{$exerciciosCount}} exercicios!</span></p>
           </div>
         </div>
       </div>

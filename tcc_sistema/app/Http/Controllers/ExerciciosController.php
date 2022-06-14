@@ -14,7 +14,11 @@ class ExerciciosController extends Controller
      */
     public function index()
     {
-        //
+        $exercicios = Exercicio::latest()->paginate(5);
+
+        return view('admin.treino', [
+            'exercicios' => $exercicios
+            ]);
     }
 
     /**
@@ -38,7 +42,7 @@ class ExerciciosController extends Controller
         $exercicioNome = Exercicio::where('exe_nome', '=', $request->input('exe_nome'))->first();
 
         if($exercicioNome){
-            return redirect()->route('admin.treino')
+            return redirect()->route('treinos.index')
             ->with('error','Esse exercício já está cadastrado!');
         } else {
         $request->validate([
@@ -49,7 +53,7 @@ class ExerciciosController extends Controller
 
         Exercicio::create($request->all());
 
-        return redirect()->route('admin.treino')
+        return redirect()->route('treinos.index')
                         ->with('success','Exercício criado com sucesso!');
             }
     }
@@ -98,4 +102,18 @@ class ExerciciosController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+
+        $filters = $request->except('_token');
+        $exercicios = Exercicio::where('exe_nome', 'LIKE', "%{$request->search}%")
+            ->orWhere('exe_membro', 'LIKE', "%{$request->search}%")
+            ->paginate(5);
+
+            return view('admin.treino', [
+                'exercicios' => $exercicios,
+                ]);
+    }
+
 }

@@ -44,7 +44,77 @@
           </button>
         </div>
         <div class="modal-body">
-            <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarExercicioModal" class="text-success" style="font-size: 20px">Registre um novo exercicio</a></h5>
+            <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarExercicioModal" class="btn btn-success">Registre um novo exercicio</a></h5>
+
+            <form action="{{route('exercicios.search')}}" method="post">
+                @csrf
+                <div class="input-group input-group-outline my-3">
+                    <!-- Campo de texto para digitar oque será filtrado -->
+                    <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome, email ou cpf">
+                    <!-- Botão para filtrar -->
+                    <button class="btn btn-primary" type="submit">Filtrar</button>
+                    <!-- Botão para limpar filtro -->
+                    <a class="btn btn-outline-secondary" href="{{route('treinos.index')}}">Limpar filtro</a>
+                  </div>
+            </form>
+
+            <table class="table align-items-center mb-0">
+                <!-- Dados que vão ser coletados -->
+                <thead>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome do exercício</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Membro Muscular</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
+                        <th class="text-secondary text-uppercase text-xxs font-weight-bolder opacity-7">Ações</th>
+                    </tr>
+                </thead>
+
+              <tbody>
+
+                <!-- Laço de repetição dos exercicios -->
+                @foreach ($exercicios as $exercicio)
+                <tr>
+
+                    <!-- Nome do exercício-->
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{ $exercicio->exe_nome }}</h6>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- Membro muscular -->
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">{{ $exercicio->exe_membro }}</p>
+                  </td>
+
+                  <!-- Descrição -->
+                  <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{ $exercicio->exe_descricao }}</p>
+                  </td>
+
+                  <!-- Botoes de ação -->
+                  <td class="align-middle">
+
+                        <!-- Editar -->
+                        <a class="btn btn-primary" href="{{ route('exercicios.edit',$exercicio->id) }}" data-bs-toggle="modal" data-bs-target="#editarExercicioModal{{$exercicio->id}}">Editar</a>
+
+                        <!-- Remover -->
+                        <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirExercicioModal{{$exercicio->id}}">Excluir</a>
+
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+            <!-- Paginação com e sem filtros -->
+            @if (isset($filters))
+            {{ $exercicios->appends($filters)->links() }}
+        @else
+            {{ $exercicios->links() }}
+        @endif
+
         </div>
         <div class="modal-footer">
             <div class="row mb-0">

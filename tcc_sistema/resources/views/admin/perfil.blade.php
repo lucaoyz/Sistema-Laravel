@@ -82,7 +82,7 @@
                         <h6 class="mb-0 text-sm"></h6>
                         <p class="list-group-item border-0 ps-0 pt-0 text-sm">Acesse seu treino clicando no texto a frente!</p>
                       </div>
-                      <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" href="{{route('admin.treino')}}">Clique aqui</a>
+                      <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" href="{{route('treinos.index')}}">Clique aqui</a>
                     </li>
                   </ul>
                 </div>

@@ -28,7 +28,14 @@
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
-            <p class="mb-0"><span class="text-sm font-weight-bolder">Atualmente contando com {{$exerciciosCount}} exercicios!</span></p>
+            <p class="mb-0"><span class="text-sm font-weight-bolder">
+                @if(isset($exerciciosCount))
+                Acesse a tela de exercícios.<br>
+                Atualmente contando com {{$exerciciosCount}} exercicios!
+                @else
+                Acesse a tela de exercícios!
+                @endif
+                </span></p>
           </div>
         </div>
       </div>

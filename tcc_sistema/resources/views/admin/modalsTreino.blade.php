@@ -50,7 +50,7 @@
                 @csrf
                 <div class="input-group input-group-outline my-3">
                     <!-- Campo de texto para digitar oque será filtrado -->
-                    <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome, email ou cpf">
+                    <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome do exercício ou membro muscular!">
                     <!-- Botão para filtrar -->
                     <button class="btn btn-primary" type="submit">Filtrar</button>
                     <!-- Botão para limpar filtro -->

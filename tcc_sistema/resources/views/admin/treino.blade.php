@@ -88,7 +88,7 @@
 </main>
 
   <!-- Modal -->
-  @extends('admin.modalsTreino')
+  @extends('admin.modalsExercicio')
 
 </body>
 </html>

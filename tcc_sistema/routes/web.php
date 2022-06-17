@@ -118,6 +118,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         /* Rotas para os treinos */
         Route::get('/treino', [App\Http\Controllers\TreinoController::class, 'index'])->name('treinos.index');
+        Route::get('/treino/create', [App\Http\Controllers\TreinoController::class, 'create'])->name('treinos.create');
+        Route::post('/treino/store', [App\Http\Controllers\TreinoController::class, 'store'])->name('treinos.store');
+        Route::get('/treino/{treino}', [App\Http\Controllers\TreinoController::class, 'show'])->name('treinos.show');
+        Route::get('/treino/{treino}/edit',[App\Http\Controllers\TreinoController::class, 'edit'])->name('treinos.edit');
+        Route::put('/treino/{treino}', [App\Http\Controllers\TreinoController::class, 'update'])->name('treinos.update');
+        Route::delete('/treino/{treino}', [App\Http\Controllers\TreinoController::class, 'destroy'])->name('treinos.destroy');
+        Route::any('/treino/search', [App\Http\Controllers\TreinoController::class, 'search'])->name('treinos.search');
 
 
         // Exercicios

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Treino;
 use App\Models\Exercicio;
+use App\Models\Aluno;
+use App\Models\Personal;
 use Illuminate\Http\Request;
 
 class TreinoController extends Controller
@@ -18,9 +20,14 @@ class TreinoController extends Controller
         $exercicios = Exercicio::latest()->paginate(5);
         $exerciciosCount = Exercicio::select('id')->count();
 
+        $treinos = Treino::latest()->paginate(5);
+        $treinosCount = Treino::select('id')->count();
+
         return view('admin.treino', [
             'exercicios' => $exercicios,
             'exerciciosCount' => $exerciciosCount,
+            'treinos' => $treinos,
+            'treinosCount' => $treinosCount,
             ]);
     }
 

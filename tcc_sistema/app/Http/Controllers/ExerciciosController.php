@@ -139,7 +139,10 @@ class ExerciciosController extends Controller
      */
     public function destroy(Exercicio $exercicio)
     {
-        //
+        $exercicio->delete();
+
+        return redirect()->route('treinos.index')
+                        ->with('success','Exercício excluido com sucesso!');
     }
 
     public function search(Request $request)

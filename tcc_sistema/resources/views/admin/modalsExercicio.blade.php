@@ -269,7 +269,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="exe_nome" class="col-md-4 col-form-label text-md-end">{{ __('Nome') }}</label>
+                        <label for="per_nome" class="col-md-4 col-form-label text-md-end">{{ __('Nome') }}</label>
 
                         <div class="col-md-6">
                             <input id="exe_nome" type="text"
@@ -313,23 +313,6 @@
                             @enderror
                         </div>
                     </div>
-
-                    <div class="row mb-3">
-                        <label for="exe_descricao" class="col-md-4 col-form-label text-md-end">{{ __('Descrição') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="exe_descricao" type="text"
-                             class="form-control @error('exe_descricao') is-invalid @enderror"
-                              name="exe_descricao" value="{{ $exercicio->exe_descricao }}" required autocomplete="exe_descricao" autofocus>
-
-                            @error('exe_descricao')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
         </div>
         <div class="modal-footer">
             <div class="row mb-0">

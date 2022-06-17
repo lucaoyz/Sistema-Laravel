@@ -225,3 +225,104 @@
       </div>
     </div>
   </div>
+
+  @foreach($exercicios as $exercicio)
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Pode haver problemas em seu formulário!<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+<div class="modal fade" id="editarExercicioModal{{$exercicio->id}}" tabindex="-1" role="dialog" aria-labelledby="editarExercicioModal{{$exercicio->id}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 700px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal" id="editarExercicioModal{{$exercicio->id}}">Editar</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('exercicios.update',$exercicio->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+
+                    <div class="row mb-3">
+                        <label for="id" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="id" type="text"
+                            class="form-control @error('id') is-invalid @enderror"
+                            name="id" value="{{ $exercicio->id }}" required autocomplete="id" autofocus>
+
+                            @error('id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="per_nome" class="col-md-4 col-form-label text-md-end">{{ __('Nome') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="exe_nome" type="text"
+                             class="form-control @error('exe_nome') is-invalid @enderror"
+                              name="exe_nome" value="{{ $exercicio->exe_nome }}" required autocomplete="exe_nome" autofocus>
+
+                            @error('exe_nome')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="exe_membro" class="col-md-4 col-form-label text-md-end">{{ __('Membro muscular') }}</label>
+
+                        <div class="col-md-6">
+
+                            <select name="exe_membro" id="exe_membro"
+                            class="form-select @error('exe_membro') is-invalid @enderror"
+                            value="{{ $exercicio->exe_membro }}" required autocomplete="exe_membro">
+
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'peito') selected @endif>Peito</option>
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'costas') selected @endif>Costas</option>
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'biceps') selected @endif>Biceps</option>
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'triceps') selected @endif>Triceps</option>
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'antebraco') selected @endif>Antebraço</option>
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'ombro') selected @endif>Ombro</option>
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'trapezio') selected @endif>Trapezio</option>
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'inferior') selected @endif>Inferior</option>
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'lombar') selected @endif>Lombar</option>
+                                <option value="{{ $exercicio->exe_membro }}" @if($exercicio->exe_membro == 'abdomen') selected @endif>Abdomen</option>
+
+                            </select>
+
+                            @error('exe_membro')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row mb-0">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Atualizar') }}
+                    </button>
+            </div>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+  @endforeach

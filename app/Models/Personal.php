@@ -28,7 +28,7 @@ class Personal extends Model
     }
 
     public function PersonalTreino() {
-        return $this->hasOne(Personal::class, 'per_id', 'id');
+        return $this->hasMany(Personal::class, 'per_id', 'id');
     }
 
 }

@@ -257,7 +257,7 @@
                         <label for="id" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
 
                         <div class="col-md-6">
-                            <input id="id" type="text"
+                            <input id="id" type="text" {{ $exercicio->id ? 'readonly' : '' }}
                             class="form-control @error('id') is-invalid @enderror"
                             name="id" value="{{ $exercicio->id }}" required autocomplete="id" autofocus>
 

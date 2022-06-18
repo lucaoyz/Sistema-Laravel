@@ -17,7 +17,7 @@ class TreinoController extends Controller
      */
     public function index()
     {
-        $exercicios = Exercicio::latest()->paginate(5);
+        $exercicios = Exercicio::latest()->paginate(1000);
         $exerciciosCount = Exercicio::select('id')->count();
 
         $treinos = Treino::latest()->paginate(5);

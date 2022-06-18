@@ -226,6 +226,7 @@
     </div>
   </div>
 
+  <!-- editar exercicio -->
   @foreach($exercicios as $exercicio)
 @if ($errors->any())
 <div class="alert alert-danger">

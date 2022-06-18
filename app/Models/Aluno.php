@@ -10,6 +10,7 @@ class Aluno extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tre_id',
         'alu_nome',
         'alu_email',
         'alu_endereco',

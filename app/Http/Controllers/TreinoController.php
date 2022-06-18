@@ -23,11 +23,14 @@ class TreinoController extends Controller
         $treinos = Treino::latest()->paginate(5);
         $treinosCount = Treino::select('id')->count();
 
+        $personals = Personal::all();
+
         return view('admin.treino', [
             'exercicios' => $exercicios,
             'exerciciosCount' => $exerciciosCount,
             'treinos' => $treinos,
             'treinosCount' => $treinosCount,
+            'personals' => $personals,
             ]);
     }
 

@@ -65,11 +65,16 @@
                         <select name="per_id" id="per_id"
                         class="form-select @error('per_id') is-invalid @enderror"
                         value="{{ old('per_id') }}" required autocomplete="per_id">
-                            @foreach ($personals as $personal)
-                                <option
-                                    value="{{ $personal['id'] }}"> {{ $personal['per_nome'] }}
-                                </option>
-                            @endforeach
+                        @if(auth()->user()->type == 'admin')
+                                @foreach ($personals as $personal)
+                                    <option
+                                        value="{{ $personal['id'] }}"> {{ $personal['per_nome'] }}
+                                    </option>
+                                @endforeach
+                            @elseif(auth()->user()->type == 'professor')
+                            <option
+                            value="{{ Auth()->user()->per_id }}"> {{ Auth()->user()->name }}
+                        @endif
                         </select>
 
                         @error('per_id')

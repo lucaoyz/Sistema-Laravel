@@ -84,7 +84,16 @@
                                 + '<option value="abdomen">Abdomen</option>';
             membroSelect += '</select>';
                 $membro_musculares.append(membroSelect);
+
         }
+
+
+                var primeiraTabEl = document.querySelector('#treino-tab')
+                var treinoTab = new bootstrap.Tab(primeiraTabEl)
+
+                treinoTab.show()
+
+
 
     </script>
 
@@ -100,7 +109,7 @@
 </div>
 @endif
 <div class="modal fade" id="criarTreinoModal" tabindex="-1" role="dialog" aria-labelledby="criarTreinoModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 50%;">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 50%;">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title font-weight-normal" id="criarTreinoModal">Criar</h5>
@@ -109,94 +118,114 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('treinos.store') }}" method="POST">
-                @csrf
+            <ul class="nav nav-tabs" id="criacaoTreino" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="treino-tab" data-bs-toggle="tab" data-bs-target="#treino" type="button" role="tab" aria-controls="treino" aria-selected="true">Treino</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="diasMembrosAluno-tab" data-bs-toggle="tab" data-bs-target="#diasMembrosAluno" type="button" role="tab" aria-controls="diasMembrosAluno" aria-selected="false">Dias, Membros e Aluno</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="exercicios-tab" data-bs-toggle="tab" data-bs-target="#exercicios" type="button" role="tab" aria-controls="exercicios" aria-selected="false">Exercícios</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="conclusao-tab" data-bs-toggle="tab" data-bs-target="#conclusao" type="button" role="tab" aria-controls="conclusao" aria-selected="false">Conclusão</button>
+                </li>
+              </ul>
 
-                <div class="container">
-                    <div class="row" style="padding-bottom: 2%;">
+              <div class="tab-content">
+                <div class="tab-pane active" id="treino" role="tabpanel" aria-labelledby="treino-tab">
 
-                      <div class="col-sm">
-                        <label for="per_id">{{ __('*Nome do Professor') }}</label>
-                        <select name="per_id" id="per_id"
-                        class="form-select @error('per_id') is-invalid @enderror"
-                        value="{{ old('per_id') }}" required autocomplete="per_id">
-                        @if(auth()->user()->type == 'admin')
-                                @foreach ($personals as $personal)
+                    <form action="{{ route('treinos.store') }}" method="POST">
+                        @csrf
+
+                        <div class="container" style="padding-top: 2%">
+                            <div class="row" style="padding-bottom: 2%;">
+
+                              <div class="col-sm">
+                                <label for="per_id">{{ __('*Nome do Professor') }}</label>
+                                <select name="per_id" id="per_id"
+                                class="form-select @error('per_id') is-invalid @enderror"
+                                value="{{ old('per_id') }}" required autocomplete="per_id">
+                                @if(auth()->user()->type == 'admin')
+                                        @foreach ($personals as $personal)
+                                            <option
+                                                value="{{ $personal['id'] }}"> {{ $personal['per_nome'] }}
+                                            </option>
+                                        @endforeach
+                                    @elseif(auth()->user()->type == 'professor')
                                     <option
-                                        value="{{ $personal['id'] }}"> {{ $personal['per_nome'] }}
-                                    </option>
-                                @endforeach
-                            @elseif(auth()->user()->type == 'professor')
-                            <option
-                            value="{{ Auth()->user()->per_id }}"> {{ Auth()->user()->name }}
-                        @endif
-                        </select>
+                                    value="{{ Auth()->user()->per_id }}"> {{ Auth()->user()->name }}
+                                @endif
+                                </select>
 
-                        @error('per_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                      </div>
+                                @error('per_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                              </div>
 
-                      <div class="col-sm">
-                        <label for="tre_dias_semana">{{ __('*Dias por semana') }}</label>
-                        <select name="tre_dias_semana" id="tre_dias_semana" onchange="dias_semana()"
-                        class="form-select @error('tre_dias_semana') is-invalid @enderror"
-                        value="{{ old('tre_dias_semana') }}" required autocomplete="tre_dias_semana">
-                            <option value="">Clique aqui</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                        </select>
+                              <div class="col-sm">
+                                <label for="tre_dias_semana">{{ __('*Dias por semana') }}</label>
+                                <select name="tre_dias_semana" id="tre_dias_semana" onchange="dias_semana()"
+                                class="form-select @error('tre_dias_semana') is-invalid @enderror"
+                                value="{{ old('tre_dias_semana') }}" required autocomplete="tre_dias_semana">
+                                    <option value="">Clique aqui</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                </select>
 
-                        @error('tre_dias_semana')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                                @error('tre_dias_semana')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
-                      </div>
+                              </div>
 
-                      <div class="col-sm">
-                        <label for="tre_tempo">{{ __('*Tempo de cada treino') }}</label>
-                        <select name="tre_tempo" id="tre_tempo"
-                        class="form-select @error('tre_tempo') is-invalid @enderror"
-                        value="{{ old('tre_tempo') }}" required autocomplete="tre_tempo">
-                            <option value="">Clique aqui</option>
-                            <option value="30m">30 Minutos</option>
-                            <option value="45m">45 Minutos</option>
-                            <option value="1h">1 Hora</option>
-                            <option value="1h30m">1 Hora e 30 Minutos</option>
-                            <option value="2h">2 Horas</option>
-                        </select>
+                              <div class="col-sm">
+                                <label for="tre_tempo">{{ __('*Tempo de cada treino') }}</label>
+                                <select name="tre_tempo" id="tre_tempo"
+                                class="form-select @error('tre_tempo') is-invalid @enderror"
+                                value="{{ old('tre_tempo') }}" required autocomplete="tre_tempo">
+                                    <option value="">Clique aqui</option>
+                                    <option value="30m">30 Minutos</option>
+                                    <option value="45m">45 Minutos</option>
+                                    <option value="1h">1 Hora</option>
+                                    <option value="1h30m">1 Hora e 30 Minutos</option>
+                                    <option value="2h">2 Horas</option>
+                                </select>
 
-                        @error('tre_tempo')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                      </div>
+                                @error('tre_tempo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                              </div>
 
-                      <div class="col-sm">
-                        <label for="tre_data_troca">{{ __('*Data de troca') }}</label>
-                        <input id="tre_data_troca" type="date"
-                        class="form-control @error('tre_data_troca') is-invalid @enderror"
-                        name="tre_data_troca" value="{{ old('tre_data_troca') }}" required autocomplete="tre_data_troca" autofocus
-                        min="{{ now()->toDateString('d-m-Y') }}" >
+                              <div class="col-sm">
+                                <label for="tre_data_troca">{{ __('*Data de troca') }}</label>
+                                <input id="tre_data_troca" type="date"
+                                class="form-control @error('tre_data_troca') is-invalid @enderror"
+                                name="tre_data_troca" value="{{ old('tre_data_troca') }}" required autocomplete="tre_data_troca" autofocus
+                                min="{{ now()->toDateString('d-m-Y') }}" >
 
-                        @error('tre_data_troca')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    </div>
+                                @error('tre_data_troca')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            </div>
+                          </div>
+                </div>
+                <div class="tab-pane" id="diasMembrosAluno" role="tabpanel" aria-labelledby="diasMembrosAluno-tab">
 
                     <div class="row" style="padding-bottom: 2%;">
 
@@ -284,7 +313,10 @@
 
                       </div>
 
-                      <div class="row" style="padding-bottom: 2%;">
+                </div>
+                <div class="tab-pane" id="exercicios" role="tabpanel" aria-labelledby="exercicios-tab">
+
+                    <div class="row" style="padding-bottom: 2%;">
 
                         <div class="col-sm">
                             <label for="exe_nome">{{ __('*Nome do exercício') }}</label>
@@ -329,7 +361,12 @@
                         </div>
 
                       </div>
-                  </div>
+
+                </div>
+                <div class="tab-pane" id="conclusao" role="tabpanel" aria-labelledby="conclusao-tab">...</div>
+              </div>
+
+
         </div>
         <div class="modal-footer">
             <div class="row mb-0">

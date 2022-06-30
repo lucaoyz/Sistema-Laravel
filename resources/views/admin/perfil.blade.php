@@ -1,4 +1,4 @@
-@extends('admin.layouts')
+@extends('admin.layoutsModals.layouts')
 @section('title', 'Perfil')
 @section('perfil', 'active bg-gradient-primary')
 @section('pagina', 'Perfil')

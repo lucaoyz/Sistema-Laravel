@@ -1,4 +1,4 @@
-@extends('admin.layouts')
+@extends('admin.layoutsModals.layouts')
 @section('title', 'Treino')
 @section('treino', 'active bg-gradient-primary')
 @section('pagina', 'Treino')
@@ -88,8 +88,8 @@
 </main>
 
   <!-- Modal -->
-  @extends('admin.modalsExercicio')
-  @extends('admin.modalsTreino')
+  @extends('admin.layoutsModals.modalsExercicio')
+  @extends('admin.layoutsModals.modalsTreino')
 
 </body>
 </html>

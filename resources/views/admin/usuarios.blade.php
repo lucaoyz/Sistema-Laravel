@@ -3,7 +3,7 @@
         ALUNOS/ALUNO    S
     PROFESSORES/PERSONALS
 -->
-@extends('admin.layouts')
+@extends('admin.layoutsModals.layouts')
 @section('title', 'Usuarios')
 @section('usuarios', 'active bg-gradient-primary')
 @section('pagina', 'Usuarios')
@@ -237,7 +237,7 @@
   </main>
 
   <!-- Modal -->
-  @extends('admin.modalsUsers')
+  @extends('admin.layoutsModals.modalsUsers')
 
 </body>
 

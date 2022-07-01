@@ -9,6 +9,8 @@ class ExerciciosTreino extends Model
 {
     use HasFactory;
 
+    protected $table = 'exercicios_treino';
+    
     protected $fillable = [
         'tre_id',
         'tex_membro',

@@ -10,14 +10,15 @@
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
     <p>{{ $message }}</p>
+   <span>Treino numero {{$treinosId}}</span>
 </div>
 @endif
 @if (Session::get('proximaAbaDMA')) {{--quando cadastrado o treino, retorna o proximaAbaDMA e executa as funções abaixo--}}
     <script>
         function proximaAbaDMA(){
 
-            $('#diasMembrosAluno-tab').removeClass('disabled'); // remove classe disabled
-            document.getElementById('diasMembrosAluno-tab').click(); // clica na outra aba pelo id
+            $('#diasMembrosQtde-tab').removeClass('disabled'); // remove classe disabled
+            document.getElementById('diasMembrosQtde-tab').click(); // clica na outra aba pelo id
     }
 
     $(document).ready(function(){
@@ -26,7 +27,6 @@
 
 </script>
 @endif
-
 <ul
 class="nav nav-tabs" id="criacaoTreino" role="tablist">
     <li class="nav-item" role="presentation">
@@ -41,9 +41,9 @@ class="nav nav-tabs" id="criacaoTreino" role="tablist">
     </li>
     <li class="nav-item" role="presentation">
 
-      <a class="nav-link disabled" id="diasMembrosAluno-tab"
-      data-bs-toggle="tab" data-bs-target="#diasMembrosAluno"
-       type="button" role="tab" aria-controls="diasMembrosAluno"
+      <a class="nav-link disabled" id="diasMembrosQtde-tab"
+      data-bs-toggle="tab" data-bs-target="#diasMembrosQtde"
+       type="button" role="tab" aria-controls="diasMembrosQtde"
        aria-selected="false">
        Quantidade de exercicios e membros musculares
     </a>
@@ -165,7 +165,107 @@ class="nav nav-tabs" id="criacaoTreino" role="tablist">
         </form>
     </div>
 
-    <div class="tab-pane" id="diasMembrosAluno" role="tabpanel" aria-labelledby="diasMembrosAluno-tab">
+    <div class="tab-pane" id="diasMembrosQtde" role="tabpanel" aria-labelledby="diasMembrosQtde-tab">
+        <br>
+        @if ($treinosDias == '1')
+        <ul
+        class="nav nav-tabs" id="criacaoTreino" role="tablist">
+            <li class="nav-item" role="presentation">
+
+              <a class="nav-link" id="dia1-tab"
+               data-bs-toggle="tab" data-bs-target="#dia1"
+               type="button" role="tab" aria-controls="dia1"
+               aria-selected="false">
+                Dia 1
+              </a>
+
+            </li>
+          </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane" id="dia1" role="tabpanel" aria-labelledby="dia1-tab">
+            <div class="container" style="margin-left: 0%; padding-top: 1.5%">
+
+            <form action="" method="POST">
+                @csrf
+
+                @include('admin.layoutsModals.formulariosTreino')
+
+            </form>
+
+            </div>
+          </div>
+        </div>
+        @endif
+
+        @if ($treinosDias == '2')
+        <ul
+        class="nav nav-tabs" id="criacaoTreino" role="tablist">
+            <li class="nav-item" role="presentation">
+
+              <a class="nav-link" id="dia1-tab"
+               data-bs-toggle="tab" data-bs-target="#dia1"
+               type="button" role="tab" aria-controls="dia1"
+               aria-selected="false">
+                Dia 1
+              </a>
+
+            </li>
+            <li class="nav-item" role="presentation">
+
+                <a class="nav-link" id="dia2-tab"
+                    data-bs-toggle="tab" data-bs-target="#dia2"
+                    type="button" role="tab" aria-controls="dia2"
+                    aria-selected="false">
+                    Dia 2
+                </a>
+
+              </li>
+          </ul>
+        <div class="tab-content">
+          <div class="tab-pane" id="dia1" role="tabpanel" aria-labelledby="dia1-tab">
+            <div class="container" style="margin-left: 0%; padding-top: 1.5%">
+
+                <form action="" method="post">
+                    @csrf
+                    @include('admin.layoutsModals.formulariosTreino')
+                </form>
+
+            </div>
+          </div>
+
+          <div class="tab-pane" id="dia2" role="tabpanel" aria-labelledby="dia2-tab">
+            <div class="container" style="margin-left: 0%; padding-top: 1.5%">
+
+                <form action="" method="post">
+                    @csrf
+                    @include('admin.layoutsModals.formulariosTreino')
+                </form>
+
+            </div>
+          </div>
+        </div>
+        @endif
+
+        @if ($treinosDias == '3')
+            {{$treinosDias}} Dias por semana
+        @endif
+
+        @if ($treinosDias == '4')
+            {{$treinosDias}} Dias por semana
+        @endif
+
+        @if ($treinosDias == '5')
+            {{$treinosDias}} Dias por semana
+        @endif
+
+        @if ($treinosDias == '6')
+            {{$treinosDias}} Dias por semana
+        @endif
+
+        @if ($treinosDias == '7')
+            {{$treinosDias}} Dias por semana
+        @endif
 
     </div>
 

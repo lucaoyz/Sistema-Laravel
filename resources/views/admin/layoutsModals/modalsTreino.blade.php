@@ -258,12 +258,11 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                            </div>
                         </div>
 
 
-                        <div id="membro_musculares"class="col-sm">
-                            <!--
+                        <div class="col-sm">
                           <label for="tex_membro1">{{ __('*Membro Muscular 1') }}</label>
                           <select name="tex_membro1" id="tex_membro1"
                             class="form-select @error('tex_membro1') is-invalid @enderror"
@@ -308,7 +307,6 @@
                                   <strong>{{ $message }}</strong>
                               </span>
                           @enderror
-                          -->
                         </div>
 
                       </div>

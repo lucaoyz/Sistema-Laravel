@@ -8,6 +8,7 @@ use App\Models\Aluno;
 use App\Models\ExerciciosTreino;
 use App\Models\Personal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TreinoController extends Controller
 {
@@ -45,13 +46,16 @@ class TreinoController extends Controller
         $exercicios = Exercicio::all();
 
         $treinos = Treino::all();
-
+        $treinosId = DB::table('treinos')->select('id')->latest()->first()->id;
+        $treinosDias = DB::table('treinos')->select('tre_dias_semana')->latest()->first()->tre_dias_semana;
         $personals = Personal::all();
 
         return view('admin.criarTreino', [
             'exercicios' => $exercicios,
             'treinos' => $treinos,
             'personals' => $personals,
+            'treinosId' => $treinosId,
+            'treinosDias' => $treinosDias,
             ]);
     }
 
@@ -70,7 +74,12 @@ class TreinoController extends Controller
             'tre_data_troca' => 'required|date',
         ]);
 
-       Treino::create($request->all());
+        $result = Treino::create($request->all());
+
+        $exercicios_treino = new ExerciciosTreino;
+        $exercicios_treino->tre_id = $result->id;
+
+        $result = $exercicios_treino->save();
 
        return redirect()->route('treinos.create')
                         ->with('success','Informações gerais cadastradas com sucesso!')->with('proximaAbaDMA', 'true');

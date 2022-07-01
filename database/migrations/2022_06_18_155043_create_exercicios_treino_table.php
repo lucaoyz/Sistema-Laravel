@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('exercicios_treino', function (Blueprint $table) {
             $table->foreignId('tre_id')->nullable()->constrained('treinos');
-            $table->string('tex_dia');
-            $table->string('tex_membro1');
+            $table->string('tex_dia')->nullable();;
+            $table->string('tex_membro1')->nullable();;
             $table->string('tex_membro2')->nullable();
-            $table->string('tex_exenum');
+            $table->string('tex_exenum')->nullable();;
             $table->foreignId('exe_id')->nullable()->constrained('exercicios');
-            $table->string('tex_series');
-            $table->string('tex_reps');
+            $table->string('tex_series')->nullable();
+            $table->string('tex_reps')->nullable();;
             $table->timestamps();
         });
     }

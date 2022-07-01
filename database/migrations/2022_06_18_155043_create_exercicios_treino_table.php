@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('exercicios_treino', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('tre_id')->nullable()->constrained('treinos');
             $table->string('tex_dia');
             $table->string('tex_membro1');

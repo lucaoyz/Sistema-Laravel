@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Treino;
 use App\Models\Exercicio;
 use App\Models\Aluno;
+use App\Models\ExerciciosTreino;
 use App\Models\Personal;
 use Illuminate\Http\Request;
 
@@ -41,7 +42,17 @@ class TreinoController extends Controller
      */
     public function create()
     {
-        //
+        $exercicios = Exercicio::all();
+
+        $treinos = Treino::all();
+
+        $personals = Personal::all();
+
+        return view('admin.criarTreino', [
+            'exercicios' => $exercicios,
+            'treinos' => $treinos,
+            'personals' => $personals,
+            ]);
     }
 
     /**
@@ -52,7 +63,18 @@ class TreinoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'per_id' => 'required',
+            'tre_dias_semana' => 'required',
+            'tre_tempo' => 'required',
+            'tre_data_troca' => 'required|date',
+        ]);
+
+       Treino::create($request->all());
+
+       return redirect()->route('treinos.create')
+                        ->with('success','Informações gerais cadastradas com sucesso!')->with('proximaAbaDMA', 'true');
+
     }
 
     /**

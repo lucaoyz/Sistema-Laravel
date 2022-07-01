@@ -44,7 +44,7 @@
           <div class="card-header p-3 pt-2">
             <div class="pt-1">
               <p class="text-sm mb-0 text-capitalize">Treinos</p>
-              <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoModal" class="text-success">Crie o treino para um aluno</a></h5>
+              <h5 class="mb-0"><a href="{{route('treinos.create')}}" class="text-success">Crie o treino para um aluno</a></h5>
             </div>
           </div>
           <hr class="dark horizontal my-0">

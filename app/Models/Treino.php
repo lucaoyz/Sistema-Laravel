@@ -17,7 +17,7 @@ class Treino extends Model
     ];
 
     protected $dates = [
-        'tre_dias_semana',
+        'tre_data_troca',
     ];
 
     public function TreinoAluno() {

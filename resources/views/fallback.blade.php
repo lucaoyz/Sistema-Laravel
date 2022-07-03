@@ -10,7 +10,7 @@
                 <div class="card-body">
 
 
-                    @if (auth::check())
+                    @if (\Auth::check())
                     @if(auth()->user()->type == 'admin')
                             <a href="{{route('admin')}}">Clique aqui</a> para voltar à sua pagina inicial.<br>
                             @elseif(auth()->user()->type == 'professor')

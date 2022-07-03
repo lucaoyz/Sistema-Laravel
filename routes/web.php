@@ -118,7 +118,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         /* Rotas para os treinos */
         Route::get('/treino', [App\Http\Controllers\TreinoController::class, 'index'])->name('treinos.index');
-        Route::get('/treino/criar', [App\Http\Controllers\TreinoController::class, 'create'])->name('treinos.create');
+        Route::get('/treino/create', [App\Http\Controllers\TreinoController::class, 'create'])->name('treinos.create');
         Route::post('/treino/store', [App\Http\Controllers\TreinoController::class, 'store'])->name('treinos.store');
         Route::get('/treino/{treino}', [App\Http\Controllers\TreinoController::class, 'show'])->name('treinos.show');
         Route::get('/treino/{treino}/edit',[App\Http\Controllers\TreinoController::class, 'edit'])->name('treinos.edit');
@@ -127,8 +127,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::any('/treino/search', [App\Http\Controllers\TreinoController::class, 'search'])->name('treinos.search');
 
 
-        // Exercicios
-        Route::get('/treino/exercicios', [App\Http\Controllers\ExerciciosController::class, 'index'])->name('exercicios.index');
+        /* Rotas para os exercicios */
+        Route::get('/treino/exercicios/inicio', [App\Http\Controllers\ExerciciosController::class, 'index'])->name('exercicios.index');
         Route::get('/treino/exercicios/create', [App\Http\Controllers\ExerciciosController::class, 'create'])->name('exercicios.create');
         Route::post('/treino/exercicios/store', [App\Http\Controllers\ExerciciosController::class, 'store'])->name('exercicios.store');
         Route::get('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'show'])->name('exercicios.show');

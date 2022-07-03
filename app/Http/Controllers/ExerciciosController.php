@@ -16,7 +16,7 @@ class ExerciciosController extends Controller
     {
         $exercicios = Exercicio::latest()->paginate(5);
 
-        return view('admin.treino', [
+        return view('admin.viewsTreino.exercicios', [
             'exercicios' => $exercicios,
             ]);
     }
@@ -28,7 +28,7 @@ class ExerciciosController extends Controller
      */
     public function create()
     {
-        return view('admin.treino');
+        return view('admin.viewsTreino.exercicios');
     }
 
     /**
@@ -53,7 +53,7 @@ class ExerciciosController extends Controller
 
         Exercicio::create($request->all());
 
-        return redirect()->route('treinos.index')
+        return redirect()->route('exercicios.index')
                         ->with('success','Exercício criado com sucesso!');
             }
     }
@@ -66,7 +66,7 @@ class ExerciciosController extends Controller
      */
     public function show(Exercicio $exercicio)
     {
-        return view('admin.treino', [
+        return view('admin.viewsTreino.exercicios', [
             'exercicio' => $exercicio,
             ]);
     }
@@ -79,7 +79,7 @@ class ExerciciosController extends Controller
      */
     public function edit(Exercicio $exercicio)
     {
-        return view('admin.treino', [
+        return view('admin.viewsTreino.exercicios', [
             'exercicio' => $exercicio,
             ]);
     }
@@ -98,7 +98,7 @@ class ExerciciosController extends Controller
 
         if($nomeExe){
             if($nomeExe->per_email != $exeId->per_email){
-                return redirect()->route('treinos.index')
+                return redirect()->route('exercicios.index')
                                     ->with('error', 'Esse exercício já está cadastrado!');
             } else {
                 $request->validate([
@@ -114,7 +114,7 @@ class ExerciciosController extends Controller
 
                 $exercicio->save();
 
-                    return redirect()->route('treinos.index')
+                    return redirect()->route('exercicios.index')
                                 ->with('success', 'Exercício atualizado!');
             }
         } else {
@@ -126,7 +126,7 @@ class ExerciciosController extends Controller
 
             $exercicio->update($request->all());
 
-                return redirect()->route('treinos.index')
+                return redirect()->route('exercicios.index')
                             ->with('success', 'Exercício atualizado!');
         }
     }
@@ -141,7 +141,7 @@ class ExerciciosController extends Controller
     {
         $exercicio->delete();
 
-        return redirect()->route('treinos.index')
+        return redirect()->route('exercicios.index')
                         ->with('success','Exercício excluido com sucesso!');
     }
 
@@ -153,7 +153,7 @@ class ExerciciosController extends Controller
             ->orWhere('exe_membro', 'LIKE', "%{$request->search}%")
             ->paginate(5);
 
-            return view('admin.treino', [
+            return view('admin.viewsTreino.exercicios', [
                 'exercicios' => $exercicios,
                 ]);
     }

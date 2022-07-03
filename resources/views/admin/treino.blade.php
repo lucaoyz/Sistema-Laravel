@@ -23,7 +23,7 @@
           <div class="card-header p-3 pt-2">
             <div class="pt-1">
               <p class="text-sm mb-0 text-capitalize">Exercícios</p>
-              <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#ExercicioModal" class="text-success">Tela de Exercícios</a></h5>
+              <h5 class="mb-0"><a href="{{route('exercicios.index')}}" class="text-success">Tela de Exercícios</a></h5>
             </div>
           </div>
           <hr class="dark horizontal my-0">

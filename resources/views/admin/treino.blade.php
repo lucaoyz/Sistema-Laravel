@@ -29,12 +29,7 @@
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
             <p class="mb-0"><span class="text-sm font-weight-bolder">
-                @if(isset($exerciciosCount))
-                Acesse a tela de exercícios.<br>
-                Atualmente contando com {{$exerciciosCount}} exercicios!
-                @else
-                Acesse a tela de exercícios!
-                @endif
+                Acesse a tela de exercícios.
                 </span></p>
           </div>
         </div>
@@ -44,7 +39,7 @@
           <div class="card-header p-3 pt-2">
             <div class="pt-1">
               <p class="text-sm mb-0 text-capitalize">Treinos</p>
-              <h5 class="mb-0"><a href="{{route('treinos.create')}}" class="text-success">Crie o treino para um aluno</a></h5>
+              <h5 class="mb-0"><a href="" class="text-success">Crie o treino para um aluno</a></h5>
             </div>
           </div>
           <hr class="dark horizontal my-0">
@@ -89,7 +84,6 @@
 
   <!-- Modal -->
   @extends('admin.layoutsModals.modalsExercicio')
-  @extends('admin.layoutsModals.modalsTreino')
 
 </body>
 </html>

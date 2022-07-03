@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Treino;
 use App\Models\Exercicio;
 use App\Models\Aluno;
-use App\Models\ExerciciosTreino;
 use App\Models\Personal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,21 +18,7 @@ class TreinoController extends Controller
      */
     public function index()
     {
-        $exercicios = Exercicio::latest()->paginate(1000);
-        $exerciciosCount = Exercicio::select('id')->count();
 
-        $treinos = Treino::latest()->paginate(5);
-        $treinosCount = Treino::select('id')->count();
-
-        $personals = Personal::all();
-
-        return view('admin.treino', [
-            'exercicios' => $exercicios,
-            'exerciciosCount' => $exerciciosCount,
-            'treinos' => $treinos,
-            'treinosCount' => $treinosCount,
-            'personals' => $personals,
-            ]);
     }
 
     /**
@@ -43,20 +28,7 @@ class TreinoController extends Controller
      */
     public function create()
     {
-        $exercicios = Exercicio::all();
 
-        $treinos = Treino::all();
-        $treinosId = DB::table('treinos')->select('id')->latest()->first()->id;
-        $treinosDias = DB::table('treinos')->select('tre_dias_semana')->latest()->first()->tre_dias_semana;
-        $personals = Personal::all();
-
-        return view('admin.criarTreino', [
-            'exercicios' => $exercicios,
-            'treinos' => $treinos,
-            'personals' => $personals,
-            'treinosId' => $treinosId,
-            'treinosDias' => $treinosDias,
-            ]);
     }
 
     /**
@@ -67,22 +39,6 @@ class TreinoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'per_id' => 'required',
-            'tre_dias_semana' => 'required',
-            'tre_tempo' => 'required',
-            'tre_data_troca' => 'required|date',
-        ]);
-
-        $result = Treino::create($request->all());
-
-        $exercicios_treino = new ExerciciosTreino;
-        $exercicios_treino->tre_id = $result->id;
-
-        $result = $exercicios_treino->save();
-
-       return redirect()->route('treinos.create')
-                        ->with('success','Informações gerais cadastradas com sucesso!')->with('proximaAbaDMA', 'true');
 
     }
 

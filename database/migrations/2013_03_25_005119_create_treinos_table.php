@@ -15,10 +15,7 @@ return new class extends Migration
     {
         Schema::create('treinos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('per_id')->nullable()->constrained('personals');
-            $table->string('tre_dias_semana');
-            $table->string('tre_tempo');
-            $table->date('tre_data_troca');
+
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_treinos');
+        Schema::dropIfExists('treinos');
     }
 };

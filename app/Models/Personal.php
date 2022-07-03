@@ -27,4 +27,7 @@ class Personal extends Model
         return $this->hasOne(User::class, 'per_id', 'id');
     }
 
+    public function personalParaTreinoGerals() {
+        return $this->hasOne(TreinoGeral::class, 'per_id', 'id');
+    }
 }

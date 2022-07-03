@@ -82,9 +82,6 @@
   @endsection
 </main>
 
-  <!-- Modal -->
-  @extends('admin.layoutsModals.modalsExercicio')
-
 </body>
 </html>
 

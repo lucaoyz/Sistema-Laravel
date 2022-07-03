@@ -15,5 +15,8 @@ class Exercicio extends Model
         'exe_descricao',
     ];
 
+    public function exeParaTreinoDetalhes() {
+        return $this->hasOne(TreinoDetalhe::class, 'exe_id', 'id');
+    }
 
 }

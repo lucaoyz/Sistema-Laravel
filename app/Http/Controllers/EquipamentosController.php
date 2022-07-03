@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Treino;
-use App\Models\Exercicio;
-use App\Models\Aluno;
-use App\Models\Personal;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class TreinoController extends Controller
+class EquipamentosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +13,7 @@ class TreinoController extends Controller
      */
     public function index()
     {
-        return view('admin.treino');
+        //
     }
 
     /**
@@ -28,7 +23,7 @@ class TreinoController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -39,16 +34,16 @@ class TreinoController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Treino  $treino
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Treino $treino)
+    public function show($id)
     {
         //
     }
@@ -56,10 +51,10 @@ class TreinoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Treino  $treino
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Treino $treino)
+    public function edit($id)
     {
         //
     }
@@ -68,10 +63,10 @@ class TreinoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Treino  $treino
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Treino $treino)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -79,10 +74,10 @@ class TreinoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Treino  $treino
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Treino $treino)
+    public function destroy($id)
     {
         //
     }

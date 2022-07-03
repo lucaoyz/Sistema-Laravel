@@ -10,11 +10,10 @@ class Aluno extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tre_id',
         'alu_nome',
         'alu_email',
-        'alu_endereco',
         'alu_data_nascimento',
+        'alu_endereco',
         'alu_telefone',
         'alu_mensalidade',
         'alu_celular',
@@ -29,4 +28,7 @@ class Aluno extends Model
         return $this->hasOne(User::class, 'alu_id', 'id');
     }
 
+    public function alunoParaTreinoGerals() {
+        return $this->hasOne(TreinoGeral::class, 'alu_id', 'id');
+    }
 }

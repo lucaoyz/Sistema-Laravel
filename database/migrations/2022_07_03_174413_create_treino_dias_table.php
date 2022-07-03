@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('treinos', function (Blueprint $table) {
+        Schema::create('treino_dias', function (Blueprint $table) {
             $table->id();
-
+            $table->foreignId('td_id')->nullable()->constrained('treino_detalhes');
+            $table->date('tdia_data');
+            $table->integer('tdia_sequencia');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('treinos');
+        Schema::dropIfExists('treino_dias');
     }
 };

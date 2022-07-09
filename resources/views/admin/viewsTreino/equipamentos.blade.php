@@ -42,7 +42,7 @@
               <br>
               <!-- Botão de criar -->
             <div class="pull-right">
-                <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarequipamentoModal" class="btn btn-success">Registre um novo equipamento</a></h5>
+                <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarEquipamentoModal" class="btn btn-success">Registre um novo equipamento</a></h5>
             </div>
             </div>
 
@@ -74,10 +74,10 @@
                       <!-- Botoes de ação -->
                       <td class="align-middle">
                             <!-- Editar -->
-                            <a class="btn btn-primary" href="{{ route('equipamentos.edit',$equipamento->id) }}" data-bs-toggle="modal" data-bs-target="#editarequipamentoModal{{$equipamento->id}}">Editar</a>
+                            <a class="btn btn-primary" href="{{ route('equipamentos.edit',$equipamento->id) }}" data-bs-toggle="modal" data-bs-target="#editarEquipamentoModal{{$equipamento->id}}">Editar</a>
 
                             <!-- Remover -->
-                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirequipamentoModal{{$equipamento->id}}">Excluir</a>
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirEquipamentoModal{{$equipamento->id}}">Excluir</a>
                         </td>
                     </tr>
                     @endforeach

@@ -42,7 +42,7 @@ class ExerciciosController extends Controller
         $exercicioNome = Exercicio::where('exe_nome', '=', $request->input('exe_nome'))->first();
 
         if($exercicioNome){
-            return redirect()->route('treinos.index')
+            return redirect()->route('exercicios.index')
             ->with('error','Esse exercício já está cadastrado!');
         } else {
         $request->validate([
@@ -97,7 +97,7 @@ class ExerciciosController extends Controller
         $exeId = Exercicio::where('id', '=', $request->input('id'))->first();
 
         if($nomeExe){
-            if($nomeExe->per_email != $exeId->per_email){
+            if($nomeExe->exe_nome != $exeId->exe_nome){
                 return redirect()->route('exercicios.index')
                                     ->with('error', 'Esse exercício já está cadastrado!');
             } else {

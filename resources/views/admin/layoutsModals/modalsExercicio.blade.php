@@ -217,7 +217,7 @@
                         <div class="col-md-6">
                             <input id="exe_descricao" type="text"
                              class="form-control @error('exe_descricao') is-invalid @enderror"
-                              name="exe_descricao" value="{{ $exercicio->exe_descricao }}" required autocomplete="exe_descricao" autofocus>
+                              name="exe_descricao" value="{{ $exercicio->exe_descricao }}" autocomplete="exe_descricao" autofocus>
 
                             @error('exe_descricao')
                                 <span class="invalid-feedback" role="alert">

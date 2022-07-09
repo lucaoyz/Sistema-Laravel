@@ -233,12 +233,10 @@
         </div>
       </div>
     </div>
-    @endsection
-  </main>
 
-  <!-- Modal -->
-  @extends('admin.layoutsModals.modalsUsers')
+      <!-- Modal -->
+  @include('admin.layoutsModals.modalsUsers')
 
-</body>
+@endsection
 
-</html>
+

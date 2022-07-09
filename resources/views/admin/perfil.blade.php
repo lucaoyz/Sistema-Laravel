@@ -16,7 +16,7 @@
     </div>
     @endif
     <div class="container-fluid px-2 px-md-4">
-      <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://scontent.fcpq5-1.fna.fbcdn.net/v/t1.6435-9/81519045_2192862607482485_8190455268572659712_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeFFbfQUsbQrwz_jGSP-a7OeRLOuezaHOXNEs657Noc5c9aE3-kw-R2ckuMv_TXdf7z_h5sZhG3PMCZTfTo4rgqc&_nc_ohc=0XmqUZJC2tEAX-B6w_K&_nc_ht=scontent.fcpq5-1.fna&oh=00_AT-v9wtAUg4bHmGHpIoc3anBWhryVJOuP00vrMc8BMZz9A&oe=62C33C58');">
+      <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url({{asset('img/gv2bg.jpg')}});">
         <span class="mask  bg-gradient-primary  opacity-6"></span>
       </div>
       <div class="card card-body mx-3 mx-md-4 mt-n6">
@@ -93,6 +93,4 @@
       </div>
     </div>
 @endsection
-</body>
 
-</html>

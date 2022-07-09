@@ -95,12 +95,10 @@
         </div>
       </div>
     </div>
-@endsection
-</main>
+
+
 
 <!-- Modal -->
-@extends('admin.layoutsModals.modalsEquipamento')
+@include('admin.layoutsModals.modalsEquipamento')
 
-</body>
-
-</html>
+@endsection

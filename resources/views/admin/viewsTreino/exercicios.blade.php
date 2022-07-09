@@ -107,12 +107,8 @@
         </div>
       </div>
     </div>
-@endsection
-</main>
 
 <!-- Modal -->
-@extends('admin.layoutsModals.modalsExercicio')
+@include('admin.layoutsModals.modalsExercicio')
 
-</body>
-
-</html>
+@endsection

@@ -483,9 +483,3 @@
       </div>
     </div>
       @endsection
-  </main>
-  <!--   Core JS Files   -->
-
-</body>
-
-</html>

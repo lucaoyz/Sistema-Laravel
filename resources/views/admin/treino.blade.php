@@ -69,9 +69,9 @@
       </div>
     </div>
   </div>
-  @endsection
 </main>
-
 </body>
 </html>
+  @endsection
+
 

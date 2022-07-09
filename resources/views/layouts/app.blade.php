@@ -9,6 +9,9 @@
 
     <title>GV2 Academia</title>
 
+    <link rel="halter" sizes="76x76" href="{{asset('img/halter.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('img/halter.png')}}">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

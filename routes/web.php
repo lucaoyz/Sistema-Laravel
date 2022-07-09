@@ -134,6 +134,17 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::put('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'update'])->name('exercicios.update');
         Route::delete('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'destroy'])->name('exercicios.destroy');
         Route::any('/treino/exercicios/search', [App\Http\Controllers\ExerciciosController::class, 'search'])->name('exercicios.search');
+
+        /* Rotas para os exercicios */
+        Route::get('/treino/equipamentos/inicio', [App\Http\Controllers\EquipamentosController::class, 'index'])->name('equipamentos.index');
+        Route::get('/treino/equipamentos/create', [App\Http\Controllers\EquipamentosController::class, 'create'])->name('equipamentos.create');
+        Route::post('/treino/equipamentos/store', [App\Http\Controllers\EquipamentosController::class, 'store'])->name('equipamentos.store');
+        Route::get('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'show'])->name('equipamentos.show');
+        Route::get('/treino/equipamentos/{equipamento}/edit',[App\Http\Controllers\EquipamentosController::class, 'edit'])->name('equipamentos.edit');
+        Route::put('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'update'])->name('equipamentos.update');
+        Route::delete('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'destroy'])->name('equipamentos.destroy');
+        Route::any('/treino/equipamentos/search', [App\Http\Controllers\EquipamentosController::class, 'search'])->name('equipamentos.search');
+
 });
 });
 

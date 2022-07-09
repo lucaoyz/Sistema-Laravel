@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipamento;
 use Illuminate\Http\Request;
 
 class EquipamentosController extends Controller
@@ -13,7 +14,10 @@ class EquipamentosController extends Controller
      */
     public function index()
     {
-        //
+        $equipamentos = Equipamento::latest()->paginate(5);
+        return view('admin.viewsTreino.equipamentos', [
+            'equipamentos' => $equipamentos,
+        ]);
     }
 
     /**
@@ -23,7 +27,7 @@ class EquipamentosController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.viewsTreino.equipamentos');
     }
 
     /**

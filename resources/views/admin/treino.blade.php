@@ -38,13 +38,15 @@
         <div class="card">
           <div class="card-header p-3 pt-2">
             <div class="pt-1">
-              <p class="text-sm mb-0 text-capitalize">Treinos</p>
-              <h5 class="mb-0"><a href="" class="text-success">Crie o treino para um aluno</a></h5>
+              <p class="text-sm mb-0 text-capitalize">Equipamentos</p>
+              <h5 class="mb-0"><a href="{{route('equipamentos.index')}}" class="text-success">Tela de Equipamentos</a></h5>
             </div>
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
-            <p class="mb-0"><span class="text-sm font-weight-bolder">Atualmente contando com ** treinos!</span></p>
+            <p class="mb-0"><span class="text-sm font-weight-bolder">
+                Acesse a tela de equipamentos.
+                </span></p>
           </div>
         </div>
       </div>
@@ -53,26 +55,14 @@
           <div class="card-header p-3 pt-2">
             <div class="pt-1">
               <p class="text-sm mb-0 text-capitalize">Treinos</p>
-              <h5 class="mb-0"><a href="" class="text-primary">Altere o treino de um aluno</a></h5>
+              <h5 class="mb-0"><a href="{{route('treinos.index')}}" class="text-success">Tela de Treinos</a></h5>
             </div>
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
-            <p class="mb-0"><span class="text-sm font-weight-bolder">Passou a data? troque o treino!</span></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-          <div class="card-header p-3 pt-2">
-            <div class="pt-1">
-              <p class="text-sm mb-0 text-capitalize">Treinos</p>
-              <h5 class="mb-0"><a href="" class="text-danger">Remova o treino de um aluno</a></h5>
-            </div>
-          </div>
-          <hr class="dark horizontal my-0">
-          <div class="card-footer p-3">
-            <p class="mb-0"><span class="text-sm font-weight-bolder">Aluno saiu? remova o treino dele!</span></p>
+            <p class="mb-0"><span class="text-sm font-weight-bolder">
+                Acesse a tela de treinos.
+                </span></p>
           </div>
         </div>
       </div>

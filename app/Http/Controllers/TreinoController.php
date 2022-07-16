@@ -6,6 +6,7 @@ use App\Models\Treino;
 use App\Models\Exercicio;
 use App\Models\Aluno;
 use App\Models\Personal;
+use App\Models\TreinoGeral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +21,19 @@ class TreinoController extends Controller
     {
         return view('admin.treino');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexGeral()
+    {
+        $treinoGerals = TreinoGeral::latest()->paginate(5);
+
+        return view('admin.viewsTreino.treinoGeral', [
+            'treinoGerals' => $treinoGerals,
+            ]);    }
 
     /**
      * Show the form for creating a new resource.
@@ -86,4 +100,19 @@ class TreinoController extends Controller
     {
         //
     }
+
+    public function searchGeral(Request $request)
+    {
+
+        $filters = $request->except('_token');
+        $treinoGerals = TreinoGeral::where('per_id', 'LIKE', "%{$request->search}%")
+            ->orWhere('alu_id', 'LIKE', "%{$request->search}%")
+            ->paginate(5);
+
+            return view('admin.viewsTreino.treinoGeral', [
+                'treinoGerals' => $treinoGerals,
+                'filters' => $filters,
+                ]);
+    }
+
 }

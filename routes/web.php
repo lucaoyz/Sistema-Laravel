@@ -116,13 +116,16 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         /* Rotas para os treinos */
         Route::get('/treino', [App\Http\Controllers\TreinoController::class, 'index'])->name('treinos.index');
-        Route::get('/treino/create', [App\Http\Controllers\TreinoController::class, 'create'])->name('treinos.create');
-        Route::post('/treino/store', [App\Http\Controllers\TreinoController::class, 'store'])->name('treinos.store');
-        Route::get('/treino/{treino}', [App\Http\Controllers\TreinoController::class, 'show'])->name('treinos.show');
-        Route::get('/treino/{treino}/edit',[App\Http\Controllers\TreinoController::class, 'edit'])->name('treinos.edit');
-        Route::put('/treino/{treino}', [App\Http\Controllers\TreinoController::class, 'update'])->name('treinos.update');
-        Route::delete('/treino/{treino}', [App\Http\Controllers\TreinoController::class, 'destroy'])->name('treinos.destroy');
-        Route::any('/treino/search', [App\Http\Controllers\TreinoController::class, 'search'])->name('treinos.search');
+
+            /* Rotas para informações gerais do treino */
+            Route::get('/treino/geral', [App\Http\Controllers\TreinoController::class, 'indexGeral'])->name('treinos.indexGeral');
+            Route::get('/treino/geral/create', [App\Http\Controllers\TreinoController::class, 'createGeral'])->name('treinos.createGeral');
+            Route::post('/treino/geral/store', [App\Http\Controllers\TreinoController::class, 'storeGeral'])->name('treinos.storeGeral');
+            Route::get('/treino/geral/{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'showGeral'])->name('treinos.showGeral');
+            Route::get('/treino/geral/{treinoGeral}/edit',[App\Http\Controllers\TreinoController::class, 'editGeral'])->name('treinos.editGeral');
+            Route::put('/treino/geral/{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'updateGeral'])->name('treinos.updateGeral');
+            Route::delete('/treino/geral/{treinoGeral}', [App\Http\Controllers\ExerciciosController::class, 'destroyGeral'])->name('treinos.destroyGeral');
+            Route::any('/treino/geral/search', [App\Http\Controllers\TreinoController::class, 'searchGeral'])->name('treinos.searchGeral');
 
 
         /* Rotas para os exercicios */
@@ -135,7 +138,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::delete('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'destroy'])->name('exercicios.destroy');
         Route::any('/treino/exercicios/search', [App\Http\Controllers\ExerciciosController::class, 'search'])->name('exercicios.search');
 
-        /* Rotas para os exercicios */
+        /* Rotas para os equipamentos */
         Route::get('/treino/equipamentos/inicio', [App\Http\Controllers\EquipamentosController::class, 'index'])->name('equipamentos.index');
         Route::get('/treino/equipamentos/create', [App\Http\Controllers\EquipamentosController::class, 'create'])->name('equipamentos.create');
         Route::post('/treino/equipamentos/store', [App\Http\Controllers\EquipamentosController::class, 'store'])->name('equipamentos.store');

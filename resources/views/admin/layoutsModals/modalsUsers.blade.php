@@ -1,3 +1,161 @@
+<!-- Criar aluno -->
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Pode haver problemas em seu formulário!<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+<div class="modal fade" id="criarAlunoModal" tabindex="-1" role="dialog" aria-labelledby="criarAlunoModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 750px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal" id="criarAlunoModal">Criar</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('alunos.store') }}" method="POST">
+                @csrf
+
+
+                    <div class="row mb-3">
+                        <label for="alu_nome" class="col-md-4 col-form-label text-md-end">{{ __('*Nome') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="alu_nome" type="text"
+                            class="form-control @error('alu_nome') is-invalid @enderror"
+                            name="alu_nome" value="{{ old('alu_nome') }}" required autocomplete="alu_nome" autofocus
+                            placeholder="Insira o nome completo do aluno aqui">
+
+                            @error('alu_nome')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="alu_email" class="col-md-4 col-form-label text-md-end">{{ __('*Endereço de email do aluno') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="alu_email" type="email"
+                             class="form-control @error('alu_email') is-invalid @enderror"
+                              name="alu_email" value="{{ old('alu_email') }}" required autocomplete="alu_email"
+                              placeholder="Insira o endereço de email do aluno aqui">
+
+                            @error('alu_email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="alu_data_nascimento" class="col-md-4 col-form-label text-md-end">{{ __('*Data de Nascimento') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="alu_data_nascimento" type="date"
+                            class="form-control @error('alu_data_nascimento') is-invalid @enderror"
+                            name="alu_data_nascimento" value="{{ old('alu_data_nascimento') }}" required autocomplete="alu_idade" autofocus
+                            max="{{ now()->toDateString('d-m-Y') }}">
+
+                            @error('alu_data_nascimento')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="alu_endereco" class="col-md-4 col-form-label text-md-end">{{ __('*Endereço') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="alu_endereco" type="text"
+                             class="form-control @error('alu_endereco') is-invalid @enderror"
+                             name="alu_endereco" value="{{ old('alu_endereco') }}" required autocomplete="alu_endereco" autofocus
+                             placeholder="Insira o endereço do aluno aqui">
+
+                            @error('alu_endereco')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="alu_celular" class="col-md-4 col-form-label text-md-end">{{ __('*Telefone ou Celular') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="alu_celular" type="tel"
+                             class="form-control @error('alu_celular') is-invalid @enderror"
+                             name="alu_celular" value="{{ old('alu_celular') }}" required autocomplete="alu_celular" autofocus
+                             onkeypress="mascara(this, '## #########'); return onlynumber();" maxlength="12"
+                             placeholder="Insira o numero de telefone ou celular do aluno aqui">
+
+                            @error('alu_celular')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="alu_mensalidade" class="col-md-4 col-form-label text-md-end">{{ __('*Mensalidade R$') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="alu_mensalidade" type="text"
+                             class="form-control @error('alu_mensalidade') is-invalid @enderror"
+                             name="alu_mensalidade" value="{{ old('alu_mensalidade') }}" required autocomplete="alu_mensalidade" autofocus
+                             maxlength="5"
+                             placeholder="Insira a mensalidade do aluno aqui">
+
+                            @error('alu_mensalidade')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="alu_cpf" class="col-md-4 col-form-label text-md-end">{{ __('*Cpf') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="alu_cpf" type="text"
+                            class="form-control @error('alu_cpf') is-invalid @enderror"
+                            name="alu_cpf" value="{{ old('alu_cpf') }}" required autocomplete="alu_cpf" autofocus
+                            onkeypress="mascara(this, '###.###.###-##'); return onlynumber();" maxlength="14"
+                            placeholder="Insira o cpf do aluno aqui">
+
+                            @error('alu_cpf')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row mb-0">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Cadastrar') }}
+                    </button>
+            </div>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Editar aluno -->
 
@@ -171,165 +329,6 @@
     </div>
   </div>
   @endforeach
-
-    <!-- Criar aluno -->
-@if ($errors->any())
-<div class="alert alert-danger">
-    <strong>Whoops!</strong> Pode haver problemas em seu formulário!<br><br>
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-<div class="modal fade" id="criarAlunoModal" tabindex="-1" role="dialog" aria-labelledby="criarAlunoModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 750px">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="criarAlunoModal">Criar</h5>
-          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ route('alunos.store') }}" method="POST">
-                @csrf
-
-
-                    <div class="row mb-3">
-                        <label for="alu_nome" class="col-md-4 col-form-label text-md-end">{{ __('*Nome') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="alu_nome" type="text"
-                            class="form-control @error('alu_nome') is-invalid @enderror"
-                            name="alu_nome" value="{{ old('alu_nome') }}" required autocomplete="alu_nome" autofocus
-                            placeholder="Insira o nome completo do aluno aqui">
-
-                            @error('alu_nome')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="alu_email" class="col-md-4 col-form-label text-md-end">{{ __('*Endereço de email do aluno') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="alu_email" type="email"
-                             class="form-control @error('alu_email') is-invalid @enderror"
-                              name="alu_email" value="{{ old('alu_email') }}" required autocomplete="alu_email"
-                              placeholder="Insira o endereço de email do aluno aqui">
-
-                            @error('alu_email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="alu_data_nascimento" class="col-md-4 col-form-label text-md-end">{{ __('*Data de Nascimento') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="alu_data_nascimento" type="date"
-                            class="form-control @error('alu_data_nascimento') is-invalid @enderror"
-                            name="alu_data_nascimento" value="{{ old('alu_data_nascimento') }}" required autocomplete="alu_idade" autofocus
-                            max="{{ now()->toDateString('d-m-Y') }}">
-
-                            @error('alu_data_nascimento')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="alu_endereco" class="col-md-4 col-form-label text-md-end">{{ __('*Endereço') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="alu_endereco" type="text"
-                             class="form-control @error('alu_endereco') is-invalid @enderror"
-                             name="alu_endereco" value="{{ old('alu_endereco') }}" required autocomplete="alu_endereco" autofocus
-                             placeholder="Insira o endereço do aluno aqui">
-
-                            @error('alu_endereco')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="alu_celular" class="col-md-4 col-form-label text-md-end">{{ __('*Telefone ou Celular') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="alu_celular" type="tel"
-                             class="form-control @error('alu_celular') is-invalid @enderror"
-                             name="alu_celular" value="{{ old('alu_celular') }}" required autocomplete="alu_celular" autofocus
-                             onkeypress="mascara(this, '## #########'); return onlynumber();" maxlength="12"
-                             placeholder="Insira o numero de telefone ou celular do aluno aqui">
-
-                            @error('alu_celular')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="alu_mensalidade" class="col-md-4 col-form-label text-md-end">{{ __('*Mensalidade R$') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="alu_mensalidade" type="text"
-                             class="form-control @error('alu_mensalidade') is-invalid @enderror"
-                             name="alu_mensalidade" value="{{ old('alu_mensalidade') }}" required autocomplete="alu_mensalidade" autofocus
-                             maxlength="5"
-                             placeholder="Insira a mensalidade do aluno aqui">
-
-                            @error('alu_mensalidade')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="alu_cpf" class="col-md-4 col-form-label text-md-end">{{ __('*Cpf') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="alu_cpf" type="text"
-                            class="form-control @error('alu_cpf') is-invalid @enderror"
-                            name="alu_cpf" value="{{ old('alu_cpf') }}" required autocomplete="alu_cpf" autofocus
-                            onkeypress="mascara(this, '###.###.###-##'); return onlynumber();" maxlength="14"
-                            placeholder="Insira o cpf do aluno aqui">
-
-                            @error('alu_cpf')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-        </div>
-        <div class="modal-footer">
-            <div class="row mb-0">
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('Cadastrar') }}
-                    </button>
-            </div>
-        </div>
-    </form>
-      </div>
-    </div>
-  </div>
 
   <!-- Modal de remover aluno -->
   @foreach($alunos as $aluno)

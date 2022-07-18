@@ -30,9 +30,13 @@ class TreinoController extends Controller
     public function indexGeral()
     {
         $treinoGerals = TreinoGeral::latest()->paginate(5);
+        $alunos = Aluno::all();
+        $personals = Personal::all();
 
         return view('admin.viewsTreino.treinoGeral', [
             'treinoGerals' => $treinoGerals,
+            'alunos' => $alunos,
+            'personals' => $personals,
             ]);    }
 
     /**
@@ -40,9 +44,9 @@ class TreinoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createGeral()
     {
-
+        return view('admin.viewsTreino.treinoGeral');
     }
 
     /**
@@ -51,7 +55,7 @@ class TreinoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeGeral(Request $request)
     {
 
     }
@@ -59,10 +63,10 @@ class TreinoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Treino  $treino
+     * @param  \App\Models\TreinoGeral  $treinoGeral
      * @return \Illuminate\Http\Response
      */
-    public function show(Treino $treino)
+    public function showGeral(TreinoGeral $treinoGeral)
     {
         //
     }
@@ -70,10 +74,10 @@ class TreinoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Treino  $treino
+     * @param  \App\Models\TreinoGeral  $treinoGeral
      * @return \Illuminate\Http\Response
      */
-    public function edit(Treino $treino)
+    public function editGeral(TreinoGeral $treinoGeral)
     {
         //
     }
@@ -82,10 +86,10 @@ class TreinoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Treino  $treino
+     * @param  \App\Models\TreinoGeral  $treinoGeral
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Treino $treino)
+    public function updateGeral(Request $request, TreinoGeral $treinoGeral)
     {
         //
     }
@@ -93,10 +97,10 @@ class TreinoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Treino  $treino
+     * @param  \App\Models\TreinoGeral  $treinoGeral
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Treino $treino)
+    public function destroyGeral(TreinoGeral $treinoGeral)
     {
         //
     }

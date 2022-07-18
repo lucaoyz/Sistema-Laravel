@@ -48,11 +48,6 @@ class UsuariosController extends Controller
         return view('admin.usuarios');
     }
 
-    public function createPersonal()
-    {
-        return view('admin.usuarios');
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -98,6 +93,14 @@ class UsuariosController extends Controller
             }
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Aluno  $aluno
+     * @return \Illuminate\Http\Response
+     */
+
     public function ativarAluno(Aluno $aluno)
     {
         $usuario = User::where('email', '=', $aluno->alu_email)->first();
@@ -123,76 +126,10 @@ class UsuariosController extends Controller
         }
     }
 
-    public function storePersonal(Request $request)
-    {
-        $usuarioEmail = Personal::where('per_email', '=', $request->input('per_email'))->first();
-        $usuarioEmailAlu = Aluno::where('alu_email', '=', $request->input('per_email'))->first();
-
-        if($usuarioEmailAlu){
-            return redirect()->route('admin.usuarios')
-            ->with('error','Esse email já está sendo usado!');
-        }
-        if($usuarioEmail){
-            return redirect()->route('admin.usuarios')
-            ->with('error','Esse email já está sendo usado!');
-        }
-        else {
-        $request->validate([
-            'per_nome' => 'required',
-            'per_email' => 'required',
-            'per_data_nascimento' => 'required|date',
-            'per_endereco' => 'required',
-            'per_celular' => 'required',
-            'per_cpf' => 'required',
-        ]);
-
-
-        $result = Personal::create($request->all());
-
-        $tb_user = new User;
-        $tb_user->per_id = $result->id;
-        $tb_user->name = $request->per_nome;
-        $tb_user->email = $request->per_email;
-        $tb_user->password = bcrypt('12345678');
-        $tb_user->type = 2;
-
-        $result = $tb_user->save();
-
-        return redirect()->route('admin.usuarios')
-                        ->with('success','Professor criado com sucesso!');
-            }
-    }
-
-    public function ativarPersonal(Personal $personal)
-    {
-        $usuario = User::where('email', '=', $personal->per_email)->first();
-
-        if(empty($usuario)){
-            $per_id = $personal->id;
-            $per_email = $personal->per_email;
-            $per_nome = $personal->per_nome;
-
-            $tb_user = new User;
-            $tb_user->per_id = $per_id;
-            $tb_user->name = $per_nome;
-            $tb_user->email = $per_email;
-            $tb_user->password = bcrypt('12345678');
-            $tb_user->type = 0;
-            $tb_user->save();
-
-            return redirect()->route('admin.usuarios')
-                            ->with('success','Professor ativado com sucesso!');
-        } else {
-            return redirect()->route('admin.usuarios')
-            ->with('error','Professor já está ativado!');
-        }
-    }
-
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Aluno  $aluno
-     * @param  \App\Models\Personal  $personal
      * @return \Illuminate\Http\Response
      */
     public function showAluno(Aluno $aluno)
@@ -203,17 +140,11 @@ class UsuariosController extends Controller
             ]);
     }
 
-     public function showPersonal(Personal $personal)
-    {
-        return view('admin.usuarios', [
-            'personal' => $personal,
-            ]);
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      * @param  \App\Models\Aluno  $aluno
-     * @param  \App\Models\Personal  $personal
      * @return \Illuminate\Http\Response
      */
 
@@ -224,19 +155,11 @@ class UsuariosController extends Controller
             ]);
     }
 
-     public function editPersonal(Personal $personal)
-    {
-        return view('admin.usuarios', [
-            'personal' => $personal,
-            ]);
-    }
-
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Aluno  $aluno
-     * @param  \App\Models\Personal  $personal
      * @return \Illuminate\Http\Response
      */
 
@@ -305,6 +228,185 @@ class UsuariosController extends Controller
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Aluno  $aluno
+     * @return \Illuminate\Http\Response
+     */
+
+    public function destroyAluno(Aluno $aluno)
+    {
+        $usuario = User::where('email', '=', $aluno->alu_email)->first();
+        if(empty($usuario)){
+            $aluno->delete();
+        } else {
+            $usuario = User::where('email', '=', $aluno->alu_email)->first();
+            $usuario->delete();
+            $aluno->delete();
+        }
+
+        return redirect()->route('admin.usuarios')
+                        ->with('success','Aluno deletado com sucesso!');
+    }
+
+    public function inativarAluno(Aluno $aluno){
+        $usuario = User::where('email', '=', $aluno->alu_email)->first();
+        $usuario->delete();
+
+        return redirect()->route('admin.usuarios')
+                        ->with('success','Aluno inativado com sucesso!');
+    }
+
+    public function search(Request $request)
+    {
+
+        $filters = $request->except('_token');
+        $alunos = Aluno::where('alu_nome', 'LIKE', "%{$request->search}%")
+            ->orWhere('alu_email', 'LIKE', "%{$request->search}%")
+            ->orWhere('alu_cpf', 'LIKE', "%{$request->search}%")
+            ->paginate(5);
+
+        $personals = Personal::where('per_nome', 'LIKE', "%{$request->search}%")
+            ->orWhere('per_email', 'LIKE', "%{$request->search}%")
+            ->orWhere('per_cpf', 'LIKE', "%{$request->search}%")
+            ->paginate(5);
+
+            return view('admin.usuarios', [
+                'alunos' => $alunos,
+                'personals' => $personals,
+                'filters' => $filters,
+                ]);
+    }
+
+    // personal
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function createPersonal()
+    {
+        return view('admin.usuarios');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function storePersonal(Request $request)
+    {
+        $usuarioEmail = Personal::where('per_email', '=', $request->input('per_email'))->first();
+        $usuarioEmailAlu = Aluno::where('alu_email', '=', $request->input('per_email'))->first();
+
+        if($usuarioEmailAlu){
+            return redirect()->route('admin.usuarios')
+            ->with('error','Esse email já está sendo usado!');
+        }
+        if($usuarioEmail){
+            return redirect()->route('admin.usuarios')
+            ->with('error','Esse email já está sendo usado!');
+        }
+        else {
+        $request->validate([
+            'per_nome' => 'required',
+            'per_email' => 'required',
+            'per_data_nascimento' => 'required|date',
+            'per_endereco' => 'required',
+            'per_celular' => 'required',
+            'per_cpf' => 'required',
+        ]);
+
+
+        $result = Personal::create($request->all());
+
+        $tb_user = new User;
+        $tb_user->per_id = $result->id;
+        $tb_user->name = $request->per_nome;
+        $tb_user->email = $request->per_email;
+        $tb_user->password = bcrypt('12345678');
+        $tb_user->type = 2;
+
+        $result = $tb_user->save();
+
+        return redirect()->route('admin.usuarios')
+                        ->with('success','Professor criado com sucesso!');
+            }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Personal  $personal
+     * @return \Illuminate\Http\Response
+     */
+
+    public function ativarPersonal(Personal $personal)
+    {
+        $usuario = User::where('email', '=', $personal->per_email)->first();
+
+        if(empty($usuario)){
+            $per_id = $personal->id;
+            $per_email = $personal->per_email;
+            $per_nome = $personal->per_nome;
+
+            $tb_user = new User;
+            $tb_user->per_id = $per_id;
+            $tb_user->name = $per_nome;
+            $tb_user->email = $per_email;
+            $tb_user->password = bcrypt('12345678');
+            $tb_user->type = 0;
+            $tb_user->save();
+
+            return redirect()->route('admin.usuarios')
+                            ->with('success','Professor ativado com sucesso!');
+        } else {
+            return redirect()->route('admin.usuarios')
+            ->with('error','Professor já está ativado!');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Personal  $personal
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showPersonal(Personal $personal)
+    {
+        return view('admin.usuarios', [
+            'personal' => $personal,
+            ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * @param  \App\Models\Personal  $personal
+     * @return \Illuminate\Http\Response
+     */
+
+    public function editPersonal(Personal $personal)
+    {
+        return view('admin.usuarios', [
+            'personal' => $personal,
+            ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Personal  $personal
+     * @return \Illuminate\Http\Response
+     */
+
     public function updatePersonal(Request $request, Personal $personal)
     {
         $usuarioEmail = Personal::where('per_email', '=', $request->input('per_email'))->first();
@@ -368,33 +470,9 @@ class UsuariosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Aluno  $aluno
      * @param  \App\Models\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-
-    public function destroyAluno(Aluno $aluno)
-    {
-        $usuario = User::where('email', '=', $aluno->alu_email)->first();
-        if(empty($usuario)){
-            $aluno->delete();
-        } else {
-            $usuario = User::where('email', '=', $aluno->alu_email)->first();
-            $usuario->delete();
-            $aluno->delete();
-        }
-
-        return redirect()->route('admin.usuarios')
-                        ->with('success','Aluno deletado com sucesso!');
-    }
-
-    public function inativarAluno(Aluno $aluno){
-        $usuario = User::where('email', '=', $aluno->alu_email)->first();
-        $usuario->delete();
-
-        return redirect()->route('admin.usuarios')
-                        ->with('success','Aluno inativado com sucesso!');
-    }
 
     public function destroyPersonal(Personal $personal)
     {
@@ -420,25 +498,5 @@ class UsuariosController extends Controller
                         ->with('success','Professor inativado com sucesso!');
     }
 
-    public function search(Request $request)
-    {
-
-        $filters = $request->except('_token');
-        $alunos = Aluno::where('alu_nome', 'LIKE', "%{$request->search}%")
-            ->orWhere('alu_email', 'LIKE', "%{$request->search}%")
-            ->orWhere('alu_cpf', 'LIKE', "%{$request->search}%")
-            ->paginate(5);
-
-        $personals = Personal::where('per_nome', 'LIKE', "%{$request->search}%")
-            ->orWhere('per_email', 'LIKE', "%{$request->search}%")
-            ->orWhere('per_cpf', 'LIKE', "%{$request->search}%")
-            ->paginate(5);
-
-            return view('admin.usuarios', [
-                'alunos' => $alunos,
-                'personals' => $personals,
-                'filters' => $filters,
-                ]);
-    }
 
 }

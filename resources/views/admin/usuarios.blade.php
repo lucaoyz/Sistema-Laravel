@@ -216,6 +216,7 @@
 
                             <!-- Remover -->
                             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerPersonalModal{{$personal->id}}">Remover</a>
+                        </form>
                       </td>
                     </tr>
                     @endforeach

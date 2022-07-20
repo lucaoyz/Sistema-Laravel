@@ -117,7 +117,7 @@
                             <button type="submit" class="btn btn-success">Ativar</button>
 
                             <!-- Editar -->
-                            <a class="btn btn-primary" href="{{ route('alunos.edit',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Editar</a>
+                            <a class="btn btn-secondary" href="{{ route('alunos.edit',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Editar</a>
 
                             <!-- Remover -->
                             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerAlunoModal{{$aluno->id}}">Remover</a>
@@ -212,7 +212,7 @@
                         <button type="submit" class="btn btn-success">Ativar</button>
 
                             <!-- Editar -->
-                            <a class="btn btn-primary" href="{{ route('personals.edit',$personal->id) }}" data-bs-toggle="modal" data-bs-target="#editarPersonalModal{{$personal->id}}">Editar</a>
+                            <a class="btn btn-secondary" href="{{ route('personals.edit',$personal->id) }}" data-bs-toggle="modal" data-bs-target="#editarPersonalModal{{$personal->id}}">Editar</a>
 
                             <!-- Remover -->
                             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerPersonalModal{{$personal->id}}">Remover</a>

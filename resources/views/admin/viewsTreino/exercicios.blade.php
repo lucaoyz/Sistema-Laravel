@@ -86,7 +86,7 @@
                       <!-- Botoes de ação -->
                       <td class="align-middle">
                             <!-- Editar -->
-                            <a class="btn btn-primary" href="{{ route('exercicios.edit',$exercicio->id) }}" data-bs-toggle="modal" data-bs-target="#editarExercicioModal{{$exercicio->id}}">Editar</a>
+                            <a class="btn btn-secondary" href="{{ route('exercicios.edit',$exercicio->id) }}" data-bs-toggle="modal" data-bs-target="#editarExercicioModal{{$exercicio->id}}">Editar</a>
 
                             <!-- Remover -->
                             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirExercicioModal{{$exercicio->id}}">Excluir</a>

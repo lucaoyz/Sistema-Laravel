@@ -74,7 +74,7 @@
                       <!-- Botoes de ação -->
                       <td class="align-middle">
                             <!-- Editar -->
-                            <a class="btn btn-primary" href="{{ route('equipamentos.edit',$equipamento->id) }}" data-bs-toggle="modal" data-bs-target="#editarEquipamentoModal{{$equipamento->id}}">Editar</a>
+                            <a class="btn btn-secondary" href="{{ route('equipamentos.edit',$equipamento->id) }}" data-bs-toggle="modal" data-bs-target="#editarEquipamentoModal{{$equipamento->id}}">Editar</a>
 
                             <!-- Remover -->
                             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirEquipamentoModal{{$equipamento->id}}">Excluir</a>

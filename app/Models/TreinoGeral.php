@@ -27,4 +27,13 @@ class TreinoGeral extends Model
         return $this->hasOne(Treino::class, 'tg_id', 'id');
     }
 
+    public function alunoId()
+    {
+        return $this->belongsTo(Aluno::class, 'alu_id', 'id');
+    }
+
+    public function personalId()
+    {
+        return $this->belongsTo(Personal::class, 'per_id', 'id');
+    }
 }

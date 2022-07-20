@@ -17,4 +17,10 @@ class Treino extends Model
     public function treinoParaTreinoDetalhes() {
         return $this->hasOne(TreinoDetalhe::class, 'tre_id', 'id');
     }
+
+    public function treinoGeralId()
+    {
+        return $this->belongsTo(TreinoGeral::class, 'tg_id', 'id');
+    }
+
 }

@@ -15,4 +15,9 @@ class TreinoDia extends Model
         'tdia_sequencia',
     ];
 
+    public function treinoDetalheId()
+    {
+        return $this->belongsTo(TreinoDetalhe::class, 'td_id', 'id');
+    }
+
 }

@@ -21,4 +21,19 @@ class TreinoDetalhe extends Model
         return $this->hasOne(TreinoDia::class, 'td_id', 'id');
     }
 
+    public function exercicioId()
+    {
+        return $this->belongsTo(Exercicio::class, 'exe_id', 'id');
+    }
+
+    public function equipamentoId()
+    {
+        return $this->belongsTo(Equipamento::class, 'eq_id', 'id');
+    }
+
+    public function tre_id()
+    {
+        return $this->belongsTo(Treino::class, 'tre_id', 'id');
+    }
+
 }

@@ -59,4 +59,14 @@ class User extends Authenticatable
         );
     }
 
+    public function alunoId()
+    {
+        return $this->belongsTo(Aluno::class, 'alu_id', 'id');
+    }
+
+    public function personalId()
+    {
+        return $this->belongsTo(Personal::class, 'per_id', 'id');
+    }
+    
 }

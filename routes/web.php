@@ -127,6 +127,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::delete('/treino/geral/{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'destroyGeral'])->name('treinos.destroyGeral');
             Route::any('/treino/geral/search', [App\Http\Controllers\TreinoController::class, 'searchGeral'])->name('treinos.searchGeral');
 
+            /* Rotas para detalhes do treino */
+            Route::get('/treino/detalhes/{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'indexDetalhes'])->name('treinos.indexDetalhes');
 
         /* Rotas para os exercicios */
         Route::get('/treino/exercicios/inicio', [App\Http\Controllers\ExerciciosController::class, 'index'])->name('exercicios.index');

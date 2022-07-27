@@ -38,7 +38,7 @@ class TreinoController extends Controller
             'alunos' => $alunos,
             'personals' => $personals,
             ]);
-        }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -73,7 +73,124 @@ class TreinoController extends Controller
             'tg_divisoes' => 'required',
         ]);
 
-        TreinoGeral::create($request->all());
+        $result = TreinoGeral::create($request->all());
+
+        if($request->tg_divisoes === 'A'){
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'A';
+            $treino->save();
+        };
+
+        if($request->tg_divisoes === 'AB'){
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'A';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'B';
+            $treino->save();
+        };
+
+        if($request->tg_divisoes === 'ABC'){
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'A';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'B';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'C';
+            $treino->save();
+        };
+
+        if($request->tg_divisoes === 'ABCD'){
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'A';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'B';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'C';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'D';
+            $treino->save();
+        };
+
+        if($request->tg_divisoes === 'ABCDE'){
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'A';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'B';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'C';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'D';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'E';
+            $treino->save();
+        };
+
+        if($request->tg_divisoes === 'ABCDEF'){
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'A';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'B';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'C';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'D';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'E';
+            $treino->save();
+
+            $treino = new Treino;
+            $treino->tg_id = $result->id;
+            $treino->tre_divisoes = 'F';
+            $treino->save();
+        };
 
         return redirect()->route('treinos.indexGeral')
                         ->with('success','Treino criado com sucesso!');
@@ -189,6 +306,26 @@ class TreinoController extends Controller
                 'treinoGerals' => $treinoGerals,
                 'filters' => $filters,
                 ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexDetalhes(TreinoGeral $treinoGeral)
+    {
+        $treinoGeralDivisoes = $treinoGeral->tg_divisoes;
+        $treinos = Treino::select('tre_divisoes')->where('tg_id', $treinoGeral->id)->get();
+        $alunos = Aluno::all();
+        $personals = Personal::all();
+
+        return view('admin.viewsTreino.treinoDetalhes', [
+            'treinoGeralDivisoes' => $treinoGeralDivisoes,
+            'treinos' => $treinos,
+            'alunos' => $alunos,
+            'personals' => $personals,
+            ]);
     }
 
 }

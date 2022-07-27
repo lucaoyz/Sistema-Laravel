@@ -16,7 +16,7 @@
 @endif
 
     <div class="container-fluid py-4">
-        <!-- Equipamentos -->
+        <!-- Treino geral -->
       <div class="row">
         <div class="col-12">
             <!-- Filtro -->
@@ -63,7 +63,7 @@
                     </thead>
 
                   <tbody>
-                    <!-- Laço de repetição dos alunos -->
+                    <!-- Laço de repetição do treino geral -->
                     @foreach ($treinoGerals as $treinoGeral)
                     <tr>
 
@@ -103,6 +103,10 @@
 
                       <!-- Botoes de ação -->
                       <td class="align-middle">
+
+                            <!-- Detalhes -->
+                            <a class="btn btn-info" href="{{ route('treinos.indexDetalhes',$treinoGeral->id) }}">Detalhes</a>
+
                             <!-- Editar -->
                             <a class="btn btn-secondary" href="{{ route('treinos.editGeral',$treinoGeral->id) }}" data-bs-toggle="modal" data-bs-target="#editarTreinoGeralModal{{$treinoGeral->id}}">Editar</a>
 

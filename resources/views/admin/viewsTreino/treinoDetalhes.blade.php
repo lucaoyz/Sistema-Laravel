@@ -32,7 +32,7 @@
             <div class="table-responsive p-0">
                 @if ($treinoGeralDivisoes === 'A')
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('treinos.createDetalhesDivisaoA', $treinoGeral->id)}}" class="btn btn-success">Treino A</a></h5>
                     </div>
 
                 @endif
@@ -40,7 +40,7 @@
                 @if ($treinoGeralDivisoes === 'AB')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoGeralModal" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('treinos.createDetalhesDivisaoA', $treinoGeral->id)}}" class="btn btn-success">Treino A</a></h5>
                     </div>
 
                     <!-- Divisão B -->
@@ -52,7 +52,7 @@
                 @if ($treinoGeralDivisoes === 'ABC')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoGeralModal" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('treinos.createDetalhesDivisaoA', $treinoGeral->id)}}" class="btn btn-success">Treino A</a></h5>
                     </div>
 
                     <!-- Divisão B -->
@@ -69,7 +69,7 @@
                 @if ($treinoGeralDivisoes === 'ABCD')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoGeralModal" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('treinos.createDetalhesDivisaoA', $treinoGeral->id)}}" class="btn btn-success">Treino A</a></h5>
                     </div>
 
                     <!-- Divisão B -->
@@ -91,7 +91,7 @@
                 @if ($treinoGeralDivisoes === 'ABCDE')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoGeralModal" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('treinos.createDetalhesDivisaoA', $treinoGeral->id)}}" class="btn btn-success">Treino A</a></h5>
                     </div>
 
                     <!-- Divisão B -->
@@ -118,7 +118,7 @@
                 @if ($treinoGeralDivisoes === 'ABCDEF')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoGeralModal" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('treinos.createDetalhesDivisaoA', $treinoGeral->id)}}" class="btn btn-success">Treino A</a></h5>
                     </div>
 
                     <!-- Divisão B -->

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Treino;
 use App\Models\Exercicio;
 use App\Models\Aluno;
+use App\Models\Equipamento;
 use App\Models\Personal;
+use App\Models\TreinoDetalhe;
 use App\Models\TreinoGeral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -322,10 +324,57 @@ class TreinoController extends Controller
 
         return view('admin.viewsTreino.treinoDetalhes', [
             'treinoGeralDivisoes' => $treinoGeralDivisoes,
+            'treinoGeral' => $treinoGeral,
             'treinos' => $treinos,
             'alunos' => $alunos,
             'personals' => $personals,
             ]);
     }
 
-}
+
+        /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createDetalhesDivisaoA(TreinoGeral $treinoGeral)
+    {
+
+        $treinoDetalhes = TreinoDetalhe::all();
+        $exercicios = Exercicio::all();
+        $equipamentos = Equipamento::all();
+
+        return view('admin.viewsTreino.divisoes.treinoA', [
+            'treinoGeral' => $treinoGeral,
+            'equipamentos' => $equipamentos,
+            'exercicios' => $exercicios,
+            'treinoDetalhes' => $treinoDetalhes,
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeDetalhesDivisaoA(Request $request, treinoGeral $treinoGeral)
+    {
+
+        $request->validate([
+            'eq_id' => 'required',
+            'exe_id' => 'required',
+            'td_series' => 'required',
+            'td_repeticoes' => 'required',
+        ]);
+
+        $treinoGeralID = $treinoGeral->id;
+        $treinosDivisaoA = Treino::select('select id from treinos where tg_id = $treinoGeralID AND tre_divisoes = A');
+
+        TreinoDetalhe::create($request->all(), $treinosDivisaoA);
+
+        return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
+                        ->with('success','Exercício adicionado com sucesso!');
+    }
+    }
+

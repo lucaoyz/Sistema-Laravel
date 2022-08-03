@@ -130,6 +130,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             /* Rotas para detalhes do treino */
             Route::get('/treino/detalhes/{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'indexDetalhes'])->name('treinos.indexDetalhes');
 
+            /* Rotas para as divisões do treino */
+            Route::get('/treino/detalhes/{treinoGeral}/a', [App\Http\Controllers\TreinoController::class, 'createDetalhesDivisaoA'])->name('treinos.createDetalhesDivisaoA');
+            Route::post('/treino/detalhes/{treinoGeral}/a', [App\Http\Controllers\TreinoController::class, 'storeDetalhesDivisaoA'])->name('treinos.storeDetalhesDivisaoA');
+            Route::get('/treino/detalhes/{treinoGeral}/b', [App\Http\Controllers\TreinoController::class, 'createDetalhesDivisaoB'])->name('treinos.createDetalhesDivisaoB');
+            Route::get('/treino/detalhes/{treinoGeral}/c', [App\Http\Controllers\TreinoController::class, 'createDetalhesDivisaoC'])->name('treinos.createDetalhesDivisaoC');
+            Route::get('/treino/detalhes/{treinoGeral}/d', [App\Http\Controllers\TreinoController::class, 'createDetalhesDivisaoD'])->name('treinos.createDetalhesDivisaoD');
+            Route::get('/treino/detalhes/{treinoGeral}/e', [App\Http\Controllers\TreinoController::class, 'createDetalhesDivisaoE'])->name('treinos.createDetalhesDivisaoE');
+            Route::get('/treino/detalhes/{treinoGeral}/f', [App\Http\Controllers\TreinoController::class, 'createDetalhesDivisaoF'])->name('treinos.createDetalhesDivisaoF');
+
         /* Rotas para os exercicios */
         Route::get('/treino/exercicios/inicio', [App\Http\Controllers\ExerciciosController::class, 'index'])->name('exercicios.index');
         Route::get('/treino/exercicios/create', [App\Http\Controllers\ExerciciosController::class, 'create'])->name('exercicios.create');

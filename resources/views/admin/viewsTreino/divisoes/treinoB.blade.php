@@ -1,0 +1,5 @@
+@extends('admin.layoutsModals.layouts')
+@section('title', 'Treino B')
+@section('treino', 'active bg-gradient-primary')
+@section('pagina', 'Treino - Treino B')
+@section('content')

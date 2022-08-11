@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('eq_id')->nullable()->constrained('equipamentos');
             $table->foreignId('exe_id')->nullable()->constrained('exercicios');
-            $table->foreignId('tre_id')->nullable()->constrained('treinos');
+            $table->foreignId('tg_id')->nullable()->constrained('treino_gerals');
+            $table->string('td_divisao');
             $table->integer('td_series');
             $table->integer('td_repeticoes');
             $table->timestamps();

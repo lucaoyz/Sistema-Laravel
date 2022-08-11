@@ -12,7 +12,8 @@ class TreinoDetalhe extends Model
     protected $fillable = [
         'eq_id',
         'exe_id',
-        'tre_id',
+        'tg_id',
+        'td_divisao',
         'td_series',
         'td_repeticoes',
     ];
@@ -31,9 +32,9 @@ class TreinoDetalhe extends Model
         return $this->belongsTo(Equipamento::class, 'eq_id', 'id');
     }
 
-    public function tre_id()
+    public function treinoGeralId()
     {
-        return $this->belongsTo(Treino::class, 'tre_id', 'id');
+        return $this->belongsTo(TreinoGeral::class, 'tg_id', 'id');
     }
 
 }

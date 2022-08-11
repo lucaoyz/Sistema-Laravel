@@ -23,6 +23,22 @@
                 @csrf
 
                     <div class="row mb-3">
+                        <label for="tre_id" class="col-md-4 col-form-label text-md-end">{{ __('Divisão') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_divisao" type="text" {{ 'A' ? 'readonly' : '' }}
+                            class="form-control @error('td_divisao') is-invalid @enderror"
+                            name="td_divisao" value="A" required autocomplete="td_divisao" autofocus>
+
+                            @error('td_divisao')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
                         <label for="eq_id" class="col-md-4 col-form-label text-md-end">{{ __('*Equipamento') }}</label>
 
                         <div class="col-md-6">

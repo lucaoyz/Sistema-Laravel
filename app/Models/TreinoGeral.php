@@ -24,7 +24,7 @@ class TreinoGeral extends Model
     ];
 
     public function treinoGeralParaTreino() {
-        return $this->hasOne(Treino::class, 'tg_id', 'id');
+        return $this->hasOne(TreinoDetalhe::class, 'tg_id', 'id');
     }
 
     public function alunoId()

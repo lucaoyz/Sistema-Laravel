@@ -221,11 +221,14 @@ class TreinoController extends Controller
     public function createDetalhesDivisaoA(TreinoGeral $treinoGeral)
     {
 
-        $treinoDetalhes = TreinoDetalhe::where('tg_id', $treinoGeral->id)->get();
+        $treinoDetalhes =TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+        ->where('tg_id', $treinoGeral->id)
+        ->get(['exercicios.*', 'equipamentos.*', 'treino_detalhes.*']);
+        //dd($treinoDetalhes);
         $exercicios = Exercicio::all();
         $equipamentos = Equipamento::all();
 
-        //dd($treinoDetalhes);
         return view('admin.viewsTreino.divisoes.treinoA', [
             'treinoGeral' => $treinoGeral,
             'equipamentos' => $equipamentos,

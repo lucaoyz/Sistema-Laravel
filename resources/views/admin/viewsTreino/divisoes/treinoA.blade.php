@@ -70,14 +70,14 @@
                        <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{ $treinoDetalhe->eq_id }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</h6>
+                            <h6 class="mb-0 text-sm">{{ $treinoDetalhe->eq_nome }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</h6>
                           </div>
                         </div>
                       </td>
 
                       <!-- exe_id -->
                       <td>
-                        <p class="text-sm font-weight-bold mb-0">{{ $treinoDetalhe->exe_id }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</p>
+                        <p class="text-sm font-weight-bold mb-0">{{ $treinoDetalhe->exe_nome }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</p>
                       </td>
 
                       <!-- td_series -->

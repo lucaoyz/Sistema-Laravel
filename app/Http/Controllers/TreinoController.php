@@ -31,7 +31,11 @@ class TreinoController extends Controller
      */
     public function indexGeral()
     {
-        $treinoGerals = TreinoGeral::latest()->paginate(5);
+        //$treinoGerals = TreinoGeral::latest()->paginate(5);
+        $treinoGerals =TreinoGeral::join('alunos', 'alunos.id', '=', 'treino_gerals.alu_id')
+        ->join('personals', 'personals.id', '=', 'treino_gerals.per_id')
+        ->select(['personals.*', 'alunos.*', 'treino_gerals.*'])->paginate(5);
+
         $alunos = Aluno::all();
         $personals = Personal::all();
 
@@ -224,7 +228,7 @@ class TreinoController extends Controller
         $treinoDetalhes =TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
         ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
         ->where('tg_id', $treinoGeral->id)
-        ->get(['exercicios.*', 'equipamentos.*', 'treino_detalhes.*']);
+        ->select(['exercicios.*', 'equipamentos.*', 'treino_detalhes.*'])->paginate(5);
         //dd($treinoDetalhes);
         $exercicios = Exercicio::all();
         $equipamentos = Equipamento::all();

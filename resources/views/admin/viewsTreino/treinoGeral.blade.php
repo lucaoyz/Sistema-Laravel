@@ -71,14 +71,14 @@
                        <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{ $treinoGeral->per_id }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</h6>
+                            <h6 class="mb-0 text-sm">{{ $treinoGeral->per_nome }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</h6>
                           </div>
                         </div>
                       </td>
 
                       <!-- alu_id -->
                       <td>
-                        <p class="text-sm font-weight-bold mb-0">{{ $treinoGeral->alu_id }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</p>
+                        <p class="text-sm font-weight-bold mb-0">{{ $treinoGeral->alu_nome }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</p>
                       </td>
 
                       <!-- tg_data_inicio -->

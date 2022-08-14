@@ -55,6 +55,7 @@
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Equipamento</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome do exercício</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Membro Muscular</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Series</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Repetições</th>
                             <th class="text-secondary text-uppercase text-xxs font-weight-bolder opacity-7">Ações</th>
@@ -66,7 +67,7 @@
                     @foreach ($treinoDetalhes as $treinoDetalhe)
                     <tr>
 
-                       <!-- eq_id -->
+                       <!-- eq_nome -->
                        <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
@@ -75,9 +76,14 @@
                         </div>
                       </td>
 
-                      <!-- exe_id -->
+                      <!-- exe_nome -->
                       <td>
                         <p class="text-sm font-weight-bold mb-0">{{ $treinoDetalhe->exe_nome }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</p>
+                      </td>
+
+                      <!-- exe_membro -->
+                      <td>
+                        <p class="text-sm font-weight-bold mb-0">{{ $treinoDetalhe->exe_membro }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</p>
                       </td>
 
                       <!-- td_series -->

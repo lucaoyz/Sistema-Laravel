@@ -103,7 +103,7 @@
                             <a class="btn btn-info" href="">Detalhes</a>
 
                             <!-- Editar -->
-                            <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#">Editar</a>
+                            <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#editarTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Editar</a>
 
                             <!-- Remover -->
                             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#">Excluir</a>

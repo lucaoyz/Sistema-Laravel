@@ -222,7 +222,7 @@ class TreinoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createDetalhesDivisaoA(TreinoGeral $treinoGeral)
+    public function createDetalhesDivisaoA(TreinoGeral $treinoGeral, TreinoDetalhe $treinoDetalhe)
     {
 
         $treinoDetalhes =TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
@@ -267,5 +267,37 @@ class TreinoController extends Controller
         return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
                         ->with('success','Exercício adicionado com sucesso!');
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\TreinoGeral  $treinoGeral
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDetalhesDivisaoA(Request $request, TreinoGeral $treinoGeral, TreinoDetalhe $treinoDetalhe)
+    {
+        $request->validate([
+            'id' => 'required',
+            'eq_id' => 'required',
+            'exe_id' => 'required',
+            'td_divisao' => 'required',
+            'td_series' => 'required',
+            'td_repeticoes' => 'required',
+        ]);
+
+        $treinoDetalhes = treinoDetalhe::where('id', $request->id)->first();
+
+        $treinoDetalhes->tg_id = $treinoGeral->id;
+        $treinoDetalhes->eq_id = $request->eq_id;
+        $treinoDetalhes->exe_id = $request->exe_id;
+        $treinoDetalhes->td_divisao = $request->td_divisao;
+        $treinoDetalhes->td_series = $request->td_series;
+        $treinoDetalhes->td_repeticoes = $request->td_repeticoes;
+        $treinoDetalhes->save();
+
+        return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
+                        ->with('success','Exercício atualizado com sucesso!');
     }
+}
 

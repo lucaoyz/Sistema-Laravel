@@ -100,7 +100,7 @@
                       <td class="align-middle">
 
                             <!-- Detalhes -->
-                            <a class="btn btn-info" href="">Detalhes</a>
+                            <a class="btn btn-info" href="" data-bs-toggle="modal" data-bs-target="#obsTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Observações</a>
 
                             <!-- Editar -->
                             <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#editarTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Editar</a>

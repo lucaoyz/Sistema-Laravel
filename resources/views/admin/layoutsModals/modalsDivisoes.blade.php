@@ -1,3 +1,27 @@
+<!-- Modal de observação exercício -->
+@foreach($treinoDetalhes as $treinoDetalhe)
+<div class="modal fade" id="obsTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}" tabindex="-1" role="dialog" aria-labelledby="obsTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Excluir Exercício</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <p>Observações do exercicio: </p><span style="font-style: bold;">{{$treinoDetalhe->exe_descricao}}</span>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+@endforeach
+
 <!-- Criar Divisao A -->
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -160,7 +184,7 @@
             <form action="{{ route('treinos.updateDetalhesDivisaoA', $treinoGeral->id, $treinoDetalhe->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                
+
                     <div class="row mb-3">
                         <label for="id" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
 

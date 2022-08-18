@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Personal;
 use App\Models\Aluno;
+use App\Models\TreinoGeral;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -238,14 +239,20 @@ class UsuariosController extends Controller
     public function destroyAluno(Aluno $aluno)
     {
         $usuario = User::where('email', '=', $aluno->alu_email)->first();
-        if(empty($usuario)){
-            $aluno->delete();
-        } else {
-            $usuario = User::where('email', '=', $aluno->alu_email)->first();
-            $usuario->delete();
-            $aluno->delete();
-        }
+        $treino_geral = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
 
+        if(empty($treino_geral)){
+            if(empty($usuario)){
+                $aluno->delete();
+            } else {
+                $usuario = User::where('email', '=', $aluno->alu_email)->first();
+                $usuario->delete();
+                $aluno->delete();
+            }
+        } else {
+            return redirect()->route('admin.usuarios')
+                        ->with('error','Aluno possue treino e não pode ser deletado!');
+        }
         return redirect()->route('admin.usuarios')
                         ->with('success','Aluno deletado com sucesso!');
     }
@@ -477,12 +484,22 @@ class UsuariosController extends Controller
     public function destroyPersonal(Personal $personal)
     {
         $usuario = User::where('email', '=', $personal->per_email)->first();
-        if(empty($usuario)){
-            $personal->delete();
+        $treino_geral = TreinoGeral::where('per_id', '=', $personal->id)->first();
+
+
+
+
+        if(empty($treino_geral)){
+            if(empty($usuario)){
+                $personal->delete();
+            } else {
+                $usuario = User::where('email', '=', $personal->per_email)->first();
+                $usuario->delete();
+                $personal->delete();
+            }
         } else {
-            $usuario = User::where('email', '=', $personal->per_email)->first();
-            $usuario->delete();
-            $personal->delete();
+            return redirect()->route('admin.usuarios')
+                        ->with('error','Esse professor possue vinculo com um treino e não pode ser deletado!');
         }
 
         return redirect()->route('admin.usuarios')

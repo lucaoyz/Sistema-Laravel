@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Aluno;
+use App\Models\TreinoGeral;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -38,10 +39,12 @@ class HomeController extends Controller
     {
         $usuarios = User::select('id')->count();
         $alunos = Aluno::select('id')->count();
+        $treinos = TreinoGeral::select('id')->count();
 
         return view('admin.dashboard', [
             'usuarios' => $usuarios,
             'alunos' => $alunos,
+            'treinos' => $treinos,
         ]);
     }
 

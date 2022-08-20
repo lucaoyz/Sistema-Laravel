@@ -293,9 +293,9 @@
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"],
         datasets: [{
-          label: "Sales",
+          label: "Frequencia de alunos",
           tension: 0.4,
           borderWidth: 0,
           borderRadius: 4,
@@ -374,9 +374,9 @@
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"],
         datasets: [{
-          label: "Mobile apps",
+          label: "Alunos registrados",
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,

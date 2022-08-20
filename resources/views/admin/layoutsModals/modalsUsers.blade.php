@@ -113,11 +113,15 @@
                         <label for="alu_mensalidade" class="col-md-4 col-form-label text-md-end">{{ __('*Mensalidade R$') }}</label>
 
                         <div class="col-md-6">
-                            <input id="alu_mensalidade" type="text"
-                             class="form-control @error('alu_mensalidade') is-invalid @enderror"
-                             name="alu_mensalidade" value="{{ old('alu_mensalidade') }}" required autocomplete="alu_mensalidade" autofocus
-                             maxlength="5"
-                             placeholder="Insira a mensalidade do aluno aqui">
+
+                             <select name="alu_mensalidade" id="alu_mensalidade"
+                            class="form-select @error('alu_mensalidade') is-invalid @enderror"
+                            value="{{ old('alu_mensalidade') }}" required autocomplete="alu_mensalidade">
+                                <option value="99,90">99,90</option>
+                                <option value="89,90">89,90</option>
+                                <option value="84,90">84,90</option>
+                                <option value="79,90">79,90</option>
+                            </select>
 
                             @error('alu_mensalidade')
                                 <span class="invalid-feedback" role="alert">
@@ -287,10 +291,17 @@
                         <label for="alu_mensalidade" class="col-md-4 col-form-label text-md-end">{{ __('Mensalidade') }}</label>
 
                         <div class="col-md-6">
-                            <input id="alu_mensalidade" type="text"
-                            class="form-control" @error('alu_mensalidade') is-invalid @enderror"
-                            name="alu_mensalidade" value="{{ $aluno->alu_mensalidade }}" required autocomplete="alu_mensalidade" autofocus
-                            maxlength="5">
+
+                            <select name="alu_mensalidade" id="alu_mensalidade"
+                            class="form-select @error('alu_mensalidade') is-invalid @enderror"
+                            required autocomplete="alu_mensalidade">
+
+                                <option value="99,90" @if($aluno->alu_mensalidade == '99,90') selected @endif>99,90</option>
+                                <option value="89,90" @if($aluno->alu_mensalidade == '89,90') selected @endif>89,90</option>
+                                <option value="84,90" @if($aluno->alu_mensalidade == '84,90') selected @endif>84,90</option>
+                                <option value="79,90" @if($aluno->alu_mensalidade == '79,90') selected @endif>79,90</option>
+
+                            </select>
 
                             @error('alu_mensalidade')
                                 <span class="invalid-feedback" role="alert">

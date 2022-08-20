@@ -99,17 +99,19 @@
                       <!-- Botoes de ação -->
                       <td class="align-middle">
 
-                        @if ($treinoDetalhe->exe_descricao == null)
-                        @else
-                            <!-- Detalhes -->
-                            <a class="btn btn-info" href="" data-bs-toggle="modal" data-bs-target="#obsTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Observações</a>
-                        @endif
+
 
                             <!-- Editar -->
                             <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#editarTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Editar</a>
 
                             <!-- Remover -->
                             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#">Excluir</a>
+
+                            @if ($treinoDetalhe->exe_descricao == null)
+                            @else
+                                <!-- Detalhes -->
+                                <a class="btn btn-info" href="" data-bs-toggle="modal" data-bs-target="#obsTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Observações</a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

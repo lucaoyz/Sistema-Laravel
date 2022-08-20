@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-md-4 text-end">
                       <a href="javascript:;">
-                        <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
+                        <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar perfil"></i>
                       </a>
                     </div>
                   </div>
@@ -66,24 +66,6 @@
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ Auth::user()->email }}</li>
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Endereço:</strong> &nbsp; Santa Barbara d'Oeste</li>
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">CPF:</strong> &nbsp; 111.111.111-11</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-xl-4">
-              <div class="card card-plain h-100">
-                <div class="card-header pb-0 p-3">
-                  <h6 class="mb-0">Treino</h6>
-                </div>
-                <div class="card-body p-3">
-                  <ul class="list-group">
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
-                      <div class="d-flex align-items-start flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm"></h6>
-                        <p class="list-group-item border-0 ps-0 pt-0 text-sm">Acesse seu treino clicando no texto a frente!</p>
-                      </div>
-                      <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto w-25 w-md-auto" href="{{route('treinos.index')}}">Clique aqui</a>
-                    </li>
                   </ul>
                 </div>
               </div>

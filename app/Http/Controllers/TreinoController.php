@@ -188,12 +188,22 @@ class TreinoController extends Controller
     {
 
         $filters = $request->except('_token');
-        $treinoGerals = TreinoGeral::where('alu_id', 'LIKE', "%{$request->search}%")
-            ->paginate(5);
+        $treinoGerals =TreinoGeral::join('alunos', 'alunos.id', '=', 'treino_gerals.alu_id')
+        ->join('personals', 'personals.id', '=', 'treino_gerals.per_id')
+        ->select(['personals.*', 'alunos.*', 'treino_gerals.*'])
+        ->where('alu_nome', 'LIKE', "%{$request->search}%")
+        ->orWhere('per_nome', 'LIKE', "%{$request->search}%")
+        ->orWhere('tg_data_final', 'LIKE', "%{$request->search}%")
+        ->paginate(5);
+
+        $alunos = Aluno::all();
+        $personals = Personal::all();
 
             return view('admin.viewsTreino.treinoGeral', [
                 'treinoGerals' => $treinoGerals,
                 'filters' => $filters,
+                'alunos' => $alunos,
+                'personals' => $personals,
                 ]);
     }
 

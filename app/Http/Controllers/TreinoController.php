@@ -309,5 +309,30 @@ class TreinoController extends Controller
         return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
                         ->with('success','Exercício atualizado com sucesso!');
     }
+
+    public function searchDetalhesDivisaoA(Request $request, TreinoGeral $treinoGeral)
+    {
+
+        $filters = $request->except('_token');
+        $treinoDetalhes =TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+        ->where('tg_id', $treinoGeral->id)
+        ->select(['exercicios.*', 'equipamentos.*', 'treino_detalhes.*'])
+        ->where('exe_nome', 'LIKE', "%{$request->search}%")
+        ->orWhere('exe_membro', 'LIKE', "%{$request->search}%")
+        ->paginate(5);
+        //dd($treinoDetalhes);
+        $exercicios = Exercicio::all();
+        $equipamentos = Equipamento::all();
+
+        return view('admin.viewsTreino.divisoes.treinoA', [
+            'treinoGeral' => $treinoGeral,
+            'filters' => $filters,
+            'equipamentos' => $equipamentos,
+            'exercicios' => $exercicios,
+            'treinoDetalhes' => $treinoDetalhes,
+        ]);
+    }
+
 }
 

@@ -22,12 +22,12 @@
         <div class="col-12">
             <!-- Filtro -->
             <div class="card-header-tabs p-0 mt-n4 mx-3 border-radius-lg" style="background-color: #fff;">
-            <form action="" method="post">
+            <form action="{{route('treinos.searchDetalhesDivisaoA', $treinoGeral->id)}}" method="post">
                 @csrf
                 <div class="input-group input-group-outline my-3">
                     <a class="btn btn-outline-primary" href="{{ route('treinos.indexDetalhes',$treinoGeral->id) }}">Voltar</a>
                     <!-- Campo de texto para digitar oque será filtrado -->
-                    <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome de exercício">
+                    <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome de exercício ou membro muscular">
                     <!-- Botão para filtrar -->
                     <button class="btn btn-primary" type="submit">Filtrar</button>
                     <!-- Botão para limpar filtro -->
@@ -118,7 +118,11 @@
                   </tbody>
                 </table>
                 <!-- Paginação com e sem filtros -->
-
+                @if (isset($filters))
+                {{ $treinoDetalhes->appends($filters)->links() }}
+            @else
+                {{ $treinoDetalhes->links() }}
+            @endif
               </div>
             </div>
           </div>

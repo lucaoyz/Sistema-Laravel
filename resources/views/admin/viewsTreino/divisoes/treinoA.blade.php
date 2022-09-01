@@ -27,7 +27,22 @@
                 <div class="input-group input-group-outline my-3">
                     <a class="btn btn-outline-primary" href="{{ route('treinos.indexDetalhes',$treinoGeral->id) }}">Voltar</a>
                     <!-- Campo de texto para digitar oque será filtrado -->
-                    <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome de exercício ou membro muscular">
+                    <!-- <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome de exercício ou membro muscular"> -->
+                    <select name="exe_membro" id="exe_membro"
+                            class="form-control"
+                            value="{{ old('exe_membro') }}" required autocomplete="exe_membro">
+                                <option value="">Selecione o membro aqui // arrumar css</option>
+                                <option value="peito">Peito</option>
+                                <option value="costas">Costas</option>
+                                <option value="biceps">Biceps</option>
+                                <option value="triceps">Triceps</option>
+                                <option value="antebraco">Antebraço</option>
+                                <option value="ombro">Ombro</option>
+                                <option value="trapezio">Trapezio</option>
+                                <option value="inferior">Inferior</option>
+                                <option value="lombar">Lombar</option>
+                                <option value="abdomen">Abdomen</option>
+                            </select>
                     <!-- Botão para filtrar -->
                     <button class="btn btn-primary" type="submit">Filtrar</button>
                     <!-- Botão para limpar filtro -->

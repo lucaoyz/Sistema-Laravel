@@ -238,6 +238,7 @@ class TreinoController extends Controller
         $treinoDetalhes =TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
         ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
         ->where('tg_id', $treinoGeral->id)
+        ->where('td_divisao', 'A')
         ->select(['exercicios.*', 'equipamentos.*', 'treino_detalhes.*'])->paginate(5);
         //dd($treinoDetalhes);
         $exercicios = Exercicio::all();

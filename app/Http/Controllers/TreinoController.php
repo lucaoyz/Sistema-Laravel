@@ -356,5 +356,21 @@ class TreinoController extends Controller
         ]);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\TreinoDetalhe  $treinoDetalhe
+     * @param  \App\Models\TreinoGeral  $treinoGeral
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyDetalhesDivisaoA(TreinoGeral $treinoGeral, TreinoDetalhe $treinoDetalhe)
+    {
+        $treinoDetalhe->delete();
+
+                return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
+                                ->with('success', 'Exercicio excluido com sucesso!');
+
+    }
+
 }
 

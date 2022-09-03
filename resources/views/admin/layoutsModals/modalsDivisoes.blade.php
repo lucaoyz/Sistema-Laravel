@@ -314,3 +314,32 @@
     </div>
   </div>
 @endforeach
+<!-- Modal de excluir treino detalhes A -->
+@foreach($treinoDetalhes as $treinoDetalhe)
+<div class="modal fade" id="excluirTreinoDetalhesDivisaoA{{$treinoGeral->id}}{{$treinoDetalhe->id}}" tabindex="-1" role="dialog" aria-labelledby="excluirTreinoDetalhesDivisaoA{{$treinoGeral->id}}{{$treinoDetalhe->id}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal" id="excluirTreinoDetalhesDivisaoA{{$treinoGeral->id}}{{$treinoDetalhe->id}}">Excluir Exercício</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <p>Deseja excluir esse exercício?</p>
+            <form action="{{ route('treinos.destroyDetalhesDivisaoA', ['treinoGeral' => $treinoGeral->id, 'treinoDetalhe' => $treinoDetalhe->id]) }}" method="POST">
+
+                @csrf
+                @method('DELETE')
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+@endforeach

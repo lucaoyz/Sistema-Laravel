@@ -120,7 +120,7 @@
                             <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#editarTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Editar</a>
 
                             <!-- Remover -->
-                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#">Excluir</a>
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirTreinoDetalhesDivisaoA{{$treinoGeral->id}}{{$treinoDetalhe->id}}">Excluir</a>
 
                             @if ($treinoDetalhe->exe_descricao == null)
                             @else

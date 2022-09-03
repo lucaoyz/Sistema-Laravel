@@ -188,16 +188,36 @@ class TreinoController extends Controller
     {
 
         $filters = $request->except('_token');
-        $treinoGerals =TreinoGeral::join('alunos', 'alunos.id', '=', 'treino_gerals.alu_id')
-        ->join('personals', 'personals.id', '=', 'treino_gerals.per_id')
-        ->select(['personals.*', 'alunos.*', 'treino_gerals.*'])
-        ->where('alu_nome', 'LIKE', "%{$request->search}%")
-        ->orWhere('per_nome', 'LIKE', "%{$request->search}%")
-        ->orWhere('tg_data_final', 'LIKE', "%{$request->search}%")
-        ->paginate(5);
-
         $alunos = Aluno::all();
         $personals = Personal::all();
+        $nome = $request->nome;
+        $data = $request->data;
+        if($data == null){
+            $treinoGerals = TreinoGeral::join('alunos', 'alunos.id', '=', 'treino_gerals.alu_id')
+            ->join('personals', 'personals.id', '=', 'treino_gerals.per_id')
+            ->select(['personals.*', 'alunos.*', 'treino_gerals.*'])
+            ->where('alu_nome', 'LIKE', "%{$nome}%")
+            ->orWhere('per_nome', 'LIKE', "%{$nome}%")
+            ->paginate(5);
+        } else if($nome == null){
+            $treinoGerals = TreinoGeral::join('alunos', 'alunos.id', '=', 'treino_gerals.alu_id')
+            ->join('personals', 'personals.id', '=', 'treino_gerals.per_id')
+            ->select(['personals.*', 'alunos.*', 'treino_gerals.*'])
+            ->orWhere('tg_data_final', 'LIKE', "%{$data}%")
+            ->paginate(5);
+        } else {
+            $treinoGerals = TreinoGeral::join('alunos', 'alunos.id', '=', 'treino_gerals.alu_id')
+            ->join('personals', 'personals.id', '=', 'treino_gerals.per_id')
+            ->select(['personals.*', 'alunos.*', 'treino_gerals.*'])
+            ->where('alu_nome', 'LIKE', "%{$nome}%")
+            ->where('tg_data_final', 'LIKE', "%{$data}%")
+            ->orWhere('per_nome', 'LIKE', "%{$nome}%")
+            ->paginate(5);
+            //dd($treinoGerals);
+        }
+
+
+        //dd($treinoGerals);
 
             return view('admin.viewsTreino.treinoGeral', [
                 'treinoGerals' => $treinoGerals,

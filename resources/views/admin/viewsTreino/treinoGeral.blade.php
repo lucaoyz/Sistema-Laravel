@@ -26,8 +26,8 @@
                 <div class="input-group input-group-outline my-3">
                     <a class="btn btn-outline-primary" href="{{route('treinos.index')}}">Voltar</a>
                     <!-- Campo de texto para digitar oque será filtrado -->
-                    <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome de aluno, professor ou data final do treino">
-                    <input type="date" name="search" class="form-control" style="max-height: 42.5px">
+                    <input type="text" name="nome" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome de aluno, professor ou data final do treino">
+                    <input type="date" name="data" class="form-control" style="max-height: 42.5px">
                     <!-- Botão para filtrar -->
                     <button class="btn btn-primary" type="submit">Filtrar</button>
                     <!-- Botão para limpar filtro -->

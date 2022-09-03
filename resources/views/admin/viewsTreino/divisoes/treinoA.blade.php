@@ -24,14 +24,14 @@
             <div class="card-header-tabs p-0 mt-n4 mx-3 border-radius-lg" style="background-color: #fff;">
             <form action="{{route('treinos.searchDetalhesDivisaoA', $treinoGeral->id)}}" method="post">
                 @csrf
-                <div class="input-group input-group-outline my-3">
+                <div class="input-group input-group-outline">
                     <a class="btn btn-outline-primary" href="{{ route('treinos.indexDetalhes',$treinoGeral->id) }}">Voltar</a>
                     <!-- Campo de texto para digitar oque será filtrado -->
                     <!-- <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por nome de exercício ou membro muscular"> -->
-                    <select name="exe_membro" id="exe_membro"
-                            class="form-control"
-                            value="{{ old('exe_membro') }}" required autocomplete="exe_membro">
-                                <option value="">Selecione o membro aqui // arrumar css</option>
+                    <select name="search" id="search"
+                            class="form-control" style="height: 100%"
+                            required autocomplete="search">
+                                <option value="">Selecione o membro muscular aqui...</option>
                                 <option value="peito">Peito</option>
                                 <option value="costas">Costas</option>
                                 <option value="biceps">Biceps</option>

@@ -315,16 +315,17 @@ class TreinoController extends Controller
     {
 
         $filters = $request->except('_token');
+        $exercicios = Exercicio::all();
+        $equipamentos = Equipamento::all();
         $treinoDetalhes =TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
         ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
         ->select(['exercicios.*', 'equipamentos.*', 'treino_detalhes.*'])
         ->where('tg_id', $treinoGeral->id)
         ->where('td_divisao', 'A')
-        ->where('exe_membro', 'LIKE', "%{$request->search}%")
+        ->where('exercicios.exe_membro', 'LIKE', "%{$request->search}%")
         ->paginate(5);
         //dd($treinoDetalhes);
-        $exercicios = Exercicio::all();
-        $equipamentos = Equipamento::all();
+
 
         return view('admin.viewsTreino.divisoes.treinoA', [
             'treinoGeral' => $treinoGeral,

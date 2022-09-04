@@ -125,6 +125,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/treino/geral/{treinoGeral}/edit',[App\Http\Controllers\TreinoController::class, 'editGeral'])->name('treinos.editGeral');
             Route::put('/treino/geral/{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'updateGeral'])->name('treinos.updateGeral');
             Route::delete('/treino/geral/{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'destroyGeral'])->name('treinos.destroyGeral');
+            Route::delete('/treino/geral/limpar/{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'limparGeral'])->name('treinos.limparGeral');
             Route::any('/treino/geral/search', [App\Http\Controllers\TreinoController::class, 'searchGeral'])->name('treinos.searchGeral');
 
             /* Rotas para detalhes do treino */

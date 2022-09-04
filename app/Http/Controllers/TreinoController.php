@@ -185,8 +185,23 @@ class TreinoController extends Controller
                                 ->with('success', 'Treino excluido com sucesso!');
         } else {
             return redirect()->route('treinos.indexGeral')
-            ->with('error', 'Esse treino possui exercícios registrado e não pode ser excluido, limpe primeiro!');
+            ->with('error', 'Esse treino possui exercícios registrados e não pode ser excluído.');
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\TreinoGeral  $treinoGeral
+     * @return \Illuminate\Http\Response
+     */
+    public function limparGeral(TreinoGeral $treinoGeral)
+    {
+        $treino_detalhes = TreinoDetalhe::where('tg_id', '=', $treinoGeral->id)->get();
+        
+            $treino_detalhes->each->delete();
+            return redirect()->route('treinos.indexGeral')
+                                ->with('success', 'Treino limpo com sucesso!');
     }
 
     public function searchGeral(Request $request)

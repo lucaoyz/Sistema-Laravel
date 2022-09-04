@@ -358,7 +358,7 @@
    </div>
    @endforeach
 
-    <!-- Modal de excluir exercício -->
+    <!-- Modal de excluir/limpar treino -->
   @foreach($treinoGerals as $treinoGeral)
   <div class="modal fade" id="excluirTreinoGeralModal{{$treinoGeral->id}}" tabindex="-1" role="dialog" aria-labelledby="excluirTreinoGeralModal{{$treinoGeral->id}}" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -370,19 +370,25 @@
             </button>
           </div>
           <div class="modal-body">
+            <p>Qual ação você deseja fazer com esse treino?</p>
+            <form action="{{ route('treinos.limparGeral',$treinoGeral->id) }}" method="POST">
 
-              <p>Deseja excluir esse treino?</p>
-              <form action="{{ route('treinos.destroyGeral',$treinoGeral->id) }}" method="POST">
-
-                  @csrf
-                  @method('DELETE')
+                @csrf
+                @method('DELETE')
 
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-danger">Excluir</button>
-          </form>
-          </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-danger">Limpar exercícios do treino</button>
+            </form>
+            <form action="{{ route('treinos.destroyGeral',$treinoGeral->id) }}" method="POST">
+
+                @csrf
+                @method('DELETE')
+
+                <button type="submit" class="btn btn-danger">Excluir treino</button>
+            </form>
+            </div>
         </div>
       </div>
     </div>

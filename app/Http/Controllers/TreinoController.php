@@ -177,11 +177,16 @@ class TreinoController extends Controller
      */
     public function destroyGeral(TreinoGeral $treinoGeral)
     {
-        $treinoGeral->delete();
+        $treino_detalhes = TreinoDetalhe::where('tg_id', '=', $treinoGeral->id)->first();
 
-                return redirect()->route('treinos.indexGeral')
+        if(empty($treino_detalhes)){
+            $treinoGeral->delete();
+            return redirect()->route('treinos.indexGeral')
                                 ->with('success', 'Treino excluido com sucesso!');
-
+        } else {
+            return redirect()->route('treinos.indexGeral')
+            ->with('error', 'Esse treino possui exercícios registrado e não pode ser excluido, limpe primeiro!');
+        }
     }
 
     public function searchGeral(Request $request)

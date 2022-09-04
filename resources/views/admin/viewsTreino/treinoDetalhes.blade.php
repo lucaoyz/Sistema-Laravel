@@ -111,7 +111,7 @@
 
                     <!-- Divisão E -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoGeralModal" class="btn btn-success">Treino E</a></h5>
+                        <h5 class="mb-0"><a href="{{route('treinos.createDetalhesDivisaoE', $treinoGeral->id)}}" class="btn btn-success">Treino E</a></h5>
                     </div>
                 @endif
 
@@ -138,7 +138,7 @@
 
                     <!-- Divisão E -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoGeralModal" class="btn btn-success">Treino E</a></h5>
+                        <h5 class="mb-0"><a href="{{route('treinos.createDetalhesDivisaoE', $treinoGeral->id)}}" class="btn btn-success">Treino E</a></h5>
                     </div>
 
                     <!-- Divisão F -->

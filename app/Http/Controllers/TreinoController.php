@@ -877,5 +877,131 @@ class TreinoController extends Controller
 
     }
 
+    // DIVISÃO F
+        /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createDetalhesDivisaoF(TreinoGeral $treinoGeral, TreinoDetalhe $treinoDetalhe)
+    {
+
+        $treinoDetalhes =TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+        ->where('tg_id', $treinoGeral->id)
+        ->where('td_divisao', 'F')
+        ->select(['exercicios.*', 'equipamentos.*', 'treino_detalhes.*'])->paginate(5);
+        //dd($treinoDetalhes);
+        $exercicios = Exercicio::all();
+        $equipamentos = Equipamento::all();
+
+        return view('admin.viewsTreino.divisoes.treinoF', [
+            'treinoGeral' => $treinoGeral,
+            'equipamentos' => $equipamentos,
+            'exercicios' => $exercicios,
+            'treinoDetalhes' => $treinoDetalhes,
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeDetalhesDivisaoF(Request $request, treinoGeral $treinoGeral)
+    {
+
+        $request->validate([
+            'eq_id' => 'required',
+            'exe_id' => 'required',
+            'td_divisao' => 'required',
+            'td_series' => 'required',
+            'td_repeticoes' => 'required',
+        ]);
+
+        $result = TreinoDetalhe::create($request->all());
+
+        $treinoDetalheTB = TreinoDetalhe::where('id', $result->id)->first();
+        $treinoDetalheTB->tg_id = $treinoGeral->id;
+        $result = $treinoDetalheTB->save();
+
+        return redirect()->route('treinos.createDetalhesDivisaoF', $treinoGeral->id)
+                        ->with('success','Exercício adicionado com sucesso!');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\TreinoGeral  $treinoGeral
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDetalhesDivisaoF(Request $request, TreinoGeral $treinoGeral, TreinoDetalhe $treinoDetalhe)
+    {
+        $request->validate([
+            'id' => 'required',
+            'eq_id' => 'required',
+            'exe_id' => 'required',
+            'td_divisao' => 'required',
+            'td_series' => 'required',
+            'td_repeticoes' => 'required',
+        ]);
+
+        $treinoDetalhes = treinoDetalhe::where('id', $request->id)->first();
+
+        $treinoDetalhes->tg_id = $treinoGeral->id;
+        $treinoDetalhes->eq_id = $request->eq_id;
+        $treinoDetalhes->exe_id = $request->exe_id;
+        $treinoDetalhes->td_divisao = $request->td_divisao;
+        $treinoDetalhes->td_series = $request->td_series;
+        $treinoDetalhes->td_repeticoes = $request->td_repeticoes;
+        $treinoDetalhes->save();
+
+        return redirect()->route('treinos.createDetalhesDivisaoF', $treinoGeral->id)
+                        ->with('success','Exercício atualizado com sucesso!');
+    }
+
+    public function searchDetalhesDivisaoF(Request $request, TreinoGeral $treinoGeral)
+    {
+
+        $filters = $request->except('_token');
+        $exercicios = Exercicio::all();
+        $equipamentos = Equipamento::all();
+        $treinoDetalhes =TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+        ->select(['exercicios.*', 'equipamentos.*', 'treino_detalhes.*'])
+        ->where('tg_id', $treinoGeral->id)
+        ->where('td_divisao', 'F')
+        ->where('exercicios.exe_membro', 'LIKE', "%{$request->search}%")
+        ->paginate(5);
+        //dd($treinoDetalhes);
+
+
+        return view('admin.viewsTreino.divisoes.treinoF', [
+            'treinoGeral' => $treinoGeral,
+            'filters' => $filters,
+            'equipamentos' => $equipamentos,
+            'exercicios' => $exercicios,
+            'treinoDetalhes' => $treinoDetalhes,
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\TreinoDetalhe  $treinoDetalhe
+     * @param  \App\Models\TreinoGeral  $treinoGeral
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyDetalhesDivisaoF(TreinoGeral $treinoGeral, TreinoDetalhe $treinoDetalhe)
+    {
+        $treinoDetalhe->delete();
+
+                return redirect()->route('treinos.createDetalhesDivisaoF', $treinoGeral->id)
+                                ->with('success', 'Exercicio excluido com sucesso!');
+
+    }
+
 }
 

@@ -143,7 +143,7 @@
 
                     <!-- Divisão F -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoGeralModal" class="btn btn-success">Treino F</a></h5>
+                        <h5 class="mb-0"><a href="{{route('treinos.createDetalhesDivisaoF', $treinoGeral->id)}}" class="btn btn-success">Treino F</a></h5>
                     </div>
                 @endif
             </div>

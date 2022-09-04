@@ -167,6 +167,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::any('/treino/detalhes/{treinoGeral}/e/search', [App\Http\Controllers\TreinoController::class, 'searchDetalhesDivisaoE'])->name('treinos.searchDetalhesDivisaoE');
 
             Route::get('/treino/detalhes/{treinoGeral}/f', [App\Http\Controllers\TreinoController::class, 'createDetalhesDivisaoF'])->name('treinos.createDetalhesDivisaoF');
+            Route::post('/treino/detalhes/{treinoGeral}/f', [App\Http\Controllers\TreinoController::class, 'storeDetalhesDivisaoF'])->name('treinos.storeDetalhesDivisaoF');
+            Route::get('/treino/detalhes/{treinoGeral}/f/edit', [App\Http\Controllers\TreinoController::class, 'editDetalhesDivisaoF'])->name('treinos.editDetalhesDivisaoF');
+            Route::put('/treino/detalhes/{treinoGeral}/f', [App\Http\Controllers\TreinoController::class, 'updateDetalhesDivisaoF'])->name('treinos.updateDetalhesDivisaoF');
+            Route::delete('/treino/detalhes/{treinoGeral}/{treinoDetalhe}/f', [App\Http\Controllers\TreinoController::class, 'destroyDetalhesDivisaoF'])->name('treinos.destroyDetalhesDivisaoF');
+            Route::any('/treino/detalhes/{treinoGeral}/f/search', [App\Http\Controllers\TreinoController::class, 'searchDetalhesDivisaoF'])->name('treinos.searchDetalhesDivisaoF');
 
         /* Rotas para os exercicios */
         Route::get('/treino/exercicios/inicio', [App\Http\Controllers\ExerciciosController::class, 'index'])->name('exercicios.index');

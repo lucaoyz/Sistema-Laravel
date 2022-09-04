@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <button class="btn btn-success">Confirmar</button>
+                                <button class="btn btn-primary">Confirmar</button>
 
                                 <a href="{{route('admin.perfil')}}" class="btn btn-secondary">Voltar</a>
 

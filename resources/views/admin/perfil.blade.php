@@ -51,21 +51,15 @@
                     <div class="col-md-8 d-flex align-items-center">
                       <h6 class="mb-0">Informações</h6>
                     </div>
-                    <div class="col-md-4 text-end">
-                      <a href="javascript:;">
-                        <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar perfil"></i>
-                      </a>
-                    </div>
                   </div>
                 </div>
                 <div class="card-body p-3">
                   <hr class="horizontal gray-light my-4">
                   <ul class="list-group">
                     <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nome:</strong> &nbsp; {{ Auth::user()->name }}</li>
-                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Telefone ou celular:</strong> &nbsp; (19) 19191-9191</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Telefone ou celular:</strong> &nbsp; (19) 3629-2954</li>
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ Auth::user()->email }}</li>
-                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Endereço:</strong> &nbsp; Santa Barbara d'Oeste</li>
-                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">CPF:</strong> &nbsp; 111.111.111-11</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Endereço:</strong> &nbsp; R. dos Tupis, 869 - Jardim São Francisco, Santa Bárbara d'Oeste</li>
                   </ul>
                 </div>
               </div>

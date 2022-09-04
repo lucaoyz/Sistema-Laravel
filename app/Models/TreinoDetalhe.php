@@ -18,10 +18,6 @@ class TreinoDetalhe extends Model
         'td_repeticoes',
     ];
 
-    public function treinoDetalheParaTreinoDias() {
-        return $this->hasOne(TreinoDia::class, 'td_id', 'id');
-    }
-
     public function exercicioId()
     {
         return $this->belongsTo(Exercicio::class, 'exe_id', 'id');

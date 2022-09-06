@@ -38,9 +38,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         })->name('aluno');
 
         /* Perfil */
-        Route::get('/perfil', function(){
-            return view('aluno.perfil');
-        })->name('aluno.perfil');
+        Route::get('/perfil', [App\Http\Controllers\PerfilController::class, 'perfilIndexAluno'])->name('aluno.perfil');
 
         Route::get('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'changePasswordAluno'])->name('aluno.change-password');
         Route::post('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'updatePasswordAluno'])->name('aluno.update-password');
@@ -99,9 +97,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 
         /* Perfil */
-        Route::get('/perfil', function(){
-            return view('admin.perfil');
-        })->name('admin.perfil');
+        Route::get('/perfil', [App\Http\Controllers\PerfilController::class, 'perfilIndexAdmin'])->name('admin.perfil');
 
         Route::get('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'changePasswordAdmin'])->name('admin.change-password');
         Route::post('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'updatePasswordAdmin'])->name('admin.update-password');
@@ -215,9 +211,7 @@ Route::middleware(['auth', 'user-access:professor'])->group(function () {
         })->name('professor');
 
         /* Perfil */
-        Route::get('/perfil', function(){
-            return view('professor.perfil');
-        })->name('professor.perfil');
+        Route::get('/perfil', [App\Http\Controllers\PerfilController::class, 'perfilIndexProfessor'])->name('professor.perfil');
 
         Route::get('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'changePasswordProfessor'])->name('professor.change-password');
         Route::post('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'updatePasswordProfessor'])->name('professor.update-password');

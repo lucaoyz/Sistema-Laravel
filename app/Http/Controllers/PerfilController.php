@@ -5,11 +5,41 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Aluno;
+use App\Models\Personal;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
 class PerfilController extends Controller
 {
+    /* PERFIL INDEX */
+
+    public function perfilIndexAluno(){
+
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        //dd($aluno);
+        return view('aluno.perfil', [
+            'aluno' => $aluno,
+        ]);
+    }
+
+    public function perfilIndexProfessor(){
+
+        $authUser = auth::user();
+        $authPerID = $authUser->per_id;
+        $personal = Personal::where('id', '=', $authPerID)->first();
+        //dd($personal);
+        return view('professor.perfil', [
+            'personal' => $personal,
+        ]);
+    }
+
+    public function perfilIndexAdmin(){
+
+        return view('admin.perfil');
+    }
     /* Mudar senha admin / Aluno / Professor */
 
     public function changePasswordAdmin()

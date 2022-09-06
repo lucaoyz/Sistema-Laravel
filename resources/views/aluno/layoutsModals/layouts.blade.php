@@ -5,8 +5,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/apple-icon.png')}}">
-  <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}">
+  <link rel="halter" sizes="76x76" href="{{asset('img/halter.png')}}">
+  <link rel="icon" type="image/png" href="{{asset('img/halter.png')}}">
   <title>
     @yield('title')
   </title>
@@ -21,16 +21,38 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('css/material-dashboard.css')}}" rel="stylesheet" />
-</head>
 
+    <script type="text/javascript">
+        function mascara(t, mask) {
+            var i = t.value.length;
+            var saida = mask.substring(1, 0);
+            var texto = mask.substring(i)
+            if (texto.substring(0, 1) != saida) {
+                t.value += texto.substring(0, 1);
+            }
+        }
+
+        function onlynumber(evt) {
+            var theEvent = evt || window.event;
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode( key );
+            //var regex = /^[0-9.,]+$/;
+            var regex = /^[0-9.]+$/;
+            if( !regex.test(key) ) {
+                theEvent.returnValue = false;
+                if(theEvent.preventDefault) theEvent.preventDefault();
+             }
+    }
+    </script>
+</head>
 {{-- sidebar --}}
 <body class="g-sidenav-show  bg-gray-200">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
       <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="{{route('professor')}}">
-            <span class="ms-1 font-weight-bold text-white">GV2 Academia - Aluno</span>
-          </a>
+        <a class="navbar-brand m-0" href="{{route('aluno')}}">
+          <span class="ms-1 font-weight-bold text-white">GV2 Academia - Gerencial</span>
+        </a>
       </div>
       <hr class="horizontal light mt-0 mb-2">
       <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
@@ -87,7 +109,7 @@
         <div class="container-fluid py-1 px-3">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{route('professor')}}">Pages</a></li>
+              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{route('aluno')}}">Paginas</a></li>
               <li class="breadcrumb-item text-sm text-dark active" aria-current="page">@yield('pagina')</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">@yield('pagina')</h6>
@@ -146,7 +168,7 @@
                   document.write(new Date().getFullYear())
                 </script>,
                 Feito <i class="fa fa-bolt"></i> por
-                <a href="" class="font-weight-bold" target="_blank">EAZY</a>
+                <a href="https://lucaoyz.github.io/Site-Eazy/" class="font-weight-bold" target="_blank">EAZY</a>
               </div>
             </div>
             <div class="col-lg-6">
@@ -209,13 +231,8 @@
               <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
             </div>
             <p class="text-sm d-xl-none d-block mt-2">Você só pode alterar o tipo de barra lateral na versão de computador.</p>
-            <!-- Navbar Fixed -->
-            <div class="mt-3 d-flex">
-              <h6 class="mb-0">Barra de navegação fixada</h6>
-              <div class="form-check form-switch ps-0 ms-auto my-auto">
-                <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
-              </div>
-            </div>
+            <!-- Dark Mode -->
+
             <hr class="horizontal dark my-3">
             <div class="mt-2 d-flex">
               <h6 class="mb-0">Branco / Escuro</h6>
@@ -231,13 +248,14 @@
               <a href="https://github.com/lucaoyz" class="btn btn-dark mb-0 me-2" target="_blank">
                 <i class="fab fa-github me-1" aria-hidden="true"></i> GitHub
               </a>
-              <a href="" class="btn btn-dark mb-0 me-2" target="_blank">
+              <a href="https://instagram.com/ahtaeazy" class="btn btn-dark mb-0 me-2" target="_blank">
                 <i class="fab fa-instagram me-1" aria-hidden="true"></i> Instagram
               </a>
             </div>
           </div>
         </div>
       </div>
+    </main>
       {{--scripts js--}}
       <script src="{{asset('js/core/popper.min.js')}}"></script>
   <script src="{{asset('js/core/bootstrap.min.js')}}"></script>
@@ -259,9 +277,9 @@
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"],
         datasets: [{
-          label: "Sales",
+          label: "Frequencia de alunos",
           tension: 0.4,
           borderWidth: 0,
           borderRadius: 4,
@@ -340,9 +358,9 @@
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"],
         datasets: [{
-          label: "Mobile apps",
+          label: "Alunos registrados",
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,

@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-md-4 text-end">
                     <a href="javascript:;">
-                        <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
+                        <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar perfil"></i>
                     </a>
                     </div>
                 </div>
@@ -69,12 +69,6 @@
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ Auth::user()->email }}</li>
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Endereço:</strong> &nbsp; {{$aluno->alu_endereco}}</li>
                 </ul>
-                </div>
-            </div>
-            </div>
-            <div class="col-12 col-xl-4">
-            <div class="card card-plain h-100">
-                <div class="card-header pb-0 p-3">
                 <h6 class="mb-0"><a href="{{route('aluno.treino')}}">Acesse seu treino clicando aqui</a></h6>
                 </div>
             </div>

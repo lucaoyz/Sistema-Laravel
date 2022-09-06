@@ -44,9 +44,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::post('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'updatePasswordAluno'])->name('aluno.update-password');
 
         /* Rotas para os treinos */
-        Route::get('/treino', function(){
-            return view('aluno.treino');
-        })->name('aluno.treino');
+        Route::get('/treino', [App\Http\Controllers\TreinoController::class, 'indexAluno'])->name('aluno.treino');
+        Route::get('/treino/visualizar', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoAluno'])->name('aluno.treino.visualizar');
 
     });
 });

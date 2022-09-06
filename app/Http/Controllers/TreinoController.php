@@ -19,9 +19,14 @@ class TreinoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexAluno()
     {
-        return view('admin.treino');
+        return view('aluno.viewsTreino.treino');
+    }
+
+    public function visualizarTreinoAluno()
+    {
+        return view('aluno.viewsTreino.treinoVisualizar');
     }
 
     /**
@@ -198,7 +203,7 @@ class TreinoController extends Controller
     public function limparGeral(TreinoGeral $treinoGeral)
     {
         $treino_detalhes = TreinoDetalhe::where('tg_id', '=', $treinoGeral->id)->get();
-        
+
             $treino_detalhes->each->delete();
             return redirect()->route('treinos.indexGeral')
                                 ->with('success', 'Treino limpo com sucesso!');

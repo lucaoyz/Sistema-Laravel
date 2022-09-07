@@ -70,7 +70,7 @@
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" class="btn btn-success">Treino C</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-success">Treino C</a></h5>
                     </div>
                 @endif
 
@@ -87,7 +87,7 @@
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" class="btn btn-success">Treino C</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-success">Treino C</a></h5>
                     </div>
 
                     <!-- Divisão D -->
@@ -109,7 +109,7 @@
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" class="btn btn-success">Treino C</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-success">Treino C</a></h5>
                     </div>
 
                     <!-- Divisão D -->
@@ -136,7 +136,7 @@
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" class="btn btn-success">Treino C</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-success">Treino C</a></h5>
                     </div>
 
                     <!-- Divisão D -->

@@ -37,44 +37,33 @@ class TreinoController extends Controller
         $authAluID = $authUser->alu_id;
         $aluno = Aluno::where('id', '=', $authAluID)->first();
         $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        if(empty($treinoGeralAluno)){
+        $treinoGeralAlunoDivisoes = null;
+    }
+        else {
+        $treinoGeralAlunoDivisoes = $treinoGeralAluno->tg_divisoes;
+    }
+
+        return view('aluno.viewsTreino.treinoVisualizar', [
+            'treinoGeralAlunoDivisoes' => $treinoGeralAlunoDivisoes,
+        ]);
+    }
+
+    public function visualizarTreinoAAluno()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
         $treinoAAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
         ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
         ->where('td_divisao', '=', 'A')
         ->where('tg_id', '=', $treinoGeralAluno->id)
         ->get();
-        $treinoBAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-        ->where('td_divisao', '=', 'B')
-        ->where('tg_id', '=', $treinoGeralAluno->id)
-        ->get();
-        $treinoCAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-        ->where('td_divisao', '=', 'C')
-        ->where('tg_id', '=', $treinoGeralAluno->id)
-        ->get();
-        $treinoDAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-        ->where('td_divisao', '=', 'D')
-        ->where('tg_id', '=', $treinoGeralAluno->id)
-        ->get();
-        $treinoEAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-        ->where('td_divisao', '=', 'E')
-        ->where('tg_id', '=', $treinoGeralAluno->id)
-        ->get();
-        $treinoFAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-        ->where('td_divisao', '=', 'F')
-        ->where('tg_id', '=', $treinoGeralAluno->id)
-        ->get();
-        //dd($treinoEAluno);
-        return view('aluno.viewsTreino.treinoVisualizar', [
+        
+        //dd($treinoAAlunos);
+        return view('aluno.viewsTreino.divisoes.treinoVisualizarTreinoA', [
             'treinoAAlunos' => $treinoAAlunos,
-            'treinoBAlunos' => $treinoBAlunos,
-            'treinoCAlunos' => $treinoCAlunos,
-            'treinoDAlunos' => $treinoDAlunos,
-            'treinoEAlunos' => $treinoEAlunos,
-            'treinoFAlunos' => $treinoFAlunos,
         ]);
     }
 

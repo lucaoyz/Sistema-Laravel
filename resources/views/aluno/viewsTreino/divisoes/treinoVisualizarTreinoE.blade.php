@@ -1,7 +1,7 @@
 @extends('aluno.layoutsModals.layouts')
 @section('title', 'Treino')
 @section('treino', 'active bg-gradient-primary')
-@section('pagina', 'Treino - Visualizar - Treino D')
+@section('pagina', 'Treino - Visualizar - Treino E')
 @section('content')
 
 

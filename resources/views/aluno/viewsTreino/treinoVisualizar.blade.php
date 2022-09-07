@@ -151,7 +151,7 @@
 
                     <!-- Divisão F -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" class="btn btn-success">Treino F</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.f')}}" class="btn btn-success">Treino F</a></h5>
                     </div>
                 @endif
             </div>

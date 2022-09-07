@@ -52,6 +52,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::get('/treino/visualizar/b', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoBAluno'])->name('aluno.treino.visualizar.b');
         Route::get('/treino/visualizar/c', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoCAluno'])->name('aluno.treino.visualizar.c');
         Route::get('/treino/visualizar/d', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoDAluno'])->name('aluno.treino.visualizar.d');
+        Route::get('/treino/visualizar/e', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoEAluno'])->name('aluno.treino.visualizar.e');
 
     });
 });

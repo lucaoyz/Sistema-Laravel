@@ -119,7 +119,7 @@
 
                     <!-- Divisão E -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" class="btn btn-success">Treino E</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.e')}}" class="btn btn-success">Treino E</a></h5>
                     </div>
                 @endif
 
@@ -146,7 +146,7 @@
 
                     <!-- Divisão E -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="" class="btn btn-success">Treino E</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.e')}}" class="btn btn-success">Treino E</a></h5>
                     </div>
 
                     <!-- Divisão F -->

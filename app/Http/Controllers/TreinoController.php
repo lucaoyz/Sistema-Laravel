@@ -49,6 +49,7 @@ class TreinoController extends Controller
         ]);
     }
 
+    // DIVISÃO A
     public function visualizarTreinoAAluno()
     {
         $authUser = auth::user();
@@ -60,10 +61,29 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('tg_id', '=', $treinoGeralAluno->id)
         ->get();
-        
+
         //dd($treinoAAlunos);
         return view('aluno.viewsTreino.divisoes.treinoVisualizarTreinoA', [
             'treinoAAlunos' => $treinoAAlunos,
+        ]);
+    }
+
+    // DIVISÃO B
+    public function visualizarTreinoBAluno()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoBAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+        ->where('td_divisao', '=', 'B')
+        ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->get();
+
+        //dd($treinoAAlunos);
+        return view('aluno.viewsTreino.divisoes.treinoVisualizarTreinoB', [
+            'treinoBAlunos' => $treinoBAlunos,
         ]);
     }
 

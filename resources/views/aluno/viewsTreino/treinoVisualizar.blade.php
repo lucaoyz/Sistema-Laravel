@@ -4,6 +4,10 @@
 @section('pagina', 'Treino - Visualizar')
 @section('content')
 
+    @foreach ($treinoAAlunos as $treinoAAluno)
+        {{$treinoAAluno->exe_nome}}
+    @endforeach
+
 @endsection
 
 

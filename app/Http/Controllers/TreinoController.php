@@ -105,6 +105,25 @@ class TreinoController extends Controller
             'treinoCAlunos' => $treinoCAlunos,
         ]);
     }
+
+    // DIVISÃO D
+    public function visualizarTreinoDAluno()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoDAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+        ->where('td_divisao', '=', 'D')
+        ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->get();
+
+        //dd($treinoAAlunos);
+        return view('aluno.viewsTreino.divisoes.treinoVisualizarTreinoD', [
+            'treinoDAlunos' => $treinoDAlunos,
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *

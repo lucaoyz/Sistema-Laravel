@@ -20,6 +20,12 @@ class TreinoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function index()
+    {
+        return view('admin.treino');
+    }
+
     public function indexAluno()
     {
         return view('aluno.viewsTreino.treino');

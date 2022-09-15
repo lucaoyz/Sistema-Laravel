@@ -46,6 +46,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         /* Rotas para os treinos */
         Route::get('/treino', [App\Http\Controllers\TreinoController::class, 'indexAluno'])->name('aluno.treino');
         Route::get('/treino/visualizar', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoAluno'])->name('aluno.treino.visualizar');
+        Route::get('/treino/pdf', [App\Http\Controllers\TreinoController::class, 'PDFTreino'])->name('aluno.PDFTreino');
 
         /* Rotas para as divisões do treino */
         Route::get('/treino/visualizar/a', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoAAluno'])->name('aluno.treino.visualizar.a');

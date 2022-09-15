@@ -1162,5 +1162,12 @@ class TreinoController extends Controller
 
     }
 
+    public function PDFTreino()
+    {
+
+    return \PDF::loadView('PDFTreino')
+                // Se quiser que fique no formato a4 retrato: ->setPaper('a4', 'landscape')
+                ->download('treino.pdf');
+    }
 }
 

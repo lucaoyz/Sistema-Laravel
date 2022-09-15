@@ -1164,10 +1164,21 @@ class TreinoController extends Controller
 
     public function PDFTreino()
     {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+        ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->get();
 
-    return \PDF::loadView('PDFTreino')
-                // Se quiser que fique no formato a4 retrato: ->setPaper('a4', 'landscape')
-                ->download('treino.pdf');
+    return \PDF::loadView('PDFTreino', [
+        'treinoAlunos' => $treinoAlunos,
+    ])
+                    ->setPaper('a4', 'landscape')
+                //->download('treino.pdf');
+                ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
     }
 }
 

@@ -1170,6 +1170,7 @@ class TreinoController extends Controller
         $authAluID = $authUser->alu_id;
         $aluno = Aluno::where('id', '=', $authAluID)->first();
         $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoGeralDivisoes = $treinoGeralAluno->tg_divisoes;
         $treinoAAlunos = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
         ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
         ->where('td_divisao', '=', 'A')
@@ -1219,6 +1220,7 @@ class TreinoController extends Controller
         'treinoDAlunos' => $treinoDAlunos,
         'treinoEAlunos' => $treinoEAlunos,
         'treinoFAlunos' => $treinoFAlunos,
+        'treinoGeralDivisoes' => $treinoGeralDivisoes,
     ])
                     ->setPaper('a4', 'landscape')
                 //->download('treino.pdf');

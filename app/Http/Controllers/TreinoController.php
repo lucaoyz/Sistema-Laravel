@@ -12,6 +12,8 @@ use App\Models\TreinoGeral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class TreinoController extends Controller
 {

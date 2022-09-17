@@ -115,10 +115,11 @@ th {
         </style>
     </head>
     <body>
-        <h1>Treino de <span style="color: #F44335;">{{ Auth::user()->name }}</span></h1>
+        <h1>GV2 Academia</h1>
+        <h2>Treino de <span>{{auth::user()->name;}}</span></h2>
 
-        <div class="divTreinos">
-        <h2>Treino A</h2>
+        <div class="divTreinos"><br>
+            <h2>Treino A</h2>
         <table>
             <tr>
               <th>Membro</th>

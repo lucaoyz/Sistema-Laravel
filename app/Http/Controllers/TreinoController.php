@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 class TreinoController extends Controller
@@ -1213,7 +1215,7 @@ class TreinoController extends Controller
         ->where('tg_id', '=', $treinoGeralAluno->id)
         ->get();
 
-    return \PDF::loadView('aluno.PDFTreino', [
+    return PDF::loadView('aluno.PDFTreino', [
         'treinoAAlunos' => $treinoAAlunos,
         'treinoBAlunos' => $treinoBAlunos,
         'treinoCAlunos' => $treinoCAlunos,

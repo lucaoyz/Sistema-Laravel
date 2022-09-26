@@ -46,7 +46,11 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         /* Rotas para os treinos */
         Route::get('/treino', [App\Http\Controllers\TreinoController::class, 'indexAluno'])->name('aluno.treino');
         Route::get('/treino/visualizar', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoAluno'])->name('aluno.treino.visualizar');
+
+        /* Rotas para baixar o treino */
         Route::get('/treino/pdf', [App\Http\Controllers\TreinoController::class, 'PDFTreino'])->name('aluno.PDFTreino');
+        Route::get('/treino/pdf/divisoes', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoes'])->name('aluno.PDFTreinoDivisoes');
+        Route::get('/treino/pdf/divisoes/a', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesA'])->name('aluno.PDFTreinoDivisoesA');
 
         /* Rotas para as divisões do treino */
         Route::get('/treino/visualizar/a', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoAAluno'])->name('aluno.treino.visualizar.a');
@@ -197,6 +201,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::put('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'update'])->name('equipamentos.update');
         Route::delete('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'destroy'])->name('equipamentos.destroy');
         Route::any('/treino/equipamentos/search', [App\Http\Controllers\EquipamentosController::class, 'search'])->name('equipamentos.search');
+
+        /* Rotas para visualização de aluno */
+        Route::get('/treino/pdf/divisoes/a{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesATreinador'])->name('aluno.PDFTreinoDivisoesATreinador');
 
 });
 });

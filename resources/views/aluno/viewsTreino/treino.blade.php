@@ -39,13 +39,13 @@
           <div class="card-header p-3 pt-2">
             <div class="pt-1">
               <p class="text-sm mb-0 text-capitalize">Baixar</p>
-              <h5 class="mb-0"><a href="{{route('aluno.PDFTreino')}}" class="text">Baixar treino</a></h5>
+              <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoes')}}" class="text">Baixar treino</a></h5>
             </div>
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
             <p class="mb-0"><span class="text-sm font-weight-bolder">
-                <a href="{{route('aluno.PDFTreino')}}">Clique aqui para baixar seu treino.</a>
+                <a href="{{route('aluno.PDFTreinoDivisoes')}}">Clique aqui para baixar seu treino.</a>
                 </span></p>
           </div>
         </div>

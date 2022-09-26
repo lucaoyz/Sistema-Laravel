@@ -45,7 +45,7 @@
         <div class="modal-body">
             <form action="{{ route('treinos.storeDetalhesDivisaoA', $treinoGeral->id) }}" method="POST">
                 @csrf
-
+                <h6>Observação: Apenas 3 Membros Musculares diferentes por treino.</h6>
                     <div class="row mb-3">
                         <label for="tre_id" class="col-md-4 col-form-label text-md-end">{{ __('Divisão') }}</label>
 
@@ -392,7 +392,7 @@
         <div class="modal-body">
             <form action="{{ route('treinos.storeDetalhesDivisaoB', $treinoGeral->id) }}" method="POST">
                 @csrf
-
+                <h6>Observação: Apenas 3 Membros Musculares diferentes por treino.</h6>
                     <div class="row mb-3">
                         <label for="tre_id" class="col-md-4 col-form-label text-md-end">{{ __('Divisão') }}</label>
 
@@ -739,7 +739,7 @@
         <div class="modal-body">
             <form action="{{ route('treinos.storeDetalhesDivisaoC', $treinoGeral->id) }}" method="POST">
                 @csrf
-
+                <h6>Observação: Apenas 3 Membros Musculares diferentes por treino.</h6>
                     <div class="row mb-3">
                         <label for="tre_id" class="col-md-4 col-form-label text-md-end">{{ __('Divisão') }}</label>
 
@@ -1086,7 +1086,7 @@
         <div class="modal-body">
             <form action="{{ route('treinos.storeDetalhesDivisaoD', $treinoGeral->id) }}" method="POST">
                 @csrf
-
+                <h6>Observação: Apenas 3 Membros Musculares diferentes por treino.</h6>
                     <div class="row mb-3">
                         <label for="tre_id" class="col-md-4 col-form-label text-md-end">{{ __('Divisão') }}</label>
 
@@ -1434,7 +1434,7 @@
         <div class="modal-body">
             <form action="{{ route('treinos.storeDetalhesDivisaoE', $treinoGeral->id) }}" method="POST">
                 @csrf
-
+                <h6>Observação: Apenas 3 Membros Musculares diferentes por treino.</h6>
                     <div class="row mb-3">
                         <label for="tre_id" class="col-md-4 col-form-label text-md-end">{{ __('Divisão') }}</label>
 
@@ -1782,7 +1782,7 @@
         <div class="modal-body">
             <form action="{{ route('treinos.storeDetalhesDivisaoF', $treinoGeral->id) }}" method="POST">
                 @csrf
-
+                <h6>Observação: Apenas 3 Membros Musculares diferentes por treino.</h6>
                     <div class="row mb-3">
                         <label for="tre_id" class="col-md-4 col-form-label text-md-end">{{ __('Divisão') }}</label>
 

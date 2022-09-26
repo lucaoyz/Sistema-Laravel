@@ -132,7 +132,7 @@ th {
         </style>
     </head>
     <body>
-        <h2><img src="img/logos/gv2.png" style="max-width: 50px"> GV2 Academia</h2>
+        <h2><img src="img/logos/GV2Logo_Compacta.png" style="width: 300px;"></h2>
         <h2>Treino de <span>{{auth::user()->name;}}</span></h2>
 
 
@@ -145,7 +145,7 @@ th {
                         <th>Exercício</th>
                         <th>Series</th>
                         <th>Repetições</th>
-                        
+                        <th>Observação</th>
                     </tr>
                     @foreach ($treinoAAlunos as $treinoAAluno)
                     <tr>
@@ -153,6 +153,7 @@ th {
                         <td>{{$treinoAAluno->exe_nome}}</td>
                         <td>{{$treinoAAluno->td_series}}</td>
                         <td>{{$treinoAAluno->td_repeticoes}}</td>
+                        <td>{{$treinoAAluno->exe_descricao}}</td>
                     </tr>
                     @endforeach
                 </table>

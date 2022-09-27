@@ -51,6 +51,11 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::get('/treino/pdf', [App\Http\Controllers\TreinoController::class, 'PDFTreino'])->name('aluno.PDFTreino');
         Route::get('/treino/pdf/divisoes', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoes'])->name('aluno.PDFTreinoDivisoes');
         Route::get('/treino/pdf/divisoes/a', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesA'])->name('aluno.PDFTreinoDivisoesA');
+        Route::get('/treino/pdf/divisoes/b', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesB'])->name('aluno.PDFTreinoDivisoesB');
+        Route::get('/treino/pdf/divisoes/c', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesC'])->name('aluno.PDFTreinoDivisoesC');
+        Route::get('/treino/pdf/divisoes/d', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesD'])->name('aluno.PDFTreinoDivisoesD');
+        Route::get('/treino/pdf/divisoes/e', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesE'])->name('aluno.PDFTreinoDivisoesE');
+        Route::get('/treino/pdf/divisoes/f', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesF'])->name('aluno.PDFTreinoDivisoesF');
 
         /* Rotas para as divisões do treino */
         Route::get('/treino/visualizar/a', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoAAluno'])->name('aluno.treino.visualizar.a');

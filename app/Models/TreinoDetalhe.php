@@ -13,6 +13,7 @@ class TreinoDetalhe extends Model
         'eq_id',
         'exe_id',
         'tg_id',
+        'td_numero',
         'td_divisao',
         'td_series',
         'td_repeticoes',

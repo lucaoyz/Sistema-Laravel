@@ -7,9 +7,10 @@
         @elseif(auth()->user()->type == 'professor')
             Visualização de como o aluno baixará o treino
         @else
-            Treino de{{auth::user()->name}}
+            Treino de {{auth::user()->name}}
         @endif</title>
     <style>
+        @page { size: a4 landscape; }
         h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -135,6 +136,11 @@ th {
     margin: 2px;
 }
 
+.tdNumero {
+    font-size: 30px;
+    font-weight: bold;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
         </style>
     </head>
     <body>
@@ -152,16 +158,16 @@ th {
                 <h2>Treino A - Peito</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosPeito as $treinoAlunoPeito)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoPeito->td_numero}}</td>
                     <td>{{$treinoAlunoPeito->exe_nome}}</td>
-                    <td>{{$treinoAlunoPeito->td_series}}</td>
-                    <td>{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoPeito->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoPeito->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -174,16 +180,16 @@ th {
                 <h2>Treino A - Costas</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosCostas as $treinoAlunoCostas)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoCostas->td_numero}}</td>
                     <td>{{$treinoAlunoCostas->exe_nome}}</td>
-                    <td>{{$treinoAlunoCostas->td_series}}</td>
-                    <td>{{$treinoAlunoCostas->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoCostas->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoCostas->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -196,16 +202,16 @@ th {
                 <h2>Treino A - Biceps</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosBiceps as $treinoAlunoBiceps)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoBiceps->td_numero}}</td>
                     <td>{{$treinoAlunoBiceps->exe_nome}}</td>
-                    <td>{{$treinoAlunoBiceps->td_series}}</td>
-                    <td>{{$treinoAlunoBiceps->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoBiceps->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoBiceps->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -218,16 +224,16 @@ th {
                 <h2>Treino A - Triceps</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosTriceps as $treinoAlunoTriceps)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoTriceps->td_numero}}</td>
                     <td>{{$treinoAlunoTriceps->exe_nome}}</td>
-                    <td>{{$treinoAlunoTriceps->td_series}}</td>
-                    <td>{{$treinoAlunoTriceps->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoTriceps->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoTriceps->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -240,16 +246,16 @@ th {
                 <h2>Treino A - Antebraço</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosAntebraco as $treinoAlunoAntebraco)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoAntebraco->td_numero}}</td>
                     <td>{{$treinoAlunoAntebraco->exe_nome}}</td>
-                    <td>{{$treinoAlunoAntebraco->td_series}}</td>
-                    <td>{{$treinoAlunoAntebraco->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoAntebraco->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoAntebraco->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -262,18 +268,17 @@ th {
                 <h2>Treino A - Ombro</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosOmbro as $treinoAlunoOmbro)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoOmbro->td_numero}}</td>
                     <td>{{$treinoAlunoOmbro->exe_nome}}</td>
-                    <td>{{$treinoAlunoOmbro->td_series}}</td>
-                    <td>{{$treinoAlunoOmbro->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoOmbro->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoOmbro->exe_descricao}}</td>
-                </tr>
                 @endforeach
             </table>
             </div>
@@ -284,16 +289,16 @@ th {
                 <h2>Treino A - Trapezio</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosTrapezio as $treinoAlunoTrapezio)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoTrapezio->td_numero}}</td>
                     <td>{{$treinoAlunoTrapezio->exe_nome}}</td>
-                    <td>{{$treinoAlunoTrapezio->td_series}}</td>
-                    <td>{{$treinoAlunoTrapezio->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoTrapezio->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoTrapezio->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -306,16 +311,16 @@ th {
                 <h2>Treino A - Inferior</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosInferior as $treinoAlunoInferior)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoInferior->td_numero}}</td>
                     <td>{{$treinoAlunoInferior->exe_nome}}</td>
-                    <td>{{$treinoAlunoInferior->td_series}}</td>
-                    <td>{{$treinoAlunoInferior->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoInferior->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoInferior->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -328,16 +333,16 @@ th {
                 <h2>Treino A - Lombar</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosLombar as $treinoAlunoLombar)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoLombar->td_numero}}</td>
                     <td>{{$treinoAlunoLombar->exe_nome}}</td>
-                    <td>{{$treinoAlunoLombar->td_series}}</td>
-                    <td>{{$treinoAlunoLombar->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoLombar->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoLombar->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -350,16 +355,16 @@ th {
                 <h2>Treino A - Abdomen</h2>
             <table>
                 <tr>
+                    <th>Nº</th>
                     <th>Exercício</th>
-                    <th>Series</th>
-                    <th>Repetições</th>
-                    <th>Observação</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
                 </tr>
                 @foreach ($treinoAlunosAbdomen as $treinoAlunoAbdomen)
                 <tr>
+                    <td class="tdNumero">{{$treinoAlunoAbdomen->td_numero}}</td>
                     <td>{{$treinoAlunoAbdomen->exe_nome}}</td>
-                    <td>{{$treinoAlunoAbdomen->td_series}}</td>
-                    <td>{{$treinoAlunoAbdomen->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoAbdomen->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoAbdomen->exe_descricao}}</td>
                 </tr>
                 @endforeach

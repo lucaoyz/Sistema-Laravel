@@ -69,6 +69,7 @@
                     <!-- Dados que vão ser coletados -->
                     <thead>
                         <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nº</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Equipamento</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome do exercício</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Membro Muscular</th>
@@ -83,23 +84,32 @@
                     @foreach ($treinoDetalhes as $treinoDetalhe)
                     <tr>
 
+                        <!-- td_numero -->
+                       <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{ $treinoDetalhe->td_numero }}</h6>
+                          </div>
+                        </div>
+                      </td>
+
                        <!-- eq_nome -->
                        <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{ $treinoDetalhe->eq_nome }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</h6>
+                            <h6 class="mb-0 text-sm">{{ $treinoDetalhe->eq_nome }}</h6>
                           </div>
                         </div>
                       </td>
 
                       <!-- exe_nome -->
                       <td>
-                        <p class="text-sm font-weight-bold mb-0">{{ $treinoDetalhe->exe_nome }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</p>
+                        <p class="text-sm font-weight-bold mb-0">{{ $treinoDetalhe->exe_nome }}</p>
                       </td>
 
                       <!-- exe_membro -->
                       <td>
-                        <p class="text-sm font-weight-bold mb-0">{{ $treinoDetalhe->exe_membro }}{{--COLOCAR O NOME AO INVES DO ID PARA APARECER--}}</p>
+                        <p class="text-sm font-weight-bold mb-0">{{ $treinoDetalhe->exe_membro }}</p>
                       </td>
 
                       <!-- td_series -->

@@ -444,10 +444,16 @@ class TreinoController extends Controller
      */
     public function storeDetalhesDivisaoA(Request $request, treinoGeral $treinoGeral)
     {
+        $numeroTreinoDetalhe = TreinoDetalhe::where('td_numero', '=', $request->input('td_numero'))->where('tg_id', '=', $treinoGeral->id)->first();
 
+        if($numeroTreinoDetalhe){
+            return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
+                    ->with('error','Esse Nº de ordem de exercício já está cadastrado!');
+        } else {
         $request->validate([
             'eq_id' => 'required',
             'exe_id' => 'required',
+            'td_numero' => 'required',
             'td_divisao' => 'required',
             'td_series' => 'required',
             'td_repeticoes' => 'required',
@@ -461,6 +467,7 @@ class TreinoController extends Controller
 
         return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
                         ->with('success','Exercício adicionado com sucesso!');
+                    }
     }
 
     /**
@@ -472,27 +479,39 @@ class TreinoController extends Controller
      */
     public function updateDetalhesDivisaoA(Request $request, TreinoGeral $treinoGeral, TreinoDetalhe $treinoDetalhe)
     {
-        $request->validate([
-            'id' => 'required',
-            'eq_id' => 'required',
-            'exe_id' => 'required',
-            'td_divisao' => 'required',
-            'td_series' => 'required',
-            'td_repeticoes' => 'required',
-        ]);
+        $numeroTreinoDetalhe = TreinoDetalhe::where('td_numero', '=', $request->input('td_numero'))->where('tg_id', '=', $treinoGeral->id)->first();
+        $treinoDetalheId = TreinoDetalhe::where('id', '=', $request->input('id'))->first();
 
-        $treinoDetalhes = treinoDetalhe::where('id', $request->id)->first();
+        if($numeroTreinoDetalhe){
+            if($numeroTreinoDetalhe->id != $treinoDetalheId->id) {
+            return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
+                    ->with('error','Esse Nº de ordem de exercício já está cadastrado!');
+                } else {
+                    $request->validate([
+                        'id' => 'required',
+                        'eq_id' => 'required',
+                        'exe_id' => 'required',
+                        'td_numero' => 'required',
+                        'td_divisao' => 'required',
+                        'td_series' => 'required',
+                        'td_repeticoes' => 'required',
+                    ]);
 
-        $treinoDetalhes->tg_id = $treinoGeral->id;
-        $treinoDetalhes->eq_id = $request->eq_id;
-        $treinoDetalhes->exe_id = $request->exe_id;
-        $treinoDetalhes->td_divisao = $request->td_divisao;
-        $treinoDetalhes->td_series = $request->td_series;
-        $treinoDetalhes->td_repeticoes = $request->td_repeticoes;
-        $treinoDetalhes->save();
+                    $treinoDetalhes = treinoDetalhe::where('id', $request->id)->first();
 
-        return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
-                        ->with('success','Exercício atualizado com sucesso!');
+                    $treinoDetalhes->tg_id = $treinoGeral->id;
+                    $treinoDetalhes->eq_id = $request->eq_id;
+                    $treinoDetalhes->exe_id = $request->exe_id;
+                    $treinoDetalhes->td_numero = $request->td_numero;
+                    $treinoDetalhes->td_divisao = $request->td_divisao;
+                    $treinoDetalhes->td_series = $request->td_series;
+                    $treinoDetalhes->td_repeticoes = $request->td_repeticoes;
+                    $treinoDetalhes->save();
+
+                    return redirect()->route('treinos.createDetalhesDivisaoA', $treinoGeral->id)
+                                    ->with('success','Exercício atualizado com sucesso!');
+                }
+        }
     }
 
     public function searchDetalhesDivisaoA(Request $request, TreinoGeral $treinoGeral)
@@ -1609,7 +1628,6 @@ class TreinoController extends Controller
         'treinoAlunosLombar' => $treinoAlunosLombar,
         'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
     ])
-                    ->setPaper('a4', 'landscape')
                 //->download('treino.pdf');
                 ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
     }

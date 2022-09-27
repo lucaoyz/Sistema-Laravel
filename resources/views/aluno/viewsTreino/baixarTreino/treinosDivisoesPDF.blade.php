@@ -38,10 +38,6 @@
 
                 @endif
 
-                <div class="pull-right">
-                    <h5 class="mb-0"><a href="{{route('aluno.PDFTreino')}}" class="btn btn-success">Todos os treinos em uma ficha</a></h5>
-                </div>
-
                 @if ($treinoGeralAlunoDivisoes === 'A')
                     <div class="pull-right">
                         <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-success">Treino A</a></h5>

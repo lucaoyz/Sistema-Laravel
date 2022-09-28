@@ -13,6 +13,7 @@ class Exercicio extends Model
         'exe_nome',
         'exe_membro',
         'exe_descricao',
+        'exe_foto',
     ];
 
     public function exeParaTreinoDetalhes() {

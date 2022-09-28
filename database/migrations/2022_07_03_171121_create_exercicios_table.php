@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('exe_nome');
             $table->string('exe_membro');
             $table->string('exe_descricao')->nullable();
+            $table->string('exe_foto')->nullable();
             $table->timestamps();
         });
     }

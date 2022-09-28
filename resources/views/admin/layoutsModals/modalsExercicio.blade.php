@@ -20,7 +20,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('exercicios.store') }}" method="POST">
+            <form action="{{ route('exercicios.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
 
@@ -78,6 +78,23 @@
                               placeholder="Insira a descrição do exercício">
 
                             @error('exe_descricao')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="exe_foto" class="col-md-4 col-form-label text-md-end">{{ __('Foto do exercicio') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="exe_foto" type="file"
+                             class="form-control-sm @error('exe_foto') is-invalid @enderror"
+                              name="exe_foto" value="{{ old('exe_foto') }}" autocomplete="exe_foto"
+                              accept=".jpeg, .png, .jpg, .gif, .svg">
+
+                            @error('exe_foto')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -196,6 +213,24 @@
                               name="exe_descricao" value="{{ $exercicio->exe_descricao }}" autocomplete="exe_descricao" autofocus>
 
                             @error('exe_descricao')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="exe_foto" class="col-md-4 col-form-label text-md-end">{{ __('Foto do exercicio') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="exe_foto" type="file"
+                             class="form-control-sm @error('exe_foto') is-invalid @enderror"
+                              name="exe_foto" value="{{ old('exe_foto') }}" autocomplete="exe_foto"
+                              accept=".jpeg, .png, .jpg, .gif, .svg">
+                              <img style="margin-top: 5px;" src="/img/exercicios/{{$exercicio->exe_foto}}" width="100px">
+
+                            @error('exe_foto')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

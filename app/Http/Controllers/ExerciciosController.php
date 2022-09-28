@@ -49,9 +49,19 @@ class ExerciciosController extends Controller
             'exe_nome' => 'required',
             'exe_membro' => 'required',
             'exe_descricao' => 'nullable',
+            'exe_foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
-        Exercicio::create($request->all());
+        $input = $request->all();
+        // Upload de imagem
+        if ($image = $request->file('exe_foto')) {
+            $destinationPath = public_path('img/exercicios');
+            $exercicioFotoNome = date('dmY') . "-" . $image->getClientOriginalName();
+            $image->move($destinationPath, $exercicioFotoNome);
+            $input['exe_foto'] = "$exercicioFotoNome";
+        }
+
+        Exercicio::create($input);
 
         return redirect()->route('exercicios.index')
                         ->with('success','Exercício criado com sucesso!');
@@ -105,14 +115,26 @@ class ExerciciosController extends Controller
                     'exe_nome' => 'required',
                     'exe_membro' => 'required',
                     'exe_descricao' => 'nullable',
+                    'exe_foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'
                 ]);
+
+                // Atualização de imagem
+                $input = $request->exe_foto;
+                if ($image = $request->file('exe_foto')) {
+                    $destinationPath = public_path('img/exercicios');
+                    $exercicioFotoNome = date('dmY') . "-" . $image->getClientOriginalName();
+                    $image->move($destinationPath, $exercicioFotoNome);
+                    $input['exe_foto'] = "$exercicioFotoNome";
+                }else{
+                    unset($input);
+                }
 
                 $exercicio->id = $request->id;
                 $exercicio->exe_nome = $request->exe_nome;
                 $exercicio->exe_membro = $request->exe_membro;
                 $exercicio->exe_descricao = $request->exe_descricao;
-
-                $exercicio->save();
+                $exercicio->exe_foto = $request->exe_foto;
+                $exercicio->update();
 
                     return redirect()->route('exercicios.index')
                                 ->with('success', 'Exercício atualizado!');

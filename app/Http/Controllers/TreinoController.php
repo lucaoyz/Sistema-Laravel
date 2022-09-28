@@ -1279,6 +1279,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'peito')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1295,6 +1296,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'costas')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1311,6 +1313,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'biceps')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1327,6 +1330,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'triceps')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1343,6 +1347,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'antebraco')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1359,6 +1364,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'ombro')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1375,6 +1381,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'trapezio')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1391,6 +1398,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'inferior')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1407,6 +1415,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'lombar')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1423,6 +1432,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'abdomen')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1461,6 +1471,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'peito')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1477,6 +1488,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'costas')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1493,6 +1505,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'biceps')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1509,6 +1522,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'triceps')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1525,6 +1539,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'antebraco')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1541,6 +1556,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'ombro')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1557,6 +1573,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'trapezio')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1573,6 +1590,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'inferior')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1589,6 +1607,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'lombar')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
@@ -1605,6 +1624,7 @@ class TreinoController extends Controller
         ->where('td_divisao', '=', 'A')
         ->where('exe_membro', '=', 'abdomen')
         ->where('tg_id', '=', $treinoGeralAluno->id)
+        ->orderBy('td_numero', 'ASC')
         ->get();
             $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
             ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')

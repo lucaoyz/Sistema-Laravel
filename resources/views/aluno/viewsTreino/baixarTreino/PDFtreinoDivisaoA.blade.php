@@ -10,7 +10,6 @@
             Treino de {{auth::user()->name}}
         @endif</title>
     <style>
-        @page { size: a4 landscape; }
         h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -115,10 +114,10 @@ th {
 
 .divTreinos {
     border-style: solid;
-    box-sizing: border-box;
     position: absolute;
     float: left;
     overflow: auto;
+    margin: 10px 0 10px 10px;
 }
 
 .container {
@@ -141,21 +140,41 @@ th {
     font-weight: bold;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
+
+    @page {
+            size: a4 landscape;
+            margin: 0in;
+    }
+    body {
+        background-color: #F44335;
+        padding: 0.2in;
+    }
+    #wrapper {
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        }
+
         </style>
     </head>
     <body>
-        <h2><img src="img/logos/GV2Logo_Compacta.png" style="width: 300px;"></h2>
+        <div id="wrapper">
+        <h2 style="padding-top: 10px;"><img src="img/logos/GV2Logo_Compacta.png" style="width: 300px;"></h2>
             @if(auth()->user()->type == 'admin')
-                <h2>Visualização de como o aluno baixará o treino</h2>
+            <p style="margin: 1px 0px 0px 5px;"> Data do treino: {{now()->format('d/m/Y')}}</p>
+            <h3>Visualização de como o aluno baixará o treino</h3>
             @elseif(auth()->user()->type == 'professor')
-                <h2>Visualização de como o aluno baixará o treino</h2>
+            <p style="margin: 1px 0px 0px 5px;"> Data do treino: {{now()->format('d/m/Y')}}</p>
+            <h3>Visualização de como o aluno baixará o treino</h3>
             @else
-                <h2>Treino de <span>{{auth::user()->name}}</span></h2>
+            <p style="margin: 1px 0px 0px 5px;"> Data do treino: {{now()->format('d/m/Y')}}</p>
+            <h3>Treino de <span>{{auth::user()->name}}</span></h3>
             @endif
 
         @isset ($treinoAlunosPeito)
             <div class="divTreinos"><br>
-                <h2>Treino A - Peito</h2>
+                <h3>Treino A - Peito</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -177,7 +196,7 @@ th {
 
         @isset ($treinoAlunosCostas)
             <div class="divTreinos"><br>
-                <h2>Treino A - Costas</h2>
+                <h3>Treino A - Costas</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -189,7 +208,7 @@ th {
                 <tr>
                     <td class="tdNumero">{{$treinoAlunoCostas->td_numero}}</td>
                     <td>{{$treinoAlunoCostas->exe_nome}}</td>
-                    <td>{{$treinoAlunoCostas->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoCostas->td_series}}x{{$treinoAlunoCostas->td_repeticoes}}</td>
                     <td>{{$treinoAlunoCostas->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -199,7 +218,7 @@ th {
 
         @isset ($treinoAlunosBiceps)
             <div class="divTreinos"><br>
-                <h2>Treino A - Biceps</h2>
+                <h3>Treino A - Biceps</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -211,7 +230,7 @@ th {
                 <tr>
                     <td class="tdNumero">{{$treinoAlunoBiceps->td_numero}}</td>
                     <td>{{$treinoAlunoBiceps->exe_nome}}</td>
-                    <td>{{$treinoAlunoBiceps->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoBiceps->td_series}}x{{$treinoAlunoBiceps->td_repeticoes}}</td>
                     <td>{{$treinoAlunoBiceps->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -221,7 +240,7 @@ th {
 
         @isset ($treinoAlunosTriceps)
             <div class="divTreinos"><br>
-                <h2>Treino A - Triceps</h2>
+                <h3>Treino A - Triceps</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -233,7 +252,7 @@ th {
                 <tr>
                     <td class="tdNumero">{{$treinoAlunoTriceps->td_numero}}</td>
                     <td>{{$treinoAlunoTriceps->exe_nome}}</td>
-                    <td>{{$treinoAlunoTriceps->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoTriceps->td_series}}x{{$treinoAlunoTriceps->td_repeticoes}}</td>
                     <td>{{$treinoAlunoTriceps->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -243,7 +262,7 @@ th {
 
         @isset ($treinoAlunosAntebraco)
             <div class="divTreinos"><br>
-                <h2>Treino A - Antebraço</h2>
+                <h3>Treino A - Antebraço</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -255,7 +274,7 @@ th {
                 <tr>
                     <td class="tdNumero">{{$treinoAlunoAntebraco->td_numero}}</td>
                     <td>{{$treinoAlunoAntebraco->exe_nome}}</td>
-                    <td>{{$treinoAlunoAntebraco->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoAntebraco->td_series}}x{{$treinoAlunoAntebraco->td_repeticoes}}</td>
                     <td>{{$treinoAlunoAntebraco->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -265,7 +284,7 @@ th {
 
         @isset ($treinoAlunosOmbro)
             <div class="divTreinos"><br>
-                <h2>Treino A - Ombro</h2>
+                <h3>Treino A - Ombro</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -277,7 +296,7 @@ th {
                 <tr>
                     <td class="tdNumero">{{$treinoAlunoOmbro->td_numero}}</td>
                     <td>{{$treinoAlunoOmbro->exe_nome}}</td>
-                    <td>{{$treinoAlunoOmbro->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoOmbro->td_series}}x{{$treinoAlunoOmbro->td_repeticoes}}</td>
                     <td>{{$treinoAlunoOmbro->exe_descricao}}</td>
                 @endforeach
             </table>
@@ -286,7 +305,7 @@ th {
 
         @isset ($treinoAlunosTrapezio)
             <div class="divTreinos"><br>
-                <h2>Treino A - Trapezio</h2>
+                <h3>Treino A - Trapezio</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -298,7 +317,7 @@ th {
                 <tr>
                     <td class="tdNumero">{{$treinoAlunoTrapezio->td_numero}}</td>
                     <td>{{$treinoAlunoTrapezio->exe_nome}}</td>
-                    <td>{{$treinoAlunoTrapezio->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoTrapezio->td_series}}x{{$treinoAlunoTrapezio->td_repeticoes}}</td>
                     <td>{{$treinoAlunoTrapezio->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -308,7 +327,7 @@ th {
 
         @isset ($treinoAlunosInferior)
             <div class="divTreinos"><br>
-                <h2>Treino A - Inferior</h2>
+                <h3>Treino A - Inferior</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -320,7 +339,7 @@ th {
                 <tr>
                     <td class="tdNumero">{{$treinoAlunoInferior->td_numero}}</td>
                     <td>{{$treinoAlunoInferior->exe_nome}}</td>
-                    <td>{{$treinoAlunoInferior->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoInferior->td_series}}x{{$treinoAlunoInferior->td_repeticoes}}</td>
                     <td>{{$treinoAlunoInferior->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -330,7 +349,7 @@ th {
 
         @isset ($treinoAlunosLombar)
             <div class="divTreinos"><br>
-                <h2>Treino A - Lombar</h2>
+                <h3>Treino A - Lombar</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -342,7 +361,7 @@ th {
                 <tr>
                     <td class="tdNumero">{{$treinoAlunoLombar->td_numero}}</td>
                     <td>{{$treinoAlunoLombar->exe_nome}}</td>
-                    <td>{{$treinoAlunoLombar->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoLombar->td_series}}x{{$treinoAlunoLombar->td_repeticoes}}</td>
                     <td>{{$treinoAlunoLombar->exe_descricao}}</td>
                 </tr>
                 @endforeach
@@ -352,7 +371,7 @@ th {
 
         @isset ($treinoAlunosAbdomen)
             <div class="divTreinos"><br>
-                <h2>Treino A - Abdomen</h2>
+                <h3>Treino A - Abdomen</h3>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -364,13 +383,13 @@ th {
                 <tr>
                     <td class="tdNumero">{{$treinoAlunoAbdomen->td_numero}}</td>
                     <td>{{$treinoAlunoAbdomen->exe_nome}}</td>
-                    <td>{{$treinoAlunoAbdomen->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoAbdomen->td_series}}x{{$treinoAlunoAbdomen->td_repeticoes}}</td>
                     <td>{{$treinoAlunoAbdomen->exe_descricao}}</td>
                 </tr>
                 @endforeach
             </table>
             </div>
         @endisset
-
+    </div>
     </body>
 </html>

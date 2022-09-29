@@ -34,7 +34,7 @@
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
             <p class="mb-0"><span class="text-sm font-weight-bolder">
-                <a href="" class="text-primary">Saiba mais.</a>
+                <a href="" class="text-primary" data-bs-toggle="modal" data-bs-target="#saibaMaisTreinoDetalhesDivisaoA{{$treinoAAluno->exe_id}}">Saiba mais.</a>
                 </span></p>
           </div>
         </div>
@@ -43,7 +43,7 @@
       </div>
     </div>
   </div>
-</main>
-</body>
-</html>
+<!-- Modal -->
+@include('aluno.layoutsModals.modalExercicios')
+
 @endsection

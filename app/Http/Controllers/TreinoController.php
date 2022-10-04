@@ -38,9 +38,14 @@ class TreinoController extends Controller
         $authAluID = $authUser->alu_id;
         $aluno = Aluno::where('id', '=', $authAluID)->first();
         $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
-        $historicoTreinoFirst = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->first();
-        $historicoTreinoFirst = $historicoTreinoFirst->ht_divisao;
-        $historicoTreinos = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->get();
+        $historicoTreinoFirst = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->latest()->first();
+        if(empty($historicoTreinoFirst)) {
+            $historicoTreinoFirst = null;
+        } else {
+            $historicoTreinoFirst = $historicoTreinoFirst->ht_divisao;
+        }
+
+        $historicoTreinos = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->orderBy('created_at', 'desc')->get();
 
         return view('aluno.viewsTreino.treino', [
             'historicoTreinoFirst' => $historicoTreinoFirst,
@@ -1678,6 +1683,106 @@ class TreinoController extends Controller
         $historicoTreino->alu_id = $authAluID;
         $historicoTreino->tg_id = $treinoGeralAluno->id;
         $historicoTreino->ht_divisao = "A";
+        $historicoTreino->ht_data_concluido = Carbon::today();
+        $historicoTreino->save();
+
+        return redirect()->route('aluno.PDFTreinoDivisoes')
+        ->with('success','Concluído com sucesso!');
+
+    }
+
+    public function conclusaoTreinoB()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoGeralDivisoes = $treinoGeralAluno->tg_divisoes;
+
+        $historicoTreino = new historicoTreino();
+        $historicoTreino->alu_id = $authAluID;
+        $historicoTreino->tg_id = $treinoGeralAluno->id;
+        $historicoTreino->ht_divisao = "B";
+        $historicoTreino->ht_data_concluido = Carbon::today();
+        $historicoTreino->save();
+
+        return redirect()->route('aluno.PDFTreinoDivisoes')
+        ->with('success','Concluído com sucesso!');
+
+    }
+
+    public function conclusaoTreinoC()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoGeralDivisoes = $treinoGeralAluno->tg_divisoes;
+
+        $historicoTreino = new historicoTreino();
+        $historicoTreino->alu_id = $authAluID;
+        $historicoTreino->tg_id = $treinoGeralAluno->id;
+        $historicoTreino->ht_divisao = "C";
+        $historicoTreino->ht_data_concluido = Carbon::today();
+        $historicoTreino->save();
+
+        return redirect()->route('aluno.PDFTreinoDivisoes')
+        ->with('success','Concluído com sucesso!');
+
+    }
+
+    public function conclusaoTreinoD()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoGeralDivisoes = $treinoGeralAluno->tg_divisoes;
+
+        $historicoTreino = new historicoTreino();
+        $historicoTreino->alu_id = $authAluID;
+        $historicoTreino->tg_id = $treinoGeralAluno->id;
+        $historicoTreino->ht_divisao = "D";
+        $historicoTreino->ht_data_concluido = Carbon::today();
+        $historicoTreino->save();
+
+        return redirect()->route('aluno.PDFTreinoDivisoes')
+        ->with('success','Concluído com sucesso!');
+
+    }
+
+    public function conclusaoTreinoE()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoGeralDivisoes = $treinoGeralAluno->tg_divisoes;
+
+        $historicoTreino = new historicoTreino();
+        $historicoTreino->alu_id = $authAluID;
+        $historicoTreino->tg_id = $treinoGeralAluno->id;
+        $historicoTreino->ht_divisao = "E";
+        $historicoTreino->ht_data_concluido = Carbon::today();
+        $historicoTreino->save();
+
+        return redirect()->route('aluno.PDFTreinoDivisoes')
+        ->with('success','Concluído com sucesso!');
+
+    }
+
+    public function conclusaoTreinoF()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoGeralDivisoes = $treinoGeralAluno->tg_divisoes;
+
+        $historicoTreino = new historicoTreino();
+        $historicoTreino->alu_id = $authAluID;
+        $historicoTreino->tg_id = $treinoGeralAluno->id;
+        $historicoTreino->ht_divisao = "F";
         $historicoTreino->ht_data_concluido = Carbon::today();
         $historicoTreino->save();
 

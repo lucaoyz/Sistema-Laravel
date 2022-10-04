@@ -59,6 +59,11 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
         /* Rotas para conclusão de treino */
         Route::get('/treino/concluir/a', [App\Http\Controllers\TreinoController::class, 'conclusaoTreinoA'])->name('aluno.conclusaoTreinoA');
+        Route::get('/treino/concluir/b', [App\Http\Controllers\TreinoController::class, 'conclusaoTreinoB'])->name('aluno.conclusaoTreinoB');
+        Route::get('/treino/concluir/c', [App\Http\Controllers\TreinoController::class, 'conclusaoTreinoC'])->name('aluno.conclusaoTreinoC');
+        Route::get('/treino/concluir/d', [App\Http\Controllers\TreinoController::class, 'conclusaoTreinoD'])->name('aluno.conclusaoTreinoD');
+        Route::get('/treino/concluir/e', [App\Http\Controllers\TreinoController::class, 'conclusaoTreinoE'])->name('aluno.conclusaoTreinoE');
+        Route::get('/treino/concluir/f', [App\Http\Controllers\TreinoController::class, 'conclusaoTreinoF'])->name('aluno.conclusaoTreinoF');
 
         /* Rotas para as divisões do treino */
         Route::get('/treino/visualizar/a', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoAAluno'])->name('aluno.treino.visualizar.a');

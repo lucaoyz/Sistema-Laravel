@@ -48,110 +48,110 @@
                 @if ($treinoGeralAlunoDivisoes === 'AB')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
 
                 @if ($treinoGeralAlunoDivisoes === 'ABC')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesC')}}" class="btn btn-primary">Treino C</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesC')}}" class="btn btn-primary">Treino C</a> <a href="{{route('aluno.conclusaoTreinoC')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
 
                 @if ($treinoGeralAlunoDivisoes === 'ABCD')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesC')}}" class="btn btn-primary">Treino C</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesC')}}" class="btn btn-primary">Treino C</a> <a href="{{route('aluno.conclusaoTreinoC')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão D -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesD')}}" class="btn btn-primary">Treino D</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesD')}}" class="btn btn-primary">Treino D</a> <a href="{{route('aluno.conclusaoTreinoD')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
 
                 @if ($treinoGeralAlunoDivisoes === 'ABCDE')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesC')}}" class="btn btn-primary">Treino C</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesC')}}" class="btn btn-primary">Treino C</a> <a href="{{route('aluno.conclusaoTreinoC')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão D -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesD')}}" class="btn btn-primary">Treino D</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesD')}}" class="btn btn-primary">Treino D</a> <a href="{{route('aluno.conclusaoTreinoD')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão E -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesE')}}" class="btn btn-primary">Treino E</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesE')}}" class="btn btn-primary">Treino E</a> <a href="{{route('aluno.conclusaoTreinoE')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
 
                 @if ($treinoGeralAlunoDivisoes === 'ABCDEF')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesB')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesC')}}" class="btn btn-primary">Treino C</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesC')}}" class="btn btn-primary">Treino C</a> <a href="{{route('aluno.conclusaoTreinoC')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão D -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesD')}}" class="btn btn-primary">Treino D</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesD')}}" class="btn btn-primary">Treino D</a> <a href="{{route('aluno.conclusaoTreinoD')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão E -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesE')}}" class="btn btn-primary">Treino E</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesE')}}" class="btn btn-primary">Treino E</a> <a href="{{route('aluno.conclusaoTreinoE')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão F -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesF')}}" class="btn btn-primary">Treino F</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesF')}}" class="btn btn-primary">Treino F</a> <a href="{{route('aluno.conclusaoTreinoF')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
             </div>

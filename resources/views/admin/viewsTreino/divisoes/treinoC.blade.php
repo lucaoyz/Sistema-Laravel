@@ -69,6 +69,7 @@
                     <!-- Dados que vão ser coletados -->
                     <thead>
                         <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nº</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Equipamento</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome do exercício</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Membro Muscular</th>
@@ -82,6 +83,15 @@
                     <!-- Laço de repetição do treino geral -->
                     @foreach ($treinoDetalhes as $treinoDetalhe)
                     <tr>
+
+                        <!-- td_numero -->
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                              <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">{{ $treinoDetalhe->td_numero }}</h6>
+                              </div>
+                            </div>
+                          </td>
 
                        <!-- eq_nome -->
                        <td>

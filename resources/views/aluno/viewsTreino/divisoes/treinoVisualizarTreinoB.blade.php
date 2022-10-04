@@ -43,7 +43,7 @@
       </div>
     </div>
   </div>
-</main>
-</body>
-</html>
+<!-- Modal -->
+@include('aluno.layoutsModals.modalExercicios')
+
 @endsection

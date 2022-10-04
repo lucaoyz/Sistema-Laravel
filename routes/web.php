@@ -57,6 +57,9 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
         Route::get('/treino/pdf/divisoes/e', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesE'])->name('aluno.PDFTreinoDivisoesE');
         Route::get('/treino/pdf/divisoes/f', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesF'])->name('aluno.PDFTreinoDivisoesF');
 
+        /* Rotas para conclusão de treino */
+        Route::get('/treino/concluir/a', [App\Http\Controllers\TreinoController::class, 'conclusaoTreinoA'])->name('aluno.conclusaoTreinoA');
+
         /* Rotas para as divisões do treino */
         Route::get('/treino/visualizar/a', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoAAluno'])->name('aluno.treino.visualizar.a');
         Route::get('/treino/visualizar/b', [App\Http\Controllers\TreinoController::class, 'visualizarTreinoBAluno'])->name('aluno.treino.visualizar.b');

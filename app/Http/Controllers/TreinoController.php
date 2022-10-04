@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Exercicio;
 use App\Models\Aluno;
 use App\Models\Equipamento;
+use App\Models\historicoTreino;
 use App\Models\Personal;
 use App\Models\TreinoDetalhe;
 use App\Models\TreinoGeral;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Carbon\Carbon;
 
 
 class TreinoController extends Controller
@@ -32,7 +34,18 @@ class TreinoController extends Controller
 
     public function indexAluno()
     {
-        return view('aluno.viewsTreino.treino');
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $historicoTreinoFirst = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->first();
+        $historicoTreinoFirst = $historicoTreinoFirst->ht_divisao;
+        $historicoTreinos = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->get();
+
+        return view('aluno.viewsTreino.treino', [
+            'historicoTreinoFirst' => $historicoTreinoFirst,
+            'historicoTreinos' => $historicoTreinos,
+        ]);
     }
 
     public function visualizarTreinoAluno()
@@ -1651,6 +1664,28 @@ class TreinoController extends Controller
                 //->download('treino.pdf');
                 ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
     }
+
+
+    public function conclusaoTreinoA()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoGeralDivisoes = $treinoGeralAluno->tg_divisoes;
+
+        $historicoTreino = new historicoTreino();
+        $historicoTreino->alu_id = $authAluID;
+        $historicoTreino->tg_id = $treinoGeralAluno->id;
+        $historicoTreino->ht_divisao = "A";
+        $historicoTreino->ht_data_concluido = Carbon::today();
+        $historicoTreino->save();
+
+        return redirect()->route('aluno.PDFTreinoDivisoes')
+        ->with('success','Concluído com sucesso!');
+
+    }
+
 
 }
 

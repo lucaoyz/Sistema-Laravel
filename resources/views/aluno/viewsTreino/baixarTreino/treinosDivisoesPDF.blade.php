@@ -40,7 +40,7 @@
 
                 @if ($treinoGeralAlunoDivisoes === 'A')
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="" class="btn btn-success">Concluir</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.PDFTreinoDivisoesA')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                 @endif

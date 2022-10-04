@@ -58,7 +58,8 @@
               <br>
               <!-- Botão de criar -->
             <div class="pull-right">
-                <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoDetalhesDivisaoF" class="btn btn-success">Registre um exercício</a></h5>
+                <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoDetalhesDivisaoF" class="btn btn-success">Registre um exercício</a>
+                    <a href="{{route('aluno.PDFTreinoDivisoesFTreinador', $treinoGeral->id)}}" class="btn btn-primary">Visualize como o aluno baixará o treino</a></h5>
             </div>
             </div>
 

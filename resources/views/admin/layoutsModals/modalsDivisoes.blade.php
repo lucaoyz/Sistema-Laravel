@@ -446,6 +446,25 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercício') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_series') is-invalid @enderror"
+                            name="td_numero" value="{{ old('td_numero') }}" required autocomplete="td_repeticoes" autofocus
+                            placeholder="Insira o Nº da ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
                         <label for="eq_id" class="col-md-4 col-form-label text-md-end">{{ __('*Equipamento') }}</label>
 
                         <div class="col-md-6">
@@ -593,6 +612,24 @@
                             name="td_divisao" value="{{ $treinoDetalhe->td_divisao }}" required autocomplete="td_divisao" autofocus>
 
                             @error('td_divisao')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercicio') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_numero') is-invalid @enderror"
+                            name="td_numero" value="{{ $treinoDetalhe->td_numero }}" required autocomplete="td_numero" autofocus
+                            placeholder="Insira o Nº de ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -793,6 +830,24 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercício') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_series') is-invalid @enderror"
+                            name="td_numero" value="{{ old('td_numero') }}" required autocomplete="td_repeticoes" autofocus
+                            placeholder="Insira o Nº da ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
                         <label for="eq_id" class="col-md-4 col-form-label text-md-end">{{ __('*Equipamento') }}</label>
 
                         <div class="col-md-6">
@@ -940,6 +995,24 @@
                             name="td_divisao" value="{{ $treinoDetalhe->td_divisao }}" required autocomplete="td_divisao" autofocus>
 
                             @error('td_divisao')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercicio') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_numero') is-invalid @enderror"
+                            name="td_numero" value="{{ $treinoDetalhe->td_numero }}" required autocomplete="td_numero" autofocus
+                            placeholder="Insira o Nº de ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -1140,6 +1213,25 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercício') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_series') is-invalid @enderror"
+                            name="td_numero" value="{{ old('td_numero') }}" required autocomplete="td_repeticoes" autofocus
+                            placeholder="Insira o Nº da ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
                         <label for="eq_id" class="col-md-4 col-form-label text-md-end">{{ __('*Equipamento') }}</label>
 
                         <div class="col-md-6">
@@ -1287,6 +1379,24 @@
                             name="td_divisao" value="{{ $treinoDetalhe->td_divisao }}" required autocomplete="td_divisao" autofocus>
 
                             @error('td_divisao')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercicio') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_numero') is-invalid @enderror"
+                            name="td_numero" value="{{ $treinoDetalhe->td_numero }}" required autocomplete="td_numero" autofocus
+                            placeholder="Insira o Nº de ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -1488,6 +1598,25 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercício') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_series') is-invalid @enderror"
+                            name="td_numero" value="{{ old('td_numero') }}" required autocomplete="td_repeticoes" autofocus
+                            placeholder="Insira o Nº da ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
                         <label for="eq_id" class="col-md-4 col-form-label text-md-end">{{ __('*Equipamento') }}</label>
 
                         <div class="col-md-6">
@@ -1635,6 +1764,24 @@
                             name="td_divisao" value="{{ $treinoDetalhe->td_divisao }}" required autocomplete="td_divisao" autofocus>
 
                             @error('td_divisao')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercicio') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_numero') is-invalid @enderror"
+                            name="td_numero" value="{{ $treinoDetalhe->td_numero }}" required autocomplete="td_numero" autofocus
+                            placeholder="Insira o Nº de ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -1836,6 +1983,25 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercício') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_series') is-invalid @enderror"
+                            name="td_numero" value="{{ old('td_numero') }}" required autocomplete="td_repeticoes" autofocus
+                            placeholder="Insira o Nº da ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
                         <label for="eq_id" class="col-md-4 col-form-label text-md-end">{{ __('*Equipamento') }}</label>
 
                         <div class="col-md-6">
@@ -1983,6 +2149,24 @@
                             name="td_divisao" value="{{ $treinoDetalhe->td_divisao }}" required autocomplete="td_divisao" autofocus>
 
                             @error('td_divisao')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="td_numero" class="col-md-4 col-form-label text-md-end">{{ __('*Nº Ordem do exercicio') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="td_numero" type="text"
+                            class="form-control @error('td_numero') is-invalid @enderror"
+                            name="td_numero" value="{{ $treinoDetalhe->td_numero }}" required autocomplete="td_numero" autofocus
+                            placeholder="Insira o Nº de ordem do exercicio"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+
+                            @error('td_numero')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

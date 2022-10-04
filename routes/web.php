@@ -218,6 +218,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         /* Rotas para visualização de aluno */
         Route::get('/treino/pdf/divisoes/a{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesATreinador'])->name('aluno.PDFTreinoDivisoesATreinador');
+        Route::get('/treino/pdf/divisoes/b{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesBTreinador'])->name('aluno.PDFTreinoDivisoesBTreinador');
+        Route::get('/treino/pdf/divisoes/c{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesCTreinador'])->name('aluno.PDFTreinoDivisoesCTreinador');
+        Route::get('/treino/pdf/divisoes/d{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesDTreinador'])->name('aluno.PDFTreinoDivisoesDTreinador');
+        Route::get('/treino/pdf/divisoes/e{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesETreinador'])->name('aluno.PDFTreinoDivisoesETreinador');
+        Route::get('/treino/pdf/divisoes/f{treinoGeral}', [App\Http\Controllers\TreinoController::class, 'PDFTreinoDivisoesFTreinador'])->name('aluno.PDFTreinoDivisoesFTreinador');
 
 });
 });

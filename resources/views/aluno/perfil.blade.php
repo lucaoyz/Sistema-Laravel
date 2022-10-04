@@ -59,9 +59,6 @@
                 </div>
                 </div>
                 <div class="card-body p-3">
-                <p class="text-sm">
-                    Colocar descrição aqui
-                </p>
                 <hr class="horizontal gray-light my-4">
                 <ul class="list-group">
                     <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nome completo:</strong> &nbsp; {{ Auth::user()->name }}</li>

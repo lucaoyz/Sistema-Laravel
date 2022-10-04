@@ -25,20 +25,22 @@ class UsuariosController extends Controller
         $personals = Personal::latest()->paginate(5);
         $personals->per_data_nascimento = \Carbon\Carbon::now('America/Sao_Paulo');
 
-        $usuario = User::where('email', '=', $aluno->alu_email)->first();
-
-        if(empty($usuario)){
-            $acesso = "0";
-        } else {
-            $acesso = "1";
-        }
-
         return view('admin.usuarios', [
             'alunos' => $alunos,
             'personals' => $personals,
-            'acesso' => $acesso,
             ]);
     }
+
+    public function indexAtivos(Aluno $aluno)
+    {
+        $alunos = Aluno::join('users', 'users.alu_id', '=', 'alunos.id')->where('users.alu_id', '=', 'alunos.id')->orderBy('alunos.created_at', 'desc')->paginate(5);
+        $alunos->alu_data_nascimento = \Carbon\Carbon::now('America/Sao_Paulo');
+
+        return view('admin.usuarios', [
+            'alunos' => $alunos,
+            ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

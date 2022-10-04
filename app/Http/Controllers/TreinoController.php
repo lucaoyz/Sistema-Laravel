@@ -1791,6 +1791,22 @@ class TreinoController extends Controller
 
     }
 
+    public function limparHistorico()
+    {
+        $authUser = auth::user();
+        $authAluID = $authUser->alu_id;
+        $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoGeralDivisoes = $treinoGeralAluno->tg_divisoes;
+
+        $historicoTreino = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->get();
+        $historicoTreino->each->delete();
+
+        return redirect()->route('aluno.treino')
+        ->with('success','Histórico limpo com sucesso!');
+
+    }
+
 
 }
 

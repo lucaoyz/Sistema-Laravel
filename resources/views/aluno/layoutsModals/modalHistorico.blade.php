@@ -15,6 +15,7 @@
             @endforeach
         </div>
         <div class="modal-footer">
+            <a class="btn bg-gradient-primary" href="{{route('aluno.limparHistorico')}}">Limpar</a>
           <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Fechar</button>
         </div>
       </div>

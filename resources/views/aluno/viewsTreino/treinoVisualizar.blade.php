@@ -40,7 +40,7 @@
 
                 @if ($treinoGeralAlunoDivisoes === 'A')
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                 @endif
@@ -48,110 +48,110 @@
                 @if ($treinoGeralAlunoDivisoes === 'AB')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-success">Treino B</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
 
                 @if ($treinoGeralAlunoDivisoes === 'ABC')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-success">Treino B</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-success">Treino C</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-primary">Treino C</a> <a href="{{route('aluno.conclusaoTreinoC')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
 
                 @if ($treinoGeralAlunoDivisoes === 'ABCD')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-success">Treino B</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-success">Treino C</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-primary">Treino C</a> <a href="{{route('aluno.conclusaoTreinoC')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão D -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.d')}}" class="btn btn-success">Treino D</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.d')}}" class="btn btn-primary">Treino D</a> <a href="{{route('aluno.conclusaoTreinoD')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
 
                 @if ($treinoGeralAlunoDivisoes === 'ABCDE')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-success">Treino B</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-success">Treino C</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-primary">Treino C</a> <a href="{{route('aluno.conclusaoTreinoC')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão D -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.d')}}" class="btn btn-success">Treino D</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.d')}}" class="btn btn-primary">Treino D</a> <a href="{{route('aluno.conclusaoTreinoD')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão E -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.e')}}" class="btn btn-success">Treino E</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.e')}}" class="btn btn-primary">Treino E</a> <a href="{{route('aluno.conclusaoTreinoE')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
 
                 @if ($treinoGeralAlunoDivisoes === 'ABCDEF')
                     <!-- Divisão A -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-success">Treino A</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.a')}}" class="btn btn-primary">Treino A</a> <a href="{{route('aluno.conclusaoTreinoA')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão B -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-success">Treino B</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.b')}}" class="btn btn-primary">Treino B</a> <a href="{{route('aluno.conclusaoTreinoB')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão C -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-success">Treino C</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.c')}}" class="btn btn-primary">Treino C</a> <a href="{{route('aluno.conclusaoTreinoC')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão D -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.d')}}" class="btn btn-success">Treino D</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.d')}}" class="btn btn-primary">Treino D</a> <a href="{{route('aluno.conclusaoTreinoD')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão E -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.e')}}" class="btn btn-success">Treino E</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.e')}}" class="btn btn-primary">Treino E</a> <a href="{{route('aluno.conclusaoTreinoE')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
 
                     <!-- Divisão F -->
                     <div class="pull-right">
-                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.f')}}" class="btn btn-success">Treino F</a></h5>
+                        <h5 class="mb-0"><a href="{{route('aluno.treino.visualizar.f')}}" class="btn btn-primary">Treino F</a> <a href="{{route('aluno.conclusaoTreinoF')}}" class="btn btn-success">Concluir</a></h5>
                     </div>
                 @endif
             </div>

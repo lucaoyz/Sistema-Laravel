@@ -23,13 +23,13 @@
           <div class="card-header p-3 pt-2">
             <div class="pt-1">
               <p class="text-sm mb-0 text-capitalize">Imprimir</p>
-              <h5 class="mb-0"><a href="" class="text-primary">Imprimir treino</a></h5>
+              <h5 class="mb-0"><a href="" class="text-primary" data-bs-toggle="modal" data-bs-target="#imprimirTreino">Imprimir treino</a></h5>
             </div>
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
             <p class="mb-0"><span class="text-sm font-weight-bolder">
-                <a href="">Clique aqui para imprimir seu treino.</a>
+                <a href="" data-bs-toggle="modal" data-bs-target="#imprimirTreino">Clique aqui para imprimir seu treino.</a>
                 </span></p>
           </div>
         </div>
@@ -90,7 +90,7 @@
     </div>
   </div>
   <!-- Modal -->
-    @include('aluno.layoutsModals.modalHistorico')
+    @include('aluno.layoutsModals.modalTreinos')
 
   @endsection
 

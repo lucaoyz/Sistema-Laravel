@@ -36,8 +36,8 @@
             Deseja imprimir próximo treino ou imprimir algum treino específico?
         </div>
         <div class="modal-footer">
-            <a class="btn bg-gradient-primary" href="">Imprimir proximo treino</a>
-            <a class="btn bg-gradient-secondary" href="">Treino específico</a>
+            <a class="btn bg-gradient-primary" href="{{route('aluno.ImprimirTreino')}}">Imprimir proximo treino</a>
+            <a class="btn bg-gradient-secondary" href="{{route('aluno.ImprimirTreinoDivisoes')}}">Treino específico</a>
           <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Fechar</button>
         </div>
       </div>

@@ -2,7 +2,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Treino de {{auth::user()->name}}</title>
+        <title>@if(auth()->user()->type == 'admin')
+            Visualização de como o aluno baixará o treino
+        @elseif(auth()->user()->type == 'professor')
+            Visualização de como o aluno baixará o treino
+        @else
+            Treino de {{auth::user()->name}}
+        @endif</title>
     <style>
         h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-top: 0;
@@ -108,10 +114,10 @@ th {
 
 .divTreinos {
     border-style: solid;
-    box-sizing: border-box;
     position: absolute;
     float: left;
     overflow: auto;
+    margin: 10px 0 10px 10px;
 }
 
 .container {
@@ -129,473 +135,261 @@ th {
     margin: 2px;
 }
 
+.tdNumero {
+    font-size: 30px;
+    font-weight: bold;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+    @page {
+            size: a4 landscape;
+            margin: 0in;
+    }
+    body {
+        background-color: #F44335;
+        padding: 0.2in;
+    }
+    #wrapper {
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        }
+
         </style>
     </head>
     <body>
-        <h2><img src="img/logos/GV2Logo_Compacta.png" style="width: 300px;"></h2>
-        <h2>Treino de <span>{{auth::user()->name;}}</span></h2>
+        <div id="wrapper">
+        <h2 style="padding-top: 10px;"><img src="img/logos/GV2Logo_Compacta.png" style="width: 300px;"></h2>
+            @if(auth()->user()->type == 'admin')
+            <p style="margin: 1px 0px 0px 5px;"> Data do treino: {{now()->format('d/m/Y')}}</p>
+            <h3>Visualização de como o aluno baixará o treino</h3>
+            @elseif(auth()->user()->type == 'professor')
+            <p style="margin: 1px 0px 0px 5px;"> Data do treino: {{now()->format('d/m/Y')}}</p>
+            <h3>Visualização de como o aluno baixará o treino</h3>
+            @else
+            <p style="margin: 1px 0px 0px 5px;"> Data do treino: {{now()->format('d/m/Y')}}</p>
+            <h3>Treino de <span>{{auth::user()->name}}</span></h3>
+            @endif
 
+        @isset ($treinoAlunosPeito)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Peito</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosPeito as $treinoAlunoPeito)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoPeito->td_numero}}</td>
+                    <td>{{$treinoAlunoPeito->exe_nome}}</td>
+                    <td>{{$treinoAlunoPeito->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoPeito->exe_descricao}}</td>
+                </tr>
+                @endforeach
+            </table>
+            </div>
+        @endisset
 
-                @if ($treinoGeralDivisoes === 'A')
-                <div class="divTreinos"><br>
-                    <h2>Treino A</h2>
-                <table>
-                    <tr>
-                        <th>Membro</th>
-                        <th>Exercício</th>
-                        <th>Series</th>
-                        <th>Repetições</th>
+        @isset ($treinoAlunosCostas)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Costas</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosCostas as $treinoAlunoCostas)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoCostas->td_numero}}</td>
+                    <td>{{$treinoAlunoCostas->exe_nome}}</td>
+                    <td>{{$treinoAlunoCostas->td_series}}x{{$treinoAlunoCostas->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoCostas->exe_descricao}}</td>
+                </tr>
+                @endforeach
+            </table>
+            </div>
+        @endisset
 
-                    </tr>
-                    @foreach ($treinoAAlunos as $treinoAAluno)
-                    <tr>
-                        <td>{{$treinoAAluno->exe_membro}}</td>
-                        <td>{{$treinoAAluno->exe_nome}}</td>
-                        <td>{{$treinoAAluno->td_series}}</td>
-                        <td>{{$treinoAAluno->td_repeticoes}}</td>
-                    </tr>
-                    @endforeach
-                </table>
-                </div>
+        @isset ($treinoAlunosBiceps)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Biceps</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosBiceps as $treinoAlunoBiceps)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoBiceps->td_numero}}</td>
+                    <td>{{$treinoAlunoBiceps->exe_nome}}</td>
+                    <td>{{$treinoAlunoBiceps->td_series}}x{{$treinoAlunoBiceps->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoBiceps->exe_descricao}}</td>
+                </tr>
+                @endforeach
+            </table>
+            </div>
+        @endisset
 
-                @endif
+        @isset ($treinoAlunosTriceps)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Triceps</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosTriceps as $treinoAlunoTriceps)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoTriceps->td_numero}}</td>
+                    <td>{{$treinoAlunoTriceps->exe_nome}}</td>
+                    <td>{{$treinoAlunoTriceps->td_series}}x{{$treinoAlunoTriceps->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoTriceps->exe_descricao}}</td>
+                </tr>
+                @endforeach
+            </table>
+            </div>
+        @endisset
 
-                @if ($treinoGeralDivisoes === 'AB')
-                    <!-- Divisão A -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino A</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoAAlunos as $treinoAAluno)
-                        <tr>
-                            <td>{{$treinoAAluno->exe_membro}}</td>
-                            <td>{{$treinoAAluno->exe_nome}}</td>
-                            <td>{{$treinoAAluno->td_series}}</td>
-                            <td>{{$treinoAAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
+        @isset ($treinoAlunosAntebraco)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Antebraço</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosAntebraco as $treinoAlunoAntebraco)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoAntebraco->td_numero}}</td>
+                    <td>{{$treinoAlunoAntebraco->exe_nome}}</td>
+                    <td>{{$treinoAlunoAntebraco->td_series}}x{{$treinoAlunoAntebraco->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoAntebraco->exe_descricao}}</td>
+                </tr>
+                @endforeach
+            </table>
+            </div>
+        @endisset
 
-                    <!-- Divisão B -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino B</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoBAlunos as $treinoBAluno)
-                        <tr>
-                            <td>{{$treinoBAluno->exe_membro}}</td>
-                            <td>{{$treinoBAluno->exe_nome}}</td>
-                            <td>{{$treinoBAluno->td_series}}</td>
-                            <td>{{$treinoBAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-                @endif
+        @isset ($treinoAlunosOmbro)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Ombro</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosOmbro as $treinoAlunoOmbro)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoOmbro->td_numero}}</td>
+                    <td>{{$treinoAlunoOmbro->exe_nome}}</td>
+                    <td>{{$treinoAlunoOmbro->td_series}}x{{$treinoAlunoOmbro->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoOmbro->exe_descricao}}</td>
+                @endforeach
+            </table>
+            </div>
+        @endisset
 
-                @if ($treinoGeralDivisoes === 'ABC')
-                    <!-- Divisão A -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino A</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoAAlunos as $treinoAAluno)
-                        <tr>
-                            <td>{{$treinoAAluno->exe_membro}}</td>
-                            <td>{{$treinoAAluno->exe_nome}}</td>
-                            <td>{{$treinoAAluno->td_series}}</td>
-                            <td>{{$treinoAAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
+        @isset ($treinoAlunosTrapezio)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Trapezio</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosTrapezio as $treinoAlunoTrapezio)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoTrapezio->td_numero}}</td>
+                    <td>{{$treinoAlunoTrapezio->exe_nome}}</td>
+                    <td>{{$treinoAlunoTrapezio->td_series}}x{{$treinoAlunoTrapezio->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoTrapezio->exe_descricao}}</td>
+                </tr>
+                @endforeach
+            </table>
+            </div>
+        @endisset
 
-                    <!-- Divisão B -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino B</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoBAlunos as $treinoBAluno)
-                        <tr>
-                            <td>{{$treinoBAluno->exe_membro}}</td>
-                            <td>{{$treinoBAluno->exe_nome}}</td>
-                            <td>{{$treinoBAluno->td_series}}</td>
-                            <td>{{$treinoBAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
+        @isset ($treinoAlunosInferior)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Inferior</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosInferior as $treinoAlunoInferior)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoInferior->td_numero}}</td>
+                    <td>{{$treinoAlunoInferior->exe_nome}}</td>
+                    <td>{{$treinoAlunoInferior->td_series}}x{{$treinoAlunoInferior->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoInferior->exe_descricao}}</td>
+                </tr>
+                @endforeach
+            </table>
+            </div>
+        @endisset
 
-                    <!-- Divisão C -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino C</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoCAlunos as $treinoCAluno)
-                        <tr>
-                            <td>{{$treinoCAluno->exe_membro}}</td>
-                            <td>{{$treinoCAluno->exe_nome}}</td>
-                            <td>{{$treinoCAluno->td_series}}</td>
-                            <td>{{$treinoCAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-                @endif
+        @isset ($treinoAlunosLombar)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Lombar</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosLombar as $treinoAlunoLombar)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoLombar->td_numero}}</td>
+                    <td>{{$treinoAlunoLombar->exe_nome}}</td>
+                    <td>{{$treinoAlunoLombar->td_series}}x{{$treinoAlunoLombar->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoLombar->exe_descricao}}</td>
+                </tr>
+                @endforeach
+            </table>
+            </div>
+        @endisset
 
-                @if ($treinoGeralDivisoes === 'ABCD')
-                    <!-- Divisão A -->
-                    <div class="container">
-                    <div class="row">
-                    <div class="col"><br>
-                        <h2>Treino A</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoAAlunos as $treinoAAluno)
-                        <tr>
-                            <td>{{$treinoAAluno->exe_membro}}</td>
-                            <td>{{$treinoAAluno->exe_nome}}</td>
-                            <td>{{$treinoAAluno->td_series}}</td>
-                            <td>{{$treinoAAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão B -->
-                    <div class="col"><br>
-                        <h2>Treino B</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoBAlunos as $treinoBAluno)
-                        <tr>
-                            <td>{{$treinoBAluno->exe_membro}}</td>
-                            <td>{{$treinoBAluno->exe_nome}}</td>
-                            <td>{{$treinoBAluno->td_series}}</td>
-                            <td>{{$treinoBAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão C -->
-                    <div class="col"><br>
-                        <h2>Treino C</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoCAlunos as $treinoCAluno)
-                        <tr>
-                            <td>{{$treinoCAluno->exe_membro}}</td>
-                            <td>{{$treinoCAluno->exe_nome}}</td>
-                            <td>{{$treinoCAluno->td_series}}</td>
-                            <td>{{$treinoCAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-                </div>
-
-                </div>
-                    <!-- Divisão D -->
-                    <div class="row">
-                    <div class="col"><br>
-                        <h2>Treino D</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoDAlunos as $treinoDAluno)
-                        <tr>
-                            <td>{{$treinoDAluno->exe_membro}}</td>
-                            <td>{{$treinoDAluno->exe_nome}}</td>
-                            <td>{{$treinoDAluno->td_series}}</td>
-                            <td>{{$treinoDAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-                </div>
-                </div>
-                @endif
-
-                @if ($treinoGeralDivisoes === 'ABCDE')
-                    <!-- Divisão A -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino A</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoAAlunos as $treinoAAluno)
-                        <tr>
-                            <td>{{$treinoAAluno->exe_membro}}</td>
-                            <td>{{$treinoAAluno->exe_nome}}</td>
-                            <td>{{$treinoAAluno->td_series}}</td>
-                            <td>{{$treinoAAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão B -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino B</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoBAlunos as $treinoBAluno)
-                        <tr>
-                            <td>{{$treinoBAluno->exe_membro}}</td>
-                            <td>{{$treinoBAluno->exe_nome}}</td>
-                            <td>{{$treinoBAluno->td_series}}</td>
-                            <td>{{$treinoBAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão C -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino C</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoCAlunos as $treinoCAluno)
-                        <tr>
-                            <td>{{$treinoCAluno->exe_membro}}</td>
-                            <td>{{$treinoCAluno->exe_nome}}</td>
-                            <td>{{$treinoCAluno->td_series}}</td>
-                            <td>{{$treinoCAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão D -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino D</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoDAlunos as $treinoDAluno)
-                        <tr>
-                            <td>{{$treinoDAluno->exe_membro}}</td>
-                            <td>{{$treinoDAluno->exe_nome}}</td>
-                            <td>{{$treinoDAluno->td_series}}</td>
-                            <td>{{$treinoDAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão E -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino E</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoEAlunos as $treinoEAluno)
-                        <tr>
-                            <td>{{$treinoEAluno->exe_membro}}</td>
-                            <td>{{$treinoEAluno->exe_nome}}</td>
-                            <td>{{$treinoEAluno->td_series}}</td>
-                            <td>{{$treinoEAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-                @endif
-
-                @if ($treinoGeralDivisoes === 'ABCDEF')
-                    <!-- Divisão A -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino A</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoAAlunos as $treinoAAluno)
-                        <tr>
-                            <td>{{$treinoAAluno->exe_membro}}</td>
-                            <td>{{$treinoAAluno->exe_nome}}</td>
-                            <td>{{$treinoAAluno->td_series}}</td>
-                            <td>{{$treinoAAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão B -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino B</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoBAlunos as $treinoBAluno)
-                        <tr>
-                            <td>{{$treinoBAluno->exe_membro}}</td>
-                            <td>{{$treinoBAluno->exe_nome}}</td>
-                            <td>{{$treinoBAluno->td_series}}</td>
-                            <td>{{$treinoBAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão C -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino C</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoCAlunos as $treinoCAluno)
-                        <tr>
-                            <td>{{$treinoCAluno->exe_membro}}</td>
-                            <td>{{$treinoCAluno->exe_nome}}</td>
-                            <td>{{$treinoCAluno->td_series}}</td>
-                            <td>{{$treinoCAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão D -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino D</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoDAlunos as $treinoDAluno)
-                        <tr>
-                            <td>{{$treinoDAluno->exe_membro}}</td>
-                            <td>{{$treinoDAluno->exe_nome}}</td>
-                            <td>{{$treinoDAluno->td_series}}</td>
-                            <td>{{$treinoDAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão E -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino E</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoEAlunos as $treinoEAluno)
-                        <tr>
-                            <td>{{$treinoEAluno->exe_membro}}</td>
-                            <td>{{$treinoEAluno->exe_nome}}</td>
-                            <td>{{$treinoEAluno->td_series}}</td>
-                            <td>{{$treinoEAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-
-                    <!-- Divisão F -->
-                    <div class="divTreinos"><br>
-                        <h2>Treino F</h2>
-                    <table>
-                        <tr>
-                            <th>Membro</th>
-                            <th>Exercício</th>
-                            <th>Series</th>
-                            <th>Repetições</th>
-                        </tr>
-                        @foreach ($treinoFAlunos as $treinoFAluno)
-                        <tr>
-                            <td>{{$treinoFAluno->exe_membro}}</td>
-                            <td>{{$treinoFAluno->exe_nome}}</td>
-                            <td>{{$treinoFAluno->td_series}}</td>
-                            <td>{{$treinoFAluno->td_repeticoes}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-                    </div>
-                @endif
-
+        @isset ($treinoAlunosAbdomen)
+            <div class="divTreinos"><br>
+                <h3>Treino D - Abdomen</h3>
+            <table>
+                <tr>
+                    <th>Nº</th>
+                    <th>Exercício</th>
+                    <th>Series/Repetições</th>
+                    <th>OBS</th>
+                </tr>
+                @foreach ($treinoAlunosAbdomen as $treinoAlunoAbdomen)
+                <tr>
+                    <td class="tdNumero">{{$treinoAlunoAbdomen->td_numero}}</td>
+                    <td>{{$treinoAlunoAbdomen->exe_nome}}</td>
+                    <td>{{$treinoAlunoAbdomen->td_series}}x{{$treinoAlunoAbdomen->td_repeticoes}}</td>
+                    <td>{{$treinoAlunoAbdomen->exe_descricao}}</td>
+                </tr>
+                @endforeach
+            </table>
+            </div>
+        @endisset
+    </div>
     </body>
 </html>

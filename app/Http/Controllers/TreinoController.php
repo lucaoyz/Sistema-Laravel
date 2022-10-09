@@ -3932,6 +3932,9 @@ class TreinoController extends Controller
         $authAluID = $authUser->alu_id;
         $aluno = Aluno::where('id', '=', $authAluID)->first();
         $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        $treinoGeralAlunoProfessorID = $treinoGeralAluno->per_id;
+        $treinoGeralAlunoProfessorQuery = Personal::where('id', $treinoGeralAlunoProfessorID)->first();
+        $treinoGeralAlunoProfessor = $treinoGeralAlunoProfessorQuery->per_nome;
         $treinoGeralDivisoes = $treinoGeralAluno->tg_divisoes;
 
         $historicoTreino = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->orderBy('created_at', 'desc')->first();
@@ -3941,193 +3944,4150 @@ class TreinoController extends Controller
             ->with('error','Não foi concluído nenhum treino ainda!');
         } else {
             $historicoTreino = $historicoTreino->ht_divisao;
-            if ($historicoTreino === 'A') {
-                $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'peito')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+            if ($treinoGeralDivisoes === 'A'){
+                if($historicoTreino === 'A'){
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "A";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+            }
+            if ($treinoGeralDivisoes === 'AB'){
+                if ($historicoTreino === 'A') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "B";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'peito')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhPeito)){
-                        $treinoAlunosPeito = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
 
-                $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'costas')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'costas')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhCostas)){
-                        $treinoAlunosCostas = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
 
-                $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'biceps')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'biceps')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhBiceps)){
-                        $treinoAlunosBiceps = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
 
-                $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'triceps')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'triceps')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhTriceps)){
-                        $treinoAlunosTriceps = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
 
-                $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'antebraco')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'antebraco')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhAntebraco)){
-                        $treinoAlunosAntebraco = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
 
-                $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'ombro')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'ombro')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhOmbro)){
-                        $treinoAlunosOmbro = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
 
-                $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'trapezio')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'trapezio')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhTrapezio)){
-                        $treinoAlunosTrapezio = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
 
-                $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'inferior')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'inferior')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhInferior)){
-                        $treinoAlunosInferior = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
 
-                $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'lombar')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'lombar')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhLombar)){
-                        $treinoAlunosLombar = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
 
-                $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
-                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
-                ->where('td_divisao', '=', 'B')
-                ->where('exe_membro', '=', 'abdomen')
-                ->where('tg_id', '=', $treinoGeralAluno->id)
-                ->orderBy('td_numero', 'ASC')
-                ->get();
-                    $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
                     ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
                     ->where('td_divisao', '=', 'B')
                     ->where('exe_membro', '=', 'abdomen')
                     ->where('tg_id', '=', $treinoGeralAluno->id)
-                    ->first();
-                    if(empty($verificarSeEhAbdomen)){
-                        $treinoAlunosAbdomen = null;
-                    }
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
 
-            return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
-                'treinoGeralDivisoes' => $treinoGeralDivisoes,
-                'treinoAlunosPeito' => $treinoAlunosPeito,
-                'treinoAlunosCostas' => $treinoAlunosCostas,
-                'treinoAlunosBiceps' => $treinoAlunosBiceps,
-                'treinoAlunosTriceps' => $treinoAlunosTriceps,
-                'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
-                'treinoAlunosOmbro' => $treinoAlunosOmbro,
-                'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
-                'treinoAlunosInferior' => $treinoAlunosInferior,
-                'treinoAlunosLombar' => $treinoAlunosLombar,
-                'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
-            ])
-                        ->setPaper([0, 0, 807.874, 221.102], 'landscape')
-                        //->download('treino.pdf');
-                        ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'B') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "A";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+            }
+            if ($treinoGeralDivisoes === 'ABC'){
+                if ($historicoTreino === 'A'){
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "B";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'B') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "C";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoC', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'C') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "A";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+            }
+            if ($treinoGeralDivisoes === 'ABCD') {
+                if ($historicoTreino === 'A') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "B";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'B') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "C";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoC', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'C'){
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "D";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoD', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'D'){
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "A";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+            }
+            if ($treinoGeralDivisoes === 'ABCDE'){
+                if ($historicoTreino === 'A') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "B";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'B') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "C";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoC', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'C'){
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "D";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoD', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'D'){
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "E";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'peito')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhPeito)){
+                                $treinoAlunosPeito = null;
+                            }
+
+                        $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'costas')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhCostas)){
+                                $treinoAlunosCostas = null;
+                            }
+
+                        $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'biceps')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhBiceps)){
+                                $treinoAlunosBiceps = null;
+                            }
+
+                        $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'triceps')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhTriceps)){
+                                $treinoAlunosTriceps = null;
+                            }
+
+                        $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'antebraco')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhAntebraco)){
+                                $treinoAlunosAntebraco = null;
+                            }
+
+                        $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'ombro')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhOmbro)){
+                                $treinoAlunosOmbro = null;
+                            }
+
+                        $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'trapezio')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhTrapezio)){
+                                $treinoAlunosTrapezio = null;
+                            }
+
+                        $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'inferior')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhInferior)){
+                                $treinoAlunosInferior = null;
+                            }
+
+                        $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'lombar')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhLombar)){
+                                $treinoAlunosLombar = null;
+                            }
+
+                        $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'abdomen')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhAbdomen)){
+                                $treinoAlunosAbdomen = null;
+                            }
+
+                    return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoE', [
+                        'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                        'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                        'treinoAlunosPeito' => $treinoAlunosPeito,
+                        'treinoAlunosCostas' => $treinoAlunosCostas,
+                        'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                        'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                        'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                        'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                        'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                        'treinoAlunosInferior' => $treinoAlunosInferior,
+                        'treinoAlunosLombar' => $treinoAlunosLombar,
+                        'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                    ])
+                                    ->setPaper('a4', 'landscape')
+                                //->download('treino.pdf');
+                                ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'E'){
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "A";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+            }
+            if ($treinoGeralDivisoes === 'ABCDEF') {
+                if ($historicoTreino === 'A') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "B";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'B')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'B')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'B') {
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "C";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'C')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'C')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoC', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'C'){
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "D";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'D')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'D')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoD', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'D'){
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "E";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'peito')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhPeito)){
+                                $treinoAlunosPeito = null;
+                            }
+
+                        $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'costas')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhCostas)){
+                                $treinoAlunosCostas = null;
+                            }
+
+                        $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'biceps')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhBiceps)){
+                                $treinoAlunosBiceps = null;
+                            }
+
+                        $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'triceps')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhTriceps)){
+                                $treinoAlunosTriceps = null;
+                            }
+
+                        $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'antebraco')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhAntebraco)){
+                                $treinoAlunosAntebraco = null;
+                            }
+
+                        $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'ombro')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhOmbro)){
+                                $treinoAlunosOmbro = null;
+                            }
+
+                        $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'trapezio')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhTrapezio)){
+                                $treinoAlunosTrapezio = null;
+                            }
+
+                        $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'inferior')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhInferior)){
+                                $treinoAlunosInferior = null;
+                            }
+
+                        $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'lombar')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhLombar)){
+                                $treinoAlunosLombar = null;
+                            }
+
+                        $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'E')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->orderBy('td_numero', 'ASC')
+                        ->get();
+                            $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'E')
+                            ->where('exe_membro', '=', 'abdomen')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->first();
+                            if(empty($verificarSeEhAbdomen)){
+                                $treinoAlunosAbdomen = null;
+                            }
+
+                    return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoE', [
+                        'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                        'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                        'treinoAlunosPeito' => $treinoAlunosPeito,
+                        'treinoAlunosCostas' => $treinoAlunosCostas,
+                        'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                        'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                        'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                        'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                        'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                        'treinoAlunosInferior' => $treinoAlunosInferior,
+                        'treinoAlunosLombar' => $treinoAlunosLombar,
+                        'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                    ])
+                                    ->setPaper('a4', 'landscape')
+                                //->download('treino.pdf');
+                                ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'E'){
+
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "F";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'peito')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'peito')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhPeito)){
+                                    $treinoAlunosPeito = null;
+                                }
+
+                            $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'costas')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'costas')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhCostas)){
+                                    $treinoAlunosCostas = null;
+                                }
+
+                            $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'biceps')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'biceps')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhBiceps)){
+                                    $treinoAlunosBiceps = null;
+                                }
+
+                            $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'triceps')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'triceps')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhTriceps)){
+                                    $treinoAlunosTriceps = null;
+                                }
+
+                            $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'antebraco')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'antebraco')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhAntebraco)){
+                                    $treinoAlunosAntebraco = null;
+                                }
+
+                            $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'ombro')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'ombro')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhOmbro)){
+                                    $treinoAlunosOmbro = null;
+                                }
+
+                            $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'trapezio')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'trapezio')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhTrapezio)){
+                                    $treinoAlunosTrapezio = null;
+                                }
+
+                            $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'inferior')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'inferior')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhInferior)){
+                                    $treinoAlunosInferior = null;
+                                }
+
+                            $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'lombar')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'lombar')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhLombar)){
+                                    $treinoAlunosLombar = null;
+                                }
+
+                            $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                            ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                            ->where('td_divisao', '=', 'F')
+                            ->where('exe_membro', '=', 'abdomen')
+                            ->where('tg_id', '=', $treinoGeralAluno->id)
+                            ->orderBy('td_numero', 'ASC')
+                            ->get();
+                                $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                                ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                                ->where('td_divisao', '=', 'F')
+                                ->where('exe_membro', '=', 'abdomen')
+                                ->where('tg_id', '=', $treinoGeralAluno->id)
+                                ->first();
+                                if(empty($verificarSeEhAbdomen)){
+                                    $treinoAlunosAbdomen = null;
+                                }
+
+                        return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoF', [
+                            'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                            'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                            'treinoAlunosPeito' => $treinoAlunosPeito,
+                            'treinoAlunosCostas' => $treinoAlunosCostas,
+                            'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                            'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                            'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                            'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                            'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                            'treinoAlunosInferior' => $treinoAlunosInferior,
+                            'treinoAlunosLombar' => $treinoAlunosLombar,
+                            'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                        ])
+                                        ->setPaper('a4', 'landscape')
+                                    //->download('treino.pdf');
+                                    ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
+                if ($historicoTreino === 'F'){
+                    $historicoTreino = new historicoTreino();
+                    $historicoTreino->alu_id = $authAluID;
+                    $historicoTreino->tg_id = $treinoGeralAluno->id;
+                    $historicoTreino->ht_divisao = "A";
+                    $historicoTreino->ht_data_concluido = Carbon::today();
+                    $historicoTreino->save();
+
+                    $treinoAlunosPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'peito')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhPeito = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'peito')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhPeito)){
+                            $treinoAlunosPeito = null;
+                        }
+
+                    $treinoAlunosCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'costas')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhCostas = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'costas')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhCostas)){
+                            $treinoAlunosCostas = null;
+                        }
+
+                    $treinoAlunosBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'biceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhBiceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'biceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhBiceps)){
+                            $treinoAlunosBiceps = null;
+                        }
+
+                    $treinoAlunosTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'triceps')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTriceps = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'triceps')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTriceps)){
+                            $treinoAlunosTriceps = null;
+                        }
+
+                    $treinoAlunosAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'antebraco')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAntebraco = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'antebraco')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAntebraco)){
+                            $treinoAlunosAntebraco = null;
+                        }
+
+                    $treinoAlunosOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'ombro')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhOmbro = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'ombro')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhOmbro)){
+                            $treinoAlunosOmbro = null;
+                        }
+
+                    $treinoAlunosTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'trapezio')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhTrapezio = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'trapezio')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhTrapezio)){
+                            $treinoAlunosTrapezio = null;
+                        }
+
+                    $treinoAlunosInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'inferior')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhInferior = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'inferior')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhInferior)){
+                            $treinoAlunosInferior = null;
+                        }
+
+                    $treinoAlunosLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'lombar')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhLombar = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'lombar')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhLombar)){
+                            $treinoAlunosLombar = null;
+                        }
+
+                    $treinoAlunosAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                    ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                    ->where('td_divisao', '=', 'A')
+                    ->where('exe_membro', '=', 'abdomen')
+                    ->where('tg_id', '=', $treinoGeralAluno->id)
+                    ->orderBy('td_numero', 'ASC')
+                    ->get();
+                        $verificarSeEhAbdomen = TreinoDetalhe::join('exercicios', 'exercicios.id', '=', 'treino_detalhes.exe_id')
+                        ->join('equipamentos', 'equipamentos.id', '=', 'treino_detalhes.eq_id')
+                        ->where('td_divisao', '=', 'A')
+                        ->where('exe_membro', '=', 'abdomen')
+                        ->where('tg_id', '=', $treinoGeralAluno->id)
+                        ->first();
+                        if(empty($verificarSeEhAbdomen)){
+                            $treinoAlunosAbdomen = null;
+                        }
+
+                return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
+                    'treinoGeralDivisoes' => $treinoGeralDivisoes,
+                    'treinoAlunosPeito' => $treinoAlunosPeito,
+                    'treinoAlunosCostas' => $treinoAlunosCostas,
+                    'treinoAlunosBiceps' => $treinoAlunosBiceps,
+                    'treinoAlunosTriceps' => $treinoAlunosTriceps,
+                    'treinoAlunosAntebraco' => $treinoAlunosAntebraco,
+                    'treinoAlunosOmbro' => $treinoAlunosOmbro,
+                    'treinoAlunosTrapezio' => $treinoAlunosTrapezio,
+                    'treinoAlunosInferior' => $treinoAlunosInferior,
+                    'treinoAlunosLombar' => $treinoAlunosLombar,
+                    'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
+                ])
+                                ->setPaper('a4', 'landscape')
+                            //->download('treino.pdf');
+                            ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                }
             }
         }
     }

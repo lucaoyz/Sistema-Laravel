@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>
             Treino de {{auth::user()->name}}
+        </title>
     <style>
         h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-top: 0;
@@ -91,11 +92,8 @@ tfoot,
 tr,
 td,
 th {
-  border-color: inherit;
-  border-style: solid;
-  border-width: 1px;
   text-align: center;
-  padding: 10px;
+  padding: 2px;
 }
 
 tr:nth-child(even) {
@@ -103,7 +101,6 @@ tr:nth-child(even) {
 }
 
 th {
-  background-color: #F44335;
   color: black;
 }
 
@@ -138,10 +135,11 @@ th {
 
     @page {
             margin: 0in;
+            font-family: 'Courier New', Courier, monospace;
     }
     body {
         background-color: #808080;
-        padding: 0.2in;
+        padding: 0.05in;
     }
     #wrapper {
         background-color: white;
@@ -150,17 +148,21 @@ th {
         text-align: center;
         }
 
+    .imprimirTreino {
+        text-align: left;
+    }
         </style>
     </head>
     <body>
         <div id="wrapper">
-        <h2 style="padding-top: 10px;"><img src="img/logos/gv2pretoebranco.png" style="width: 100px;"></h2>
+        <h2 style="padding-top: 10px;"><img src="img/logos/gv2pretoebranco.png" style="width: 90px;"></h2>
             <p style="margin: 1px 0px 0px 5px;"> Data do treino: {{now()->format('d/m/Y')}}</p>
-            <h3>Treino de <span>{{auth::user()->name}}</span></h3>
-
+            <p style="margin: 1px 0px 0px 5px;"> Treinador: {{$treinoGeralAlunoProfessor}}</p>
+            <h3 style="margin: 0;">Treino de <span style="font-weight: 10;">{{auth::user()->name}}</span></h3>
         @isset ($treinoAlunosPeito)
-            <div class="divTreinos"><br>
-                <h3>Treino B - Peito</h3>
+        <p style="margin: 0;">---------------------------</p>
+        <div class="imprimirTreino">
+            <p style="font-size: 30px;">Treino B - <span>Peito</span></p>
             <table>
                 <tr>
                     <th>Nº</th>
@@ -170,14 +172,14 @@ th {
                 </tr>
                 @foreach ($treinoAlunosPeito as $treinoAlunoPeito)
                 <tr>
-                    <td class="tdNumero">{{$treinoAlunoPeito->td_numero}}</td>
+                    <td>{{$treinoAlunoPeito->td_numero}}</td>
                     <td>{{$treinoAlunoPeito->exe_nome}}</td>
                     <td>{{$treinoAlunoPeito->td_series}}x{{$treinoAlunoPeito->td_repeticoes}}</td>
                     <td>{{$treinoAlunoPeito->exe_descricao}}</td>
                 </tr>
                 @endforeach
             </table>
-            </div>
+        </div>
         @endisset
 
         @isset ($treinoAlunosCostas)

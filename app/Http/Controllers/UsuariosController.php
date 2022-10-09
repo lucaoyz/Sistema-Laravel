@@ -71,28 +71,34 @@ class UsuariosController extends Controller
             ->with('error','Esse email já está sendo usado!');
         }
         else {
-        $request->validate([
-            'alu_nome' => 'required',
-            'alu_email' => 'required',
-            'alu_data_nascimento' => 'required|date',
-            'alu_endereco' => 'required',
-            'alu_mensalidade' => 'required',
-            'alu_celular' => 'required',
-            'alu_cpf' => 'required',
-        ]);
+            try{
 
-        $result = Aluno::create($request->all());
+                $dados = $request->validate([
+                    'alu_nome' => 'required',
+                    'alu_email' => 'required',
+                    'alu_data_nascimento' => 'required|date',
+                    'alu_endereco' => 'required',
+                    'alu_mensalidade' => 'required',
+                    'alu_celular' => 'required',
+                    'alu_cpf' => 'required|cpf',
+                ]);
 
-        $tb_user = new User;
-        $tb_user->alu_id = $result->id;
-        $tb_user->name = $request->alu_nome;
-        $tb_user->email = $request->alu_email;
-        $tb_user->password = bcrypt('12345678');
-        $tb_user->type = 0;
+                $result = Aluno::create($request->all());
 
-        $result = $tb_user->save();
-        return redirect()->route('admin.usuarios')
-                        ->with('success','Aluno criado com sucesso!');
+                $tb_user = new User;
+                $tb_user->alu_id = $result->id;
+                $tb_user->name = $request->alu_nome;
+                $tb_user->email = $request->alu_email;
+                $tb_user->password = bcrypt('12345678');
+                $tb_user->type = 0;
+
+                $result = $tb_user->save();
+                return redirect()->route('admin.usuarios')
+                                ->with('success','Aluno criado com sucesso!');
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                return redirect()->route('admin.usuarios')
+            ->with('error', 'O Cpf é inválido.');
+            }
             }
     }
 
@@ -176,9 +182,52 @@ class UsuariosController extends Controller
                 return redirect()->route('admin.usuarios')
                                     ->with('error', 'Esse email já está sendo usado!');
             } else {
-                $request->validate([
+                try{
+
+                    $dados = $request->validate([
+                        'id' => 'required',
+                        'alu_nome' => 'required',
+                        'alu_data_nascimento' => 'required|date',
+                        'alu_endereco' => 'required',
+                        'alu_mensalidade' => 'required',
+                        'alu_celular' => 'required',
+                        'alu_cpf' => 'required|cpf',
+                    ]);
+
+                    $aluno->id = $request->id;
+                    $aluno->alu_nome = $request->alu_nome;
+                    $aluno->alu_data_nascimento = $request->alu_data_nascimento;
+                    $aluno->alu_endereco = $request->alu_endereco;
+                    $aluno->alu_mensalidade = $request->alu_mensalidade;
+                    $aluno->alu_celular = $request->alu_celular;
+                    $aluno->alu_cpf = $request->alu_cpf;
+
+                    $aluno->save();
+
+                    $queryUser = User::where('alu_id', $request->id)->first();
+                    if(isset($queryUser)){
+                        $user = User::where('alu_id', $request->id)->first();
+
+                        $user->alu_id = $request->id;
+                        $user->name = $request->alu_nome;
+                        $user->save();
+                    }
+
+                        return redirect()->route('admin.usuarios')
+                                    ->with('success', 'Aluno atualizado com sucesso!');
+
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    return redirect()->route('admin.usuarios')
+                ->with('error', 'O Cpf é inválido.');
+                }
+            }
+        } else {
+            try{
+
+                $dados = $request->validate([
                     'id' => 'required',
                     'alu_nome' => 'required',
+                    'alu_email' => 'required',
                     'alu_data_nascimento' => 'required|date',
                     'alu_endereco' => 'required',
                     'alu_mensalidade' => 'required',
@@ -186,48 +235,24 @@ class UsuariosController extends Controller
                     'alu_cpf' => 'required',
                 ]);
 
-                $aluno->id = $request->id;
-                $aluno->alu_nome = $request->alu_nome;
-                $aluno->alu_data_nascimento = $request->alu_data_nascimento;
-                $aluno->alu_endereco = $request->alu_endereco;
-                $aluno->alu_mensalidade = $request->alu_mensalidade;
-                $aluno->alu_celular = $request->alu_celular;
-                $aluno->alu_cpf = $request->alu_cpf;
+                $aluno->update($request->all());
 
-                $aluno->save();
+                $queryUser = User::where('alu_id', $request->id)->first();
+                    if(isset($queryUser)){
+                        $user = User::where('alu_id', $request->id)->first();
 
-                $user = User::where('alu_id', $request->id)->first();
-
-                    $user->alu_id = $request->id;
-                    $user->name = $request->alu_nome;
-                    $user->save();
+                        $user->alu_id = $request->id;
+                        $user->email = $request->alu_email;
+                        $user->name = $request->alu_nome;
+                        $user->save();
+                    }
 
                     return redirect()->route('admin.usuarios')
                                 ->with('success', 'Aluno atualizado com sucesso!');
-            }
-        } else {
-            $request->validate([
-                'id' => 'required',
-                'alu_nome' => 'required',
-                'alu_email' => 'required',
-                'alu_data_nascimento' => 'required|date',
-                'alu_endereco' => 'required',
-                'alu_mensalidade' => 'required',
-                'alu_celular' => 'required',
-                'alu_cpf' => 'required',
-            ]);
-
-            $aluno->update($request->all());
-
-            $user = User::where('alu_id', $request->id)->first();
-
-                $user->alu_id = $request->id;
-                $user->email = $request->alu_email;
-                $user->name = $request->alu_nome;
-                $user->save();
-
+            } catch (\Illuminate\Validation\ValidationException $e) {
                 return redirect()->route('admin.usuarios')
-                            ->with('success', 'Aluno atualizado com sucesso!');
+            ->with('error', 'O Cpf é inválido.');
+            }
         }
     }
 

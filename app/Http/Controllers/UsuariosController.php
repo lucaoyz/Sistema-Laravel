@@ -347,29 +347,35 @@ class UsuariosController extends Controller
             ->with('error','Esse email já está sendo usado!');
         }
         else {
-        $request->validate([
-            'per_nome' => 'required',
-            'per_email' => 'required',
-            'per_data_nascimento' => 'required|date',
-            'per_endereco' => 'required',
-            'per_celular' => 'required',
-            'per_cpf' => 'required',
-        ]);
+            try{
+
+                $dados = $request->validate([
+                    'per_nome' => 'required',
+                    'per_email' => 'required',
+                    'per_data_nascimento' => 'required|date',
+                    'per_endereco' => 'required',
+                    'per_celular' => 'required',
+                    'per_cpf' => 'required',
+                ]);
 
 
-        $result = Personal::create($request->all());
+                $result = Personal::create($request->all());
 
-        $tb_user = new User;
-        $tb_user->per_id = $result->id;
-        $tb_user->name = $request->per_nome;
-        $tb_user->email = $request->per_email;
-        $tb_user->password = bcrypt('12345678');
-        $tb_user->type = 2;
+                $tb_user = new User;
+                $tb_user->per_id = $result->id;
+                $tb_user->name = $request->per_nome;
+                $tb_user->email = $request->per_email;
+                $tb_user->password = bcrypt('12345678');
+                $tb_user->type = 2;
 
-        $result = $tb_user->save();
+                $result = $tb_user->save();
 
-        return redirect()->route('admin.usuarios')
-                        ->with('success','Professor criado com sucesso!');
+                return redirect()->route('admin.usuarios')
+                                ->with('success','Professor criado com sucesso!');
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                return redirect()->route('admin.usuarios')
+            ->with('error', 'O Cpf é inválido.');
+            }
             }
     }
 
@@ -451,53 +457,72 @@ class UsuariosController extends Controller
                 return redirect()->route('admin.usuarios')
                                     ->with('error', 'Esse email já está sendo usado!');
             } else {
-                $request->validate([
+                try{
+
+                    $dados =
+                    $request->validate([
+                        'per_nome' => 'required',
+                        'per_data_nascimento' => 'required|date',
+                        'per_endereco' => 'required',
+                        'per_celular' => 'required',
+                        'per_cpf' => 'required',
+                    ]);
+
+                    $personal->id = $request->id;
+                    $personal->per_nome = $request->per_nome;
+                    $personal->per_data_nascimento = $request->per_data_nascimento;
+                    $personal->per_endereco = $request->per_endereco;
+                    $personal->per_celular = $request->per_celular;
+                    $personal->per_cpf = $request->per_cpf;
+
+                    $personal->save();
+
+                    $queryUser = User::where('per_id', $request->id)->first();
+                    if(isset($queryUser)){
+                        $user = User::where('per_id', $request->id)->first();
+
+                        $user->per_id = $request->id;
+                        $user->name = $request->alu_nome;
+                        $user->save();
+                    }
+
+                        return redirect()->route('admin.usuarios')
+                                    ->with('success', 'Professor atualizado com sucesso!');
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    return redirect()->route('admin.usuarios')
+                ->with('error', 'O Cpf é inválido.');
+                }
+            }
+        } else {
+            try{
+
+                $dados = $request->validate([
                     'per_nome' => 'required',
+                    'per_email' => 'required',
                     'per_data_nascimento' => 'required|date',
                     'per_endereco' => 'required',
                     'per_celular' => 'required',
                     'per_cpf' => 'required',
                 ]);
 
-                $personal->id = $request->id;
-                $personal->per_nome = $request->per_nome;
-                $personal->per_data_nascimento = $request->per_data_nascimento;
-                $personal->per_endereco = $request->per_endereco;
-                $personal->per_celular = $request->per_celular;
-                $personal->per_cpf = $request->per_cpf;
+                $personal->update($request->all());
 
-                $personal->save();
+                $queryUser = User::where('per_id', $request->id)->first();
+                    if(isset($queryUser)){
+                        $user = User::where('per_id', $request->id)->first();
 
-                $user = User::where('per_id', $request->id)->first();
-
-                    $user->per_id = $request->id;
-                    $user->name = $request->per_nome;
-                    $user->save();
+                        $user->per_id = $request->id;
+                        $user->email = $request->per_email;
+                        $user->name = $request->alu_nome;
+                        $user->save();
+                    }
 
                     return redirect()->route('admin.usuarios')
                                 ->with('success', 'Professor atualizado com sucesso!');
-            }
-        } else {
-            $request->validate([
-                'per_nome' => 'required',
-                'per_email' => 'required',
-                'per_data_nascimento' => 'required|date',
-                'per_endereco' => 'required',
-                'per_celular' => 'required',
-                'per_cpf' => 'required',
-            ]);
-
-            $personal->update($request->all());
-
-            $user = User::where('per_id', $request->id)->first();
-
-                $user->per_id = $request->id;
-                $user->email = $request->per_email;
-                $user->name = $request->per_nome;
-                $user->save();
-
+            } catch (\Illuminate\Validation\ValidationException $e) {
                 return redirect()->route('admin.usuarios')
-                            ->with('success', 'Professor atualizado com sucesso!');
+            ->with('error', 'O Cpf é inválido.');
+            }
         }
     }
 

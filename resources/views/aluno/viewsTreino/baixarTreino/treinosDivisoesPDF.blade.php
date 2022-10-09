@@ -23,7 +23,7 @@
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <a class="btn btn-outline-primary" href="{{route('aluno.treino')}}">Voltar</a>
           <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Treino divisões</h6>
+            <h6 class="text-white text-capitalize ps-3">Treino Divisões</h6>
           </div>
           <br>
         </div>

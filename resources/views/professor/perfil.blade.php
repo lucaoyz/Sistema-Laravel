@@ -59,9 +59,6 @@
                 </div>
                 </div>
                 <div class="card-body p-3">
-                <p class="text-sm">
-                    Colocar descrição aqui
-                </p>
                 <hr class="horizontal gray-light my-4">
                 <ul class="list-group">
                     <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nome completo:</strong> &nbsp; {{ Auth::user()->name }}</li>
@@ -69,7 +66,6 @@
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ Auth::user()->email }}</li>
                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Endereço:</strong> &nbsp; {{$personal->per_endereco}}</li>
                 </ul>
-                <h6 class="mb-0"><a href="{{route('professor.treino')}}">Acesse seu treino clicando aqui</a></h6>
                 </div>
             </div>
             </div>

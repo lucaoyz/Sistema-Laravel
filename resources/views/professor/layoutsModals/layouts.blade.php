@@ -66,7 +66,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white @yield('treino')" href="{{route('professor.treino')}}">
+            <a class="nav-link text-white @yield('treino')" href="{{route('professor.treinos.index')}}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">fitness_center</i>
               </div>

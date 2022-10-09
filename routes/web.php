@@ -262,9 +262,92 @@ Route::middleware(['auth', 'user-access:professor'])->group(function () {
         Route::post('/perfil/change-password', [App\Http\Controllers\PerfilController::class, 'updatePasswordProfessor'])->name('professor.update-password');
 
         /* Rotas para os treinos */
-        Route::get('/treino', function(){
-            return view('professor.treino');
-        })->name('professor.treino');
+        Route::get('/treino', [App\Http\Controllers\ProfessorTreinoController::class, 'indexProfessor'])->name('professor.treinos.index');
+
+            /* Rotas para informações gerais do treino */
+            Route::get('/treino/geral', [App\Http\Controllers\ProfessorTreinoController::class, 'indexGeral'])->name('professor.treinos.indexGeral');
+            Route::get('/treino/geral/create', [App\Http\Controllers\ProfessorTreinoController::class, 'createGeral'])->name('professor.treinos.createGeral');
+            Route::post('/treino/geral/store', [App\Http\Controllers\ProfessorTreinoController::class, 'storeGeral'])->name('professor.treinos.storeGeral');
+            Route::get('/treino/geral/{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'showGeral'])->name('professor.treinos.showGeral');
+            Route::get('/treino/geral/{treinoGeral}/edit',[App\Http\Controllers\ProfessorTreinoController::class, 'editGeral'])->name('professor.treinos.editGeral');
+            Route::put('/treino/geral/{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'updateGeral'])->name('professor.treinos.updateGeral');
+            Route::delete('/treino/geral/{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'destroyGeral'])->name('professor.treinos.destroyGeral');
+            Route::delete('/treino/geral/limpar/{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'limparGeral'])->name('professor.treinos.limparGeral');
+            Route::any('/treino/geral/search', [App\Http\Controllers\ProfessorTreinoController::class, 'searchGeral'])->name('professor.treinos.searchGeral');
+
+            /* Rotas para detalhes do treino */
+            Route::get('/treino/detalhes/{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'indexDetalhes'])->name('professor.treinos.indexDetalhes');
+
+            /* Rotas para as divisões do treino */
+            Route::get('/treino/detalhes/{treinoGeral}/a', [App\Http\Controllers\ProfessorTreinoController::class, 'createDetalhesDivisaoA'])->name('professor.treinos.createDetalhesDivisaoA');
+            Route::post('/treino/detalhes/{treinoGeral}/a', [App\Http\Controllers\ProfessorTreinoController::class, 'storeDetalhesDivisaoA'])->name('professor.treinos.storeDetalhesDivisaoA');
+            Route::get('/treino/detalhes/{treinoGeral}/a/edit', [App\Http\Controllers\ProfessorTreinoController::class, 'editDetalhesDivisaoA'])->name('professor.treinos.editDetalhesDivisaoA');
+            Route::put('/treino/detalhes/{treinoGeral}/a', [App\Http\Controllers\ProfessorTreinoController::class, 'updateDetalhesDivisaoA'])->name('professor.treinos.updateDetalhesDivisaoA');
+            Route::delete('/treino/detalhes/{treinoGeral}/{treinoDetalhe}/a', [App\Http\Controllers\ProfessorTreinoController::class, 'destroyDetalhesDivisaoA'])->name('professor.treinos.destroyDetalhesDivisaoA');
+            Route::any('/treino/detalhes/{treinoGeral}/a/search', [App\Http\Controllers\ProfessorTreinoController::class, 'searchDetalhesDivisaoA'])->name('professor.treinos.searchDetalhesDivisaoA');
+
+            Route::get('/treino/detalhes/{treinoGeral}/b', [App\Http\Controllers\ProfessorTreinoController::class, 'createDetalhesDivisaoB'])->name('professor.treinos.createDetalhesDivisaoB');
+            Route::post('/treino/detalhes/{treinoGeral}/b', [App\Http\Controllers\ProfessorTreinoController::class, 'storeDetalhesDivisaoB'])->name('professor.treinos.storeDetalhesDivisaoB');
+            Route::get('/treino/detalhes/{treinoGeral}/b/edit', [App\Http\Controllers\ProfessorTreinoController::class, 'editDetalhesDivisaoB'])->name('professor.treinos.editDetalhesDivisaoB');
+            Route::put('/treino/detalhes/{treinoGeral}/b', [App\Http\Controllers\ProfessorTreinoController::class, 'updateDetalhesDivisaoB'])->name('professor.treinos.updateDetalhesDivisaoB');
+            Route::delete('/treino/detalhes/{treinoGeral}/{treinoDetalhe}/b', [App\Http\Controllers\ProfessorTreinoController::class, 'destroyDetalhesDivisaoB'])->name('professor.treinos.destroyDetalhesDivisaoB');
+            Route::any('/treino/detalhes/{treinoGeral}/b/search', [App\Http\Controllers\ProfessorTreinoController::class, 'searchDetalhesDivisaoB'])->name('professor.treinos.searchDetalhesDivisaoB');
+
+            Route::get('/treino/detalhes/{treinoGeral}/c', [App\Http\Controllers\ProfessorTreinoController::class, 'createDetalhesDivisaoC'])->name('professor.treinos.createDetalhesDivisaoC');
+            Route::post('/treino/detalhes/{treinoGeral}/c', [App\Http\Controllers\ProfessorTreinoController::class, 'storeDetalhesDivisaoC'])->name('professor.treinos.storeDetalhesDivisaoC');
+            Route::get('/treino/detalhes/{treinoGeral}/c/edit', [App\Http\Controllers\ProfessorTreinoController::class, 'editDetalhesDivisaoC'])->name('professor.treinos.editDetalhesDivisaoC');
+            Route::put('/treino/detalhes/{treinoGeral}/c', [App\Http\Controllers\ProfessorTreinoController::class, 'updateDetalhesDivisaoC'])->name('professor.treinos.updateDetalhesDivisaoC');
+            Route::delete('/treino/detalhes/{treinoGeral}/{treinoDetalhe}/c', [App\Http\Controllers\ProfessorTreinoController::class, 'destroyDetalhesDivisaoC'])->name('professor.treinos.destroyDetalhesDivisaoC');
+            Route::any('/treino/detalhes/{treinoGeral}/c/search', [App\Http\Controllers\ProfessorTreinoController::class, 'searchDetalhesDivisaoC'])->name('professor.treinos.searchDetalhesDivisaoC');
+
+            Route::get('/treino/detalhes/{treinoGeral}/d', [App\Http\Controllers\ProfessorTreinoController::class, 'createDetalhesDivisaoD'])->name('professor.treinos.createDetalhesDivisaoD');
+            Route::post('/treino/detalhes/{treinoGeral}/d', [App\Http\Controllers\ProfessorTreinoController::class, 'storeDetalhesDivisaoD'])->name('professor.treinos.storeDetalhesDivisaoD');
+            Route::get('/treino/detalhes/{treinoGeral}/d/edit', [App\Http\Controllers\ProfessorTreinoController::class, 'editDetalhesDivisaoD'])->name('professor.treinos.editDetalhesDivisaoD');
+            Route::put('/treino/detalhes/{treinoGeral}/d', [App\Http\Controllers\ProfessorTreinoController::class, 'updateDetalhesDivisaoD'])->name('professor.treinos.updateDetalhesDivisaoD');
+            Route::delete('/treino/detalhes/{treinoGeral}/{treinoDetalhe}/d', [App\Http\Controllers\ProfessorTreinoController::class, 'destroyDetalhesDivisaoD'])->name('professor.treinos.destroyDetalhesDivisaoD');
+            Route::any('/treino/detalhes/{treinoGeral}/d/search', [App\Http\Controllers\ProfessorTreinoController::class, 'searchDetalhesDivisaoD'])->name('professor.treinos.searchDetalhesDivisaoD');
+
+            Route::get('/treino/detalhes/{treinoGeral}/e', [App\Http\Controllers\ProfessorTreinoController::class, 'createDetalhesDivisaoE'])->name('professor.treinos.createDetalhesDivisaoE');
+            Route::post('/treino/detalhes/{treinoGeral}/e', [App\Http\Controllers\ProfessorTreinoController::class, 'storeDetalhesDivisaoE'])->name('professor.treinos.storeDetalhesDivisaoE');
+            Route::get('/treino/detalhes/{treinoGeral}/e/edit', [App\Http\Controllers\ProfessorTreinoController::class, 'editDetalhesDivisaoE'])->name('professor.treinos.editDetalhesDivisaoE');
+            Route::put('/treino/detalhes/{treinoGeral}/e', [App\Http\Controllers\ProfessorTreinoController::class, 'updateDetalhesDivisaoE'])->name('professor.treinos.updateDetalhesDivisaoE');
+            Route::delete('/treino/detalhes/{treinoGeral}/{treinoDetalhe}/e', [App\Http\Controllers\ProfessorTreinoController::class, 'destroyDetalhesDivisaoE'])->name('professor.treinos.destroyDetalhesDivisaoE');
+            Route::any('/treino/detalhes/{treinoGeral}/e/search', [App\Http\Controllers\ProfessorTreinoController::class, 'searchDetalhesDivisaoE'])->name('professor.treinos.searchDetalhesDivisaoE');
+
+            Route::get('/treino/detalhes/{treinoGeral}/f', [App\Http\Controllers\ProfessorTreinoController::class, 'createDetalhesDivisaoF'])->name('professor.treinos.createDetalhesDivisaoF');
+            Route::post('/treino/detalhes/{treinoGeral}/f', [App\Http\Controllers\ProfessorTreinoController::class, 'storeDetalhesDivisaoF'])->name('professor.treinos.storeDetalhesDivisaoF');
+            Route::get('/treino/detalhes/{treinoGeral}/f/edit', [App\Http\Controllers\ProfessorTreinoController::class, 'editDetalhesDivisaoF'])->name('professor.treinos.editDetalhesDivisaoF');
+            Route::put('/treino/detalhes/{treinoGeral}/f', [App\Http\Controllers\ProfessorTreinoController::class, 'updateDetalhesDivisaoF'])->name('professor.treinos.updateDetalhesDivisaoF');
+            Route::delete('/treino/detalhes/{treinoGeral}/{treinoDetalhe}/f', [App\Http\Controllers\ProfessorTreinoController::class, 'destroyDetalhesDivisaoF'])->name('professor.treinos.destroyDetalhesDivisaoF');
+            Route::any('/treino/detalhes/{treinoGeral}/f/search', [App\Http\Controllers\ProfessorTreinoController::class, 'searchDetalhesDivisaoF'])->name('professor.treinos.searchDetalhesDivisaoF');
+
+        /* Rotas para os exercicios */
+        Route::get('/treino/exercicios/inicio', [App\Http\Controllers\ExerciciosController::class, 'index'])->name('professor.exercicios.index');
+        Route::get('/treino/exercicios/create', [App\Http\Controllers\ExerciciosController::class, 'create'])->name('professor.exercicios.create');
+        Route::post('/treino/exercicios/store', [App\Http\Controllers\ExerciciosController::class, 'store'])->name('professor.exercicios.store');
+        Route::get('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'show'])->name('professor.exercicios.show');
+        Route::get('/treino/exercicios/{exercicio}/edit',[App\Http\Controllers\ExerciciosController::class, 'edit'])->name('professor.exercicios.edit');
+        Route::put('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'update'])->name('professor.exercicios.update');
+        Route::delete('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'destroy'])->name('professor.exercicios.destroy');
+        Route::any('/treino/exercicios/search', [App\Http\Controllers\ExerciciosController::class, 'search'])->name('professor.exercicios.search');
+
+        /* Rotas para os equipamentos */
+        Route::get('/treino/equipamentos/inicio', [App\Http\Controllers\EquipamentosController::class, 'index'])->name('professor.equipamentos.index');
+        Route::get('/treino/equipamentos/create', [App\Http\Controllers\EquipamentosController::class, 'create'])->name('professor.equipamentos.create');
+        Route::post('/treino/equipamentos/store', [App\Http\Controllers\EquipamentosController::class, 'store'])->name('professor.equipamentos.store');
+        Route::get('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'show'])->name('professor.equipamentos.show');
+        Route::get('/treino/equipamentos/{equipamento}/edit',[App\Http\Controllers\EquipamentosController::class, 'edit'])->name('professor.equipamentos.edit');
+        Route::put('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'update'])->name('professor.equipamentos.update');
+        Route::delete('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'destroy'])->name('professor.equipamentos.destroy');
+        Route::any('/treino/equipamentos/search', [App\Http\Controllers\EquipamentosController::class, 'search'])->name('professor.equipamentos.search');
+
+        /* Rotas para visualização de aluno */
+        Route::get('/treino/pdf/divisoes/a{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'PDFTreinoDivisoesATreinador'])->name('professor.aluno.PDFTreinoDivisoesATreinador');
+        Route::get('/treino/pdf/divisoes/b{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'PDFTreinoDivisoesBTreinador'])->name('professor.aluno.PDFTreinoDivisoesBTreinador');
+        Route::get('/treino/pdf/divisoes/c{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'PDFTreinoDivisoesCTreinador'])->name('professor.aluno.PDFTreinoDivisoesCTreinador');
+        Route::get('/treino/pdf/divisoes/d{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'PDFTreinoDivisoesDTreinador'])->name('professor.aluno.PDFTreinoDivisoesDTreinador');
+        Route::get('/treino/pdf/divisoes/e{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'PDFTreinoDivisoesETreinador'])->name('professor.aluno.PDFTreinoDivisoesETreinador');
+        Route::get('/treino/pdf/divisoes/f{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'PDFTreinoDivisoesFTreinador'])->name('professor.aluno.PDFTreinoDivisoesFTreinador');
 
     });
 

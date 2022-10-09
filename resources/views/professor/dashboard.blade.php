@@ -21,7 +21,7 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-                <p class="mb-0"><span class="text-danger text-sm font-weight-bolder"><a href="{{route('professor.treino')}}">Clique aqui para registrar um treino</a></span></p>
+                <p class="mb-0"><span class="text-danger text-sm font-weight-bolder"><a href="{{route('professor.treinos.index')}}">Clique aqui para registrar um treino</a></span></p>
             </div>
           </div>
         </div>

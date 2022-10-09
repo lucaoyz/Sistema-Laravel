@@ -1653,6 +1653,7 @@ class TreinoController extends Controller
                 $treinoAlunosAbdomen = null;
             }
 
+            $downloadTreinoA = 'treino-A-' . Carbon::today()->format('d/m/Y') . '.pdf';
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoA', [
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -1667,8 +1668,7 @@ class TreinoController extends Controller
         'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
     ])
                     ->setPaper('a4', 'landscape')
-                //->download('treino.pdf');
-                ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                ->download($downloadTreinoA);
     }
 
     public function PDFTreinoDivisoesB()
@@ -1849,6 +1849,8 @@ class TreinoController extends Controller
                 $treinoAlunosAbdomen = null;
             }
 
+            $downloadTreinoB = 'treino-B-' . Carbon::today()->format('d/m/Y') . '.pdf';
+
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoB', [
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -1863,8 +1865,7 @@ class TreinoController extends Controller
         'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
     ])
                     ->setPaper('a4', 'landscape')
-                //->download('treino.pdf');
-                ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                ->download($downloadTreinoB);
     }
 
     public function PDFTreinoDivisoesC()
@@ -2045,6 +2046,8 @@ class TreinoController extends Controller
                 $treinoAlunosAbdomen = null;
             }
 
+            $downloadTreinoC = 'treino-C-' . Carbon::today()->format('d/m/Y') . '.pdf';
+
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoC', [
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -2059,8 +2062,7 @@ class TreinoController extends Controller
         'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
     ])
                     ->setPaper('a4', 'landscape')
-                //->download('treino.pdf');
-                ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                ->download($downloadTreinoC);
     }
 
     public function PDFTreinoDivisoesD()
@@ -2241,6 +2243,8 @@ class TreinoController extends Controller
                 $treinoAlunosAbdomen = null;
             }
 
+            $downloadTreinoD = 'treino-D-' . Carbon::today()->format('d/m/Y') . '.pdf';
+
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoD', [
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -2255,8 +2259,7 @@ class TreinoController extends Controller
         'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
     ])
                     ->setPaper('a4', 'landscape')
-                //->download('treino.pdf');
-                ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                ->download($downloadTreinoD);
     }
 
         public function PDFTreinoDivisoesE()
@@ -2437,6 +2440,8 @@ class TreinoController extends Controller
                 $treinoAlunosAbdomen = null;
             }
 
+            $downloadTreinoE = 'treino-E-' . Carbon::today()->format('d/m/Y') . '.pdf';
+
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoE', [
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -2451,8 +2456,7 @@ class TreinoController extends Controller
         'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
     ])
                     ->setPaper('a4', 'landscape')
-                //->download('treino.pdf');
-                ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                ->download($downloadTreinoE);
     }
 
         public function PDFTreinoDivisoesF()
@@ -2633,6 +2637,8 @@ class TreinoController extends Controller
                 $treinoAlunosAbdomen = null;
             }
 
+            $downloadTreinoF = 'treino-F-' . Carbon::today()->format('d/m/Y') . '.pdf';
+
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoF', [
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -2647,8 +2653,7 @@ class TreinoController extends Controller
         'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
     ])
                     ->setPaper('a4', 'landscape')
-                //->download('treino.pdf');
-                ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
+                ->download($downloadTreinoF);
     }
 
     public function PDFTreinoDivisoesATreinador(TreinoGeral $treinoGeral)

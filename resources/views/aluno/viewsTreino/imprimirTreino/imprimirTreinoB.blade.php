@@ -104,14 +104,6 @@ th {
   color: black;
 }
 
-.divTreinos {
-    border-style: solid;
-    position: absolute;
-    float: left;
-    overflow: auto;
-    margin: 10px 0 10px 10px;
-}
-
 .container {
     display: flex;
     width: 20cm;
@@ -149,8 +141,17 @@ th {
         }
 
     .imprimirTreino {
-        text-align: left;
-        font-size: 20px;
+        font-size: 23px;
+        text-align: center;
+        max-width: 800px;
+    }
+
+    .imprimirTreino td {
+        word-wrap: break-word;
+    }
+    .imprimirTreino table {
+        width: 580px;
+        margin-left: 5px;
     }
         </style>
     </head>

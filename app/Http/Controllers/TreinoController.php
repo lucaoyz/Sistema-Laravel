@@ -4337,7 +4337,7 @@ class TreinoController extends Controller
                     'treinoAlunosLombar' => $treinoAlunosLombar,
                     'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
                 ])
-                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            ->setPaper([0, 0, 807.874, 300], 'landscape')
                             //->download('treino.pdf');
                             ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
                 }
@@ -4733,7 +4733,7 @@ class TreinoController extends Controller
                     'treinoAlunosLombar' => $treinoAlunosLombar,
                     'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
                 ])
-                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            ->setPaper([0, 0, 807.874, 300], 'landscape')
                             //->download('treino.pdf');
                             ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
                 }
@@ -5326,7 +5326,7 @@ class TreinoController extends Controller
                     'treinoAlunosLombar' => $treinoAlunosLombar,
                     'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
                 ])
-                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            ->setPaper([0, 0, 807.874, 300], 'landscape')
                             //->download('treino.pdf');
                             ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
                 }
@@ -6115,7 +6115,7 @@ class TreinoController extends Controller
                     'treinoAlunosLombar' => $treinoAlunosLombar,
                     'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
                 ])
-                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            ->setPaper([0, 0, 807.874, 300], 'landscape')
                             //->download('treino.pdf');
                             ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
                 }
@@ -7101,7 +7101,7 @@ class TreinoController extends Controller
                     'treinoAlunosLombar' => $treinoAlunosLombar,
                     'treinoAlunosAbdomen' => $treinoAlunosAbdomen,
                 ])
-                            ->setPaper([0, 0, 807.874, 221.102], 'landscape')
+                            ->setPaper([0, 0, 807.874, 300], 'landscape')
                             //->download('treino.pdf');
                             ->stream(); //EXCLUIR DPS DE FINALIZAR A TELA DE DOWNLOAD
                 }

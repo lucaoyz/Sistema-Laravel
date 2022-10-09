@@ -592,8 +592,9 @@ class TreinoController extends Controller
     public function destroyGeral(TreinoGeral $treinoGeral)
     {
         $treino_detalhes = TreinoDetalhe::where('tg_id', '=', $treinoGeral->id)->first();
-
+        $historicoTreino = historicoTreino::where('tg_id', '=', $treinoGeral->id)->get();
         if(empty($treino_detalhes)){
+            $historicoTreino->each->delete();
             $treinoGeral->delete();
             return redirect()->route('treinos.indexGeral')
                                 ->with('success', 'Treino excluido com sucesso!');

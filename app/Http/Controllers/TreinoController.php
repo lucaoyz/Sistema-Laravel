@@ -3944,6 +3944,10 @@ class TreinoController extends Controller
         $authAluID = $authUser->alu_id;
         $aluno = Aluno::where('id', '=', $authAluID)->first();
         $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
+        if (empty($treinoGeralAluno)) {
+            return redirect()->route('aluno.treino')
+        ->with('error','Você não possue treino ainda, solicite para um professor!');
+        } else {
         $treinoGeralAlunoProfessorID = $treinoGeralAluno->per_id;
         $treinoGeralAlunoProfessorQuery = Personal::where('id', $treinoGeralAlunoProfessorID)->first();
         $treinoGeralAlunoProfessor = $treinoGeralAlunoProfessorQuery->per_nome;
@@ -8294,6 +8298,7 @@ class TreinoController extends Controller
                 }
             }
         }
+    }
     }
 
      public function ImprimirTreinoDivisoes(){

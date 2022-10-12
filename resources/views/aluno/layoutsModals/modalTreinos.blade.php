@@ -10,9 +10,13 @@
         </div>
         <div class="modal-body">
             Histórico de treinos em ordem de conclusão:
-            @foreach ($historicoTreinos as $historicoTreino)
-                {{$historicoTreino->ht_divisao}}
-            @endforeach
+            @if ($historicoTreinos == null)
+
+            @else
+                @foreach ($historicoTreinos as $historicoTreino)
+                    {{$historicoTreino->ht_divisao}}
+                @endforeach
+            @endif
         </div>
         <div class="modal-footer">
             <a class="btn bg-gradient-primary" href="{{route('aluno.limparHistorico')}}">Limpar</a>

@@ -132,6 +132,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         /* Rotas dashboard */
         Route::get('/', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin');
 
+        /* Rotas alterar site e informações */
+        Route::get('/informacoes', [App\Http\Controllers\InformacoesController::class, 'index'])->name('admin.alterarInfos');
 
         /* Perfil */
         Route::get('/perfil', [App\Http\Controllers\PerfilController::class, 'perfilIndexAdmin'])->name('admin.perfil');

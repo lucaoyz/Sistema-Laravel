@@ -63,13 +63,13 @@
                 <i class="material-icons opacity-10">weekend</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Em breve</p>
-                <h4 class="mb-0">Em breve</h4>
+                <p class="text-sm mb-0 text-capitalize">Alterar site e dados gerais</p>
+                <h4 class="mb-0"><a href="{{route('admin.alterarInfos')}}">Acesse aqui</a></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-                <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">Em desenvolvimento.</span></p>
+                <p class="mb-0"><span class="text-danger text-sm font-weight-bolder"><a href="{{route('admin.alterarInfos')}}">Clique aqui para alterar informações</a></span></p>
             </div>
           </div>
         </div>

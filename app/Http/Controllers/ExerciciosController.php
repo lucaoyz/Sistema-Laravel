@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exercicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ExerciciosController extends Controller
 {
@@ -119,21 +120,23 @@ class ExerciciosController extends Controller
                 ]);
 
                 // Atualização de imagem
-                $input = $request->exe_foto;
-                if ($image = $request->file('exe_foto')) {
+                $imageName = '';
+                if($request->hasFile('exe_foto')){
+                    $imageName = date('dmY') . "-" . $request->exe_foto->getClientOriginalName();
                     $destinationPath = public_path('img/exercicios');
-                    $exercicioFotoNome = date('dmY') . "-" . $image->getClientOriginalName();
-                    $image->move($destinationPath, $exercicioFotoNome);
-                    $input['exe_foto'] = "$exercicioFotoNome";
-                }else{
-                    unset($input);
+                    $request->exe_foto->move($destinationPath, $imageName);
+                    if($exercicio->exe_foto){
+                        Storage::delete('public/images/exercicios/' . $exercicio->exe_foto);
+                    }
+                } else {
+                    $imageName = $exercicio->exe_foto;
                 }
 
                 $exercicio->id = $request->id;
                 $exercicio->exe_nome = $request->exe_nome;
                 $exercicio->exe_membro = $request->exe_membro;
                 $exercicio->exe_descricao = $request->exe_descricao;
-                $exercicio->exe_foto = $request->exe_foto;
+                $exercicio->exe_foto = $imageName;
                 $exercicio->update();
 
                     return redirect()->route('exercicios.index')
@@ -161,6 +164,7 @@ class ExerciciosController extends Controller
      */
     public function destroy(Exercicio $exercicio)
     {
+        Storage::delete('public/img/exercicios/' . $exercicio->exe_foto);
         $exercicio->delete();
 
         return redirect()->route('exercicios.index')

@@ -137,7 +137,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('exercicios.update',$exercicio->id) }}" method="POST">
+            <form action="{{ route('exercicios.update',$exercicio->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

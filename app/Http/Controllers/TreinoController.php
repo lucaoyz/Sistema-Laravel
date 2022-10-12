@@ -49,8 +49,9 @@ class TreinoController extends Controller
             $historicoTreinoFirst = $historicoTreinoFirst->ht_divisao;
         }
         if(empty($treinoGeralAluno)) {
+            $historicoTreinos = null;
         } else {
-        $historicoTreinos = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->orderBy('created_at', 'desc')->get();
+            $historicoTreinos = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->orderBy('created_at', 'desc')->get();
         }
         return view('aluno.viewsTreino.treino', [
             'historicoTreinoFirst' => $historicoTreinoFirst,

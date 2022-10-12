@@ -39,7 +39,7 @@ class TreinoController extends Controller
         $aluno = Aluno::where('id', '=', $authAluID)->first();
         $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
         if(empty($treinoGeralAluno)) {
-            
+
         } else {
             $historicoTreinoFirst = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->latest()->first();
         }
@@ -48,9 +48,10 @@ class TreinoController extends Controller
         } else {
             $historicoTreinoFirst = $historicoTreinoFirst->ht_divisao;
         }
-
+        if(empty($treinoGeralAluno)) {
+        } else {
         $historicoTreinos = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->orderBy('created_at', 'desc')->get();
-
+        }
         return view('aluno.viewsTreino.treino', [
             'historicoTreinoFirst' => $historicoTreinoFirst,
             'historicoTreinos' => $historicoTreinos,

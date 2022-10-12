@@ -38,7 +38,11 @@ class TreinoController extends Controller
         $authAluID = $authUser->alu_id;
         $aluno = Aluno::where('id', '=', $authAluID)->first();
         $treinoGeralAluno = TreinoGeral::where('alu_id', '=', $aluno->id)->first();
-        $historicoTreinoFirst = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->latest()->first();
+        if(empty($treinoGeralAluno)) {
+            
+        } else {
+            $historicoTreinoFirst = historicoTreino::where('tg_id', '=', $treinoGeralAluno->id)->latest()->first();
+        }
         if(empty($historicoTreinoFirst)) {
             $historicoTreinoFirst = null;
         } else {

@@ -48,7 +48,7 @@
               <!-- Botão de criar -->
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('alunos.create') }}" data-bs-toggle="modal" data-bs-target="#criarAlunoModal"> Crie um novo aluno</a>
-                <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filtrosEspecificos"> Filtros Específicos</a>
+                <!-- <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filtrosEspecificos"> Filtros Específicos</a> -->
             </div>
             </div>
 

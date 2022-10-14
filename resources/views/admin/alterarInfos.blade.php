@@ -1,7 +1,7 @@
 @extends('admin.layoutsModals.layouts')
-@section('title', 'Dashboard - Alterar informações')
+@section('title', 'Início - Alterar informações')
 @section('dashboard', 'active bg-gradient-primary')
-@section('pagina', 'Dashboard - Alterar informações')
+@section('pagina', 'Início - Alterar informações')
 @section('content')
 
 <div class="row">

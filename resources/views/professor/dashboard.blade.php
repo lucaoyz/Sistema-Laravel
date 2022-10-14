@@ -1,7 +1,7 @@
 @extends('professor.layoutsModals.layouts')
-@section('title', 'Dashboard')
+@section('title', 'Início')
 @section('dashboard', 'active bg-gradient-primary')
-@section('pagina', 'Dashboard')
+@section('pagina', 'Início')
 @section('content')
     <div class="container-fluid py-4">
         <div class="card-header-tabs p-0 mt-n4 mx-3 border-radius-lg">

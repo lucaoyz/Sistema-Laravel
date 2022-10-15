@@ -8,9 +8,11 @@
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
+                <a href="{{route('treinos.index')}}">
               <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                 <i class="material-icons opacity-10">fitness_center</i>
               </div>
+            </a>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Treinos registrados</p>
                 <h4 class="mb-0">{{$treinos}}</h4>
@@ -25,9 +27,11 @@
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
+                <a href="{{route('admin.usuarios')}}">
               <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
                 <i class="material-icons opacity-10">person</i>
               </div>
+                </a>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Usuarios registrados</p>
                 <h4 class="mb-0">{{ $usuarios }}</h4>
@@ -42,9 +46,11 @@
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
+                <a href="{{route('admin.usuarios')}}">
               <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
                 <i class="material-icons opacity-10">person</i>
               </div>
+                </a>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Alunos registrados</p>
                 <h4 class="mb-0">{{ $alunos }}</h4>
@@ -59,9 +65,11 @@
         <div class="col-xl-3 col-sm-6">
           <div class="card">
             <div class="card-header p-3 pt-2">
+                <a href="{{route('admin.alterarInfos')}}">
               <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
                 <i class="material-icons opacity-10">weekend</i>
               </div>
+            </a>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Alterar site e dados gerais</p>
                 <h4 class="mb-0"><a href="{{route('admin.alterarInfos')}}">Acesse aqui</a></h4>

@@ -33,7 +33,7 @@
                       </div>
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
-                      <h6 class="text-center mb-0">Contar a pagar</h6>
+                      <h6 class="text-center mb-0">Contas a pagar</h6>
                       <span class="text-xs">Saldo de contas a pagar</span>
                       <hr class="horizontal dark my-3">
                       <h5 class="mb-0">aqui vai a variavel</h5>

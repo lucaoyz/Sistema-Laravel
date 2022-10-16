@@ -66,7 +66,7 @@
                       </div>
                     </div>
                     <div class="col-md-6">
-                        <h6 class="mb-0">Contar a pagar</h6>
+                        <h6 class="mb-0">Contas a pagar</h6>
                       <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
                         <h6 class="mb-0">CONTA | PREÇO</h6>
                         <a href="" class="material-icons ms-auto text-dark cursor-pointer"><i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar conta">edit</i></a>
@@ -84,7 +84,7 @@
             <div class="card-header pb-0 p-3">
               <div class="row">
                 <div class="col-6 d-flex align-items-center">
-                  <h6 class="mb-0">Historico de contas pagas</h6>
+                  <h6 class="mb-0">Histórico de contas pagas</h6>
                 </div>
                 <div class="col-6 text-end">
                   <button class="btn btn-outline-primary btn-sm mb-0">Ver tudo</button>
@@ -123,13 +123,13 @@
               </div>
             </div>
             <div class="card-body pt-4 p-3">
-              <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">HISTORICO DE ENTRADA E SAIDA</h6>
+              <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">HISTÓRICO DE ENTRADA E SAÍDA</h6>
               <ul class="list-group">
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex align-items-center">
                     <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_more</i></button>
                     <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">EXEMPLO CONTA DE SAIDA</h6>
+                      <h6 class="mb-1 text-dark text-sm">EXEMPLO CONTA DE SAÍDA</h6>
                       <span class="text-xs">DATA E HORARIO</span>
                     </div>
                   </div>

@@ -33,7 +33,7 @@
               </div>
                 </a>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Usuarios registrados</p>
+                <p class="text-sm mb-0 text-capitalize">Usuários registrados</p>
                 <h4 class="mb-0">{{ $usuarios }}</h4>
               </div>
             </div>

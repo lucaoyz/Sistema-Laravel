@@ -4,9 +4,9 @@
     PROFESSORES/PERSONALS
 -->
 @extends('admin.layoutsModals.layouts')
-@section('title', 'Usuarios')
+@section('title', 'Usuários')
 @section('usuarios', 'active bg-gradient-primary')
-@section('pagina', 'Usuarios')
+@section('pagina', 'Usuários')
 @section('content')
 
 @if ($message = Session::get('success'))

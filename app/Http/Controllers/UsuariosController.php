@@ -367,7 +367,7 @@ class UsuariosController extends Controller
                     'per_data_nascimento' => 'required|date',
                     'per_endereco' => 'required',
                     'per_celular' => 'required',
-                    'per_cpf' => 'required',
+                    'per_cpf' => 'required|cpf',
                 ]);
 
 
@@ -514,7 +514,7 @@ class UsuariosController extends Controller
                     'per_data_nascimento' => 'required|date',
                     'per_endereco' => 'required',
                     'per_celular' => 'required',
-                    'per_cpf' => 'required',
+                    'per_cpf' => 'required|cpf',
                 ]);
 
                 $personal->update($request->all());

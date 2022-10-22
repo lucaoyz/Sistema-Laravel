@@ -51,11 +51,11 @@
                     <div class="col-md-8 d-flex align-items-center">
                     <h6 class="mb-0">Informações</h6>
                     </div>
-                    <div class="col-md-4 text-end">
-                    <a href="javascript:;">
-                        <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar perfil"></i>
-                    </a>
-                    </div>
+                    @if ($avaliacaoFisica === null)
+
+                    @else
+                    <a class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#visualizarAvaliacaoFisica{{$aluno->id}}">Ver Avaliação Física</a>
+                    @endif
                 </div>
                 </div>
                 <div class="card-body p-3">
@@ -74,7 +74,14 @@
         </div>
     </div>
     </div>
-@endsection
-</body>
+    <!-- Modal -->
+    @if ($avaliacaoFisica === null)
 
-</html>
+    @else
+        @include('aluno.layoutsModals.modalsAvaliacao')
+    @endif
+
+
+@endsection
+
+

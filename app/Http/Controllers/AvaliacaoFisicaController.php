@@ -21,7 +21,11 @@ class AvaliacaoFisicaController extends Controller
     public function index(Aluno $aluno)
     {
 
-        $avaliacaoFisicas = AvaliacaoFisica::latest()->paginate(5);
+        $avaliacaoFisicas = AvaliacaoFisica::join('alunos', 'alunos.id', '=', 'avaliacao_fisicas.alu_id')
+        ->where('avaliacao_fisicas.alu_id', '=', $aluno->id)
+        ->orderBy('avaliacao_fisicas.created_at', 'desc')
+        ->paginate(5);
+
         return view('admin.avaliacaoFisica', [
             'aluno' => $aluno,
             'avaliacaoFisicas' => $avaliacaoFisicas,

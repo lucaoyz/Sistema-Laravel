@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Aluno;
 use App\Models\Personal;
+use App\Models\AvaliacaoFisica;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,9 +20,11 @@ class PerfilController extends Controller
         $authUser = auth::user();
         $authAluID = $authUser->alu_id;
         $aluno = Aluno::where('id', '=', $authAluID)->first();
+        $avaliacaoFisica = AvaliacaoFisica::where('alu_id', '=', $aluno->id)->first();
         //dd($aluno);
         return view('aluno.perfil', [
             'aluno' => $aluno,
+            'avaliacaoFisica' => $avaliacaoFisica,
         ]);
     }
 

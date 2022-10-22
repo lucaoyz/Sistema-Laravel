@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Personal;
 use App\Models\Aluno;
+use App\Models\AvaliacaoFisica;
 use App\Models\TreinoGeral;
 use App\Models\User;
 use App\Models\Plano;
@@ -19,8 +20,11 @@ class AvaliacaoFisicaController extends Controller
      */
     public function index(Aluno $aluno)
     {
+
+        $avaliacaoFisicas = AvaliacaoFisica::all();
         return view('admin.avaliacaoFisica', [
             'aluno' => $aluno,
+            'avaliacaoFisicas' => $avaliacaoFisicas,
             ]);
     }
 
@@ -41,9 +45,53 @@ class AvaliacaoFisicaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Aluno $aluno)
     {
-        //
+        $request->validate([
+            'alu_id' => 'nullable',
+            'af_kg' => 'nullable',
+            'af_altura' => 'nullable',
+            'af_massa_gorda' => 'nullable',
+            'af_massa_magra' => 'nullable',
+            'af_imc' => 'nullable',
+            'af_cm_bracoE' => 'nullable',
+            'af_cm_bracoD' => 'nullable',
+            'af_cm_antebracoE' => 'nullable',
+            'af_cm_antebracoD' => 'nullable',
+            'af_cm_coxaE' => 'nullable',
+            'af_cm_coxaD' => 'nullable',
+            'af_cm_panturrilhaE' => 'nullable',
+            'af_cm_panturrilhaD' => 'nullable',
+            'af_cm_torax' => 'nullable',
+            'af_cm_cintura' => 'nullable',
+            'af_cm_abdomen' => 'nullable',
+            'af_cm_quadril' => 'nullable',
+            'af_cm_pescoco' => 'nullable',
+            'af_cm_ombro' => 'nullable',
+            'af_dc_subescapular' => 'nullable',
+            'af_dc_triceps' => 'nullable',
+            'af_dc_biceps' => 'nullable',
+            'af_dc_torax' => 'nullable',
+            'af_dc_axilarMedia' => 'nullable',
+            'af_dc_suprailiaca' => 'nullable',
+            'af_dc_abdominal' => 'nullable',
+            'af_dc_coxaMedial' => 'nullable',
+            'af_dc_panturrilhaMedial' => 'nullable',
+            'af_objetivo' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        $kg = $request->af_kg;
+        $altura = $request->af_altura;
+        $alturaIMC = $altura * $altura;
+        $imc = $kg / $alturaIMC;
+        $input['af_imc'] = "$imc";
+        
+        AvaliacaoFisica::create($input);
+
+        return redirect()->route('alunos.avaliacaoFisica', $aluno->id)
+                        ->with('success','Avaliação Física cadastrada com sucesso!');
+
     }
 
     /**

@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
             <form action="@if ($plano === null)
-                {{ route('admin.alterarInfos.updatePlanos')}}
+                {{ route('admin.alterarInfos.storePlanos')}}
                 " method="POST">
                 @csrf
             @else

@@ -45,9 +45,20 @@ class InformacoesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storePlanos(Request $request)
     {
-        //
+        $request->validate([
+            'pl_plano1' => 'nullable',
+            'pl_plano2' => 'nullable',
+            'pl_plano3' => 'nullable',
+            'pl_plano4' => 'nullable',
+        ]);
+
+        Plano::create($request->all());
+
+        //dd($plano);
+            return redirect()->route('admin.alterarInfos')
+                        ->with('success', 'Planos atualizados com sucesso!');
     }
 
     /**

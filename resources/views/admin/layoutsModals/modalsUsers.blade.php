@@ -1,3 +1,4 @@
+ @foreach ($alunos as $aluno)
  <!-- Modal Informações -->
  <div class="modal fade" id="infoAlunoModal{{$aluno->id}}" tabindex="-1" role="dialog" aria-labelledby="infoAlunoModal{{$aluno->id}}" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
@@ -25,7 +26,7 @@
        </div>
      </div>
    </div>
-
+@endforeach
 <!-- Criar aluno -->
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -145,10 +146,16 @@
                              <select name="alu_mensalidade" id="alu_mensalidade"
                             class="form-select @error('alu_mensalidade') is-invalid @enderror"
                             value="{{ old('alu_mensalidade') }}" required autocomplete="alu_mensalidade">
+                            @if ($plano === null)
+                            <option value="">Nenhuma mensalidade cadastrada, cadastre na tela de informações</option>
+
+                            @else
                                 <option value="{{$plano1->pl_plano1}}">{{$plano1->pl_plano1}}</option>
                                 <option value="{{$plano2->pl_plano2}}">{{$plano2->pl_plano2}}</option>
                                 <option value="{{$plano3->pl_plano3}}">{{$plano3->pl_plano3}}</option>
                                 <option value="{{$plano4->pl_plano4}}">{{$plano4->pl_plano4}}</option>
+                            @endif
+
                             </select>
 
                             @error('alu_mensalidade')

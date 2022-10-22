@@ -51,34 +51,35 @@
 
                   <tbody>
                     <!-- Laço de repetição da avaliação fisica -->
+                    @foreach ($avaliacaoFisicas as $avaliacaoFisica)
+
                     <tr>
-
-                        <!--  -->
+                        <!-- alu_nome -->
                        <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"></h6>
+                            <h6 class="mb-0 text-sm">{{$aluno->alu_nome}}</h6>
                           </div>
                         </div>
                       </td>
 
-                       <!--  -->
+                       <!-- af_kg -->
                        <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"></h6>
+                            <h6 class="mb-0 text-sm">{{$avaliacaoFisica->af_kg}}</h6>
                           </div>
                         </div>
                       </td>
 
-                      <!--  -->
+                      <!-- af_imc -->
                       <td>
-                        <p class="text-sm font-weight-bold mb-0"></p>
+                        <p class="text-sm font-weight-bold mb-0">{{$avaliacaoFisica->af_imc}}</p>
                       </td>
 
                       <!--  -->
                       <td>
-                        <p class="text-sm font-weight-bold mb-0"></p>
+                        <p class="text-sm font-weight-bold mb-0">{{$avaliacaoFisica->created_at->format('d/m/Y')}}</p>
                       </td>
 
                       <!-- Botoes de ação -->
@@ -96,7 +97,7 @@
 
                         </td>
                     </tr>
-
+                    @endforeach
                   </tbody>
                 </table>
                 <!-- Paginação com e sem filtros -->

@@ -56,17 +56,17 @@
     </div>
     <div class="col-md-4 mb-4">
       <div class="card bg-gradient-dark shadow-lg">
-        <span class="badge rounded-pill bg-primary w-30 mt-n2 mx-auto">TIME</span>
+        <span class="badge rounded-pill bg-primary w-40 mt-n2 mx-auto">Painel Administrativo</span>
         <div class="card-header text-center pt-4 pb-3 bg-transparent">
         </div>
         <div class="card-body text-lg-start text-center pt-0">
           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-            <i class="material-icons my-auto text-white">remove</i>
-            <span class="ps-3 text-white">nome do membro do time</span>
+
+            <span class="ps-3 text-white">Altere os membros da equipe e a tabela de preços pelo painel administrativo</span>
           </div>
 
           <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0">
-            Adicionar ou editar membros do time
+            Acesse o painel administrativo por aqui
             <i class="fas fa-arrow-right ms-1"></i>
           </a>
         </div>

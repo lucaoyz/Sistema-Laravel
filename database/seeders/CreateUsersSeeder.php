@@ -20,7 +20,7 @@ class CreateUsersSeeder extends Seeder
             'name'=>'Gerencial',
             'email'=>'gerencial@sistema.com',
             'type'=>1,
-            'password'=> bcrypt('12345678'),
+            'password'=> bcrypt('gerencial123'),
         ]);
 
     }

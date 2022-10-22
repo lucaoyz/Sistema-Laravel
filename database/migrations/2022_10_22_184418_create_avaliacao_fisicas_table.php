@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('alu_id')->nullable()->constrained('alunos');
             $table->string('af_kg')->nullable();
+            $table->string('af_altura')->nullable();
             $table->string('af_massa_gorda')->nullable();
             $table->string('af_massa_magra')->nullable();
             $table->string('af_imc')->nullable();

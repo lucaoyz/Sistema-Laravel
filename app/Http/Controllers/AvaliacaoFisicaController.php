@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Personal;
+use App\Models\Aluno;
+use App\Models\TreinoGeral;
+use App\Models\User;
+use App\Models\Plano;
+
 use Illuminate\Http\Request;
 
 class AvaliacaoFisicaController extends Controller
@@ -11,9 +17,11 @@ class AvaliacaoFisicaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Aluno $aluno)
     {
-        //
+        return view('admin.avaliacaoFisica', [
+            'aluno' => $aluno,
+            ]);
     }
 
     /**
@@ -23,7 +31,8 @@ class AvaliacaoFisicaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.avaliacaoFisica', [
+        ]);
     }
 
     /**

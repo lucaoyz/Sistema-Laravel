@@ -26,7 +26,7 @@
                         <div class="col-md-6">
                             <input id="pl_plano1" type="text"
                             class="form-control @error('pl_plano1') is-invalid @enderror"
-                            name="pl_plano1"
+                            name="pl_plano1" onkeypress="return onlynumber();"
                                 @if ($plano1 === null)
                                     value="{{ old('pl_plano1') }}" autocomplete="pl_plano1" autofocus
                                     placeholder="Insira o valor do plano">
@@ -49,7 +49,7 @@
                         <div class="col-md-6">
                             <input id="pl_plano2" type="text"
                             class="form-control @error('pl_plano2') is-invalid @enderror"
-                            name="pl_plano2"
+                            name="pl_plano2" onkeypress="return onlynumber();"
                                 @if ($plano2 === null)
                                     value="{{ old('pl_plano2') }}" autocomplete="pl_plano2" autofocus
                                     placeholder="Insira o valor do plano">
@@ -72,7 +72,7 @@
                         <div class="col-md-6">
                             <input id="pl_plano3" type="text"
                             class="form-control @error('pl_plano3') is-invalid @enderror"
-                            name="pl_plano3"
+                            name="pl_plano3" onkeypress="return onlynumber();"
                                 @if ($plano3 === null)
                                     value="{{ old('pl_plano3') }}" autocomplete="pl_plano3" autofocus
                                     placeholder="Insira o valor do plano">
@@ -95,7 +95,7 @@
                         <div class="col-md-6">
                             <input id="pl_plano4" type="text"
                             class="form-control @error('pl_plano4') is-invalid @enderror"
-                            name="pl_plano4"
+                            name="pl_plano4" onkeypress="return onlynumber();"
                                 @if ($plano4 === null)
                                     value="{{ old('pl_plano4') }}" autocomplete="pl_plano4" autofocus
                                     placeholder="Insira o valor do plano">

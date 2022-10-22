@@ -43,15 +43,6 @@ class UsuariosController extends Controller
             ]);
     }
 
-    public function avaliacaoFisica(Aluno $aluno)
-    {
-
-
-        return view('admin.avaliacaoFisica', [
-            ]);
-    }
-
-
     /**
      * Show the form for creating a new resource.
      *

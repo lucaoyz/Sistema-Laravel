@@ -100,7 +100,14 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         // Cadastro de aluno
         Route::get('/alunos', [App\Http\Controllers\UsuariosController::class, 'index'])->name('alunos.index');
-        Route::get('/alunos/avaliacao/{aluno}', [App\Http\Controllers\UsuariosController::class, 'avaliacaoFisica'])->name('alunos.avaliacaoFisica');
+            // Avaliação Física
+            Route::get('/alunos/avaliacao/{aluno}', [App\Http\Controllers\AvaliacaoFisicaController::class, 'index'])->name('alunos.avaliacaoFisica');
+            Route::get('/alunos/avaliacao/{aluno}/create', [App\Http\Controllers\AvaliacaoFisicaController::class, 'create'])->name('alunos.avaliacaoFisicaCreate');
+            Route::post('/alunos/avaliacao/{aluno}/store', [App\Http\Controllers\AvaliacaoFisicaController::class, 'store'])->name('alunos.avaliacaoFisicaStore');
+            Route::get('/alunos/avaliacao/{aluno}/edit', [App\Http\Controllers\AvaliacaoFisicaController::class, 'edit'])->name('alunos.avaliacaoFisicaEdit');
+            Route::put('/alunos/avaliacao/{aluno}/update', [App\Http\Controllers\AvaliacaoFisicaController::class, 'update'])->name('alunos.avaliacaoFisicaUpdate');
+            Route::delete('/alunos/avaliacao/{aluno}/delete', [App\Http\Controllers\AvaliacaoFisicaController::class, 'destroy'])->name('alunos.avaliacaoFisicaDelete');
+
         Route::get('/alunos/create', [App\Http\Controllers\UsuariosController::class, 'createAluno'])->name('alunos.create');
         Route::post('/alunos/store', [App\Http\Controllers\UsuariosController::class, 'storeAluno'])->name('alunos.store');
         Route::post('/alunos/ativar/{aluno}', [App\Http\Controllers\UsuariosController::class, 'ativarAluno'])->name('alunos.ativar');

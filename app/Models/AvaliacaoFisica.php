@@ -12,6 +12,7 @@ class AvaliacaoFisica extends Model
     protected $fillable = [
         'alu_id',
         'af_kg',
+        'af_altura',
         'af_massa_gorda',
         'af_massa_magra',
         'af_imc',

@@ -329,24 +329,24 @@ Route::middleware(['auth', 'user-access:professor'])->group(function () {
             Route::any('/treino/detalhes/{treinoGeral}/f/search', [App\Http\Controllers\ProfessorTreinoController::class, 'searchDetalhesDivisaoF'])->name('professor.treinos.searchDetalhesDivisaoF');
 
         /* Rotas para os exercicios */
-        Route::get('/treino/exercicios/inicio', [App\Http\Controllers\ExerciciosController::class, 'index'])->name('professor.exercicios.index');
-        Route::get('/treino/exercicios/create', [App\Http\Controllers\ExerciciosController::class, 'create'])->name('professor.exercicios.create');
-        Route::post('/treino/exercicios/store', [App\Http\Controllers\ExerciciosController::class, 'store'])->name('professor.exercicios.store');
-        Route::get('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'show'])->name('professor.exercicios.show');
-        Route::get('/treino/exercicios/{exercicio}/edit',[App\Http\Controllers\ExerciciosController::class, 'edit'])->name('professor.exercicios.edit');
-        Route::put('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'update'])->name('professor.exercicios.update');
-        Route::delete('/treino/exercicios/{exercicio}', [App\Http\Controllers\ExerciciosController::class, 'destroy'])->name('professor.exercicios.destroy');
-        Route::any('/treino/exercicios/search', [App\Http\Controllers\ExerciciosController::class, 'search'])->name('professor.exercicios.search');
+        Route::get('/treino/exercicios/inicio', [App\Http\Controllers\ProfessorExerciciosController::class, 'index'])->name('professor.exercicios.index');
+        Route::get('/treino/exercicios/create', [App\Http\Controllers\ProfessorExerciciosController::class, 'create'])->name('professor.exercicios.create');
+        Route::post('/treino/exercicios/store', [App\Http\Controllers\ProfessorExerciciosController::class, 'store'])->name('professor.exercicios.store');
+        Route::get('/treino/exercicios/{exercicio}', [App\Http\Controllers\ProfessorExerciciosController::class, 'show'])->name('professor.exercicios.show');
+        Route::get('/treino/exercicios/{exercicio}/edit',[App\Http\Controllers\ProfessorExerciciosController::class, 'edit'])->name('professor.exercicios.edit');
+        Route::put('/treino/exercicios/{exercicio}', [App\Http\Controllers\ProfessorExerciciosController::class, 'update'])->name('professor.exercicios.update');
+        Route::delete('/treino/exercicios/{exercicio}', [App\Http\Controllers\ProfessorExerciciosController::class, 'destroy'])->name('professor.exercicios.destroy');
+        Route::any('/treino/exercicios/search', [App\Http\Controllers\ProfessorExerciciosController::class, 'search'])->name('professor.exercicios.search');
 
         /* Rotas para os equipamentos */
-        Route::get('/treino/equipamentos/inicio', [App\Http\Controllers\EquipamentosController::class, 'index'])->name('professor.equipamentos.index');
-        Route::get('/treino/equipamentos/create', [App\Http\Controllers\EquipamentosController::class, 'create'])->name('professor.equipamentos.create');
-        Route::post('/treino/equipamentos/store', [App\Http\Controllers\EquipamentosController::class, 'store'])->name('professor.equipamentos.store');
-        Route::get('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'show'])->name('professor.equipamentos.show');
-        Route::get('/treino/equipamentos/{equipamento}/edit',[App\Http\Controllers\EquipamentosController::class, 'edit'])->name('professor.equipamentos.edit');
-        Route::put('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'update'])->name('professor.equipamentos.update');
-        Route::delete('/treino/equipamentos/{equipamento}', [App\Http\Controllers\EquipamentosController::class, 'destroy'])->name('professor.equipamentos.destroy');
-        Route::any('/treino/equipamentos/search', [App\Http\Controllers\EquipamentosController::class, 'search'])->name('professor.equipamentos.search');
+        Route::get('/treino/equipamentos/inicio', [App\Http\Controllers\ProfessorEquipamentosController::class, 'index'])->name('professor.equipamentos.index');
+        Route::get('/treino/equipamentos/create', [App\Http\Controllers\ProfessorEquipamentosController::class, 'create'])->name('professor.equipamentos.create');
+        Route::post('/treino/equipamentos/store', [App\Http\Controllers\ProfessorEquipamentosController::class, 'store'])->name('professor.equipamentos.store');
+        Route::get('/treino/equipamentos/{equipamento}', [App\Http\Controllers\ProfessorEquipamentosController::class, 'show'])->name('professor.equipamentos.show');
+        Route::get('/treino/equipamentos/{equipamento}/edit',[App\Http\Controllers\ProfessorEquipamentosController::class, 'edit'])->name('professor.equipamentos.edit');
+        Route::put('/treino/equipamentos/{equipamento}', [App\Http\Controllers\ProfessorEquipamentosController::class, 'update'])->name('professor.equipamentos.update');
+        Route::delete('/treino/equipamentos/{equipamento}', [App\Http\Controllers\ProfessorEquipamentosController::class, 'destroy'])->name('professor.equipamentos.destroy');
+        Route::any('/treino/equipamentos/search', [App\Http\Controllers\ProfessorEquipamentosController::class, 'search'])->name('professor.equipamentos.search');
 
         /* Rotas para visualização de aluno */
         Route::get('/treino/pdf/divisoes/a{treinoGeral}', [App\Http\Controllers\ProfessorTreinoController::class, 'PDFTreinoDivisoesATreinador'])->name('professor.aluno.PDFTreinoDivisoesATreinador');

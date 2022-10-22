@@ -45,7 +45,7 @@ class ProfessorTreinoController extends Controller
         $alunos = Aluno::all();
         $personals = Personal::all();
 
-        return view('admin.viewsTreino.treinoGeral', [
+        return view('professor.viewsTreino.treinoGeral', [
             'treinoGerals' => $treinoGerals,
             'alunos' => $alunos,
             'personals' => $personals,

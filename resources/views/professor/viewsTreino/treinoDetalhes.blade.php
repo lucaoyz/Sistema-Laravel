@@ -1,4 +1,4 @@
-@extends('admin.layoutsModals.layouts')
+@extends('professor.layoutsModals.layouts')
 @section('title', 'Detalhes do Treino')
 @section('treino', 'active bg-gradient-primary')
 @section('pagina', 'Treino - Detalhes do Treino')

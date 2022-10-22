@@ -90,10 +90,10 @@
 
 
                             <!-- Editar -->
-                            <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#">Editar</a>
+                            <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#editarAvaliacaoFisica{{$aluno->id}}">Editar</a>
 
                             <!-- Remover -->
-                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#">Excluir</a>
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirAvaliacaoFisica{{$aluno->id}}">Excluir</a>
 
                         </td>
                     </tr>
@@ -101,7 +101,11 @@
                   </tbody>
                 </table>
                 <!-- Paginação com e sem filtros -->
-
+                @if (isset($filters))
+                        {{ $avaliacaoFisicas->appends($filters)->links() }}
+                    @else
+                        {{ $avaliacaoFisicas->links() }}
+                    @endif
               </div>
             </div>
           </div>

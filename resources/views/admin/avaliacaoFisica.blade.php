@@ -58,7 +58,7 @@
                        <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{$avaliacaoFisica->alu_nome}}</h6>
+                            <h6 class="mb-0 text-sm">{{$aluno->alu_nome}}</h6>
                           </div>
                         </div>
                       </td>
@@ -90,10 +90,10 @@
 
 
                             <!-- Editar -->
-                            <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#editarAvaliacaoFisica{{$aluno->id}}">Editar</a>
+                            <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#editarAvaliacaoFisica{{$aluno->id}}{{$avaliacaoFisica->id}}">Editar</a>
 
                             <!-- Remover -->
-                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirAvaliacaoFisica{{$aluno->id}}">Excluir</a>
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirAvaliacaoFisica{{$aluno->id}}{{$avaliacaoFisica->id}}">Excluir</a>
 
                         </td>
                     </tr>

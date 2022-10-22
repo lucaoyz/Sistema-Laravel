@@ -41,12 +41,12 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="af_kg" class="col-md-4 col-form-label text-md-end">{{ __('Peso do Aluno') }}</label>
+                        <label for="af_kg" class="col-md-4 col-form-label text-md-end">{{ __('*Peso do Aluno') }}</label>
 
                         <div class="col-md-6">
                             <input id="af_kg" type="text"
                             class="form-control @error('af_kg') is-invalid @enderror"
-                            name="af_kg" value="{{ old('af_kg') }}" autocomplete="af_kg" autofocus
+                            name="af_kg" value="{{ old('af_kg') }}" required autocomplete="af_kg" autofocus
                             onkeypress="return onlynumber();"
                             placeholder="Insira o peso do aluno">
 
@@ -59,12 +59,12 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="af_altura" class="col-md-4 col-form-label text-md-end">{{ __('Altura do Aluno') }}</label>
+                        <label for="af_altura" class="col-md-4 col-form-label text-md-end">{{ __('*Altura do Aluno') }}</label>
 
                         <div class="col-md-6">
                             <input id="af_altura" type="text"
                             class="form-control @error('af_altura') is-invalid @enderror"
-                            name="af_altura" value="{{ old('af_altura') }}" autocomplete="af_altura" autofocus
+                            name="af_altura" value="{{ old('af_altura') }}" required autocomplete="af_altura" autofocus
                             onkeypress="return onlynumber();"
                             placeholder="Insira a altura do aluno">
 
@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="af_massa_gorda" class="col-md-4 col-form-label text-md-end">{{ __('Massa gorda do Aluno') }}</label>
+                        <label for="af_massa_gorda" class="col-md-4 col-form-label text-md-end">{{ __('Massa gorda do Aluno (Gordura/kg)') }}</label>
 
                         <div class="col-md-6">
                             <input id="af_massa_gorda" type="text"
@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="af_massa_magra" class="col-md-4 col-form-label text-md-end">{{ __('Massa magra do Aluno') }}</label>
+                        <label for="af_massa_magra" class="col-md-4 col-form-label text-md-end">{{ __('Massa magra do Aluno (Músculo/kg)') }}</label>
 
                         <div class="col-md-6">
                             <input id="af_massa_magra" type="text"
@@ -587,11 +587,11 @@
 </div>
 @endif
 @foreach ($avaliacaoFisicas as $avaliacaoFisica)
-<div class="modal fade" id="editarAvaliacaoFisica{{$aluno->id}}" tabindex="-1" role="dialog" aria-labelledby="editarAvaliacaoFisica{{$aluno->id}}" aria-hidden="true">
+<div class="modal fade" id="editarAvaliacaoFisica{{$aluno->id}}{{$avaliacaoFisica->id}}" tabindex="-1" role="dialog" aria-labelledby="editarAvaliacaoFisica{{$aluno->id}}{{$avaliacaoFisica->id}}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 750px">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="editarAvaliacaoFisica{{$aluno->id}}">Editar</h5>
+          <h5 class="modal-title font-weight-normal" id="editarAvaliacaoFisica{{$aluno->id}}{{$avaliacaoFisica->id}}">Editar</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -1173,11 +1173,11 @@
 
 <!-- Modal de excluir exercício -->
 @foreach($avaliacaoFisicas as $avaliacaoFisica)
-<div class="modal fade" id="excluirAvaliacaoFisica{{$aluno->id}}" tabindex="-1" role="dialog" aria-labelledby="excluirAvaliacaoFisica{{$aluno->id}}" aria-hidden="true">
+<div class="modal fade" id="excluirAvaliacaoFisica{{$aluno->id}}{{$avaliacaoFisica->id}}" tabindex="-1" role="dialog" aria-labelledby="excluirAvaliacaoFisica{{$aluno->id}}{{$avaliacaoFisica->id}}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="excluirAvaliacaoFisica{{$aluno->id}}">Excluir Equipamento</h5>
+          <h5 class="modal-title font-weight-normal" id="excluirAvaliacaoFisica{{$aluno->id}}{{$avaliacaoFisica->id}}">Excluir Equipamento</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -1221,8 +1221,8 @@
             Objetivo: {{$avaliacaoFisica->af_objetivo}}</span>
         </p>
             <h6>Medidas (cm)</h6>
-            <p>Massa Gorda (Gordura): {{$avaliacaoFisica->af_massa_gorda}}</p>
-            <p>Massa Magra (Musculo): {{$avaliacaoFisica->af_massa_musculo}}</p>
+            <p>Massa Gorda (Gordura/kg): {{$avaliacaoFisica->af_massa_gorda}}</p>
+            <p>Massa Magra (Músculo/kg): {{$avaliacaoFisica->af_massa_musculo}}</p>
             <p>Medida do Braço Esquerdo (cm): {{$avaliacaoFisica->af_cm_bracoE}}</p>
             <p>Medida do Braço Direito (cm): {{$avaliacaoFisica->af_cm_bracoD}}</p>
             <p>Medida do Antebraço Esquerdo (cm): {{$avaliacaoFisica->af_cm_antebracoE}}</p>

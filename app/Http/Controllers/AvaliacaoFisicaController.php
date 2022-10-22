@@ -21,9 +21,7 @@ class AvaliacaoFisicaController extends Controller
     public function index(Aluno $aluno)
     {
 
-        $avaliacaoFisicas = AvaliacaoFisica::join('alunos', 'alunos.id', '=', 'avaliacao_fisicas.alu_id')
-        ->where('avaliacao_fisicas.alu_id', '=', $aluno->id)
-        ->orderBy('avaliacao_fisicas.created_at', 'desc')
+        $avaliacaoFisicas = AvaliacaoFisica::where('alu_id', '=', $aluno->id)
         ->paginate(5);
 
         return view('admin.avaliacaoFisica', [
@@ -51,8 +49,6 @@ class AvaliacaoFisicaController extends Controller
      */
     public function store(Request $request, Aluno $aluno)
     {
-        $avaliacaoFisicas = AvaliacaoFisica::all();
-
         $request->validate([
             'alu_id' => 'nullable',
             'af_kg' => 'nullable',
@@ -132,7 +128,6 @@ class AvaliacaoFisicaController extends Controller
     public function update(Request $request, Aluno $aluno, AvaliacaoFisica $avaliacaoFisica)
     {
         $avaliacaoFisica = AvaliacaoFisica::where('id', '=', $request->input('id'))->first();
-
         $request->validate([
             'alu_id' => 'nullable',
             'af_kg' => 'nullable',
@@ -171,7 +166,7 @@ class AvaliacaoFisicaController extends Controller
         $altura = $request->af_altura;
         $alturaIMC = $altura * $altura;
         $imc = $kg / $alturaIMC;
-        $input['af_imc'] = "$imc";
+        $input['af_imc'] = round($imc, 2);
 
         $avaliacaoFisica->update($input);
         //dd($avaliacaoFisica);

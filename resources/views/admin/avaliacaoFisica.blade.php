@@ -86,7 +86,7 @@
                       <td class="align-middle">
 
                             <!-- Visualizar -->
-                            <a class="btn btn-info" href="" data-bs-toggle="modal" data-bs-target="#">Visualizar</a>
+                            <a class="btn btn-info" href="" data-bs-toggle="modal" data-bs-target="#visualizarAvaliacaoFisica{{$aluno->id}}">Visualizar</a>
 
 
                             <!-- Editar -->

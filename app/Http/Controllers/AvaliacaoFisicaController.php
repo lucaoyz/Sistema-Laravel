@@ -87,8 +87,8 @@ class AvaliacaoFisicaController extends Controller
         $altura = $request->af_altura;
         $alturaIMC = $altura * $altura;
         $imc = $kg / $alturaIMC;
-        $input['af_imc'] = "$imc";
 
+        $input['af_imc'] = round($imc, 2);
         AvaliacaoFisica::create($input);
 
         return redirect()->route('alunos.avaliacaoFisica', $aluno->id)

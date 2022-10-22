@@ -142,10 +142,10 @@
                              <select name="alu_mensalidade" id="alu_mensalidade"
                             class="form-select @error('alu_mensalidade') is-invalid @enderror"
                             value="{{ old('alu_mensalidade') }}" required autocomplete="alu_mensalidade">
-                                <option value="99,90">99,90</option>
-                                <option value="89,90">89,90</option>
-                                <option value="84,90">84,90</option>
-                                <option value="79,90">79,90</option>
+                                <option value="{{$plano1->pl_plano1}}">{{$plano1->pl_plano1}}</option>
+                                <option value="{{$plano2->pl_plano2}}">{{$plano2->pl_plano2}}</option>
+                                <option value="{{$plano3->pl_plano3}}">{{$plano3->pl_plano3}}</option>
+                                <option value="{{$plano4->pl_plano4}}">{{$plano4->pl_plano4}}</option>
                             </select>
 
                             @error('alu_mensalidade')
@@ -320,12 +320,13 @@
                             <select name="alu_mensalidade" id="alu_mensalidade"
                             class="form-select @error('alu_mensalidade') is-invalid @enderror"
                             required autocomplete="alu_mensalidade">
-
-                                <option value="99,90" @if($aluno->alu_mensalidade == '99,90') selected @endif>99,90</option>
-                                <option value="89,90" @if($aluno->alu_mensalidade == '89,90') selected @endif>89,90</option>
-                                <option value="84,90" @if($aluno->alu_mensalidade == '84,90') selected @endif>84,90</option>
-                                <option value="79,90" @if($aluno->alu_mensalidade == '79,90') selected @endif>79,90</option>
-
+                                <option value="{{$aluno->alu_mensalidade}}" selected>{{$aluno->alu_mensalidade}}</option>
+                                <optgroup label="Mensalidades Atuais">
+                                    <option value="{{$plano1->pl_plano1}}" @if($aluno->alu_mensalidade == $plano1->pl_plano1) selected @endif>{{$plano1->pl_plano1}}</option>
+                                    <option value="{{$plano2->pl_plano2}}" @if($aluno->alu_mensalidade == $plano2->pl_plano2) selected @endif>{{$plano2->pl_plano2}}</option>
+                                    <option value="{{$plano3->pl_plano3}}" @if($aluno->alu_mensalidade == $plano3->pl_plano3) selected @endif>{{$plano3->pl_plano3}}</option>
+                                    <option value="{{$plano4->pl_plano4}}" @if($aluno->alu_mensalidade == $plano4->pl_plano4) selected @endif>{{$plano4->pl_plano4}}</option>
+                                </optgroup>
                             </select>
 
                             @error('alu_mensalidade')

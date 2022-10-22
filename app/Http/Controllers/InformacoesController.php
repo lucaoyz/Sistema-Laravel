@@ -88,15 +88,15 @@ class InformacoesController extends Controller
             'pl_plano4' => 'nullable',
         ]);
 
-        $plano->id = $request->id;
+        $plano = Plano::all()->first();
+        $plano->id = $plano->id;
         $plano->pl_plano1 = $request->pl_plano1;
         $plano->pl_plano2 = $request->pl_plano2;
         $plano->pl_plano3 = $request->pl_plano3;
         $plano->pl_plano4 = $request->pl_plano4;
+        $plano->update($request->all());
 
-
-        $plano->save();
-
+        //dd($plano);
             return redirect()->route('admin.alterarInfos')
                         ->with('success', 'Planos atualizados com sucesso!');
     }

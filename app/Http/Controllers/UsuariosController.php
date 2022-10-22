@@ -7,6 +7,7 @@ use App\Models\Personal;
 use App\Models\Aluno;
 use App\Models\TreinoGeral;
 use App\Models\User;
+use App\Models\Plano;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -25,9 +26,20 @@ class UsuariosController extends Controller
         $personals = Personal::latest()->paginate(5);
         $personals->per_data_nascimento = \Carbon\Carbon::now('America/Sao_Paulo');
 
+        $plano = Plano::all()->first();
+        $plano1 = Plano::select('pl_plano1')->first();
+        $plano2 = Plano::select('pl_plano2')->first();
+        $plano3 = Plano::select('pl_plano3')->first();
+        $plano4 = Plano::select('pl_plano4')->first();
+
         return view('admin.usuarios', [
             'alunos' => $alunos,
             'personals' => $personals,
+            'plano' => $plano,
+            'plano1' => $plano1,
+            'plano2' => $plano2,
+            'plano3' => $plano3,
+            'plano4' => $plano4,
             ]);
     }
 

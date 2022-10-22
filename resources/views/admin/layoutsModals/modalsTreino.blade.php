@@ -31,12 +31,19 @@
                             class="form-select @error('per_id') is-invalid @enderror"
                             value="{{ old('per_id') }}" required autocomplete="per_id">
 
+
+
                             @if(auth()->user()->type == 'admin')
+                            <option
+                                        value=""> Selecione um professor...
+                                    </option>
+                            <optgroup label="Professores">
                                 @foreach ($personals as $personal)
                                     <option
                                         value="{{ $personal['id'] }}"> {{ $personal['per_nome'] }}
                                     </option>
                                 @endforeach
+                            </optgroup>
                             @elseif(auth()->user()->type == 'professor')
                                 <option
                                 value="{{ Auth()->user()->per_id }}"> {{ Auth()->user()->name }}
@@ -60,12 +67,17 @@
                             class="form-select @error('alu_id') is-invalid @enderror"
                             value="{{ old('alu_id') }}" required autocomplete="alu_id">
 
+                                    <option
+                                        value=""> Selecione um aluno...
+                                    </option>
+
+                                    <optgroup label="Alunos">
                                 @foreach ($alunos as $aluno)
                                     <option
                                         value="{{ $aluno['id'] }}"> {{ $aluno['alu_nome'] }}
                                     </option>
                                 @endforeach
-
+                            </optgroup>
                             </select>
 
                             @error('alu_id')

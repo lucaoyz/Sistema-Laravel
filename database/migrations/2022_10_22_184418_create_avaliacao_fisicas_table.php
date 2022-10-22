@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('avaliacao_fisicas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('per_id')->nullable()->constrained('personals');
             $table->foreignId('alu_id')->nullable()->constrained('alunos');
             $table->string('af_kg')->nullable();
             $table->string('af_massa_gorda')->nullable();

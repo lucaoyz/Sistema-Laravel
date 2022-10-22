@@ -154,9 +154,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/usuarios', [App\Http\Controllers\UsuariosController::class, 'index'])->name('admin.usuarios');
 
         /* Rotas para o Financeiro */
-        Route::get('/financeiro', function(){
-            return view('admin.financeiro');
-        })->name('admin.financeiro');
+        Route::get('/financeiro', [App\Http\Controllers\FinanceiroController::class, 'index'])->name('admin.financeiro');
+
 
         /* Rotas para os treinos */
         Route::get('/treino', [App\Http\Controllers\TreinoController::class, 'index'])->name('treinos.index');

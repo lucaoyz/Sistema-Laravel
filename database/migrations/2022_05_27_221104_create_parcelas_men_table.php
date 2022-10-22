@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('men_id')->nullable()->constrained('mensalidade');
             $table->foreignId('alu_id')->nullable()->constrained('alunos');
             $table->date('par_data_pagto');
-            $table->string('status');
+            $table->string('par_status');
             $table->timestamps();
         });
     }

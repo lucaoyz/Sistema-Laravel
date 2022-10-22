@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('for_bairro');
             $table->string('for_rua');
             $table->string('for_numero');
-            $table->string('for_produto');
+            $table->string('for_tipoproduto');
             $table->string('for_telefone')->nullable();
             $table->string('for_celular')->nullable();
             $table->string('for_cpf_cnpj')->nullable();

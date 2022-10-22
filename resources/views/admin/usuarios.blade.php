@@ -111,11 +111,8 @@
                       <!-- Botoes de ação -->
                       <td class="align-middle">
 
-                            <form action="{{ route('alunos.ativar',$aluno->id) }}" method="POST">
-
-                                @csrf
-
-                            <button type="submit" class="btn btn-success">Ativar</button>
+                            <!-- Mais informações -->
+                            <a href="" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#infoAlunoModal{{$aluno->id}}">Mais Informações</a>
 
                             <!-- Editar -->
                             <a class="btn btn-secondary" href="{{ route('alunos.edit',$aluno->id) }}" data-bs-toggle="modal" data-bs-target="#editarAlunoModal{{$aluno->id}}">Editar</a>

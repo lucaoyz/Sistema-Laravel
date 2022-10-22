@@ -99,11 +99,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 
         // Cadastro de aluno
-
         Route::get('/alunos', [App\Http\Controllers\UsuariosController::class, 'index'])->name('alunos.index');
-        Route::get('/alunos/ativos', [App\Http\Controllers\UsuariosController::class, 'indexAtivos'])->name('alunos.indexAtivos');
-        Route::get('/alunos/inativos', [App\Http\Controllers\UsuariosController::class, 'indexInativos'])->name('alunos.indexInativos');
-        Route::get('/alunos/comTreino', [App\Http\Controllers\UsuariosController::class, 'indexComTreino'])->name('alunos.indexComTreino');
+        Route::get('/alunos/avaliacao/{aluno}', [App\Http\Controllers\UsuariosController::class, 'avaliacaoFisica'])->name('alunos.avaliacaoFisica');
         Route::get('/alunos/create', [App\Http\Controllers\UsuariosController::class, 'createAluno'])->name('alunos.create');
         Route::post('/alunos/store', [App\Http\Controllers\UsuariosController::class, 'storeAluno'])->name('alunos.store');
         Route::post('/alunos/ativar/{aluno}', [App\Http\Controllers\UsuariosController::class, 'ativarAluno'])->name('alunos.ativar');

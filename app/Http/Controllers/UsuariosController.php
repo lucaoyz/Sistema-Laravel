@@ -43,15 +43,14 @@ class UsuariosController extends Controller
             ]);
     }
 
-    public function indexAtivos(Aluno $aluno)
+    public function avaliacaoFisica(Aluno $aluno)
     {
-        $alunos = Aluno::join('users', 'users.alu_id', '=', 'alunos.id')->where('users.alu_id', '=', 'alunos.id')->orderBy('alunos.created_at', 'desc')->paginate(5);
-        $alunos->alu_data_nascimento = \Carbon\Carbon::now('America/Sao_Paulo');
 
-        return view('admin.usuarios', [
-            'alunos' => $alunos,
+
+        return view('admin.avaliacaoFisica', [
             ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

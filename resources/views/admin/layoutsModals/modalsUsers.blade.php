@@ -1,24 +1,27 @@
- <!-- Modal filtros -->
- <div class="modal fade" id="filtrosEspecificos" tabindex="-1" role="dialog" aria-labelledby="filtrosEspecificos" aria-hidden="true">
+ <!-- Modal Informações -->
+ <div class="modal fade" id="infoAlunoModal{{$aluno->id}}" tabindex="-1" role="dialog" aria-labelledby="infoAlunoModal{{$aluno->id}}" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
          <div class="modal-header">
-           <h5 class="modal-title font-weight-normal" id="filtrosEspecificos">Filtros Específicos</h5>
+           <h5 class="modal-title font-weight-normal" id="infoAlunoModal{{$aluno->id}}">Informações de {{$aluno->alu_nome}}</h5>
            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
            </button>
          </div>
          <div class="modal-body">
 
-             <p>Qual filtro você deseja aplicar?</p>
+             <p>Aqui você acessar a tela de avaliação física ou ativar o aluno.</p>
 
          </div>
+         <form action="{{ route('alunos.ativar',$aluno->id) }}" method="POST">
+
+            @csrf
          <div class="modal-footer">
-           <button type="button" class="btn bg-gradient-success">Alunos Ativos</button>
-           <button type="button" class="btn bg-gradient-danger">Alunos Inativos</button>
-           <button type="button" class="btn bg-gradient-info">Alunos com Treino</button>
+           <a href="{{route('alunos.avaliacaoFisica', $aluno->id)}}" class="btn bg-gradient-info">Avaliação Física</a>
+           <button type="submit" class="btn bg-gradient-success">Ativar</button>
            <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Fechar</button>
          </div>
+         </form>
        </div>
      </div>
    </div>

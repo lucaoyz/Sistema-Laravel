@@ -13,26 +13,42 @@
         <div class="card-body text-lg-start text-center pt-0">
           <div class="d-flex justify-content-lg-start justify-content-center p-2">
             <i class="material-icons my-auto">remove</i>
-            <span class="ps-3">Plano 1:</span>
+            <span class="ps-3">Plano 1: @if ($plano1 === null)
+                Sem planos cadastrados.
+            @else
+                {{$plano1->pl_plano1}}
+            @endif</span>
           </div>
 
           <div class="d-flex justify-content-lg-start justify-content-center p-2">
             <i class="material-icons my-auto">remove</i>
-            <span class="ps-3">Plano 2:</span>
+            <span class="ps-3">Plano 2: @if ($plano2 === null)
+                Sem planos cadastrados.
+            @else
+                {{$plano2->pl_plano2}}
+            @endif</span>
           </div>
 
           <div class="d-flex justify-content-lg-start justify-content-center p-2">
             <i class="material-icons my-auto">remove</i>
-            <span class="ps-3">Plano 3:</span>
+            <span class="ps-3">Plano 3: @if ($plano3 === null)
+                Sem planos cadastrados.
+            @else
+                {{$plano3->pl_plano3}}
+            @endif</span>
           </div>
 
           <div class="d-flex justify-content-lg-start justify-content-center p-2">
             <i class="material-icons my-auto">remove</i>
-            <span class="ps-3">Plano 4:</span>
+            <span class="ps-3">Plano 4: @if ($plano4 === null)
+                Sem planos cadastrados.
+            @else
+                {{$plano4->pl_plano4}}
+            @endif</span>
           </div>
 
-          <a href="javascript:;" class="btn btn-icon bg-gradient-dark d-lg-block mt-3 mb-0">
-            Alterar Preço
+          <a data-bs-toggle="modal" data-bs-target="#alterarPlanos" class="btn btn-icon bg-gradient-dark d-lg-block mt-3 mb-0">
+            Alterar Planos
             <i class="fas fa-arrow-right ms-1"></i>
           </a>
         </div>
@@ -57,4 +73,8 @@
       </div>
     </div>
   </div>
+
+        <!-- Modal -->
+        @include('admin.layoutsModals.modalsAlterarInfos')
+
 @endsection

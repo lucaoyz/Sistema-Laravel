@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('planos', function (Blueprint $table) {
             $table->id();
-            $table->string('pl_plano1');
-            $table->string('pl_plano2');
-            $table->string('pl_plano3');
-            $table->string('pl_plano4');
+            $table->string('pl_plano1')->nullable();
+            $table->string('pl_plano2')->nullable();
+            $table->string('pl_plano3')->nullable();
+            $table->string('pl_plano4')->nullable();
             $table->timestamps();
         });
     }

@@ -71,7 +71,7 @@
               </div>
             </a>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Alterar site e dados gerais</p>
+                <p class="text-sm mb-0 text-capitalize">Alterar informações gerais</p>
                 <h4 class="mb-0"><a href="{{route('admin.alterarInfos')}}">Acesse aqui</a></h4>
               </div>
             </div>

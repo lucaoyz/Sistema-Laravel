@@ -134,6 +134,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         /* Rotas alterar site e informações */
         Route::get('/informacoes', [App\Http\Controllers\InformacoesController::class, 'index'])->name('admin.alterarInfos');
+        Route::get('/informacoes/planos/create', [App\Http\Controllers\InformacoesController::class, 'createPlanos'])->name('admin.alterarInfos.createPlanos');
+        Route::post('/informacoes/planos/store', [App\Http\Controllers\InformacoesController::class, 'storePlanos'])->name('admin.alterarInfos.storePlanos');
+        Route::get('/informacoes/planos/edit', [App\Http\Controllers\InformacoesController::class, 'editPlanos'])->name('admin.alterarInfos.editPlanos');
+        Route::put('/informacoes/planos/update', [App\Http\Controllers\InformacoesController::class, 'updatePlanos'])->name('admin.alterarInfos.updatePlanos');
+        Route::delete('/informacoes/planos/delete', [App\Http\Controllers\InformacoesController::class, 'deletePlanos'])->name('admin.alterarInfos.deletePlanos');
 
         /* Perfil */
         Route::get('/perfil', [App\Http\Controllers\PerfilController::class, 'perfilIndexAdmin'])->name('admin.perfil');

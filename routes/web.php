@@ -157,10 +157,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/financeiro', [App\Http\Controllers\FinanceiroController::class, 'index'])->name('admin.financeiro');
 
             // Rotas para tipo de pagamento
-            Route::get('/financeiro/tipopagto/index', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoIndex'])->name('admin.financeiro.tipopagto.index');
-            Route::get('/financeiro/tipopagto/store', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoStore'])->name('admin.financeiro.tipopagto.store');
-            Route::get('/financeiro/tipopagto/update', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoUpdate'])->name('admin.financeiro.tipopagto.update');
-            Route::get('/financeiro/tipopagto/delete', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoDelete'])->name('admin.financeiro.tipopagto.delete');
+            Route::get('/financeiro/tipopagto/', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoIndex'])->name('admin.financeiro.tipopagto.index');
+            Route::post('/financeiro/tipopagto/store', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoStore'])->name('admin.financeiro.tipopagto.store');
+            Route::put('/financeiro/tipopagto/update/{tipoPagto}', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoUpdate'])->name('admin.financeiro.tipopagto.update');
+            Route::delete('/financeiro/tipopagto/delete/{tipoPagto}', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoDelete'])->name('admin.financeiro.tipopagto.delete');
+            Route::any('/financeiro/tipopagto/search', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoSearch'])->name('admin.financeiro.tipopagto.search');
 
             // Rotas para contas a receber
             Route::get('/financeiro/contas/receber/store', [App\Http\Controllers\FinanceiroController::class, 'receberStore'])->name('admin.financeiro.receber.store');

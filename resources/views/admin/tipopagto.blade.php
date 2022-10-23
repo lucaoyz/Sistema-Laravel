@@ -1,7 +1,7 @@
 @extends('admin.layoutsModals.layouts')
-@section('title', 'Equipamentos')
+@section('title', 'Tipo de pagamentos')
 @section('treino', 'active bg-gradient-primary')
-@section('pagina', 'Treino - Equipamentos')
+@section('pagina', 'Financeiro - Tipos de Pagamentos')
 @section('content')
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
@@ -19,7 +19,21 @@
         <!-- Equipamentos -->
       <div class="row">
         <div class="col-12">
-            <a class="btn btn-outline-primary" href="{{route('admin.financeiro')}}">Voltar</a>
+            <!-- Filtro -->
+            <div class="card-header-tabs p-0 mt-n4 mx-3 border-radius-lg" style="background-color: #fff;">
+                <form action="{{route('admin.financeiro.tipopagto.search')}}" method="post">
+                    @csrf
+                    <div class="input-group input-group-outline my-3">
+                        <a class="btn btn-outline-primary" href="{{route('admin.financeiro')}}">Voltar</a>
+                        <!-- Campo de texto para digitar oque será filtrado -->
+                        <input type="text" name="search" class="form-control" style="max-height: 42.5px" placeholder="Filtrar por tipo de pagamento">
+                        <!-- Botão para filtrar -->
+                        <button class="btn btn-primary" type="submit">Filtrar</button>
+                        <!-- Botão para limpar filtro -->
+                        <a class="btn btn-outline-secondary" href="{{route('admin.financeiro.tipopagto.index')}}">Limpar filtro</a>
+                      </div>
+                </form>
+                </div>
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
@@ -45,14 +59,14 @@
 
                   <tbody>
                     <!-- Laço de repetição dos tipos de pagamentos -->
-                    @foreach ($tipopagtos as $tipopagto)
+                    @foreach ($tipoPagtos as $tipoPagto)
                     <tr>
 
                         <!-- tpg_descricao -->
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{ $tipopagto->tpg_descricao }}</h6>
+                            <h6 class="mb-0 text-sm">{{ $tipoPagto->tpg_descricao }}</h6>
                           </div>
                         </div>
                       </td>
@@ -60,16 +74,21 @@
                       <!-- Botoes de ação -->
                       <td class="align-middle">
                             <!-- Editar -->
-                            <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#editarTipoPagto{{$tipopagto->id}}">Editar</a>
+                            <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#editarTipoPagto{{$tipoPagto->id}}">Editar</a>
 
                             <!-- Remover -->
-                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirTipoPagto{{$tipopagto->id}}">Excluir</a>
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#excluirTipoPagto{{$tipoPagto->id}}">Excluir</a>
                         </td>
                     </tr>
                     @endforeach
                   </tbody>
                 </table>
                 <!-- Paginação com e sem filtros -->
+                @if (isset($filters))
+                        {{ $tipoPagtos->appends($filters)->links() }}
+                    @else
+                        {{ $tipoPagtos->links() }}
+                @endif
 
               </div>
             </div>
@@ -80,7 +99,7 @@
 
 
 
-<!-- Modal -->
-
+      <!-- Modal -->
+      @include('admin.layoutsModals.modalsTipoPagto')
 
 @endsection

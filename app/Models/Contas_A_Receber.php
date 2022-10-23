@@ -15,9 +15,8 @@ class Contas_A_Receber extends Model
         'men_id',
         'tpg_id',
         'rec_data',
+        'rec_descricao',
         'rec_valor',
-        'rec_valor_final',
-        'rec_parcelas',
         'rec_status',
     ];
 

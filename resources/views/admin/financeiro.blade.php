@@ -33,7 +33,7 @@
                       <h6 class="text-center mb-0">Contas a receber</h6>
                       <span class="text-xs">Saldo de contas a receber</span>
                       <hr class="horizontal dark my-3">
-                      <h5 class="mb-0">aqui vai a variavel</h5>
+                      <h5 class="mb-0">R$ {{$saldoContaAReceberNaoRecebidos}} a receber</h5>
                     </div>
                   </div>
                 </div>
@@ -71,11 +71,14 @@
                   <div class="row">
                     <div class="col-md-6 mb-md-0 mb-4">
                         <h6 class="mb-0">Contas a receber</h6>
+                        @foreach ($contaAReceberNaoRecebidos as $contaAReceberNaoRecebido)
                       <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                        <h6 class="mb-0">CONTA | PREÇO</h6>
-                        <a href="" class="material-icons ms-auto text-dark cursor-pointer"><i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar conta">edit</i></a>
-                        <a href="" class="material-icons ms-auto text-danger"><i class="material-icons ms-auto text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Excluir Conta">delete</i></a>
-                      </div>
+                        <a href="" class="material-icons text-danger"><i class="material-icons text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Excluir Conta">delete</i></a>
+                        <a href="" class="material-icons text-dark cursor-pointer"><i class="material-icons text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar conta">edit</i></a>
+                        &nbsp; <h6 class="mb-0">{{$contaAReceberNaoRecebido->rec_descricao}} | R$ {{$contaAReceberNaoRecebido->rec_valor}}</h6>
+                        &nbsp; <a href="" class="material-icons text-success cursor-pointer"><i class="material-icons text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Marcar como recebido">check_circle</i></a>
+                        </div>
+                        @endforeach
                     </div>
                     <div class="col-md-6">
                         <h6 class="mb-0">Contas a pagar</h6>
@@ -87,6 +90,12 @@
                     </div>
                   </div>
                 </div>
+            <!-- Paginação com e sem filtros -->
+            @if (isset($filters))
+            {{ $contasAReceber->appends($filters)->links() }}
+              @else
+            {{ $contasAReceber->links() }}
+            @endif
               </div>
             </div>
           </div>
@@ -126,7 +135,7 @@
             <div class="card-header pb-0 px-3">
               <div class="row">
                 <div class="col-md-6">
-                  <h6 class="mb-0">Todas transações</h6>
+                  <h6 class="mb-0">Entradas</h6>
                 </div>
                 <div class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
                   <i class="material-icons me-2 text-lg">date_range</i>
@@ -135,32 +144,22 @@
               </div>
             </div>
             <div class="card-body pt-4 p-3">
-              <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">HISTÓRICO DE ENTRADA E SAÍDA</h6>
+              <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">HISTÓRICO DE ENTRADAS</h6>
               <ul class="list-group">
+                @foreach ($contaAReceberRecebidos as $contaAReceberRecebido)
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_more</i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">EXEMPLO CONTA DE SAÍDA</h6>
-                      <span class="text-xs">DATA E HORARIO</span>
+                    <div class="d-flex align-items-center">
+                      <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
+                      <div class="d-flex flex-column">
+                        <h6 class="mb-1 text-dark text-sm">{{$contaAReceberRecebido->rec_descricao}}</h6>
+                        <span class="text-xs">{{$contaAReceberRecebido->rec_data->format('d/m/Y')}}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                    - R$ PREÇO
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">EXEMPLO CONTA DE ENTRADA</h6>
-                      <span class="text-xs">DATA E HORARIO</span>
+                    <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
+                      + R$ {{$contaAReceberRecebido->rec_valor}}
                     </div>
-                  </div>
-                  <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                    + R$ PREÇO
-                  </div>
-                </li>
+                  </li>
+                  @endforeach
               </ul>
             </div>
           </div>

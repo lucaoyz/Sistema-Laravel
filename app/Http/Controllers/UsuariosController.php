@@ -308,10 +308,21 @@ class UsuariosController extends Controller
             ->orWhere('per_cpf', 'LIKE', "%{$request->search}%")
             ->paginate(5);
 
+            $plano = Plano::all()->first();
+            $plano1 = Plano::select('pl_plano1')->first();
+            $plano2 = Plano::select('pl_plano2')->first();
+            $plano3 = Plano::select('pl_plano3')->first();
+            $plano4 = Plano::select('pl_plano4')->first();
+
             return view('admin.usuarios', [
                 'alunos' => $alunos,
                 'personals' => $personals,
                 'filters' => $filters,
+                'plano' => $plano,
+                'plano1' => $plano1,
+                'plano2' => $plano2,
+                'plano3' => $plano3,
+                'plano4' => $plano4,
                 ]);
     }
 

@@ -18,9 +18,8 @@ return new class extends Migration
             $table->foreignId('men_id')->nullable()->constrained('mensalidade');
             $table->foreignId('tpg_id')->constrained('tipopagto');
             $table->date('rec_data')->nullable();
+            $table->string('rec_descricao');
             $table->string('rec_valor');
-            $table->string('rec_valor_final');
-            $table->string('rec_parcelas');
             $table->string('rec_status');
             $table->timestamps();
         });

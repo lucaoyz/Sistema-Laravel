@@ -94,7 +94,25 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="rec_valor" class="col-md-4 col-form-label text-md-end">{{ __('*Valor da parcela e/ou conta') }}</label>
+                        <label for="rec_descricao" class="col-md-4 col-form-label text-md-end">{{ __('*Descrição da conta') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="rec_descricao" type="text"
+                            class="form-control @error('rec_descricao') is-invalid @enderror"
+                            name="rec_descricao" value="{{ old('rec_descricao') }}" required autocomplete="rec_descricao" autofocus
+                            placeholder="Insira a descrição da conta">
+
+                            @error('rec_descricao')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <label for="rec_valor" class="col-md-4 col-form-label text-md-end">{{ __('*Valor da conta') }}</label>
 
                         <div class="col-md-6">
                             <input id="rec_valor" type="text"
@@ -104,42 +122,6 @@
                             placeholder="Insira o valor da parcela e/ou conta">
 
                             @error('rec_valor')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="rec_valor_final" class="col-md-4 col-form-label text-md-end">{{ __('*Valor final da conta') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="rec_valor_final" type="text"
-                            class="form-control @error('rec_valor_final') is-invalid @enderror"
-                            name="rec_valor_final" value="{{ old('rec_valor_final') }}" required autocomplete="rec_valor_final" autofocus
-                            onkeypress="return onlynumber();"
-                            placeholder="Insira o valor final da conta">
-
-                            @error('rec_valor_final')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="rec_parcelas" class="col-md-4 col-form-label text-md-end">{{ __('*Quantidade de parcelas') }}</label>
-
-                        <div class="col-md-6">
-                            <input id="rec_parcelas" type="text"
-                            class="form-control @error('rec_parcelas') is-invalid @enderror"
-                            name="rec_parcelas" value="{{ old('rec_parcelas') }}" required autocomplete="rec_parcelas" autofocus
-                            onkeypress="return onlynumber();"
-                            placeholder="Insira a quantidade de parcelas">
-
-                            @error('rec_parcelas')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

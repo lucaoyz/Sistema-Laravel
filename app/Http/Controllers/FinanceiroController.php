@@ -8,19 +8,7 @@ use Illuminate\Http\Request;
 
 class FinanceiroController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $tipoPagtos = TipoPagto::latest()->paginate(5);
 
-        return view('admin.financeiro', [
-            'tipoPagtos' => $tipoPagtos,
-        ]);
-    }
 
     public function tipoPagtoIndex()
     {
@@ -125,6 +113,38 @@ class FinanceiroController extends Controller
     }
 
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $tipoPagtos = TipoPagto::latest()->paginate(5);
+        $contasAReceber = Contas_A_Receber::latest()->paginate(5);
+        $contaAReceberNaoRecebidos = Contas_A_Receber::where('rec_status', '=', 'nao_recebido')
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
+
+        $valorContaAReceberNaoRecebidos = Contas_A_Receber::where('rec_status', '=', 'nao_recebido')
+        ->select('rec_valor')
+        ->get();
+
+        $saldoContaAReceberNaoRecebidos = $valorContaAReceberNaoRecebidos->sum('rec_valor');
+
+        $contaAReceberRecebidos = Contas_A_Receber::where('rec_status', '=', 'recebido')
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
+
+        return view('admin.financeiro', [
+            'tipoPagtos' => $tipoPagtos,
+            'contasAReceber' => $contasAReceber,
+            'saldoContaAReceberNaoRecebidos' => $saldoContaAReceberNaoRecebidos,
+            'contaAReceberNaoRecebidos' => $contaAReceberNaoRecebidos,
+            'contaAReceberRecebidos' => $contaAReceberRecebidos,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -147,11 +167,11 @@ class FinanceiroController extends Controller
             'tpg_id' => 'required',
             'rec_data' => 'required|date',
             'rec_valor' => 'required',
-            'rec_valor_final' => 'required',
-            'rec_parcelas' => 'required',
             'rec_status' => 'required',
+            'rec_descricao' => 'required',
         ]);
 
+        //dd($request);
         Contas_A_Receber::create($request->all());
 
         return redirect()->route('admin.financeiro')

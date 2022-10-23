@@ -156,6 +156,17 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         /* Rotas para o Financeiro */
         Route::get('/financeiro', [App\Http\Controllers\FinanceiroController::class, 'index'])->name('admin.financeiro');
 
+            // Rotas para tipo de pagamento
+            Route::get('/financeiro/tipopagto/index', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoIndex'])->name('admin.financeiro.tipopagto.index');
+            Route::get('/financeiro/tipopagto/store', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoStore'])->name('admin.financeiro.tipopagto.store');
+            Route::get('/financeiro/tipopagto/update', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoUpdate'])->name('admin.financeiro.tipopagto.update');
+            Route::get('/financeiro/tipopagto/delete', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoDelete'])->name('admin.financeiro.tipopagto.delete');
+
+            // Rotas para contas a receber
+            Route::get('/financeiro/contas/receber/store', [App\Http\Controllers\FinanceiroController::class, 'receberStore'])->name('admin.financeiro.receber.store');
+            Route::get('/financeiro/contas/receber/update', [App\Http\Controllers\FinanceiroController::class, 'receberUpdate'])->name('admin.financeiro.receber.update');
+            Route::get('/financeiro/contas/receber/delete', [App\Http\Controllers\FinanceiroController::class, 'receberDelete'])->name('admin.financeiro.receber.delete');
+
 
         /* Rotas para os treinos */
         Route::get('/treino', [App\Http\Controllers\TreinoController::class, 'index'])->name('treinos.index');

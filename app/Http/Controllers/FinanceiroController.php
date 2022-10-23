@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TipoPagto;
 use Illuminate\Http\Request;
 
 class FinanceiroController extends Controller
@@ -13,7 +14,20 @@ class FinanceiroController extends Controller
      */
     public function index()
     {
-        return view('admin.financeiro');
+        $TipoPagtos = TipoPagto::latest()->paginate(5);
+
+        return view('admin.financeiro', [
+            'tipopagtos' => $TipoPagtos,
+        ]);
+    }
+
+    public function tipoPagtoIndex()
+    {
+        $TipoPagtos = TipoPagto::latest()->paginate(5);
+
+        return view('admin.tipopagto', [
+            'tipopagtos' => $TipoPagtos,
+        ]);
     }
 
     /**

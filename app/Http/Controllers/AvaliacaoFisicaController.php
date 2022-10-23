@@ -22,6 +22,7 @@ class AvaliacaoFisicaController extends Controller
     {
 
         $avaliacaoFisicas = AvaliacaoFisica::where('alu_id', '=', $aluno->id)
+        ->orderBy('created_at', 'desc')
         ->paginate(5);
 
         return view('admin.avaliacaoFisica', [

@@ -20,7 +20,7 @@ class PerfilController extends Controller
         $authUser = auth::user();
         $authAluID = $authUser->alu_id;
         $aluno = Aluno::where('id', '=', $authAluID)->first();
-        $avaliacaoFisica = AvaliacaoFisica::where('alu_id', '=', $aluno->id)->first();
+        $avaliacaoFisica = AvaliacaoFisica::where('alu_id', '=', $aluno->id)->orderBy('created_at', 'desc')->first();
         //dd($aluno);
         return view('aluno.perfil', [
             'aluno' => $aluno,

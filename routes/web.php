@@ -164,7 +164,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::any('/financeiro/tipopagto/search', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoSearch'])->name('admin.financeiro.tipopagto.search');
 
             // Rotas para contas a receber
-            Route::get('/financeiro/contas/receber/store', [App\Http\Controllers\FinanceiroController::class, 'receberStore'])->name('admin.financeiro.receber.store');
+            Route::post('/financeiro/contas/receber/store', [App\Http\Controllers\FinanceiroController::class, 'receberStore'])->name('admin.financeiro.receber.store');
             Route::get('/financeiro/contas/receber/update', [App\Http\Controllers\FinanceiroController::class, 'receberUpdate'])->name('admin.financeiro.receber.update');
             Route::get('/financeiro/contas/receber/delete', [App\Http\Controllers\FinanceiroController::class, 'receberDelete'])->name('admin.financeiro.receber.delete');
 

@@ -76,6 +76,98 @@
 
                     </div>
 
+                    <div class="row mb-3">
+                        <label for="rec_data" class="col-md-4 col-form-label text-md-end">{{ __('*Data da conta') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="rec_data" type="date"
+                            class="form-control @error('rec_data') is-invalid @enderror"
+                            name="rec_data" value="{{ old('rec_data') }}" required autocomplete="rec_data" autofocus
+                            >
+
+                            @error('rec_data')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="rec_valor" class="col-md-4 col-form-label text-md-end">{{ __('*Valor da parcela e/ou conta') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="rec_valor" type="text"
+                            class="form-control @error('rec_valor') is-invalid @enderror"
+                            name="rec_valor" value="{{ old('rec_valor') }}" required autocomplete="rec_valor" autofocus
+                            onkeypress="return onlynumber();"
+                            placeholder="Insira o valor da parcela e/ou conta">
+
+                            @error('rec_valor')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="rec_valor_final" class="col-md-4 col-form-label text-md-end">{{ __('*Valor final da conta') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="rec_valor_final" type="text"
+                            class="form-control @error('rec_valor_final') is-invalid @enderror"
+                            name="rec_valor_final" value="{{ old('rec_valor_final') }}" required autocomplete="rec_valor_final" autofocus
+                            onkeypress="return onlynumber();"
+                            placeholder="Insira o valor final da conta">
+
+                            @error('rec_valor_final')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="rec_parcelas" class="col-md-4 col-form-label text-md-end">{{ __('*Quantidade de parcelas') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="rec_parcelas" type="text"
+                            class="form-control @error('rec_parcelas') is-invalid @enderror"
+                            name="rec_parcelas" value="{{ old('rec_parcelas') }}" required autocomplete="rec_parcelas" autofocus
+                            onkeypress="return onlynumber();"
+                            placeholder="Insira a quantidade de parcelas">
+
+                            @error('rec_parcelas')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="rec_parcelas" class="col-md-4 col-form-label text-md-end">{{ __('*Status da conta') }}</label>
+
+                        <div class="col-md-6">
+                            <select name="rec_status" id="tg_dias_semana"
+                            class="form-select @error('rec_status') is-invalid @enderror"
+                            value="{{ old('rec_status') }}" required autocomplete="rec_status">
+                                <option value="">Clique aqui</option>
+                                <option value="recebido">Recebido</option>
+                                <option value="nao_recebido">Não recebido</option>
+                            </select>
+
+                            @error('rec_status')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+
         </div>
         <div class="modal-footer">
             <div class="row mb-0">

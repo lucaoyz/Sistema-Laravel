@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contas_A_Receber;
 use App\Models\TipoPagto;
 use Illuminate\Http\Request;
 
@@ -134,15 +135,28 @@ class FinanceiroController extends Controller
         //
     }
 
-    /**
+     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function receberStore(Request $request)
     {
-        //
+        $request->validate([
+            'tpg_id' => 'required',
+            'rec_data' => 'required|date',
+            'rec_valor' => 'required',
+            'rec_valor_final' => 'required',
+            'rec_parcelas' => 'required',
+            'rec_status' => 'required',
+        ]);
+
+        Contas_A_Receber::create($request->all());
+
+        return redirect()->route('admin.financeiro')
+                        ->with('success','Conta a receber adicionada com sucesso!');
+
     }
 
     /**

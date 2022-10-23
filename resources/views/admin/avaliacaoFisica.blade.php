@@ -1,6 +1,6 @@
 @extends('admin.layoutsModals.layouts')
 @section('title', 'Avaliação Física')
-@section('treino', 'active bg-gradient-primary')
+@section('usuarios', 'active bg-gradient-primary')
 @section('pagina', 'Usuários - Avaliação Física')
 @section('content')
 

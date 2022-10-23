@@ -1,6 +1,6 @@
 @extends('admin.layoutsModals.layouts')
 @section('title', 'Tipo de pagamentos')
-@section('treino', 'active bg-gradient-primary')
+@section('financeiro', 'active bg-gradient-primary')
 @section('pagina', 'Financeiro - Tipos de Pagamentos')
 @section('content')
 @if ($message = Session::get('success'))

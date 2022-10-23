@@ -51,7 +51,7 @@
                       <h6 class="mb-0">Contas</h6>
                     </div>
                     <div class="col-6 text-end">
-                      <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Adicionar nova conta</a>
+                      <a class="btn bg-gradient-dark mb-0" data-bs-toggle="modal" data-bs-target="#selecionarContaModal"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Adicionar nova conta</a>
                     </div>
                   </div>
                 </div>
@@ -155,4 +155,8 @@
         </div>
       </div>
     </div>
+
+          <!-- Modal -->
+          @include('admin.layoutsModals.modalsFinanceiro')
+
     @endsection

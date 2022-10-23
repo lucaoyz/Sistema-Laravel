@@ -9,6 +9,8 @@ class TipoPagto extends Model
 {
     use HasFactory;
 
+    protected $table = "tipopagto";
+
     protected $fillable = [
         'tpg_descricao',
     ];

@@ -9,6 +9,8 @@ class Contas_A_Pagar extends Model
 {
     use HasFactory;
 
+    protected $table = "contas_a_pagar";
+
     protected $fillable = [
         'tpg_id',
         'for_id',

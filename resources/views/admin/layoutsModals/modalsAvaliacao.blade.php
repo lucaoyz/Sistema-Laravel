@@ -551,9 +551,7 @@
                             <input id="af_objetivo" type="text"
                             class="form-control @error('af_objetivo') is-invalid @enderror"
                             name="af_objetivo" value="{{ old('af_objetivo') }}" autocomplete="af_objetivo" autofocus
-                            onkeypress="return onlynumber();"
                             placeholder="Insira o objetivo do aluno">
-
                             @error('af_objetivo')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

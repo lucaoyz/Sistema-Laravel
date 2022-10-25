@@ -162,3 +162,30 @@
       </div>
     </div>
   </div>
+
+  <!-- modal de confirmação -->
+  @foreach ($contaAReceberNaoRecebidos as $contaAReceberNaoRecebido)
+<div class="modal fade" id="confirmacaoContaAReceber{{$contaAReceberNaoRecebido->id}}" tabindex="-1" role="dialog" aria-labelledby="confirmacaoContaAReceber{{$contaAReceberNaoRecebido->id}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal" id="confirmacaoContaAReceber{{$contaAReceberNaoRecebido->id}}">Selecionar</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('admin.financeiro.receber.confirmar', $contaAReceberNaoRecebido->id) }}" method="POST">
+                @csrf
+            <p>Deseja realmente marcar como recebido?</p>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn bg-gradient-success" type="submit">Sim</a>
+          <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Não</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  @endforeach

@@ -54,7 +54,8 @@
                     @if ($avaliacaoFisica === null)
 
                     @else
-                    <a class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#visualizarAvaliacaoFisica{{$aluno->id}}">Ver Avaliação Física</a>
+                    <a class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#visualizarAvaliacaoFisicaRecente{{$aluno->id}}">Ver Avaliação Física</a>
+                    <a class="btn bg-gradient-secondary" data-bs-toggle="modal" data-bs-target="#visualizaHistoricoAvaliacao{{$aluno->id}}">Ver Avaliações Físicas anteriores</a>
                     @endif
                 </div>
                 </div>

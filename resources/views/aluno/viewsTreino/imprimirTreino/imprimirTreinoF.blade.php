@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>
-            Treino de {{auth::user()->name}}
+            Treino de {{$aluno->alu_nome}}
         </title>
     <style>
         h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
@@ -160,7 +160,7 @@ th {
         <h2 style="padding-top: 10px;"><img src="img/logos/gv2pretoebranco.png" style="width: 90px;"></h2>
             <p style="margin: 1px 0px 0px 5px;"> Data do treino: {{now()->format('d/m/Y')}}</p>
             <p style="margin: 1px 0px 0px 5px;"> Treinador: {{$treinoGeralAlunoProfessor}}</p>
-            <h3 style="margin: 0;">Treino de <span style="font-weight: 10;">{{auth::user()->name}}</span></h3>
+            <h3 style="margin: 0;">Treino de <span style="font-weight: 10;">{{$aluno->alu_nome}}</span></h3>
         @isset ($treinoAlunosPeito)
         <p style="margin: 0;">---------------------------</p>
         <div class="imprimirTreino">

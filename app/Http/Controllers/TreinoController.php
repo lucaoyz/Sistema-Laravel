@@ -1661,6 +1661,7 @@ class TreinoController extends Controller
 
             $downloadTreinoA = 'treino-A-' . Carbon::today()->format('d/m/Y') . '.pdf';
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoA', [
+        'aluno' => $aluno,
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
         'treinoAlunosCostas' => $treinoAlunosCostas,
@@ -1858,6 +1859,7 @@ class TreinoController extends Controller
             $downloadTreinoB = 'treino-B-' . Carbon::today()->format('d/m/Y') . '.pdf';
 
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoB', [
+        'aluno' => $aluno,
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
         'treinoAlunosCostas' => $treinoAlunosCostas,
@@ -2055,6 +2057,7 @@ class TreinoController extends Controller
             $downloadTreinoC = 'treino-C-' . Carbon::today()->format('d/m/Y') . '.pdf';
 
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoC', [
+        'aluno' => $aluno,
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
         'treinoAlunosCostas' => $treinoAlunosCostas,
@@ -2449,6 +2452,7 @@ class TreinoController extends Controller
             $downloadTreinoE = 'treino-E-' . Carbon::today()->format('d/m/Y') . '.pdf';
 
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoE', [
+        'aluno' => $aluno,
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
         'treinoAlunosCostas' => $treinoAlunosCostas,
@@ -2646,6 +2650,7 @@ class TreinoController extends Controller
             $downloadTreinoF = 'treino-F-' . Carbon::today()->format('d/m/Y') . '.pdf';
 
     return PDF::loadView('aluno.viewsTreino.baixarTreino.PDFtreinoDivisaoF', [
+        'aluno' => $aluno,
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
         'treinoAlunosCostas' => $treinoAlunosCostas,
@@ -4134,6 +4139,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -4332,6 +4338,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -4531,6 +4538,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -4728,6 +4736,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -4927,6 +4936,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -5124,6 +5134,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoC', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -5321,6 +5332,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -5520,6 +5532,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -5717,6 +5730,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoC', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -5914,6 +5928,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoD', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -6110,6 +6125,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -6309,6 +6325,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -6506,6 +6523,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoC', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -6703,6 +6721,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoD', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -6900,6 +6919,7 @@ class TreinoController extends Controller
                             }
 
                     return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoE', [
+                        'aluno' => $aluno,
                         'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                         'treinoGeralDivisoes' => $treinoGeralDivisoes,
                         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -7096,6 +7116,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -7295,6 +7316,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -7492,6 +7514,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoC', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -7689,6 +7712,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoD', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -7886,6 +7910,7 @@ class TreinoController extends Controller
                             }
 
                     return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoE', [
+                        'aluno' => $aluno,
                         'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                         'treinoGeralDivisoes' => $treinoGeralDivisoes,
                         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -8083,6 +8108,7 @@ class TreinoController extends Controller
                                 }
 
                         return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoF', [
+                            'aluno' => $aluno,
                             'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                             'treinoGeralDivisoes' => $treinoGeralDivisoes,
                             'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -8279,6 +8305,7 @@ class TreinoController extends Controller
                         }
 
                 return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+                    'aluno' => $aluno,
                     'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                     'treinoGeralDivisoes' => $treinoGeralDivisoes,
                     'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -8508,6 +8535,7 @@ class TreinoController extends Controller
             }
 
     return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoA', [
+        'aluno' => $aluno,
         'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -8716,6 +8744,7 @@ class TreinoController extends Controller
             }
 
     return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoB', [
+        'aluno' => $aluno,
         'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -8925,6 +8954,7 @@ class TreinoController extends Controller
             }
 
     return PDF::loadView('aluno.viewsTreino.ImprimirTreino.imprimirTreinoC', [
+        'aluno' => $aluno,
         'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -9134,6 +9164,7 @@ class TreinoController extends Controller
             }
 
     return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoD', [
+        'aluno' => $aluno,
         'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
         'treinoGeralDivisoes' => $treinoGeralDivisoes,
         'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -9343,6 +9374,7 @@ class TreinoController extends Controller
                 }
 
         return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoE', [
+            'aluno' => $aluno,
             'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
             'treinoGeralDivisoes' => $treinoGeralDivisoes,
             'treinoAlunosPeito' => $treinoAlunosPeito,
@@ -9552,6 +9584,7 @@ class TreinoController extends Controller
                     }
 
             return PDF::loadView('aluno.viewsTreino.imprimirTreino.imprimirTreinoF', [
+                'aluno' => $aluno,
                 'treinoGeralAlunoProfessor' => $treinoGeralAlunoProfessor,
                 'treinoGeralDivisoes' => $treinoGeralDivisoes,
                 'treinoAlunosPeito' => $treinoAlunosPeito,

@@ -7,7 +7,7 @@
         @elseif(auth()->user()->type == 'professor')
             Visualização de como o aluno baixará o treino
         @else
-            Treino de {{auth::user()->name}}
+            Treino de {{$aluno->alu_nome}}
         @endif</title>
     <style>
         h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
@@ -169,7 +169,7 @@ th {
             <h3>Visualização de como o aluno baixará o treino</h3>
             @else
             <p style="margin: 1px 0px 0px 5px;"> Data do treino: {{now()->format('d/m/Y')}}</p>
-            <h3>Treino de <span>{{auth::user()->name}}</span></h3>
+            <h3>Treino de <span>{{$aluno->alu_nome}}</span></h3>
             @endif
 
         @isset ($treinoAlunosPeito)

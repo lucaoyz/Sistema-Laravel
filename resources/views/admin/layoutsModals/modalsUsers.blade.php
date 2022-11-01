@@ -150,10 +150,10 @@
                             <option value="">Nenhuma mensalidade cadastrada, cadastre na tela de informações</option>
 
                             @else
-                                <option value="{{$plano1->pl_plano1}}">{{$plano1->pl_plano1}}</option>
-                                <option value="{{$plano2->pl_plano2}}">{{$plano2->pl_plano2}}</option>
-                                <option value="{{$plano3->pl_plano3}}">{{$plano3->pl_plano3}}</option>
-                                <option value="{{$plano4->pl_plano4}}">{{$plano4->pl_plano4}}</option>
+                                <option value="{{$plano1->pl_plano1}}">Plano mensal: {{$plano1->pl_plano1}}</option>
+                                <option value="{{$plano2->pl_plano2}}">Plano trimestral: {{$plano2->pl_plano2}}</option>
+                                <option value="{{$plano3->pl_plano3}}">Plano semestral: {{$plano3->pl_plano3}}</option>
+                                <option value="{{$plano4->pl_plano4}}">Plano anual recorrente: {{$plano4->pl_plano4}}</option>
                             @endif
 
                             </select>

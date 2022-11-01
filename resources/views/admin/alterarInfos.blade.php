@@ -13,7 +13,7 @@
         <div class="card-body text-lg-start text-center pt-0">
           <div class="d-flex justify-content-lg-start justify-content-center p-2">
             <i class="material-icons my-auto">remove</i>
-            <span class="ps-3">Plano 1: @if ($plano1 === null)
+            <span class="ps-3">Plano mensal: @if ($plano1 === null)
                 Sem planos cadastrados.
             @else
                 {{$plano1->pl_plano1}}
@@ -22,7 +22,7 @@
 
           <div class="d-flex justify-content-lg-start justify-content-center p-2">
             <i class="material-icons my-auto">remove</i>
-            <span class="ps-3">Plano 2: @if ($plano2 === null)
+            <span class="ps-3">Plano trimestral: @if ($plano2 === null)
                 Sem planos cadastrados.
             @else
                 {{$plano2->pl_plano2}}
@@ -31,7 +31,7 @@
 
           <div class="d-flex justify-content-lg-start justify-content-center p-2">
             <i class="material-icons my-auto">remove</i>
-            <span class="ps-3">Plano 3: @if ($plano3 === null)
+            <span class="ps-3">Plano semestral: @if ($plano3 === null)
                 Sem planos cadastrados.
             @else
                 {{$plano3->pl_plano3}}
@@ -40,7 +40,7 @@
 
           <div class="d-flex justify-content-lg-start justify-content-center p-2">
             <i class="material-icons my-auto">remove</i>
-            <span class="ps-3">Plano 4: @if ($plano4 === null)
+            <span class="ps-3">Plano anual recorrente: @if ($plano4 === null)
                 Sem planos cadastrados.
             @else
                 {{$plano4->pl_plano4}}

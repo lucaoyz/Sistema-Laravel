@@ -48,7 +48,7 @@
                       <h6 class="text-center mb-0">Contas a pagar</h6>
                       <span class="text-xs">Saldo de contas a pagar</span>
                       <hr class="horizontal dark my-3">
-                      <h5 class="mb-0">aqui vai a variavel</h5>
+                      <h5 class="mb-0">R$ 603.99 a pagar</h5>
                     </div>
                   </div>
                 </div>
@@ -80,14 +80,16 @@
                         </div>
                         @endforeach
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-md-0 mb-4">
                         <h6 class="mb-0">Contas a pagar</h6>
                       <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                        <h6 class="mb-0">CONTA | PREÇO</h6>
-                        <a href="" class="material-icons ms-auto text-dark cursor-pointer"><i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar conta">edit</i></a>
-                        <a href="" class="material-icons ms-auto text-danger"><i class="material-icons ms-auto text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Excluir Conta">delete</i></a>
-                      </div>
+                        <a href="" class="material-icons text-danger"><i class="material-icons text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Excluir Conta">delete</i></a>
+                        <a href="" class="material-icons text-dark cursor-pointer"><i class="material-icons text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar conta">edit</i></a>
+                        &nbsp; <h6 class="mb-0">Conta de Luz| R$ 603,99</h6>
+                        &nbsp; <a href="" class="material-icons text-success cursor-pointer" data-bs-toggle="modal" data-bs-target="#confirmacaoContaAReceber{{$contaAReceberNaoRecebido->id}}"><i class="material-icons text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Marcar como pago">check_circle</i></a>
+                        </div>
                     </div>
+
                   </div>
                 </div>
             <!-- Paginação com e sem filtros -->
@@ -116,11 +118,11 @@
               <ul class="list-group">
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark font-weight-bold text-sm">DATA</h6>
-                    <span class="text-xs">CONTA</span>
+                    <h6 class="mb-1 text-dark font-weight-bold text-sm">31/10/2022</h6>
+                    <span class="text-xs">Conta de Agua</span>
                   </div>
                   <div class="d-flex align-items-center text-sm">
-                    R$PREÇO
+                    R$ 209,80
                     <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="material-icons text-lg position-relative me-1">picture_as_pdf</i> PDF</button>
                   </div>
                 </li>
@@ -136,10 +138,6 @@
               <div class="row">
                 <div class="col-md-6">
                   <h6 class="mb-0">Entradas</h6>
-                </div>
-                <div class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
-                  <i class="material-icons me-2 text-lg">date_range</i>
-                  <small>DATA ATÉ QUE DATA</small>
                 </div>
               </div>
             </div>

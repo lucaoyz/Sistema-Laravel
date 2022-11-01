@@ -177,6 +177,7 @@
         <div class="modal-body">
             <form action="{{ route('admin.financeiro.receber.confirmar', $contaAReceberNaoRecebido->id) }}" method="POST">
                 @csrf
+                @method('PUT')
             <p>Deseja realmente marcar como recebido?</p>
 
         </div>

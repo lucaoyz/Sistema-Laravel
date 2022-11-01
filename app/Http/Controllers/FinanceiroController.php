@@ -202,15 +202,20 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Confirmar the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function receberConfirmar(Request $request, Contas_A_Receber $conta_a_receber)
     {
-        //
+        $receber = Contas_A_Receber::where('id', '=', $conta_a_receber->id)->first();
+        $receber->rec_status = "recebido";
+        $receber->update();
+
+        return redirect()->route('admin.financeiro')
+                        ->with('success','Conta recebida com sucesso!');
     }
 
     /**

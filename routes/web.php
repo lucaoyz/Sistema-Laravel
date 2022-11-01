@@ -167,7 +167,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::post('/financeiro/contas/receber/store', [App\Http\Controllers\FinanceiroController::class, 'receberStore'])->name('admin.financeiro.receber.store');
             Route::put('/financeiro/contas/receber/update', [App\Http\Controllers\FinanceiroController::class, 'receberUpdate'])->name('admin.financeiro.receber.update');
             Route::delete('/financeiro/contas/receber/delete', [App\Http\Controllers\FinanceiroController::class, 'receberDelete'])->name('admin.financeiro.receber.delete');
-            Route::post('/financeiro/contas/receber/confirmar', [App\Http\Controllers\FinanceiroController::class, 'receberConfirmar'])->name('admin.financeiro.receber.confirmar');
+            Route::put('/financeiro/contas/receber/confirmar/{conta_a_receber}', [App\Http\Controllers\FinanceiroController::class, 'receberConfirmar'])->name('admin.financeiro.receber.confirmar');
 
 
         /* Rotas para os treinos */

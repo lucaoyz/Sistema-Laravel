@@ -21,7 +21,7 @@
             @endif
 
                     <div class="row mb-3">
-                        <label for="pl_plano1" class="col-md-4 col-form-label text-md-end">{{ __('Plano 1') }}</label>
+                        <label for="pl_plano1" class="col-md-4 col-form-label text-md-end">{{ __('Plano Mensal') }}</label>
 
                         <div class="col-md-6">
                             <input id="pl_plano1" type="text"
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="pl_plano2" class="col-md-4 col-form-label text-md-end">{{ __('Plano 2') }}</label>
+                        <label for="pl_plano2" class="col-md-4 col-form-label text-md-end">{{ __('Plano Trimestral') }}</label>
 
                         <div class="col-md-6">
                             <input id="pl_plano2" type="text"
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="pl_plano3" class="col-md-4 col-form-label text-md-end">{{ __('Plano 3') }}</label>
+                        <label for="pl_plano3" class="col-md-4 col-form-label text-md-end">{{ __('Plano Semestral') }}</label>
 
                         <div class="col-md-6">
                             <input id="pl_plano3" type="text"
@@ -90,7 +90,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="pl_plano4" class="col-md-4 col-form-label text-md-end">{{ __('Plano 4') }}</label>
+                        <label for="pl_plano4" class="col-md-4 col-form-label text-md-end">{{ __('Plano Anual Recorrente') }}</label>
 
                         <div class="col-md-6">
                             <input id="pl_plano4" type="text"

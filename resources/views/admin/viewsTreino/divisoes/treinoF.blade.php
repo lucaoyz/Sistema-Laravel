@@ -59,7 +59,8 @@
               <!-- Botão de criar -->
             <div class="pull-right">
                 <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTreinoDetalhesDivisaoF" class="btn btn-success">Registre um exercício</a>
-                    <a href="{{route('aluno.PDFTreinoDivisoesFTreinador', $treinoGeral->id)}}" class="btn btn-primary">Visualize como o aluno baixará o treino</a></h5>
+                    <a href="{{route('aluno.PDFTreinoDivisoesFTreinador', $treinoGeral->id)}}" class="btn btn-primary">Visualize como o aluno baixará o treino</a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#selecionarExcel" class="btn btn-success" style="background-color:darkgreen">Excel</a></h5>
             </div>
             </div>
 
@@ -92,7 +93,7 @@
                               </div>
                             </div>
                           </td>
-                          
+
                        <!-- eq_nome -->
                        <td>
                         <div class="d-flex px-2 py-1">
@@ -158,5 +159,6 @@
 
 <!-- Modal -->
 @include('admin.layoutsModals.modalsDivisoes')
+@include('admin.layoutsModals.modalsExcel')
 
 @endsection

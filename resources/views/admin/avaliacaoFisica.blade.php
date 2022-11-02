@@ -32,6 +32,7 @@
               <!-- Botão de criar -->
             <div class="pull-right">
                 <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarAvaliacaoFisica" class="btn btn-success">Cadastre uma avaliação física</a>
+                <a href="" data-bs-toggle="modal" data-bs-target="#selecionarExcel" class="btn btn-success" style="background-color:darkgreen">Excel</a></h5>
             </div>
             </div>
 
@@ -115,5 +116,6 @@
 
 <!-- Modal -->
 @include('admin.layoutsModals.modalsAvaliacao')
+@include('admin.layoutsModals.modalsExcel')
 
 @endsection

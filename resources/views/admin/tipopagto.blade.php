@@ -42,7 +42,8 @@
               <br>
               <!-- Botão de criar -->
             <div class="pull-right">
-                <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTipoPagto" class="btn btn-success">Registre um novo tipo de pagamento</a></h5>
+                <h5 class="mb-0"><a href="" data-bs-toggle="modal" data-bs-target="#criarTipoPagto" class="btn btn-success">Registre um novo tipo de pagamento</a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#selecionarExcel" class="btn btn-success" style="background-color:darkgreen">Excel</a></h5>
             </div>
             </div>
 
@@ -101,5 +102,6 @@
 
       <!-- Modal -->
       @include('admin.layoutsModals.modalsTipoPagto')
+      @include('admin.layoutsModals.modalsExcel')
 
 @endsection

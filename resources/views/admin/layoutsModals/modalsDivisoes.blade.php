@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Excluir Exercício</h5>
+          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoA{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Observações do Exercício</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -12,6 +12,8 @@
         <div class="modal-body">
 
             <p>Observações do exercicio: </p><span style="font-style: bold;">{{$treinoDetalhe->exe_descricao}}</span>
+            <p>Foto do exercício:</p>
+                <img style="border-radius: 5px;" src="/img/exercicios/{{$treinoDetalhe->exe_foto}}" width="200px">
 
         </div>
         <div class="modal-footer">
@@ -387,7 +389,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoB{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Excluir Exercício</h5>
+          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoB{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Observações do Exercício</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -395,6 +397,8 @@
         <div class="modal-body">
 
             <p>Observações do exercicio: </p><span style="font-style: bold;">{{$treinoDetalhe->exe_descricao}}</span>
+            <p>Foto do exercício:</p>
+                <img style="border-radius: 5px;" src="/img/exercicios/{{$treinoDetalhe->exe_foto}}" width="200px">
 
         </div>
         <div class="modal-footer">
@@ -771,7 +775,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoC{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Excluir Exercício</h5>
+          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoC{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Observações do Exercício</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -779,6 +783,8 @@
         <div class="modal-body">
 
             <p>Observações do exercicio: </p><span style="font-style: bold;">{{$treinoDetalhe->exe_descricao}}</span>
+            <p>Foto do exercício:</p>
+                <img style="border-radius: 5px;" src="/img/exercicios/{{$treinoDetalhe->exe_foto}}" width="200px">
 
         </div>
         <div class="modal-footer">
@@ -1154,7 +1160,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoD{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Excluir Exercício</h5>
+          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoD{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Observações do Exercício</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -1162,6 +1168,8 @@
         <div class="modal-body">
 
             <p>Observações do exercicio: </p><span style="font-style: bold;">{{$treinoDetalhe->exe_descricao}}</span>
+            <p>Foto do exercício:</p>
+                <img style="border-radius: 5px;" src="/img/exercicios/{{$treinoDetalhe->exe_foto}}" width="200px">
 
         </div>
         <div class="modal-footer">
@@ -1539,7 +1547,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoE{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Excluir Exercício</h5>
+          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoE{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Observações do Exercício</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -1547,6 +1555,8 @@
         <div class="modal-body">
 
             <p>Observações do exercicio: </p><span style="font-style: bold;">{{$treinoDetalhe->exe_descricao}}</span>
+            <p>Foto do exercício:</p>
+                <img style="border-radius: 5px;" src="/img/exercicios/{{$treinoDetalhe->exe_foto}}" width="200px">
 
         </div>
         <div class="modal-footer">
@@ -1924,7 +1934,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoF{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Excluir Exercício</h5>
+          <h5 class="modal-title font-weight-normal" id="obsTreinoDetalhesDivisaoF{{$treinoDetalhe->id}}{{$treinoGeral->id}}">Observações do Exercício</h5>
           <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -1932,6 +1942,8 @@
         <div class="modal-body">
 
             <p>Observações do exercicio: </p><span style="font-style: bold;">{{$treinoDetalhe->exe_descricao}}</span>
+            <p>Foto do exercício:</p>
+                <img style="border-radius: 5px;" src="/img/exercicios/{{$treinoDetalhe->exe_foto}}" width="200px">
 
         </div>
         <div class="modal-footer">

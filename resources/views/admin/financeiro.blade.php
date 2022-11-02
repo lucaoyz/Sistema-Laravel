@@ -86,7 +86,7 @@
                         <a href="" class="material-icons text-danger"><i class="material-icons text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Excluir Conta">delete</i></a>
                         <a href="" class="material-icons text-dark cursor-pointer"><i class="material-icons text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar conta">edit</i></a>
                         &nbsp; <h6 class="mb-0">Conta de Luz| R$ 603,99</h6>
-                        &nbsp; <a href="" class="material-icons text-success cursor-pointer" data-bs-toggle="modal" data-bs-target="#confirmacaoContaAReceber{{$contaAReceberNaoRecebido->id}}"><i class="material-icons text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Marcar como pago">check_circle</i></a>
+                        &nbsp; <a href="" class="material-icons text-success cursor-pointer" data-bs-toggle="modal" data-bs-target="#"><i class="material-icons text-success cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Marcar como pago">check_circle</i></a>
                         </div>
                     </div>
 

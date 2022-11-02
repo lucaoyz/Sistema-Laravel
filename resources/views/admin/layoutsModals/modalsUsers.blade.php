@@ -139,7 +139,10 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="alu_mensalidade" class="col-md-4 col-form-label text-md-end">{{ __('*Mensalidade R$') }}</label>
+                        <label for="alu_mensalidade" class="col-md-4 col-form-label text-md-end">
+                            {{ __('*Mensalidade R$') }}
+                            <a href="{{route('admin.alterarInfos')}}" class="material-icons ms-auto text-dark cursor-pointer"><i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Adicione as mensalidades">edit</i></a>
+                        </label>
 
                         <div class="col-md-6">
 
@@ -147,7 +150,7 @@
                             class="form-select @error('alu_mensalidade') is-invalid @enderror"
                             value="{{ old('alu_mensalidade') }}" required autocomplete="alu_mensalidade">
                             @if ($plano === null)
-                            <option value="">Nenhuma mensalidade cadastrada, cadastre na tela de informações</option>
+                            <option value="">Adicione as mensalidades pelo lápis</option>
 
                             @else
                                 <option value="{{$plano1->pl_plano1}}">Plano mensal: {{$plano1->pl_plano1}}</option>

@@ -5,10 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Contas_A_Receber;
 use App\Models\TipoPagto;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class FinanceiroController extends Controller
 {
 
+    public function notaFiscal()
+    {
+
+        return PDF::loadView('admin.notaFiscal')
+                    ->setPaper([0, 0, 807.874, 300], 'landscape')
+                    ->stream();
+
+    }
 
     public function tipoPagtoIndex()
     {

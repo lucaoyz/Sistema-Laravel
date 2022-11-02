@@ -156,6 +156,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         /* Rotas para o Financeiro */
         Route::get('/financeiro', [App\Http\Controllers\FinanceiroController::class, 'index'])->name('admin.financeiro');
 
+        Route::get('/financeiro/notafiscal', [App\Http\Controllers\FinanceiroController::class, 'notaFiscal'])->name('admin.financeiro.notafiscal');
+
             // Rotas para tipo de pagamento
             Route::get('/financeiro/tipopagto/', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoIndex'])->name('admin.financeiro.tipopagto.index');
             Route::post('/financeiro/tipopagto/store', [App\Http\Controllers\FinanceiroController::class, 'tipopagtoStore'])->name('admin.financeiro.tipopagto.store');

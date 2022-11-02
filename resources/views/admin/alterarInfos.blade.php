@@ -65,7 +65,7 @@
             <span class="ps-3 text-white">Altere os membros da equipe e a tabela de preços pelo painel administrativo</span>
           </div>
 
-          <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0">
+          <a href="https://site-gv2-painel-adm.herokuapp.com/login" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0">
             Acesse o painel administrativo por aqui
             <i class="fas fa-arrow-right ms-1"></i>
           </a>

@@ -237,6 +237,8 @@
             <hr class="horizontal dark my-sm-4">
             <div class="w-100 text-center">
               <a class="github-button" href="https://github.com/lucaoyz/sistema-laravel" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+              <br>
+              <a href="{{('/pdf/Manual_do_sistema-GV2Academia.pdf')}}" download>Alguma dúvida sobre o sistema? baixe o manual por aqui!</a>
               <br><h6 class="mt-3">Obrigado por usar nosso sistema!</h6>
 
               <a href="https://github.com/lucaoyz" class="btn btn-dark mb-0 me-2" target="_blank">

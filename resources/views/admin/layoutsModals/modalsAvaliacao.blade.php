@@ -1220,7 +1220,7 @@
         </p>
             <h6>Medidas (cm)</h6>
             <p>Massa Gorda (Gordura/kg): {{$avaliacaoFisica->af_massa_gorda}}</p>
-            <p>Massa Magra (Músculo/kg): {{$avaliacaoFisica->af_massa_musculo}}</p>
+            <p>Massa Magra (Músculo/kg): {{$avaliacaoFisica->af_massa_magra}}</p>
             <p>Medida do Braço Esquerdo (cm): {{$avaliacaoFisica->af_cm_bracoE}}</p>
             <p>Medida do Braço Direito (cm): {{$avaliacaoFisica->af_cm_bracoD}}</p>
             <p>Medida do Antebraço Esquerdo (cm): {{$avaliacaoFisica->af_cm_antebracoE}}</p>

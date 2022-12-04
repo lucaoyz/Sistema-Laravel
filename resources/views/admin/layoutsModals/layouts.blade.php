@@ -183,8 +183,9 @@
                 © <script>
                   document.write(new Date().getFullYear())
                 </script>,
-                Feito <i class="fa fa-bolt"></i> por
-                <a href="https://lucaoyz.github.io/Site-Eazy/" class="font-weight-bold" target="_blank">EAZY</a>
+                Feito por <i class="fa fa-bolt"></i>
+                <a href="https://lucaoyz.github.io/Site-Eazy/" class="font-weight-bold" target="_blank">EAZY</a> |
+                <a href="https://creative-tim.com/" class="font-weight-bold" target="_blank"> Creative Tim</a>
               </div>
             </div>
             <div class="col-lg-6">
